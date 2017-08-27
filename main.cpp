@@ -1,5 +1,5 @@
 #include <iostream>
-#include "user.hpp"
+#include "user.h"
 using namespace std;
 
 int main()
@@ -20,7 +20,7 @@ int main()
         cout << "下面你要进行什么操作：" << endl << "a. 发起战争 b.休整 c.退出" << endl;
         cin >> choice1;
         if(choice1 == 'a') {
-            user->player.StartWar()
+			user->player.StartWar ( );
         }
         else if(choice1 == 'b'){
             int choice2;
