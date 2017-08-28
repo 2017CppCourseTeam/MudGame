@@ -29,6 +29,8 @@ class User {
 
 	User ( string username , string password );
 
+	string Get_Username ( );
+	string Get_Password ( );
 	bool Is_Login ( );
 	bool Login ( );
 	bool Register ( );

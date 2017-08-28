@@ -24,3 +24,6 @@
 ### 该类的属性只有 Player 成员外界可访问
 ### 另外，请在 Player 类中对该类声明友元
 ****
+# 2017.8.28 @ user.cpp, user.h
+****
+新增 **Get_Username( )** 和 **Get_Password( )** 两个接口，返回用户名和密码（string类）

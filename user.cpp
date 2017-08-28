@@ -8,6 +8,16 @@ User::User ( string username , string password )
 	this->is_login = false;
 }
 
+string User::Get_Username ( )
+{
+	return this->username;
+}
+
+string User::Get_Password ( )
+{
+	return this->password;
+}
+
 bool User::Is_Login ( )
 {
 	return this->is_login;
