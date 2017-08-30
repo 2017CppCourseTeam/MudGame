@@ -8,21 +8,22 @@
 
 using namespace std;
 
-class Player{
-    private:
-        double prestige;
-        double bitcoin;
-        double violence;
-        int second;
-        int war_num;
-		friend class User;
-    public:
-	    Player ( );
+class Player
+{
+private:
+    double prestige;
+    double bitcoin;
+    double violence;
+    int second;
+    int war_num;
+    friend class User;
+public:
+    Player ( );
 
-		void TrainCoder ( );
-		void DigMine ( );
-		void WashBrain ( );
-		void StartWar ( );
+    void TrainCoder ( );
+    void DigMine ( );
+    void WashBrain ( );
+    void StartWar ( );
 };
 
 #endif // PLAYER_H_INCLUDED

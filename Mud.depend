@@ -1,9 +1,9 @@
 # depslib dependency file v1.0
-1504059209 source:f:\文档\学习资料\mudgame\main.cpp
+1504061180 source:f:\文档\学习资料\mudgame\main.cpp
 	<iostream>
-	"user.h"
+	"Mudgame.h"
 
-1504056672 f:\文档\学习资料\mudgame\user.h
+1504059654 f:\文档\学习资料\mudgame\user.h
 	<string>
 	<fstream>
 	<cstdio>
@@ -11,7 +11,7 @@
 	<iostream>
 	"player.h"
 
-1503838119 f:\文档\学习资料\mudgame\player.h
+1504059660 f:\文档\学习资料\mudgame\player.h
 	<iostream>
 	<ctime>
 	<cstdlib>
@@ -24,6 +24,12 @@
 	"user.h"
 	<iostream>
 
-1504059301 source:f:\文档\学习资料\mudgame\user.cpp
+1504062607 source:f:\文档\学习资料\mudgame\user.cpp
 	"user.h"
+
+1504061127 f:\文档\学习资料\mudgame\mudgame.h
+	"user.h"
+
+1504063082 source:f:\文档\学习资料\mudgame\mudgame.cpp
+	"Mudgame.h"
 

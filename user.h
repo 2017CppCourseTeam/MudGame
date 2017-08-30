@@ -10,39 +10,39 @@
 
 class User
 {
-	private:
-	string username;
-	string password;
-	string filename;
-	bool is_login;
+private:
+    string username;
+    string password;
+    string filename;
+    bool is_login;
 
-	Player player1;
-	Player player2;
-	Player player3;
+    Player player1;
+    Player player2;
+    Player player3;
 
-	void _Write ( ofstream &f );
-	string _Read ( ifstream &f );
-	string _Encrypt ( string str );
-	string _Decrypt ( string str );
-	void _Load_Player ( ifstream& login );
+    void _Write ( ofstream &f );
+    string _Read ( ifstream &f );
+    string _Encrypt ( string str );
+    string _Decrypt ( string str );
+    void _Load_Player ( ifstream& login );
 
-	template <class T>
-	string _ConverNumToString ( T d );
-	template <class T>
-	T _ConvertStringToNum ( const std::string& str );
+    template <class T>
+    string _ConverNumToString ( T d );
+    template <class T>
+    T _ConvertStringToNum ( const std::string& str );
 
-	public:
-	Player* player;
-	User ( string username , string password );
+public:
+    Player* player;
+    User ( string username, string password );
 
-	string Get_Username ( );
-	string Get_Password ( );
-	int Select_Player ( int no );
-	bool Is_Login ( );
-	bool Login ( );
-	bool Register ( );
-	bool Save ( );
-	bool DeleteUser ( );
+    string Get_Username ( );
+    string Get_Password ( );
+    int Select_Player ( int no );
+    bool Is_Login ( );
+    bool Login ( );
+    bool Register ( );
+    bool Save ( );
+    bool DeleteUser ( );
 
 };
 
