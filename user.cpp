@@ -54,7 +54,7 @@ bool User::Is_Login ( )
 bool User::Login ( )
 {
 	ifstream login;
-	login.open ( this->filename , ios::in );
+	login.open ( this->filename.c_str() , ios::in );
 	if ( !login )
 	{
 		return false;
@@ -87,7 +87,7 @@ bool User::Register ( )
 {
 	// Test the user if exists.
 	ifstream test_user_exists;
-	test_user_exists.open ( this->filename , ios::in );
+	test_user_exists.open ( this->filename.c_str() , ios::in );
 	if ( test_user_exists )
 	{
 		test_user_exists.close ( );
@@ -98,7 +98,7 @@ bool User::Register ( )
 		test_user_exists.close ( );
 		// Ready to register.
 		ofstream regist;
-		regist.open ( this->filename , ios::out );
+		regist.open ( this->filename.c_str() , ios::out );
 		this->_Write ( regist );
 		regist.close ( );
 		return true;
@@ -110,7 +110,7 @@ bool User::Save ( )
 	if ( this->Is_Login ( ) )
 	{
 		ofstream save;
-		save.open ( this->filename , ios::out );
+		save.open ( this->filename.c_str() , ios::out );
 		this->_Write ( save );
 		save.close ( );
 		return true;
@@ -124,7 +124,7 @@ bool User::Save ( )
 bool User::DeleteUser ( )
 {
 	// Must be login!
-	if ( this->Is_Login ( ) ) 
+	if ( this->Is_Login ( ) )
 	{
 		if ( remove ( this->filename.c_str ( ) ) )
 			return true;
