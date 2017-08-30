@@ -1,20 +1,18 @@
-<<<<<<< HEAD
-#include <iostream>
 #include "Mudgame.h"
 using namespace std;
 
 int main()
 {
-    Game a;
-    a.Run();
-}
-=======
-#include <iostream>
-#include "user.hpp"
-using namespace std;
+    Game game;
+    User* user = 0;
+    while ( true ) {
+        if ( game.Init_User ( user ) ) {
 
-int main()
-{
+        }
+    }
+}
+
+/*
     string username, password;
     cout << "人工智能统治地球27391年之后。。" << endl;
     cout << "你是地球上200个人类幸存者，企图通过骚操作打倒人工智能政权。。" << endl;
@@ -74,6 +72,5 @@ int main()
         else
             cout << "不存在该命令" << endl;
     }
-    return 0;
-}
->>>>>>> origin/master
+
+*/

@@ -10,6 +10,18 @@
 
 class User
 {
+public:
+    Player* player;
+    User ( string username, string password );
+
+    string Get_Username ( );
+    string Get_Password ( );
+    int Select_Player ( int no );
+    bool Is_Login ( );
+    bool Login ( );
+    bool Register ( );
+    bool Save ( );
+    bool DeleteUser ( );
 private:
     string username;
     string password;
@@ -31,18 +43,7 @@ private:
     template <class T>
     T _ConvertStringToNum ( const std::string& str );
 
-public:
-    Player* player;
-    User ( string username, string password );
 
-    string Get_Username ( );
-    string Get_Password ( );
-    int Select_Player ( int no );
-    bool Is_Login ( );
-    bool Login ( );
-    bool Register ( );
-    bool Save ( );
-    bool DeleteUser ( );
 
 };
 

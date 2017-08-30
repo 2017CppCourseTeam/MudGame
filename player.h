@@ -9,21 +9,23 @@
 
 using namespace std;
 
-class Player{
-    private:
-        double prestige;
-        double bitcoin;
-        double violence;
-        int second;
-        int warnum;
-        friend class User;
-    public:
-        Player();
-        void showStatus();
-        void TrainCoder();
-        void DigMine();
-        void WashBrain() ;
-        ~Player(){};
+class Player
+{
+public:
+    Player();
+    void showStatus();
+    void TrainCoder();
+    void DigMine();
+    void WashBrain() ;
+    ~Player() {};
+private:
+    double prestige;
+    double bitcoin;
+    double violence;
+    int second;
+    int war_num;
+    friend class User;
+
 };
 
 #endif // PLAYER1_H_INCLUDED

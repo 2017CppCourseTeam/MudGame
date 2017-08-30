@@ -25,23 +25,17 @@ int User::Select_Player ( int no )
         case 1:
             this->player = &this->player1;
             break;
-
         case 2:
             this->player = &this->player2;
             break;
-
         case 3:
             this->player = &this->player3;
             break;
-
         default:
             return 0;
         }
-
         return no;
-    }
-
-    else {
+    } else {
         return 0;
     }
 }
@@ -53,21 +47,16 @@ bool User::Is_Login ( )
 
 bool User::Login ( )
 {
-    cout << "asdasdasdasd"<<endl;
     ifstream login;
     login.open ( this->filename.c_str(), ios::in );
-
     if ( !login ) {
         return false;
-    }
-
-    else {
+    } else {
         string username, password;
         // Get username.
         username = this->_Read ( login );
         // Get password.
         password = this->_Read ( login );
-
         if ( username == this->username && password == this->password ) {
             // Get player status
             this->_Load_Player ( login );
@@ -75,9 +64,7 @@ bool User::Login ( )
             this->is_login = true;
             login.close ( );
             return true;
-        }
-
-        else {
+        } else {
             login.close ( );
             return false;
         }
@@ -89,13 +76,10 @@ bool User::Register ( )
     // Test the user if exists.
     ifstream test_user_exists;
     test_user_exists.open ( this->filename.c_str(), ios::in );
-
     if ( test_user_exists ) {
         test_user_exists.close ( );
         return false;
-    }
-
-    else {
+    } else {
         test_user_exists.close ( );
         // Ready to register.
         ofstream regist;
@@ -114,9 +98,7 @@ bool User::Save ( )
         this->_Write ( save );
         save.close ( );
         return true;
-    }
-
-    else {
+    } else {
         return false;
     }
 }
@@ -127,13 +109,10 @@ bool User::DeleteUser ( )
     if ( this->Is_Login ( ) ) {
         if ( remove ( this->filename.c_str ( ) ) )
             return true;
-
         else {
             return false;
         }
-    }
-
-    else {
+    } else {
         return false;
     }
 }
@@ -143,23 +122,16 @@ string User::_Encrypt ( string str )
     int c = str.length ( );
     string h = "";
     string o = "";
-
     for ( int i = 0; i < c; i++ ) {
         if ( str [ i ] >= 'a' && str [ i ] <= 'z' ) {
             h = int ( str [ i ] ) - 27;
-        }
-
-        else if ( str [ i ] >= 'A' && str [ i ] <= 'Z' ) {
+        } else if ( str [ i ] >= 'A' && str [ i ] <= 'Z' ) {
             h = int ( str [ i ] ) + 11;
-        }
-
-        else {
+        } else {
             h = int ( str [ i ] ) - 14;
         }
-
         o.append ( string ( h ) );
     }
-
     return o;
 }
 
@@ -168,23 +140,16 @@ string User::_Decrypt ( string str )
     int c = str.length ( );
     string h = "";
     string o = "";
-
     for ( int i = 0; i < c; i++ ) {
         if ( str [ i ] >= 'F' && str [ i ] <= '_' ) {
             h = int ( str [ i ] ) + 27;
-        }
-
-        else if ( str [ i ] >= 'L' && str [ i ] <= 'e' ) {
+        } else if ( str [ i ] >= 'L' && str [ i ] <= 'e' ) {
             h = int ( str [ i ] ) - 11;
-        }
-
-        else {
+        } else {
             h = int ( str [ i ] ) + 14;
         }
-
         o.append ( string ( h ) );
     }
-
     return o;
 }
 

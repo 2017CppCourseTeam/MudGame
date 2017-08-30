@@ -7,7 +7,7 @@ class Game
 private:
 
 public:
-    void Run();
+    bool Init_User(User* user);
 
 };
 
