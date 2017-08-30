@@ -18,6 +18,7 @@
   * 删除当前用户
   * 必须在用户登录的情况下，如果在用户未登录时使用该函数，则返回 **False**
   * 删除成功返回 **True**，否则（该用户未注册）返回 **False**
+* **User** 类中Player属性公有
 
 ### User 类中存在一个函数对写入和读取存档时的数据进行加密解密，以防止用户恶意修改存档，但该接口不对外开放
 ### 构造函数为 User ( string username , string password );
@@ -27,3 +28,7 @@
 # 2017.8.28 @ user.cpp, user.h
 ****
 新增 **Get_Username( )** 和 **Get_Password( )** 两个接口，返回用户名和密码（string类）
+****
+# 2017.8.30 @ user.cpp, user.h
+****
+更改加密算法

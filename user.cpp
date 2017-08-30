@@ -4,7 +4,7 @@ User::User ( string username , string password )
 {
 	this->username = username;
 	this->password = password;
-	this->filename = ( string ( "./userdata/" ) + this->username ).c_str ( );
+	this->filename = string ( ".\\userdata\\" ) + this->username;
 	this->is_login = false;
 }
 
@@ -101,7 +101,7 @@ bool User::DeleteUser ( )
 {
 	if ( this->Is_Login ( ) )
 	{
-		if(remove ( this->filename ))
+		if ( remove ( this->filename.c_str ( ) ) )
 			return true;
 		else
 		{
@@ -114,39 +114,70 @@ bool User::DeleteUser ( )
 	}
 }
 
-string User::_Crypto ( string str )
+string User::_Encrypt ( string str )
 {
-	string k = "d03a1f3c";
 	int c = str.length ( );
-	int l = k.length ( );
+	string h = "";
 	string o = "";
-	for ( int i = 0; i < c;)
+	for ( int i = 0; i < c; i++ )
 	{
-		for ( int j = 0; ( j < c&&i < l ); j++ , i++ )
+		if ( str [ i ] >= 'a' && str [ i ] <= 'z' )
 		{
-			char c = char ( int ( str [ i ] ) ^ int ( k [ j ] ) );
-			o.append ( string ( &c ) );
+			h = int ( str [ i ] ) - 27;
 		}
+		else if ( str [ i ] >= 'A' && str [ i ] <= 'Z' )
+		{
+			h = int ( str [ i ] ) + 11;
+		}
+		else
+		{
+			h = int ( str [ i ] ) - 14;
+		}
+		o.append ( string ( h ) );
+	}
+	return o;
+}
+
+string User::_Decrypt ( string str )
+{
+	int c = str.length ( );
+	string h = "";
+	string o = "";
+	for ( int i = 0; i < c; i++ )
+	{
+		if ( str [ i ] >= 'F' && str [ i ] <= '_' )
+		{
+			h = int ( str [ i ] ) + 27;
+		}
+		else if ( str [ i ] >= 'L' && str [ i ] <= 'e' )
+		{
+			h = int ( str [ i ] ) - 11;
+		}
+		else
+		{
+			h = int ( str [ i ] ) + 14;
+		}
+		o.append ( string ( h ) );
 	}
 	return o;
 }
 
 void User::_Write ( ofstream& f )
 {
-	f << this->_Crypto ( this->username ) << std::endl;
-	f << this->_Crypto ( this->password ) << std::endl;
-	f << this->_Crypto ( this->_ConverNumToString ( this->player.prestige )) << std::endl;
-	f << this->_Crypto ( this->_ConverNumToString ( this->player.bitcoin ) ) << std::endl;
-	f << this->_Crypto ( this->_ConverNumToString ( this->player.violence ) ) << std::endl;
-	f << this->_Crypto ( this->_ConverNumToString ( this->player.second ) ) << std::endl;
-	f << this->_Crypto ( this->_ConverNumToString ( this->player.war_num ) ) << std::endl;
+	f << this->_Encrypt ( this->username ) << std::endl;
+	f << this->_Encrypt ( this->password ) << std::endl;
+	f << this->_Encrypt ( this->_ConverNumToString ( this->player.prestige )) << std::endl;
+	f << this->_Encrypt ( this->_ConverNumToString ( this->player.bitcoin ) ) << std::endl;
+	f << this->_Encrypt ( this->_ConverNumToString ( this->player.violence ) ) << std::endl;
+	f << this->_Encrypt ( this->_ConverNumToString ( this->player.second ) ) << std::endl;
+	f << this->_Encrypt ( this->_ConverNumToString ( this->player.war_num ) ) << std::endl;
 }
 
 string User::_Read ( ifstream & f )
 {
 	string _tmp;
 	getline ( f , _tmp );
-	return this->_Crypto ( _tmp );
+	return this->_Decrypt ( _tmp );
 }
 
 template <class T>

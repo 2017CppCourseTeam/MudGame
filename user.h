@@ -12,10 +12,9 @@ class User {
  private:
      string username;
 	 string password;
-	 const char* filename;
+	 string filename;
 	 bool is_login;
 
-	 string _Crypto ( string str );
 	 void _Write ( ofstream &f );
 	 string _Read ( ifstream &f );
 
@@ -27,6 +26,8 @@ class User {
  public:
     Player player;
 
+	string _Encrypt ( string str );
+	string _Decrypt ( string str );
 	User ( string username , string password );
 
 	string Get_Username ( );
