@@ -18,6 +18,34 @@ string User::Get_Password ( )
 	return this->password;
 }
 
+int User::Select_Player ( int no )
+{
+	if ( this->Is_Login ( ) )
+	{
+		switch ( no )
+		{
+			case 1:
+				this->player = &this->player1;
+				break;
+
+			case 2:
+				this->player = &this->player2;
+				break;
+
+			case 3:
+				this->player = &this->player3;
+				break;
+			default:
+				return 0;
+		}
+		return no;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
 bool User::Is_Login ( )
 {
 	return this->is_login;
@@ -41,12 +69,7 @@ bool User::Login ( )
 		if ( username == this->username && password == this->password )
 		{
 			// Get player status
-			this->player.prestige = this->_ConvertStringToNum<double> ( this->_Read ( login ) );
-			this->player.bitcoin = this->_ConvertStringToNum<double> ( this->_Read ( login ) );
-			this->player.violence = this->_ConvertStringToNum<double> ( this->_Read ( login ) );
-			this->player.second = this->_ConvertStringToNum<int> ( this->_Read ( login ) );
-			this->player.war_num = this->_ConvertStringToNum<int> ( this->_Read ( login ) );
-
+			this->_Load_Player ( login );
 			// User login success.
 			this->is_login = true;
 			login.close ( );
@@ -87,6 +110,7 @@ bool User::Save ( )
 	if ( this->Is_Login ( ) )
 	{
 		ofstream save;
+		save.open ( this->filename , ios::out );
 		this->_Write ( save );
 		save.close ( );
 		return true;
@@ -99,7 +123,8 @@ bool User::Save ( )
 
 bool User::DeleteUser ( )
 {
-	if ( this->Is_Login ( ) )
+	// Must be login!
+	if ( this->Is_Login ( ) ) 
 	{
 		if ( remove ( this->filename.c_str ( ) ) )
 			return true;
@@ -162,15 +187,52 @@ string User::_Decrypt ( string str )
 	return o;
 }
 
+// Load player status
+void User::_Load_Player ( ifstream & login )
+{
+	// Player1 status
+	this->player1.prestige = this->_ConvertStringToNum<double> ( this->_Read ( login ) );
+	this->player1.bitcoin = this->_ConvertStringToNum<double> ( this->_Read ( login ) );
+	this->player1.violence = this->_ConvertStringToNum<double> ( this->_Read ( login ) );
+	this->player1.second = this->_ConvertStringToNum<int> ( this->_Read ( login ) );
+	this->player1.war_num = this->_ConvertStringToNum<int> ( this->_Read ( login ) );
+	// Player2 status
+	this->player2.prestige = this->_ConvertStringToNum<double> ( this->_Read ( login ) );
+	this->player2.bitcoin = this->_ConvertStringToNum<double> ( this->_Read ( login ) );
+	this->player2.violence = this->_ConvertStringToNum<double> ( this->_Read ( login ) );
+	this->player2.second = this->_ConvertStringToNum<int> ( this->_Read ( login ) );
+	this->player2.war_num = this->_ConvertStringToNum<int> ( this->_Read ( login ) );
+	// Player3 status
+	this->player3.prestige = this->_ConvertStringToNum<double> ( this->_Read ( login ) );
+	this->player3.bitcoin = this->_ConvertStringToNum<double> ( this->_Read ( login ) );
+	this->player3.violence = this->_ConvertStringToNum<double> ( this->_Read ( login ) );
+	this->player3.second = this->_ConvertStringToNum<int> ( this->_Read ( login ) );
+	this->player3.war_num = this->_ConvertStringToNum<int> ( this->_Read ( login ) );
+}
+
 void User::_Write ( ofstream& f )
 {
+	// Username and Password
 	f << this->_Encrypt ( this->username ) << std::endl;
 	f << this->_Encrypt ( this->password ) << std::endl;
-	f << this->_Encrypt ( this->_ConverNumToString ( this->player.prestige )) << std::endl;
-	f << this->_Encrypt ( this->_ConverNumToString ( this->player.bitcoin ) ) << std::endl;
-	f << this->_Encrypt ( this->_ConverNumToString ( this->player.violence ) ) << std::endl;
-	f << this->_Encrypt ( this->_ConverNumToString ( this->player.second ) ) << std::endl;
-	f << this->_Encrypt ( this->_ConverNumToString ( this->player.war_num ) ) << std::endl;
+	// Player1 status
+	f << this->_Encrypt ( this->_ConverNumToString ( this->player1.prestige ) ) << std::endl;
+	f << this->_Encrypt ( this->_ConverNumToString ( this->player1.bitcoin ) ) << std::endl;
+	f << this->_Encrypt ( this->_ConverNumToString ( this->player1.violence ) ) << std::endl;
+	f << this->_Encrypt ( this->_ConverNumToString ( this->player1.second ) ) << std::endl;
+	f << this->_Encrypt ( this->_ConverNumToString ( this->player1.war_num ) ) << std::endl;
+	// Player2 status
+	f << this->_Encrypt ( this->_ConverNumToString ( this->player2.prestige ) ) << std::endl;
+	f << this->_Encrypt ( this->_ConverNumToString ( this->player2.bitcoin ) ) << std::endl;
+	f << this->_Encrypt ( this->_ConverNumToString ( this->player2.violence ) ) << std::endl;
+	f << this->_Encrypt ( this->_ConverNumToString ( this->player2.second ) ) << std::endl;
+	f << this->_Encrypt ( this->_ConverNumToString ( this->player2.war_num ) ) << std::endl;
+	// Player3 status
+	f << this->_Encrypt ( this->_ConverNumToString ( this->player3.prestige ) ) << std::endl;
+	f << this->_Encrypt ( this->_ConverNumToString ( this->player3.bitcoin ) ) << std::endl;
+	f << this->_Encrypt ( this->_ConverNumToString ( this->player3.violence ) ) << std::endl;
+	f << this->_Encrypt ( this->_ConverNumToString ( this->player3.second ) ) << std::endl;
+	f << this->_Encrypt ( this->_ConverNumToString ( this->player3.war_num ) ) << std::endl;
 }
 
 string User::_Read ( ifstream & f )
