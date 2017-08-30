@@ -6,6 +6,10 @@
 #include <cstdlib>
 #include <cmath>
 #include <iomanip>
+#include <string>
+#include <fstream>
+#include <cstdio>
+#include <sstream>
 
 using namespace std;
 
@@ -16,7 +20,9 @@ public:
     void showStatus();
     void TrainCoder();
     void DigMine();
-    void WashBrain() ;
+    void WashBrain();
+    string Get_name();
+    void Set_name ( string name );
     ~Player() {};
 private:
     double prestige;
@@ -24,6 +30,7 @@ private:
     double violence;
     int second;
     int war_num;
+    string name;
     friend class User;
 
 };

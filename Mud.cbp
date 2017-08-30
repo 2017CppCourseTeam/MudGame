@@ -34,6 +34,8 @@
 		</Compiler>
 		<Unit filename="Mudgame.cpp" />
 		<Unit filename="Mudgame.h" />
+		<Unit filename="commder.cpp" />
+		<Unit filename="commder.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="player.cpp" />
 		<Unit filename="player.h" />

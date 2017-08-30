@@ -1,11 +1,5 @@
 #ifndef USER_H_INCLUDED
 #define USER_H_INCLUDED
-
-#include <string>
-#include <fstream>
-#include <cstdio>
-#include <sstream>
-#include <iostream>
 #include "player.h"
 
 class User

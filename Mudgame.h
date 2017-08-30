@@ -7,8 +7,9 @@ class Game
 private:
 
 public:
-    bool Init_User(User* user);
-
+    bool Init ( User*& user );
+    void Select_Archive ( User* user );
+    bool Run ( User* user );
 };
 
 #endif // MUDGAME_H

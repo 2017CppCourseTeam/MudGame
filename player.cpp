@@ -8,7 +8,18 @@ Player::Player()
     this->violence = 50.0;
     this->second = 10;
     this->war_num = 0;
+    this->name = "";
     srand ( unsigned ( time ( NULL ) ) );
+}
+
+string Player::Get_name()
+{
+    return this->name;
+}
+
+void Player::Set_name ( string name )
+{
+    this->name = name;
 }
 
 void Player::showStatus()
@@ -42,14 +53,17 @@ void Player::TrainCoder()
     cout << "|                     *   *                 |" << endl;
     cout << "|                                           |" << endl;
     this->bitcoin -= 0.2;
-    if ( rand() / double ( RAND_MAX ) <= 0.8 ) {
+    if ( rand() / double ( RAND_MAX ) <= 0.8 )
+    {
         this->violence += 5;
         this->second += 1;
         cout << "|   恭喜你，训练成功。                      |" << endl;
         cout << "|                                           |" << endl;
         cout << "|                          暴力值+5，+1s    |" << endl;
         cout << " ------------------------------------------- " << endl;
-    } else {
+    }
+    else
+    {
         cout << "|   很遗憾，训练失败。                      |" << endl;
         cout << "|                                           |" << endl;
         cout << "|                          暴力值-3，-1s    |" << endl;
@@ -74,14 +88,17 @@ void Player::DigMine()
     cout << "|                 *     *                   |" << endl;
     cout << "|                  *   *                    |" << endl;
     cout << "|                                           |" << endl;
-    if ( ( rand() / double ( RAND_MAX ) ) <= 0.05 ) {
+    if ( ( rand() / double ( RAND_MAX ) ) <= 0.05 )
+    {
         this->bitcoin += 10;
         this->second += 1;
         cout << "|   好NB，本次挖出10个比特币！              |" << endl;
         cout << "|                                           |" << endl;
         cout << "|                          比特币+10，+1s   |" << endl;
         cout << " ------------------------------------------- " << endl;
-    } else {
+    }
+    else
+    {
         this->bitcoin += 0.01;
         this->second += 1;
         cout << "|   恭喜你，本次挖出0.1个比特币！           |" << endl;
@@ -107,14 +124,17 @@ void Player::WashBrain()
     cout << "|    ～～～～～～～～～～～～～～～～～～   |" << endl;
     cout << "|                                           |" << endl;
     this->bitcoin -= 0.2;
-    if ( ( rand() / double ( RAND_MAX ) ) <= 0.7 ) {
+    if ( ( rand() / double ( RAND_MAX ) ) <= 0.7 )
+    {
         this->prestige += 10;
         this->second += 1;
         cout << "|   恭喜您，训练成功                        |" << endl;
         cout << "|                                           |" << endl;
         cout << "|                            威望+10， +1s  |" << endl;
         cout << " ------------------------------------------- " << endl;
-    } else {
+    }
+    else
+    {
         this->prestige -= 5;
         this->second -= 1;
         cout << "|   很遗憾，训练失败                        |" << endl;

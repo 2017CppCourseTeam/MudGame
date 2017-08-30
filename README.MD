@@ -35,3 +35,12 @@
 * 每个 **User** 登录后有三个 **player** 可选择
 * 新增 **Select_Player ( int no )** 函数，**no** 可选值为**1,2或3**，选择成功返回**no**的值，选择失败（用户未登录或选择的 **no** 不存在）返回**0**
 * **User**中的**Player属性**为指向**Player类**的指针，指向**Select_Player**所选择的**player**
+****
+# 2017.8.30 @ main.cpp, mudgame.cpp, mudgame.h, commder.cpp, commder.h
+* 新增 **Mudgame** 类
+* 将 **main** 函数中的逻辑代码移动到 **Mudgame** 类中
+  * 该类提供三个接口，这三个接口均需要 **User类的指针** 作为参数
+  * 第一个接口 **Init(User*& user)** 包含了用户的初始化界面，登录，注册功能
+  * 第二个接口 **Select_Archive ( User* user )** 包含了用户选择存档的功能
+  * 第三个接口 **Run ( User* user )** 中包含了游戏的主逻辑循环
+* 新增 **Commder** 类用于存储并执行用户输入的命令，将命令与Player类分开
