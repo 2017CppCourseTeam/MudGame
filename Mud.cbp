@@ -33,6 +33,10 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="main.cpp" />
+		<Unit filename="player.cpp" />
+		<Unit filename="player.h" />
+		<Unit filename="user.cpp" />
+		<Unit filename="user.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
