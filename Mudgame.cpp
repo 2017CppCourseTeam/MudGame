@@ -1,7 +1,12 @@
 #include "Mudgame.h"
 #include "commder.h"
 
-bool Game::Init ( User*& user )
+Game::Game ( User*& user )
+{
+    this->user = user;
+}
+
+bool Game::Init ( )
 {
     cout << "人工智能统治地球27391年之后" << endl;
     cout << "你是地球上200个人类幸存者之一" << endl;
@@ -9,7 +14,7 @@ bool Game::Init ( User*& user )
     cout << "1) 登录" << endl;
     cout << "2) 注册" << endl;
     cout << "3) 退出" << endl;
-    int choice = -1;
+    int choice = -1; // BUG
     do
     {
         cout << ">>";
@@ -26,7 +31,7 @@ bool Game::Init ( User*& user )
         cin >> username;
         cout << endl << "密码: ";
         cin >> password;
-        user = new User ( username, password );
+        this->user = new User ( username, password );
         if ( user->Login() )
         {
             cout << endl << "[*]登录成功！" << endl << endl;
@@ -49,10 +54,10 @@ bool Game::Init ( User*& user )
         cin >> password;
         cout << endl << "确认密码: ";
         cin >> cpassword;
-        user = new User ( username, password );
+        this->user = new User ( username, password );
         if ( password == cpassword )
         {
-            if ( user->Register() )
+            if ( this->user->Register() )
             {
                 cout << endl << "[*]注册成功！" << endl << endl;
                 user->Login();
@@ -72,35 +77,36 @@ bool Game::Init ( User*& user )
         break;
     }
     case 3:
+        cout << endl << "[*]退出游戏" << endl;
         exit ( 0 );
     default:
         return false;
     }
 }
 
-void Game::Select_Archive ( User* user )
+void Game::Select_Archive ( )
 {
     cout << endl << "*********选择存档*********" << endl;
     // Print archives
     cout << "1) ";
     user->Select_Player ( 1 );
-    if ( user->player->Get_name() == string ( "" ) )
+    if ( this->user->player->Get_name() == string ( "" ) )
     {
         cout << "无" << endl;
     }
     else
     {
-        cout << user->player->Get_name() << endl;
+        cout << this->user->player->Get_name() << endl;
     }
     cout << "2) ";
     user->Select_Player ( 2 );
-    if ( user->player->Get_name() == string ( "" ) )
+    if ( this->user->player->Get_name() == string ( "" ) )
     {
         cout << "无" << endl;
     }
     else
     {
-        cout << user->player->Get_name() << endl;
+        cout << this->user->player->Get_name() << endl;
     }
     cout << "3) ";
     user->Select_Player ( 3 );
@@ -110,15 +116,18 @@ void Game::Select_Archive ( User* user )
     }
     else
     {
-        cout << user->player->Get_name() << endl;
+        cout << this->user->player->Get_name() << endl;
     }
-    int _choice = -1;
-    do
+    int _choice;
+    while ( true )
     {
         cout << ">>";
-        cin >> _choice;
+        cin >> _choice; // BUG
+        if ( ( int ( _choice ) >= 1 && int ( _choice ) <= 3 ) || ( char ( _choice ) >= '1' && char ( _choice ) <= '3' ) )
+            break;
+        else
+            cout << endl << "[*]未知存档" << endl;
     }
-    while ( ! ( _choice >= 1 && _choice <= 3 ) );
     // Set arhcive name
     user->Select_Player ( _choice );
     if ( user->player->Get_name() == string ( "" ) )
@@ -126,62 +135,31 @@ void Game::Select_Archive ( User* user )
         cout << "请输入存档名称: ";
         string _arhcive_name;
         cin >> _arhcive_name;
-        user->player->Set_name ( _arhcive_name );
+        this->user->player->Set_name ( _arhcive_name );
     }
-    cout << endl << "当前存档: " << user->player->Get_name() << endl;
+    cout << endl << "[*]当前存档: " << this->user->player->Get_name() << endl;
+    getchar();
 }
 
-bool Game::Run ( User* user )
+bool Game::Run ( )
 {
+    Commder commder ( this->user );
+    cout << endl << "[*]输入'manual'获得游戏详细帮助" << endl;
     while ( true )
     {
-        string choice1;
-        cout << "你想要进行什么骚操作?(输入'help'可以进行帮助)" << endl;
-        cin >> choice1;
-        if ( choice1 == "help" )
-        {
-            cout << "你可以输入'starwar'进行战争 ,'practice'进行训练 ,'end'退出游戏" << endl;
-        }
-        else if ( choice1 == "starwar" )
-        {
-            // user->player.StartWar()
-        }
-        else if ( choice1 == "practice" )
-        {
-            while ( true )
-            {
-                string choice2;
-                cout << "你想要训练什么?(输入'help'可以进行帮助)" << endl;
-                cin >> choice2;
-                if ( choice2 == "help" )
-                {
-                    cout << "你可以输入'train'训练码农,'dig'挖比特币,'washbrain'政治洗脑,'return'返回" << endl;
-                }
-                else if ( choice2 == "train" )
-                {
-                    user->player->TrainCoder();
-                    user->player->showStatus();
-                }
-                else if ( choice2 == "dig" )
-                {
-                    user->player->DigMine();
-                    user->player->showStatus();
-                }
-                else if ( choice2 == "washbrain" )
-                {
-                    user->player->WashBrain();
-                    user->player->showStatus();
-                }
-                else if ( choice2 == "return" )
-                    break;
-                else
-                    cout << "不存在该命令" << endl;
-            }
-        }
-        else if ( choice1 == "end" )
+        if ( commder.status == Commder::exit )
             break;
-        else
-            cout << "不存在该命令" << endl;
+        string cmd;
+        cout << endl << "输入命令: " << endl << ">>";
+        getline ( cin, cmd );
+        if ( !commder.Eval ( cmd ) )
+            cout << endl << "[!]未知命令: " << cmd << endl;
     }
     return true;
+}
+
+void Game::Exit()
+{
+    cout << endl << "[*]退出游戏" << endl;
+    delete this->user;
 }

@@ -22,7 +22,12 @@ void Player::Set_name ( string name )
     this->name = name;
 }
 
-void Player::showStatus()
+void Player::Restart_War()
+{
+    this->war_num = 0;
+}
+
+void Player::Show_Status()
 {
     cout << " ---------------------- " << endl;
     cout << "|属性值：              |" << endl;
@@ -36,7 +41,7 @@ void Player::showStatus()
     return;
 }
 
-void Player::TrainCoder()
+void Player::Train_Coder()
 {
     cout << " ------------------------------------------- " << endl;
     cout << "|   正在进行：训练码农（您有80%几率成功）   |" << endl;
@@ -71,7 +76,7 @@ void Player::TrainCoder()
     }
     return;
 }
-void Player::DigMine()
+void Player::Dig_Mine()
 {
     cout << " ------------------------------------------- " << endl;
     cout << "|   正在进行：挖比特币矿                    |" << endl;
@@ -108,7 +113,7 @@ void Player::DigMine()
     }
     return;
 }
-void Player::WashBrain()
+void Player::Wash_Brain()
 {
     cout << " ------------------------------------------- " << endl;
     cout << "|   正在进行： 政治洗脑                     |" << endl;
@@ -143,4 +148,9 @@ void Player::WashBrain()
         cout << " ------------------------------------------- " << endl;
     }
     return;
+}
+
+void Player::Start_War()
+{
+
 }

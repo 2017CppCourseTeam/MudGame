@@ -4,12 +4,14 @@
 
 class Game
 {
-private:
-
 public:
-    bool Init ( User*& user );
-    void Select_Archive ( User* user );
-    bool Run ( User* user );
+    Game ( User*& user );
+    bool Init ( );
+    void Select_Archive ( );
+    bool Run ( );
+    void Exit( );
+private:
+    User* user;
 };
 
 #endif // MUDGAME_H

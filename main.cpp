@@ -2,16 +2,16 @@
 
 int main()
 {
-    Game game;
     User* user;
+    Game game ( user );
     while ( true )
     {
-        if ( game.Init ( user ) )   // 游戏初始化，登陆
+        if ( game.Init ( ) )   // 娓告垙鍒濆鍖栵紙鐧诲綍銆佹敞鍐岋級
         {
-            game.Select_Archive ( user ); // 选择存档
-            if ( game.Run ( user ) )
+            game.Select_Archive ( ); // 閫夋嫨瀛樻。
+            if ( game.Run ( ) )
             {
-                // End Game code...
+                game.Exit( );
                 return 0;
             }
         }

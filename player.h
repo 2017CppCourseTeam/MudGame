@@ -17,13 +17,18 @@ class Player
 {
 public:
     Player();
-    void showStatus();
-    void TrainCoder();
-    void DigMine();
-    void WashBrain();
+    ~Player() {};
+
+    void Show_Status();
+    void Train_Coder();
+    void Dig_Mine();
+    void Wash_Brain();
+
+    void Start_War();
+    void Restart_War();
+
     string Get_name();
     void Set_name ( string name );
-    ~Player() {};
 private:
     double prestige;
     double bitcoin;
