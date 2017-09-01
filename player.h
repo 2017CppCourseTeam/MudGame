@@ -26,6 +26,13 @@ public:
     void Dig_Mine();
     void Wash_Brain();
 
+    void Random_Event();
+
+    void Mine_Crash();
+    void Brain_Unwashed();
+    void AI_Rebel();
+    void Naive();
+
     void Start_War();
     void Restart_War();
 

@@ -32,15 +32,15 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="Mudgame.cpp" />
-		<Unit filename="Mudgame.h" />
-		<Unit filename="commder.cpp" />
-		<Unit filename="commder.h" />
+		<Unit filename="Commander.cpp" />
+		<Unit filename="Commander.h" />
+		<Unit filename="Game.cpp" />
+		<Unit filename="Game.h" />
+		<Unit filename="Player.cpp" />
+		<Unit filename="Player.h" />
+		<Unit filename="User.cpp" />
+		<Unit filename="User.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="player.cpp" />
-		<Unit filename="player.h" />
-		<Unit filename="user.cpp" />
-		<Unit filename="user.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

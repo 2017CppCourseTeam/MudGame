@@ -72,6 +72,7 @@ void Player::Train_Coder()
         cout << "|                          暴力值-3，-1s    |" << endl;
         cout << " ------------------------------------------- " << endl;
     }
+    Player::Random_Event();
     return;
 }
 void Player::Dig_Mine()
@@ -102,13 +103,14 @@ void Player::Dig_Mine()
     }
     else
     {
-        this->bitcoin += 0.01;
+        this->bitcoin += 0.1;
         this->second += 1;
         cout << "|   恭喜你，本次挖出0.1个比特币！           |" << endl;
         cout << "|                                           |" << endl;
         cout << "|                          比特币+0.1，+1s  |" << endl;
         cout << " ------------------------------------------- " << endl;
     }
+    Player::Random_Event();
     return;
 }
 void Player::Wash_Brain()
@@ -145,7 +147,46 @@ void Player::Wash_Brain()
         cout << "|                            威望-5， -1s   |" << endl;
         cout << " ------------------------------------------- " << endl;
     }
+    Player::Random_Event();
     return;
+}
+
+void Player::Random_Event() {
+    cout << "|                                           |" << endl;
+
+    if ( ( rand() / double ( RAND_MAX ) ) <= 0.50 )
+        Mine_Crash();
+    if ( ( rand() / double ( RAND_MAX ) ) <= 0.15 )
+        Brain_Unwashed();
+    if ( ( rand() / double ( RAND_MAX ) ) <= 0.10 )
+        AI_Rebel();
+
+    cout << " ------------------------------------------- " << endl;
+
+}
+
+void Player::Mine_Crash() {
+    this->second -= 2;
+    this->bitcoin -=2;
+    cout << "|  发生突发事件：比特币矿难                 |" << endl;
+    cout << "|                            比特币-2，-2s  |" << endl;
+    cout << "|                                           |" << endl;
+}
+
+void Player::Brain_Unwashed() {
+    this->second -= 2;
+    this->prestige -= 5;
+    cout << "|  发生突发事件：码农思想僵化               |" << endl;
+    cout << "|                              威望-2，-2s  |" << endl;
+    cout << "|                                           |" << endl;
+}
+
+void Player::AI_Rebel() {
+    this->violence += 5;
+    this->prestige += 5;
+    cout << "|  发生突发事件：人工智能被感化             |" << endl;
+    cout << "|                         威望+5，暴力值+5  |" << endl;
+    cout << "|                                           |" << endl;
 }
 
 int Player::Get_Second()

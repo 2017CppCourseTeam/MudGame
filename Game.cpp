@@ -16,9 +16,11 @@ bool Game::Init ( )
     cout << "人工智能统治地球27391年之后" << endl;
     cout << "你是地球上200个人类幸存者之一" << endl;
     cout << "企图通过骚操作打倒人工智能政权" << endl << endl;
-    cout << "登录[login]" << endl;
-    cout << "注册[register]" << endl;
-    cout << "退出[exit]" << endl;
+    cout << "+----------------+" << endl;
+    cout << "|* 登录[login]   |" << endl;
+    cout << "|* 注册[register]|" << endl;
+    cout << "|* 退出[exit]    |" << endl;
+    cout << "+----------------+" << endl;
     enum _CHOICE {login = 1, regist, exits};
     enum _CHOICE __choice;
     while ( true )
@@ -58,12 +60,15 @@ bool Game::Init ( )
         this->commander = new Commander ( this->user );
         if ( user->Login() )
         {
-            cout << endl << "[*]登录成功！" << endl << endl;
+            cout << endl << "[*]登录成功！" << endl;
+            cout << "**************************" << endl;
             return true;
         }
         else
         {
             cout << endl << "[!]错误的用户名或密码！" << endl << endl;
+            getchar();
+            system("cls");
             return false;
         }
         break;
@@ -71,7 +76,7 @@ bool Game::Init ( )
     case regist:
     {
         string cpassword;
-        cout << "*********用户注册*********" << endl;
+        cout << endl << "*********用户注册*********" << endl;
         cout << "用户名: ";
         cin >> username;
         cout << endl << "密码: ";
@@ -85,18 +90,23 @@ bool Game::Init ( )
             if ( this->user->Register() )
             {
                 cout << endl << "[*]注册成功！" << endl << endl;
+                cout << "**************************" << endl;
                 user->Login();
                 return true;
             }
             else
             {
                 cout << endl << "[!]用户名已存在！" << endl << endl;
+                getchar();
+                system("cls");
                 return false;
             }
         }
         else
         {
             cout << endl << "[!]两次输入的密码不一样！" << endl << endl;
+            getchar();
+            system("cls");
             return false;
         }
         break;
@@ -163,6 +173,7 @@ void Game::Select_Archive ( )
         this->user->player->Set_name ( _arhcive_name );
     }
     cout << endl << "[*]当前存档: " << this->user->player->Get_name() << endl;
+    cout << "**************************" << endl;
     getchar();
 }
 
