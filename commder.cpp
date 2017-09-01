@@ -1,13 +1,31 @@
-#include "commder.h"
+#include "Mudgame.h"
 
 Commder::Commder ( User*& user )
 {
-    this->status = main;
+    this->status = _main;
     this->user = user;
+}
+
+enum STATUS Commder::Get_Status()
+{
+    return this->status;
 }
 
 void Commder::_Show_Manual()
 {
+    cout << endl << "[*]游戏介绍: " << endl;
+    cout << "这是一个关于养成类的战争游戏" << endl;
+    cout << "在这里，你需要通过训练提升自己的属性，攻克一个个战争，最后获取胜利" << endl;
+    cout << "  最开始，你拥有的属性值分别是：" << endl;
+    cout << "     50点威望值（士气，能够影响战斗时的能力值）" << endl;
+    cout << "     10个比特币（用于训练、发动战争）" << endl;
+    cout << "     50点暴力值（战斗的能力值）" << endl;
+    cout << "     10秒的生命值（当生命值小于0则游戏失败）" << endl;
+    cout << "  你可以通过输入相应的命令，进行训练与战争" << endl;
+    cout << "  通过训练码农，提升暴力值" << endl;
+    cout << "  通过挖矿，获得比特币" << endl;
+    cout << "  通过政治洗脑，提升威望值" << endl;
+    cout << "  通过发动战争，攻克各个关卡，获得最终的胜利！" << endl;
     cout << endl << "[*]全局命令: " << endl;
     cout << "manual         获得详细游戏帮助" << endl;
     cout << "help           获得当前界面帮助" << endl;
@@ -35,7 +53,7 @@ void Commder::_Current_Page()
     cout << endl << "[*]当前界面: ";
     switch ( this->status )
     {
-    case main:
+    case _main:
         cout << "主界面" << endl;
         break;
     case practice:
@@ -67,91 +85,85 @@ bool Commder::Eval ( string& cmd )
         this->user->player->Show_Status();
         return true;
     }
-    if ( cmd == string ( "current page" ) )
+    else if ( cmd == string ( "current page" ) )
     {
         this->_Current_Page();
         return true;
     }
-    if ( cmd == string ( "manual" ) )
+    else if ( cmd == string ( "manual" ) )
     {
         this->_Show_Manual();
         return true;
     }
-    if ( cmd == string ( "history" ) )
+    else if ( cmd == string ( "history" ) )
     {
         this->_Show_History();
         return true;
     }
     // Main page
-    if ( this->status == main )
+    if ( this->status == _main )
     {
         if ( cmd == string ( "help" ) )
         {
             cout << endl << "[*]你可以选择: 战争[war], 训练[practice], 保存[save], 退出[exit]" << endl;
             cout << "[*]输入相应命令执行操作" << endl;
-            return true;
         }
-        if ( cmd == string ( "practice" ) )
+        else if ( cmd == string ( "practice" ) )
         {
             this->status = practice;
             cout << endl << "[*]训练界面" << endl;
-            return true;
         }
-        if ( cmd == string ( "war" ) )
+        else if ( cmd == string ( "war" ) )
         {
             this->status = war;
             cout << endl << "[*]战争界面" << endl;
-            return true;
         }
-        if ( cmd == string ( "save" ) )
+        else if ( cmd == string ( "save" ) )
         {
             if ( this->user->Save() )
-            {
                 cout << endl << "[*]保存成功" << endl;
-                return true;
-            }
         }
-        if ( cmd == string ( "exit" ) )
+        else if ( cmd == string ( "exit" ) )
         {
-            this->status = exit;
-            return true;
+            this->status = quit;
         }
-        return false;
+        else
+            return false;
+        return true;
     }
     // Practice page
-    if  ( this->status == practice )
+    else if  ( this->status == practice )
     {
         if ( cmd == string ( "help" ) )
         {
             cout << endl << "[*]你可以选择: 训练[train coder], 挖矿[dig mine], 洗脑[wash brain], 返回[back]" << endl;
             cout << "[*]输入相应命令执行操作" << endl;
-            return true;
         }
-        if ( cmd == string ( "train coder" ) )
+        else if ( cmd == string ( "train coder" ) )
         {
             this->user->player->Train_Coder();
-            return true;
         }
-        if ( cmd == string ( "dig mine" ) )
+        else if ( cmd == string ( "dig mine" ) )
         {
             this->user->player->Dig_Mine();
-            return true;
         }
-        if ( cmd == string ( "wash brain" ) )
+        else if ( cmd == string ( "wash brain" ) )
         {
             this->user->player->Wash_Brain();
-            return true;
         }
-        if ( cmd == string ( "back" ) )
+        else if ( cmd == string ( "back" ) )
         {
-            this->status = main;
+            this->status = _main;
             cout << endl << "[*]返回主界面" << endl;
-            return true;
         }
-        return false;
+        else
+            return false;
+        if ( this->user->player->Get_Second() == 0 )
+            this->status = lose;
+        return true;
     }
     // War page
-    if ( this->status == war )
+    else if ( this->status == war )
     {
         if ( cmd == string ( "help" ) )
         {
@@ -159,30 +171,32 @@ bool Commder::Eval ( string& cmd )
             cout << "[*]输入相应命令执行操作" << endl;
             return true;
         }
-        if ( cmd == string ( "restart" ) )
+        else if ( cmd == string ( "restart" ) )
         {
             string _choice;
-            cout << endl << "[*]确定要重新开始吗？(y/N)";
+            cout << endl << "[*]确定要重新开始吗？(y/n)";
             cin >> _choice;
+            getchar();
             if ( _choice == string ( "y" ) || _choice == string ( "Y" ) )
             {
-                cout << endl << "[*]重新开始战争";
+                cout << endl << "[*]重新开始战争" << endl;
                 this->user->player->Restart_War();
             }
-            return true;
         }
-        if ( cmd == string ( "continue" ) )
+        else if ( cmd == string ( "continue" ) )
         {
-            cout << endl << "[*]继续战争";
+            cout << endl << "[*]继续战争" << endl;
             this->user->player->Start_War();
-            return true;
+            if (this->user->player->Get_War_Num() == 5)
+                this->status = win;
         }
-        if ( cmd == string ( "back" ) )
+        else if ( cmd == string ( "back" ) )
         {
-            this->status = main;
+            this->status = _main;
             cout << endl << "[*]返回主界面" << endl;
-            return true;
         }
-        return false;
+        else
+            return false;
+        return true;
     }
 }

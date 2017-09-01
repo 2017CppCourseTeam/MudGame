@@ -13,6 +13,8 @@
 
 using namespace std;
 
+enum STATUS {_main = 0, practice, war, quit, win, lose};
+
 class Player
 {
 public:
@@ -26,6 +28,9 @@ public:
 
     void Start_War();
     void Restart_War();
+
+    int Get_Second();
+    int Get_War_Num();
 
     string Get_name();
     void Set_name ( string name );

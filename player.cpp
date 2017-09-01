@@ -1,5 +1,4 @@
-#include "player.h"
-using namespace std;
+#include "Mudgame.h"
 
 Player::Player()
 {
@@ -148,6 +147,16 @@ void Player::Wash_Brain()
         cout << " ------------------------------------------- " << endl;
     }
     return;
+}
+
+int Player::Get_Second()
+{
+    return this->second;
+}
+
+int Player::Get_War_Num()
+{
+    return this->war_num;
 }
 
 void Player::Start_War()

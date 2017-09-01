@@ -10,14 +10,12 @@ using namespace std;
 class Commder
 {
 public:
-    enum STATUS {main = 0, practice, war, exit};
-    enum STATUS status;
-
     Commder ( User*& user );
-
     bool Eval ( string& cmd );
+    enum STATUS Get_Status();
 private:
     User* user;
+    enum STATUS status;
     vector<string> history;
     void _Show_History();
     void _Show_Manual();

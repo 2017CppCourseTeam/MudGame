@@ -1,4 +1,4 @@
-#include "user.h"
+#include "Mudgame.h"
 
 User::User ( string username, string password )
 {
@@ -19,11 +19,11 @@ string User::Get_Password ( )
     return this->password;
 }
 
-int User::Select_Player ( int no )
+int User::Select_Player ( int _no )
 {
     if ( this->Is_Login ( ) )
     {
-        switch ( no )
+        switch ( _no )
         {
         case 1:
             this->player = & ( this->player1 );
@@ -37,7 +37,7 @@ int User::Select_Player ( int no )
         default:
             return 0;
         }
-        return no;
+        return _no;
     }
     else
     {

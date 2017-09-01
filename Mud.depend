@@ -1,11 +1,11 @@
 # depslib dependency file v1.0
-1504192244 source:f:\文档\学习资料\mudgame\main.cpp
+1504248215 source:f:\文档\学习资料\mudgame\main.cpp
 	"Mudgame.h"
 
 1504185163 f:\文档\学习资料\mudgame\user.h
 	"player.h"
 
-1504190616 f:\文档\学习资料\mudgame\player.h
+1504247331 f:\文档\学习资料\mudgame\player.h
 	<iostream>
 	<ctime>
 	<cstdlib>
@@ -16,27 +16,26 @@
 	<cstdio>
 	<sstream>
 
-1504194599 source:f:\文档\学习资料\mudgame\player.cpp
-	"player.h"
+1504248215 source:f:\文档\学习资料\mudgame\player.cpp
+	"Mudgame.h"
 
 1504055371 source:f:\文档\学习资料\mudgame\test.cpp
 	"user.h"
 	<iostream>
 
-1504083703 source:f:\文档\学习资料\mudgame\user.cpp
-	"user.h"
-
-1504192258 f:\文档\学习资料\mudgame\mudgame.h
-	"user.h"
-
-1504244287 source:f:\文档\学习资料\mudgame\mudgame.cpp
+1504249739 source:f:\文档\学习资料\mudgame\user.cpp
 	"Mudgame.h"
+
+1504249200 f:\文档\学习资料\mudgame\mudgame.h
 	"commder.h"
 
-1504194511 source:f:\文档\学习资料\mudgame\commder.cpp
-	"commder.h"
+1504249277 source:f:\文档\学习资料\mudgame\mudgame.cpp
+	"Mudgame.h"
 
-1504193691 f:\文档\学习资料\mudgame\commder.h
+1504249337 source:f:\文档\学习资料\mudgame\commder.cpp
+	"Mudgame.h"
+
+1504249590 f:\文档\学习资料\mudgame\commder.h
 	<iostream>
 	<vector>
 	<string>
