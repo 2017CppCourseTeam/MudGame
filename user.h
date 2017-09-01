@@ -1,6 +1,6 @@
 #ifndef USER_H_INCLUDED
 #define USER_H_INCLUDED
-#include "player.h"
+#include "Player.h"
 
 class User
 {
@@ -36,8 +36,6 @@ private:
     string _ConverNumToString ( T d );
     template <class T>
     T _ConvertStringToNum ( const std::string& str );
-
-
 
 };
 

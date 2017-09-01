@@ -1,5 +1,4 @@
-#include "Mudgame.h"
-
+#include "Game.h"
 Player::Player()
 {
     this->prestige = 50.0;

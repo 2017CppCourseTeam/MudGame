@@ -3,14 +3,14 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include "user.h"
+#include "User.h"
 
 using namespace std;
 
-class Commder
+class Commander
 {
 public:
-    Commder ( User*& user );
+    Commander ( User*& user );
     bool Eval ( string& cmd );
     enum STATUS Get_Status();
 private:

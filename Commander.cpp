@@ -1,17 +1,17 @@
-#include "Mudgame.h"
+#include "Game.h"
 
-Commder::Commder ( User*& user )
+Commander::Commander ( User*& user )
 {
     this->status = _main;
     this->user = user;
 }
 
-enum STATUS Commder::Get_Status()
+enum STATUS Commander::Get_Status()
 {
     return this->status;
 }
 
-void Commder::_Show_Manual()
+void Commander::_Show_Manual()
 {
     cout << endl << "[*]游戏介绍: " << endl;
     cout << "这是一个关于养成类的战争游戏" << endl;
@@ -48,7 +48,7 @@ void Commder::_Show_Manual()
     cout << "back           返回主界面" << endl;
 }
 
-void Commder::_Current_Page()
+void Commander::_Current_Page()
 {
     cout << endl << "[*]当前界面: ";
     switch ( this->status )
@@ -65,7 +65,7 @@ void Commder::_Current_Page()
     }
 }
 
-void Commder::_Show_History()
+void Commander::_Show_History()
 {
     cout << endl << "[*]历史命令: " << endl;
     for ( int i = this->history.size() - 1; i >= 0 ; i-- )
@@ -76,7 +76,7 @@ void Commder::_Show_History()
     }
 }
 
-bool Commder::Eval ( string& cmd )
+bool Commander::Eval ( string& cmd )
 {
     this->history.insert ( history.begin(), cmd );
     // Global command

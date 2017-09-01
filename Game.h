@@ -1,6 +1,6 @@
 #ifndef MUDGAME_H
 #define MUDGAME_H
-#include "commder.h"
+#include "Commander.h"
 
 class Game
 {
@@ -14,7 +14,7 @@ public:
 private:
     bool _Check();
     User* user;
-    Commder* commder;
+    Commander* commander;
 };
 
 #endif // MUDGAME_H

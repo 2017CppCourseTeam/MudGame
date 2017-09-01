@@ -1,4 +1,4 @@
-#include "Mudgame.h"
+#include "Game.h"
 
 Game::Game ( User*& user )
 {
@@ -7,7 +7,7 @@ Game::Game ( User*& user )
 
 Game::~Game()
 {
-    delete this->commder;
+    delete this->commander;
     delete this->user;
 }
 
@@ -55,7 +55,7 @@ bool Game::Init ( )
         cout << endl << "ÃÜÂë: ";
         cin >> password;
         this->user = new User ( username, password );
-        this->commder = new Commder ( this->user );
+        this->commander = new Commander ( this->user );
         if ( user->Login() )
         {
             cout << endl << "[*]µÇÂ¼³É¹¦£¡" << endl << endl;
@@ -79,7 +79,7 @@ bool Game::Init ( )
         cout << endl << "È·ÈÏÃÜÂë: ";
         cin >> cpassword;
         this->user = new User ( username, password );
-        this->commder = new Commder ( this->user );
+        this->commander = new Commander ( this->user );
         if ( password == cpassword )
         {
             if ( this->user->Register() )
@@ -176,7 +176,7 @@ bool Game::Run ( )
             string cmd;
             cout << endl << "ÊäÈëÃüÁî: " << endl << ">>";
             getline ( cin, cmd );
-            if ( !this->commder->Eval ( cmd ) )
+            if ( !this->commander->Eval ( cmd ) )
                 cout << endl << "[!]Î´ÖªÃüÁî: " << cmd << endl;
         }
         else
@@ -187,17 +187,17 @@ bool Game::Run ( )
 
 bool Game::_Check()
 {
-    if ( this->commder->Get_Status() == lose )
+    if ( this->commander->Get_Status() == lose )
     {
         cout << endl << "[*]ÄãÊäÁË" << endl;
         return false;
     }
-    if ( this->commder->Get_Status() == win )
+    if ( this->commander->Get_Status() == win )
     {
         cout << endl << "[*]ÄãÓ®ÁË" << endl;
         return false;
     }
-    if ( this->commder->Get_Status() == quit )
+    if ( this->commander->Get_Status() == quit )
     {
         cout << endl << "[*]Íæ¼ÒÍË³ö" << endl;
         return false;
