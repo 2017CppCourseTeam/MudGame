@@ -11,20 +11,38 @@ bool Game::Init ( )
     cout << "人工智能统治地球27391年之后" << endl;
     cout << "你是地球上200个人类幸存者之一" << endl;
     cout << "企图通过骚操作打倒人工智能政权" << endl << endl;
-    cout << "1) 登录" << endl;
-    cout << "2) 注册" << endl;
-    cout << "3) 退出" << endl;
-    int choice = -1; // BUG
-    do
+    cout << "登录[login]" << endl;
+    cout << "注册[register]" << endl;
+    cout << "退出[exit]" << endl;
+    enum _CHOICE {login = 1, regist, exits};
+    enum _CHOICE __choice;
+    while ( true )
     {
-        cout << ">>";
-        cin >> choice;
+        string _choice;
+        cout << endl << ">>";
+        cin >> _choice;
+        if ( _choice == string ( "login" ) )
+        {
+            __choice = login;
+            break;
+        }
+        else if ( _choice == string ( "register" ) )
+        {
+            __choice = regist;
+            break;
+        }
+        else if ( _choice == string ( "exit" ) )
+        {
+            __choice = exits;
+            break;
+        }
+        else
+            cout << endl << "[!]错误的命令: " << _choice << endl;
     }
-    while ( choice == -1 );
     string username, password;
-    switch ( choice )
+    switch ( __choice )
     {
-    case 1:
+    case login:
     {
         cout << endl << "*********用户登录*********" << endl;
         cout << "用户名: ";
@@ -44,7 +62,7 @@ bool Game::Init ( )
         }
         break;
     }
-    case 2:
+    case regist:
     {
         string cpassword;
         cout << "*********用户注册*********" << endl;
@@ -76,7 +94,7 @@ bool Game::Init ( )
         }
         break;
     }
-    case 3:
+    case exits:
         cout << endl << "[*]退出游戏" << endl;
         exit ( 0 );
     default:
