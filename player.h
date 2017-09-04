@@ -10,6 +10,7 @@
 #include <fstream>
 #include <cstdio>
 #include <sstream>
+#include "windows.h"
 
 using namespace std;
 
@@ -49,7 +50,7 @@ private:
     int war_num;
     string name;
     friend class User;
-
+    HANDLE handle;
 };
 
 #endif // PLAYER1_H_INCLUDED

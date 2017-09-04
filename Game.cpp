@@ -13,14 +13,19 @@ Game::~Game()
 
 bool Game::Init ( )
 {
+    HANDLE handle;
+
+    handle = GetStdHandle(STD_OUTPUT_HANDLE);
     cout << "人工智能统治地球27391年之后" << endl;
     cout << "你是地球上200个人类幸存者之一" << endl;
     cout << "企图通过骚操作打倒人工智能政权" << endl << endl;
-    cout << "+----------------+" << endl;
-    cout << "|* 登录[login]   |" << endl;
-    cout << "|* 注册[register]|" << endl;
-    cout << "|* 退出[exit]    |" << endl;
-    cout << "+----------------+" << endl;
+    SetConsoleTextAttribute(handle, BACKGROUND_RED|BACKGROUND_BLUE|BACKGROUND_GREEN|FOREGROUND_BLUE);
+    cout << " +----------------+ " << endl;
+    cout << " |* 登录[login]   | " << endl;
+    cout << " |* 注册[register]| " << endl;
+    cout << " |* 退出[exit]    | " << endl;
+    cout << " +----------------+ " << endl;
+    SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_BLUE);
     enum _CHOICE {login = 1, regist, exits};
     enum _CHOICE __choice;
     while ( true )

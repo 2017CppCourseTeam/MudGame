@@ -3,6 +3,8 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <cstdlib>
+#include <Windows.h>
 #include "User.h"
 
 using namespace std;

@@ -13,9 +13,15 @@ enum STATUS Commander::Get_Status()
 
 void Commander::_Show_Manual()
 {
-    cout << endl << "[*]游戏介绍: " << endl;
-    cout << "这是一个关于养成类的战争游戏" << endl;
-    cout << "在这里，你需要通过训练提升自己的属性，攻克一个个战争，最后获取胜利" << endl;
+    HANDLE handle;
+
+    handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY | BACKGROUND_RED |BACKGROUND_GREEN | FOREGROUND_GREEN);
+    cout << endl;
+    cout << "                                                                   " << endl;
+    cout << "[*]游戏介绍:                                                       " << endl;
+    cout << "这是一个关于养成类的战争游戏                                       " << endl;
+    cout << "在这里，你需要通过训练提升自己的属性，攻克一个个战争，最后获取胜利 " << endl;
     cout << "+-------------------------------------------------+" << endl;
     cout << "|  最开始，你拥有的属性值分别是：                 |" << endl;
     cout << "|    * 50点威望值（士气，能够影响战斗时的能力值） |" << endl;
@@ -23,14 +29,17 @@ void Commander::_Show_Manual()
     cout << "|    * 50点暴力值（战斗的能力值）                 |" << endl;
     cout << "|    * 10秒的生命值（当生命值小于0则游戏失败）    |" << endl;
     cout << "+-------------------------------------------------+" << endl;
-    cout << "  你可以通过输入相应的命令，进行训练与战争" << endl;
-    cout << "  通过训练码农，提升暴力值" << endl;
-    cout << "  通过挖矿，获得比特币" << endl;
-    cout << "  通过政治洗脑，提升威望值" << endl;
-    cout << "  通过发动战争，攻克各个关卡，获得最终的胜利！" << endl << endl;
+    cout << "  你可以通过输入相应的命令，进行训练与战争    " << endl;
+    cout << "  通过训练码农，提升暴力值                    " << endl;
+    cout << "  通过挖矿，获得比特币                        " << endl;
+    cout << "  通过政治洗脑，提升威望值                    " << endl;
+    cout << "  通过发动战争，攻克各个关卡，获得最终的胜利！" << endl;
+    cout << "                                              "<< endl;
+    SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_BLUE);
     cout << "按任意键继续"<< endl;
     if (getchar())
     {
+        SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_GREEN);
         cout << "+----------------------------------+" << endl;
         cout << "|[*]全局命令:                      |" << endl;
         cout << "|manual         获得详细游戏帮助   |" << endl;
@@ -56,6 +65,7 @@ void Commander::_Show_Manual()
         cout << "|restart        重新开始战争       |" << endl;
         cout << "|back           返回主界面         |" << endl;
         cout << "+----------------------------------+" << endl;
+        SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_BLUE);
     }
 }
 
