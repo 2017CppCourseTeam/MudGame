@@ -10,6 +10,7 @@
 #include <fstream>
 #include <conio.h>
 #include <cstdio>
+#include <windows.h>
 #include <sstream>
 
 #include "War.h"
@@ -63,6 +64,7 @@ class Player
         double violence;
         int second;
         unsigned short war_num;
+        HANDLE handle;
         bool war_first;
         string name;
         War* war;

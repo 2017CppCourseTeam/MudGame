@@ -165,12 +165,7 @@ void Player::Wash_Brain()
 void Player::Random_Event()
 {
     cout << "|                                           |" << endl;
-<<<<<<< HEAD:src/Player.cpp
-    if ( ( rand() / double ( RAND_MAX ) ) <= 0.50 )
-=======
-
     if ( ( rand() / double ( RAND_MAX ) ) <= 0.05 )
->>>>>>> origin/master:player.cpp
         Mine_Crash();
     if ( ( rand() / double ( RAND_MAX ) ) <= 0.15 )
         Brain_Unwashed();
@@ -182,12 +177,8 @@ void Player::Random_Event()
 void Player::Mine_Crash()
 {
     this->second -= 2;
-<<<<<<< HEAD:src/Player.cpp
-    this->bitcoin -= 2;
-=======
     this->bitcoin -=2;
     cout << " ------------------------------------------- " << endl;
->>>>>>> origin/master:player.cpp
     cout << "|  发生突发事件：比特币矿难                 |" << endl;
     cout << "|                            比特币-2，-2s  |" << endl;
     cout << "|                                           |" << endl;

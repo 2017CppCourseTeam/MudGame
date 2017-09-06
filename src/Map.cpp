@@ -37,7 +37,7 @@ void Map::_Init_Map_Points()
     {
         for ( unsigned int j = 1; j < this->width; j += 3 )
         {
-            if (this->_map[i][j] == "X")
+            //if (this->_map[i][j] == "X")
         }
     }
 }

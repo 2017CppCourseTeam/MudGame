@@ -39,15 +39,6 @@ void Commander::_Show_Manual()
     cout << "|    * 50点暴力值（战斗的能力值）                 |" << endl;
     cout << "|    * 10秒的生命值（当生命值小于0则游戏失败）    |" << endl;
     cout << "+-------------------------------------------------+" << endl;
-<<<<<<< HEAD:src/Commander.cpp
-    cout << "  你可以通过输入相应的命令，进行训练与战争" << endl;
-    cout << "  通过训练码农，提升暴力值" << endl;
-    cout << "  通过挖矿，获得比特币" << endl;
-    cout << "  通过政治洗脑，提升威望值" << endl;
-    cout << "  通过发动战争，攻克各个关卡，获得最终的胜利！" << endl << endl;
-    cout << "按任意键继续" << endl;
-    if ( getch() )
-=======
     cout << "  你可以通过输入相应的命令，进行训练与战争    " << endl;
     cout << "  通过训练码农，提升暴力值                    " << endl;
     cout << "  通过挖矿，获得比特币                        " << endl;
@@ -56,8 +47,7 @@ void Commander::_Show_Manual()
     cout << "                                              "<< endl;
     SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_BLUE);
     cout << "按任意键继续"<< endl;
-    if (getchar())
->>>>>>> origin/master:Commander.cpp
+    if (getch())
     {
         SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_GREEN);
         cout << "+----------------------------------+" << endl;
@@ -85,12 +75,9 @@ void Commander::_Show_Manual()
         cout << "|restart        重新开始战争       |" << endl;
         cout << "|back           返回主界面         |" << endl;
         cout << "+----------------------------------+" << endl;
-<<<<<<< HEAD:src/Commander.cpp
         cout << "|[*]战争界面命令:                  |" << endl;
         cout << "+----------------------------------+" << endl;
-=======
         SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_BLUE);
->>>>>>> origin/master:Commander.cpp
     }
 }
 
