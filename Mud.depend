@@ -1,11 +1,11 @@
 # depslib dependency file v1.0
-1504262308 source:f:\文档\学习资料\mudgame\main.cpp
+1504442356 source:f:\文档\学习资料\mudgame\main.cpp
 	"Game.h"
 
-1504252937 f:\文档\学习资料\mudgame\user.h
+1504445116 f:\文档\学习资料\mudgame\user.h
 	"Player.h"
 
-1504263449 f:\文档\学习资料\mudgame\player.h
+1504445181 f:\文档\学习资料\mudgame\player.h
 	<iostream>
 	<ctime>
 	<cstdlib>
@@ -13,17 +13,20 @@
 	<iomanip>
 	<string>
 	<fstream>
+	<conio.h>
 	<cstdio>
 	<sstream>
+	"War.h"
+	"AI-Settings.h"
 
-1504263447 source:f:\文档\学习资料\mudgame\player.cpp
+1504445187 source:f:\文档\学习资料\mudgame\player.cpp
 	"Game.h"
 
 1504055371 source:f:\文档\学习资料\mudgame\test.cpp
 	"user.h"
 	<iostream>
 
-1504252937 source:f:\文档\学习资料\mudgame\user.cpp
+1504445066 source:f:\文档\学习资料\mudgame\user.cpp
 	"Game.h"
 
 1504249200 f:\文档\学习资料\mudgame\mudgame.h
@@ -41,18 +44,82 @@
 	<string>
 	"user.h"
 
-1504262351 source:f:\文档\学习资料\mudgame\commander.cpp
+1504445066 source:f:\文档\学习资料\mudgame\commander.cpp
 	"Game.h"
 
-1504262342 f:\文档\学习资料\mudgame\game.h
+1504445066 f:\文档\学习资料\mudgame\game.h
 	"Commander.h"
 
-1504262358 f:\文档\学习资料\mudgame\commander.h
+1504445066 f:\文档\学习资料\mudgame\commander.h
 	<iostream>
 	<vector>
 	<string>
 	"User.h"
 
-1504262331 source:f:\文档\学习资料\mudgame\game.cpp
+1504445066 source:f:\文档\学习资料\mudgame\game.cpp
 	"Game.h"
+
+1504536764 f:\文档\学习资料\mudgame\include\war.h
+	<iostream>
+	"Map.h"
+
+1504538558 source:f:\文档\学习资料\mudgame\src\war.cpp
+	"War.h"
+
+1504340809 f:\文档\学习资料\mudgame\ai-settings.h
+
+1504538702 source:f:\文档\学习资料\mudgame\src\map.cpp
+	"Map.h"
+
+1504538702 f:\文档\学习资料\mudgame\include\map.h
+	<iostream>
+	<string>
+	<fstream>
+	<sstream>
+	<vector>
+
+1504445066 f:\文档\学习资料\mudgame\include\game.h
+	"Commander.h"
+
+1504535267 f:\文档\学习资料\mudgame\include\commander.h
+	<iostream>
+	<vector>
+	<string>
+	"User.h"
+
+1504445116 f:\文档\学习资料\mudgame\include\user.h
+	"Player.h"
+
+1504536829 f:\文档\学习资料\mudgame\include\player.h
+	<iostream>
+	<ctime>
+	<cstdlib>
+	<cmath>
+	<iomanip>
+	<string>
+	<fstream>
+	<conio.h>
+	<cstdio>
+	<sstream>
+	"War.h"
+	"AI-Settings.h"
+
+1504340809 f:\文档\学习资料\mudgame\include\ai-settings.h
+
+1504511332 source:f:\文档\学习资料\mudgame\src\game.cpp
+	"Game.h"
+
+1504537298 source:f:\文档\学习资料\mudgame\src\player.cpp
+	"Game.h"
+
+1504521684 source:f:\文档\学习资料\mudgame\src\user.cpp
+	"Game.h"
+
+1504538399 source:f:\文档\学习资料\mudgame\src\commander.cpp
+	"Game.h"
+
+1504523153 source:f:\文档\学习资料\mudgame\src\soldier.cpp
+	"Soldier.h"
+
+1504523985 f:\文档\学习资料\mudgame\include\soldier.h
 

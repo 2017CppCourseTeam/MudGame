@@ -2,13 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="Mud" />
+		<Option title="MapBuild" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="include\;" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/Mud" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/MapBuild" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -18,7 +17,7 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/Mud" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Release/MapBuild" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -35,27 +34,15 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="include/AI-Settings.h" />
-		<Unit filename="include/Commander.h" />
-		<Unit filename="include/Game.h" />
 		<Unit filename="include/Map.h" />
-		<Unit filename="include/Player.h" />
-		<Unit filename="include/Soldier.h" />
-		<Unit filename="include/User.h" />
-		<Unit filename="include/War.h" />
+		<Unit filename="include/MapBuilder.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="src/Commander.cpp" />
-		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/Map.cpp" />
-		<Unit filename="src/Player.cpp" />
-		<Unit filename="src/Soldier.cpp" />
-		<Unit filename="src/User.cpp" />
-		<Unit filename="src/War.cpp" />
+		<Unit filename="src/MapBuilder.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
 			<debugger />
-			<lib_finder disable_auto="1" />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
