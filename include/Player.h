@@ -54,8 +54,10 @@ class Player
 
         void Show_War_Status();
         void Show_Map ( bool show_detail );
-        void Select_Point ( unsigned int _x, unsigned int _y );
+        bool Select_Point ( unsigned int _x, unsigned int _y );
         void Show_Ponit_Status();
+        bool Select_Soldier(unsigned int id);
+        void Show_Soldier_Status(unsigned int id);
 
         void Ai_Init ( double prestige, double bitcoin, double violence, int second, unsigned short war_num, bool first );
     private:
@@ -64,9 +66,12 @@ class Player
         double violence;
         int second;
         unsigned short war_num;
-        HANDLE handle;
         bool war_first;
         string name;
+
+        vector<Soldier> allow_species;
+
+        HANDLE handle;
         War* war;
         friend class User;
 
