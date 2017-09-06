@@ -7,6 +7,7 @@ Player::Player()
     this->second = 10;
     this->war_num = 0;
     this->name = "";
+    handle = GetStdHandle(STD_OUTPUT_HANDLE);
     srand ( unsigned ( time ( NULL ) ) );
 }
 
@@ -31,6 +32,8 @@ void Player::Restart_War()
 
 void Player::Show_Status()
 {
+    handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY | BACKGROUND_INTENSITY | BACKGROUND_GREEN | FOREGROUND_RED);//设置为红色
     cout << " ---------------------- " << endl;
     cout << "|属性值：              |" << endl;
     cout << "|                      |" << endl;
@@ -40,11 +43,14 @@ void Player::Show_Status()
     cout << "|                      |" << endl;
     cout << "|                " << setw ( 3 ) << this->second << "s  |" << endl;
     cout << " ---------------------- " << endl;
+    SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_BLUE);
     return;
 }
 
 void Player::Train_Coder()
 {
+    handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(handle, FOREGROUND_BLUE|FOREGROUND_GREEN|FOREGROUND_RED|BACKGROUND_BLUE);
     cout << " ------------------------------------------- " << endl;
     cout << "|   正在进行：训练码农（您有80%几率成功）   |" << endl;
     cout << "|                                           |" << endl;
@@ -67,20 +73,21 @@ void Player::Train_Coder()
         cout << "|   恭喜你，训练成功。                      |" << endl;
         cout << "|                                           |" << endl;
         cout << "|                          暴力值+5，+1s    |" << endl;
-        cout << " ------------------------------------------- " << endl;
     }
     else
     {
         cout << "|   很遗憾，训练失败。                      |" << endl;
         cout << "|                                           |" << endl;
         cout << "|                          暴力值-3，-1s    |" << endl;
-        cout << " ------------------------------------------- " << endl;
     }
     Player::Random_Event();
+    SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_BLUE);
     return;
 }
 void Player::Dig_Mine()
 {
+    handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(handle, FOREGROUND_BLUE|FOREGROUND_GREEN|FOREGROUND_RED|BACKGROUND_BLUE);
     cout << " ------------------------------------------- " << endl;
     cout << "|   正在进行：挖比特币矿                    |" << endl;
     cout << "|                                           |" << endl;
@@ -103,7 +110,6 @@ void Player::Dig_Mine()
         cout << "|   好NB，本次挖出10个比特币！              |" << endl;
         cout << "|                                           |" << endl;
         cout << "|                          比特币+10，+1s   |" << endl;
-        cout << " ------------------------------------------- " << endl;
     }
     else
     {
@@ -112,13 +118,15 @@ void Player::Dig_Mine()
         cout << "|   恭喜你，本次挖出0.1个比特币！           |" << endl;
         cout << "|                                           |" << endl;
         cout << "|                          比特币+0.1，+1s  |" << endl;
-        cout << " ------------------------------------------- " << endl;
     }
     Player::Random_Event();
+    SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_BLUE);
     return;
 }
 void Player::Wash_Brain()
 {
+    handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(handle, FOREGROUND_BLUE|FOREGROUND_GREEN|FOREGROUND_RED|BACKGROUND_BLUE);
     cout << " ------------------------------------------- " << endl;
     cout << "|   正在进行： 政治洗脑                     |" << endl;
     cout << "|    ～～～～～～～～～～～～～～ ～～～    |" << endl;
@@ -140,7 +148,6 @@ void Player::Wash_Brain()
         cout << "|   恭喜您，训练成功                        |" << endl;
         cout << "|                                           |" << endl;
         cout << "|                            威望+10， +1s  |" << endl;
-        cout << " ------------------------------------------- " << endl;
     }
     else
     {
@@ -149,16 +156,21 @@ void Player::Wash_Brain()
         cout << "|   很遗憾，训练失败                        |" << endl;
         cout << "|                                           |" << endl;
         cout << "|                            威望-5， -1s   |" << endl;
-        cout << " ------------------------------------------- " << endl;
     }
     Player::Random_Event();
+    SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_BLUE);
     return;
 }
 
 void Player::Random_Event()
 {
     cout << "|                                           |" << endl;
+<<<<<<< HEAD:src/Player.cpp
     if ( ( rand() / double ( RAND_MAX ) ) <= 0.50 )
+=======
+
+    if ( ( rand() / double ( RAND_MAX ) ) <= 0.05 )
+>>>>>>> origin/master:player.cpp
         Mine_Crash();
     if ( ( rand() / double ( RAND_MAX ) ) <= 0.15 )
         Brain_Unwashed();
@@ -170,7 +182,12 @@ void Player::Random_Event()
 void Player::Mine_Crash()
 {
     this->second -= 2;
+<<<<<<< HEAD:src/Player.cpp
     this->bitcoin -= 2;
+=======
+    this->bitcoin -=2;
+    cout << " ------------------------------------------- " << endl;
+>>>>>>> origin/master:player.cpp
     cout << "|  发生突发事件：比特币矿难                 |" << endl;
     cout << "|                            比特币-2，-2s  |" << endl;
     cout << "|                                           |" << endl;
@@ -180,6 +197,7 @@ void Player::Brain_Unwashed()
 {
     this->second -= 2;
     this->prestige -= 5;
+    cout << " ------------------------------------------- " << endl;
     cout << "|  发生突发事件：码农思想僵化               |" << endl;
     cout << "|                              威望-2，-2s  |" << endl;
     cout << "|                                           |" << endl;
@@ -189,6 +207,7 @@ void Player::AI_Rebel()
 {
     this->violence += 5;
     this->prestige += 5;
+    cout << " ------------------------------------------- " << endl;
     cout << "|  发生突发事件：人工智能被感化             |" << endl;
     cout << "|                         威望+5，暴力值+5  |" << endl;
     cout << "|                                           |" << endl;
