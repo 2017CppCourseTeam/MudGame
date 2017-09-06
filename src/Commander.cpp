@@ -43,17 +43,10 @@ void Commander::_Show_Manual()
     cout << "  通过挖矿，获得比特币                        " << endl;
     cout << "  通过政治洗脑，提升威望值                    " << endl;
     cout << "  通过发动战争，攻克各个关卡，获得最终的胜利！" << endl;
-<<<<<<< HEAD
-    cout << "                                              "<< endl;
-    SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN);
-    cout << "按任意键继续"<< endl;
-    if (getch())
-=======
     cout << "                                              " << endl;
     SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_BLUE );
     cout << "按任意键继续" << endl;
     if ( getch() )
->>>>>>> 6729415ffba56967d04c58f1f4224bd6a083faa8
     {
         SetConsoleTextAttribute ( handle, FOREGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_GREEN );
         cout << "+----------------------------------+" << endl;
@@ -83,11 +76,7 @@ void Commander::_Show_Manual()
         cout << "+----------------------------------+" << endl;
         cout << "|[*]战争界面命令:                  |" << endl;
         cout << "+----------------------------------+" << endl;
-<<<<<<< HEAD
-        SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN);
-=======
-        SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_BLUE );
->>>>>>> 6729415ffba56967d04c58f1f4224bd6a083faa8
+        SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN );
     }
 }
 
@@ -383,10 +372,10 @@ bool Commander::Eval ( string& cmd )
                 {
                     if ( cmd.substr (  0 + 6 + 1 + 7, 1 ) == string ( " " ) )
                     {
-                        string _subcmd = cmd.substr(0 + 6 + 1 + 7 + 1);
-                        unsigned int _id = this->_ConvertStringToNum<unsigned int> (_subcmd);
-                        if(this->user->player->Select_Soldier(_id))
-                            this->user->player->Show_Soldier_Status(_id);
+                        string _subcmd = cmd.substr ( 0 + 6 + 1 + 7 + 1 );
+                        unsigned int _id = this->_ConvertStringToNum<unsigned int> ( _subcmd );
+                        if ( this->user->player->Select_Soldier ( _id ) )
+                            this->user->player->Show_Soldier_Status ( _id );
                         else
                             return false;
                     }

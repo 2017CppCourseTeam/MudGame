@@ -15,8 +15,8 @@ class War
         void Show_Map ( bool show_detail = false );
         bool Select_Point ( unsigned int _x, unsigned int _y );
         void Show_Point_Status();
-        bool Select_Soldier(unsigned int id);
-        void Show_Soldier_Status(unsigned int id);
+        bool Select_Soldier ( unsigned int id );
+        void Show_Soldier_Status ( unsigned int id );
     private:
         double life;
         double magic;

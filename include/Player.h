@@ -56,8 +56,8 @@ class Player
         void Show_Map ( bool show_detail );
         bool Select_Point ( unsigned int _x, unsigned int _y );
         void Show_Ponit_Status();
-        bool Select_Soldier(unsigned int id);
-        void Show_Soldier_Status(unsigned int id);
+        bool Select_Soldier ( unsigned int id );
+        void Show_Soldier_Status ( unsigned int id );
 
         void Ai_Init ( double prestige, double bitcoin, double violence, int second, unsigned short war_num, bool first );
     private:

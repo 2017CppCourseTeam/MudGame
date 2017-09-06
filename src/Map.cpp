@@ -148,7 +148,6 @@ void Map::Update()
             {
                 this->points[k][l].UpdatePower ( _empty );
             }
-
         }
     }
 }

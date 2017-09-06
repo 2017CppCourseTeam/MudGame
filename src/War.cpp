@@ -22,30 +22,30 @@ bool War::_Load_Map ( string name, unsigned short level )
     switch ( level )
     {
         case 1:
-            {
-                load.open (   ( string ( ".\\map\\" ) + name + string ( "1.dat" ) ).c_str(), ios::in );
-                break;
-            }
+        {
+            load.open (   ( string ( ".\\map\\" ) + name + string ( "1.dat" ) ).c_str(), ios::in );
+            break;
+        }
         case 2:
-            {
-                load.open ( ( ( string ( ".\\map\\" ) + name + string ( "2.dat" ) ).c_str() ), ios::in );
-                break;
-            }
+        {
+            load.open ( ( ( string ( ".\\map\\" ) + name + string ( "2.dat" ) ).c_str() ), ios::in );
+            break;
+        }
         case 3:
-            {
-                load.open ( ( ( string ( ".\\map\\" ) + name + string ( "3.dat" ) ).c_str() ), ios::in );
-                break;
-            }
+        {
+            load.open ( ( ( string ( ".\\map\\" ) + name + string ( "3.dat" ) ).c_str() ), ios::in );
+            break;
+        }
         case 4:
-            {
-                load.open ( ( ( string ( ".\\map\\" ) + name + string ( "4.dat" ) ).c_str() ), ios::in );
-                break;
-            }
+        {
+            load.open ( ( ( string ( ".\\map\\" ) + name + string ( "4.dat" ) ).c_str() ), ios::in );
+            break;
+        }
         case 5:
-            {
-                load.open ( ( ( string ( ".\\map\\" ) + name + string ( "5.dat" ) ).c_str() ), ios::in );
-                break;
-            }
+        {
+            load.open ( ( ( string ( ".\\map\\" ) + name + string ( "5.dat" ) ).c_str() ), ios::in );
+            break;
+        }
     }
     string _name = this->_Read ( load );
     string _level = this->_Read ( load );
@@ -129,7 +129,7 @@ void War::Show_Map ( bool show_detail )
 
 bool War::Select_Point ( unsigned int _x, unsigned int _y )
 {
-    if(_x > this->_map->rwidth || _y > this->_map->rheight )
+    if ( _x > this->_map->rwidth || _y > this->_map->rheight )
         return false;
     this->poing_selecter = this->_map->Get_Point ( _x, _y );
     return true;
@@ -145,12 +145,10 @@ void War::Show_Point_Status()
     cout << "Ê¿±ø×ÜÊý: " << this->poing_selecter->GetNumber() << endl;
 }
 
-bool War::Select_Soldier(unsigned int id)
+bool War::Select_Soldier ( unsigned int id )
 {
-
 }
 
-void War::Show_Soldier_Status(unsigned int id)
+void War::Show_Soldier_Status ( unsigned int id )
 {
-
 }

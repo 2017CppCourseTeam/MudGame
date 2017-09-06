@@ -1,6 +1,6 @@
 #include "Soldier.h"
 
-Soldier::Soldier (unsigned int id,  int life, int attack, int defence, enum Species species, unsigned int price )
+Soldier::Soldier ( unsigned int id,  int life, int attack, int defence, enum Species species, unsigned int price )
 {
     this->life = life;
     this->attack = attack;

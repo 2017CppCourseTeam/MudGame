@@ -43,11 +43,7 @@ void Player::Show_Status()
     cout << "|                      |" << endl;
     cout << "|                " << setw ( 3 ) << this->second << "s  |" << endl;
     cout << " ---------------------- " << endl;
-<<<<<<< HEAD
-    SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN);
-=======
-    SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_BLUE );
->>>>>>> 6729415ffba56967d04c58f1f4224bd6a083faa8
+    SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN );
     return;
 }
 
@@ -87,11 +83,7 @@ void Player::Train_Coder()
         cout << "|                          暴力值-5，-1s    |" << endl;
     }
     Player::Random_Event();
-<<<<<<< HEAD
-    SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN);
-=======
-    SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_BLUE );
->>>>>>> 6729415ffba56967d04c58f1f4224bd6a083faa8
+    SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN );
     return;
 }
 void Player::Dig_Mine()
@@ -130,11 +122,7 @@ void Player::Dig_Mine()
         cout << "|                          比特币+0.5，+1s  |" << endl;
     }
     Player::Random_Event();
-<<<<<<< HEAD
-    SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN);
-=======
-    SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_BLUE );
->>>>>>> 6729415ffba56967d04c58f1f4224bd6a083faa8
+    SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN );
     return;
 }
 void Player::Wash_Brain()
@@ -172,11 +160,7 @@ void Player::Wash_Brain()
         cout << "|                            威望-5， -1s   |" << endl;
     }
     Player::Random_Event();
-<<<<<<< HEAD
-    SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN);
-=======
-    SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_BLUE );
->>>>>>> 6729415ffba56967d04c58f1f4224bd6a083faa8
+    SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN );
     return;
 }
 
@@ -185,7 +169,7 @@ void Player::Random_Event()
     cout << "|                                           |" << endl;
     if ( ( rand() / double ( RAND_MAX ) ) <= 0.13 )
         Mine_Crash();
-    if ( ( rand() / double ( RAND_MAX ) ) <= 0.13)
+    if ( ( rand() / double ( RAND_MAX ) ) <= 0.13 )
         Brain_Unwashed();
     if ( ( rand() / double ( RAND_MAX ) ) <= 0.10 )
         AI_Rebel();
@@ -194,13 +178,8 @@ void Player::Random_Event()
 
 void Player::Mine_Crash()
 {
-<<<<<<< HEAD
     this->second -= 1;
     this->bitcoin -= 1;
-=======
-    this->second -= 2;
-    this->bitcoin -= 2;
->>>>>>> 6729415ffba56967d04c58f1f4224bd6a083faa8
     cout << " ------------------------------------------- " << endl;
     cout << "|  发生突发事件：比特币矿难                 |" << endl;
     cout << "|                            比特币-1，-1s  |" << endl;
@@ -305,7 +284,7 @@ bool Player::Is_First()
 
 bool Player::Select_Point ( unsigned int _x, unsigned int _y )
 {
-    if(this->war->Select_Point ( _x, _y ))
+    if ( this->war->Select_Point ( _x, _y ) )
         return true;
     else
         return false;
@@ -316,12 +295,12 @@ void Player::Show_Ponit_Status()
     this->war->Show_Point_Status();
 }
 
-bool Player::Select_Soldier(unsigned int id)
+bool Player::Select_Soldier ( unsigned int id )
 {
-    this->war->Select_Soldier(id);
+    this->war->Select_Soldier ( id );
 }
 
-void Player::Show_Soldier_Status(unsigned int id)
+void Player::Show_Soldier_Status ( unsigned int id )
 {
-    this->war->Show_Soldier_Status(id);
+    this->war->Show_Soldier_Status ( id );
 }

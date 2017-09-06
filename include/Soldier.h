@@ -9,7 +9,7 @@ enum Species {humanity, mechanical, beast, wizard, warcraft};
 class Soldier
 {
     public:
-        Soldier (unsigned int id, int life, int attack, int defence, enum Species species, unsigned int price );
+        Soldier ( unsigned int id, int life, int attack, int defence, enum Species species, unsigned int price );
 
         int GetAttack();
         int GetDefence();
@@ -35,41 +35,41 @@ class Soldier
 class Worker: public Soldier
 {
     public:
-        Worker(unsigned int id) : Soldier (id, 100, 20, 50, humanity, 20 ) {};
+        Worker ( unsigned int id ) : Soldier ( id, 100, 20, 50, humanity, 20 ) {};
 };
 
 class Archer: public Soldier
 {
     public:
-        Archer(unsigned int id) : Soldier (id, 200, 150, 80, humanity, 50 ) {};
+        Archer ( unsigned int id ) : Soldier ( id, 200, 150, 80, humanity, 50 ) {};
 
 };
 
 class SwordsMan: public Soldier
 {
     public:
-        SwordsMan(unsigned int id) : Soldier (id, 250, 210, 140, humanity, 110 ) {};
+        SwordsMan ( unsigned int id ) : Soldier ( id, 250, 210, 140, humanity, 110 ) {};
 
 };
 
 class Priest: public Soldier
 {
     public:
-        Priest(unsigned int id) : Soldier (id, 160, 0, 70, humanity, 100 ) {};
+        Priest ( unsigned int id ) : Soldier ( id, 160, 0, 70, humanity, 100 ) {};
 
 };
 
 class SiegCar: public Soldier
 {
     public:
-        SiegCar(unsigned int id) : Soldier (id, 500, 700, 310, mechanical, 450 ) {};
+        SiegCar ( unsigned int id ) : Soldier ( id, 500, 700, 310, mechanical, 450 ) {};
 
 };
 
 class Dragon: public Soldier
 {
     public:
-        Dragon(unsigned int id) : Soldier (id, 450, 525, 430, beast, 310 ) {};
+        Dragon ( unsigned int id ) : Soldier ( id, 450, 525, 430, beast, 310 ) {};
 
 };
 
@@ -77,20 +77,20 @@ class Wolf: public Soldier
 {
 
     public:
-        Wolf(unsigned int id) : Soldier (id, 210, 200, 160, beast, 130 ) {};
+        Wolf ( unsigned int id ) : Soldier ( id, 210, 200, 160, beast, 130 ) {};
 };
 
 class Slime: public Soldier
 {
     public:
-        Slime(unsigned int id) : Soldier (id, 140, 120, 75, wizard, 60) {};
+        Slime ( unsigned int id ) : Soldier ( id, 140, 120, 75, wizard, 60 ) {};
 
 };
 
 class Goblin: public Soldier
 {
     public:
-        Goblin(unsigned int id) : Soldier (id, 210, 185, 120, wizard, 100 ) {};
+        Goblin ( unsigned int id ) : Soldier ( id, 210, 185, 120, wizard, 100 ) {};
 
 };
 
@@ -98,27 +98,27 @@ class IceGiant: public Soldier
 {
 
     public:
-        IceGiant(unsigned int id) : Soldier (id, 400, 575, 500, warcraft, 850 ) {};
+        IceGiant ( unsigned int id ) : Soldier ( id, 400, 575, 500, warcraft, 850 ) {};
 };
 
 class FlameBirds: public Soldier
 {
 
     public:
-        FlameBirds(unsigned int id) : Soldier (id, 450, 670, 260 , warcraft, 970 ) {};
+        FlameBirds ( unsigned int id ) : Soldier ( id, 450, 670, 260, warcraft, 970 ) {};
 };
 
 class Naga: public Soldier
 {
     public:
-        Naga(unsigned int id) : Soldier (id, 380, 430, 350, warcraft, 700 ) {};
+        Naga ( unsigned int id ) : Soldier ( id, 380, 430, 350, warcraft, 700 ) {};
 
 };
 
 class Phoenix: public Soldier
 {
     public:
-        Phoenix(unsigned int id) : Soldier (id, 350, 770, 120, warcraft, 1300 ) {};
+        Phoenix ( unsigned int id ) : Soldier ( id, 350, 770, 120, warcraft, 1300 ) {};
 
 };
 

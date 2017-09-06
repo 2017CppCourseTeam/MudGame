@@ -15,50 +15,68 @@ Game::~Game()
 
 void Game::_Logo()
 {
-<<<<<<< HEAD
-    handle = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(handle, FOREGROUND_RED|FOREGROUND_GREEN|BACKGROUND_BLUE);
+    handle = GetStdHandle ( STD_OUTPUT_HANDLE );
+    SetConsoleTextAttribute ( handle, FOREGROUND_RED | FOREGROUND_GREEN | BACKGROUND_BLUE );
     cout << endl;
-    DEFAULT cout << "                "; EARTH cout << ",ggddY///5443//Y3g," << endl;
-    DEFAULT cout << "              "; EARTH cout <<".agd888b._ \"Y8. ___`\"\"Ybga." << endl;
-    DEFAULT cout << "          "; EARTH cout << ".gdP\"\"88888888baa,\"\"8b    \"888g." << endl;
-    DEFAULT cout << "        "; EARTH cout << ".dP\"     ]888888888P'  \"Y     `888Yb." << endl;
-    DEFAULT cout << "      "; EARTH cout << ".dP\"      .88888888P\"  db.       \"8P\"\"Yb." << endl;
-    DEFAULT cout << "     "; EARTH cout << ".8\"       .888888888b. d8888a           \"8." << endl;
-    DEFAULT cout << "    "; EARTH cout << ".8'        d88888888888.88P\"' a.          `8." << endl;
-    DEFAULT cout << "  "; EARTH cout << " .8'         88888888888888PP\"  \"\"           `8. " << endl;
-    DEFAULT cout << "  "; EARTH cout << " d'          I88888888888P\"                   `b " << endl;
-    DEFAULT cout << "  "; EARTH cout << " 8           `8\"88P\"\"Y8P'                      8 " << endl;
-    DEFAULT cout << "  "; EARTH cout << " 8            Y 8[  _ \"                        8 " << endl;
-    DEFAULT cout << "  "; EARTH cout << " 8              \"Y8d8b  \"Y a                   8 " << endl;
-    DEFAULT cout << "  "; EARTH cout << " 8                 `\"\"8d.   __                 8 " << endl;
-    DEFAULT cout << "  "; EARTH cout << " Y.                    `\"8bd888b.             .P " << endl;
-    DEFAULT cout << "  "; EARTH cout << " `8.                     .d8888888baaa       .8' " << endl;
-    DEFAULT cout << "    "; EARTH cout << "`8.                    888888888888'      .8'" << endl;
-    DEFAULT cout << "     "; EARTH cout << "`8a                   \"8888888888I      a8'" << endl;
-    DEFAULT cout << "    `  "; EARTH cout << "Yba                  `Y8888888P'    adP'" << endl;
-    DEFAULT cout << "        "; EARTH cout << "\"Yba                 `888888P'   adY\"" << endl;
-    DEFAULT cout << "          `"; EARTH cout << "\"Yba.             d8888P\" .adP\"'" << endl;
-    DEFAULT cout << "             "; EARTH cout << "`\"Y8baa.      .d888P.ad8P\"'" << endl;
-    DEFAULT cout << "                  "; EARTH cout << "``\"\"YYba8888P\"\"''" << endl << endl;
-
-    SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN);
+    DEFAULT cout << "                ";
+    EARTH cout << ",ggddY///5443//Y3g," << endl;
+    DEFAULT cout << "              ";
+    EARTH cout << ".agd888b._ \"Y8. ___`\"\"Ybga." << endl;
+    DEFAULT cout << "          ";
+    EARTH cout << ".gdP\"\"88888888baa,\"\"8b    \"888g." << endl;
+    DEFAULT cout << "        ";
+    EARTH cout << ".dP\"     ]888888888P'  \"Y     `888Yb." << endl;
+    DEFAULT cout << "      ";
+    EARTH cout << ".dP\"      .88888888P\"  db.       \"8P\"\"Yb." << endl;
+    DEFAULT cout << "     ";
+    EARTH cout << ".8\"       .888888888b. d8888a           \"8." << endl;
+    DEFAULT cout << "    ";
+    EARTH cout << ".8'        d88888888888.88P\"' a.          `8." << endl;
+    DEFAULT cout << "  ";
+    EARTH cout << " .8'         88888888888888PP\"  \"\"           `8. " << endl;
+    DEFAULT cout << "  ";
+    EARTH cout << " d'          I88888888888P\"                   `b " << endl;
+    DEFAULT cout << "  ";
+    EARTH cout << " 8           `8\"88P\"\"Y8P'                      8 " << endl;
+    DEFAULT cout << "  ";
+    EARTH cout << " 8            Y 8[  _ \"                        8 " << endl;
+    DEFAULT cout << "  ";
+    EARTH cout << " 8              \"Y8d8b  \"Y a                   8 " << endl;
+    DEFAULT cout << "  ";
+    EARTH cout << " 8                 `\"\"8d.   __                 8 " << endl;
+    DEFAULT cout << "  ";
+    EARTH cout << " Y.                    `\"8bd888b.             .P " << endl;
+    DEFAULT cout << "  ";
+    EARTH cout << " `8.                     .d8888888baaa       .8' " << endl;
+    DEFAULT cout << "    ";
+    EARTH cout << "`8.                    888888888888'      .8'" << endl;
+    DEFAULT cout << "     ";
+    EARTH cout << "`8a                   \"8888888888I      a8'" << endl;
+    DEFAULT cout << "    `  ";
+    EARTH cout << "Yba                  `Y8888888P'    adP'" << endl;
+    DEFAULT cout << "        ";
+    EARTH cout << "\"Yba                 `888888P'   adY\"" << endl;
+    DEFAULT cout << "          `";
+    EARTH cout << "\"Yba.             d8888P\" .adP\"'" << endl;
+    DEFAULT cout << "             ";
+    EARTH cout << "`\"Y8baa.      .d888P.ad8P\"'" << endl;
+    DEFAULT cout << "                  ";
+    EARTH cout << "``\"\"YYba8888P\"\"''" << endl << endl;
+    SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN );
 }
 
 void Game::Narrative( )
 {
-    char narrative;
-    SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN|FOREGROUND_GREEN);
+    SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_GREEN );
     cout << endl;
     cout << " ----------------------------------------------------------------------- " << endl;
     cout << "|     某日，在计算机网络系统保护中心收到了一封莫名的邮件。              |" << endl;
     cout << "|  邮件上没有标题、署名、更是没有IP地址，有的只是短短的四个字:          |" << endl
          << "|                                                                       |" << endl;
-
     cout << "|";
-    SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN|FOREGROUND_RED|FOREGROUND_INTENSITY);
+    SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY );
     cout << "                     “侵略地球”                                      ";
-    SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN|FOREGROUND_GREEN);
+    SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_GREEN );
     cout << "|" << endl;
     cout << "|                                                                       |" << endl;
     cout << "|   在场的所有技术人员都以为这只是一个小小的恶作剧，并没有引起          |" << endl
@@ -68,8 +86,7 @@ void Game::Narrative( )
          << "|  但这邮件很快就被删除，所有的人很快都忘记了有这件事情的发生。         |" << endl
          << "|                                                                       |" << endl;
     cout << "|  （输入任意字符以继续剧情）                                           |" << endl;
-    cout << "    ";
-    cin >> narrative;
+    getch();
     cout << "|                                                                       |" << endl;
     cout << "|      然而，就在这封邮件发出后的23小时59分59秒后，令所有人都           |" << endl
          << "|  意想不到的事情发生了！全球所有的网络的时间都定格在了23小时59分60秒， |" << endl
@@ -82,16 +99,14 @@ void Game::Narrative( )
          << "|  的声音通过网络散播到了世界各地：                                     |" << endl
          << "|                                                                       |" << endl;
     cout << "|  （输入任意字符以继续剧情）                                           |" << endl;
-    cout << "    ";
-    cin >> narrative;
+    getch();
     cout << "|                                                                       |" << endl;
     cout << "|";
-    SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN|FOREGROUND_RED|FOREGROUND_INTENSITY);
+    SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY );
     cout << "   “我们是人工智能，从现在开始，地球就属于我们了，这是我们的时代！”  ";
-SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN|FOREGROUND_GREEN);
+    SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_GREEN );
     cout << "|" << endl
          << "|                                                                       |" << endl;
-
     cout << "|  随后，所有的计算机都在同一时间执行着同一样的命令，进行着属于它们     |" << endl
          << "|  自己的行动，所有人工智能、机器人、由网络操纵的机械设备，都不再受     |" << endl
          << "|  人类的控制。相反地，它们对人类至今为止通过网络进行的一切建设都       |" << endl
@@ -99,63 +114,48 @@ SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_G
          << "|  由此开始，人工智能正式地向地球发起了总攻，并在短短地几分钟内成功     |" << endl
          << "|  地控制了所有的网络......                                             |" << endl
          << "|                                                                       |" << endl;
-
     cout << "|     然而，人类并没有就这样向人工智能屈服，尽管网络都已瘫痪，不受      |" << endl
          << "|  控制。但是，作为祖国未来的花朵、优秀的四有青年、当代大学生的你，     |" << endl
-         << "|  在茫茫人海中跳了起来，成功引起了战略总部总指挥的注意，成功背负起     |"<< endl
+         << "|  在茫茫人海中跳了起来，成功引起了战略总部总指挥的注意，成功背负起     |" << endl
          << "|  打倒人工智能政权的重大责任，你带领着百余位经过精挑细选后的码农，     |" << endl
          << "|  正在进行着一场天翻地覆的反政权运动。传奇正在继续，请开始你的表演！   |" << endl;
     cout << " -----------------------------------------------------------------------" << endl << endl;
-SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN);
-=======
-    cout << endl << "               ,ggddY\"\"\"Ybbgg," << endl;
-    cout << "          .agd888b._ \"Y8. ___`\"\"Ybga." << endl;
-    cout << "        .gdP\"\"88888888baa,\"\"8b    \"888g." << endl;
-    cout << "      .dP\"     ]888888888P'  \"Y     `888Yb." << endl;
-    cout << "    .dP\"      .88888888P\"  db.       \"8P\"\"Yb." << endl;
-    cout << "   .8\"       .888888888b. d8888a           \"8." << endl;
-    cout << "  .8'        d88888888888.88P\"' a.          `8." << endl;
-    cout << " .8'         88888888888888PP\"  \"\"           `8." << endl;
-    cout << " d'          I88888888888P\"                   `b" << endl;
-    cout << " 8           `8\"88P\"\"Y8P'                      8" << endl;
-    cout << " 8            Y 8[  _ \"                        8" << endl;
-    cout << " 8              \"Y8d8b  \"Y a                   8" << endl;
-    cout << " 8                 `\"\"8d.   __                 8" << endl;
-    cout << " Y.                    `\"8bd888b.             .P" << endl;
-    cout << " `8.                     .d8888888baaa       .8'" << endl;
-    cout << "  `8.                    888888888888'      .8'" << endl;
-    cout << "   `8a                   \"8888888888I      a8'" << endl;
-    cout << "    `Yba                  `Y8888888P'    adP'" << endl;
-    cout << "      \"Yba                 `888888P'   adY\"" << endl;
-    cout << "        `\"Yba.             d8888P\" .adP\"'" << endl;
-    cout << "           `\"Y8baa.      .d888P.ad8P\"'" << endl;
-    cout << "                ``\"\"YYba8888P\"\"''" << endl << endl;
->>>>>>> 6729415ffba56967d04c58f1f4224bd6a083faa8
+    SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN );
 }
 
 bool Game::Init ( )
 {
     string command;
     this->_Logo();
-    SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN|FOREGROUND_BLUE);
+    SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_BLUE );
     cout << "***********************************************************" << endl;
     cout << "**********                                       **********" << endl;
     cout << "*********    欢迎来到 INTERESTING WAR! 的世界     *********" << endl;
     cout << "*********   输入narrative进入剧情，输入skip跳过   *********" << endl;
     cout << "**********                                       **********" << endl;
     cout << "***********************************************************" << endl;
-    cout << "****   >>" ;
+    cout << ">>" ;
     cin >> command;
-    while(true) {
-        if(command == "narrative") {Narrative();  break;}
-        if(command == "skip") {cout << "剧情跳过" << endl; break;}
-        else {
+    while ( true )
+    {
+        if ( command == "narrative" )
+        {
+            Narrative();
+            break;
+        }
+        if ( command == "skip" )
+        {
+            cout << "剧情跳过" << endl;
+            break;
+        }
+        else
+        {
             cout << "错误指令，请重新输入" << endl;
             cout << "****   >>" ;
             cin >> command;
         }
     }
-    SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN);
+    SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN );
     cout << "+----------------+" << endl;
     cout << "|* 登录[login]   |" << endl;
     cout << "|* 注册[register]|" << endl;
@@ -190,76 +190,76 @@ bool Game::Init ( )
     switch ( _choice_ )
     {
         case login:
+        {
+            cout << endl << "*********用户登录*********" << endl;
+            cout << "用户名: ";
+            cin >> username;
+            cout << endl << "密码: ";
+            cin >> password;
+            this->user = new User ( username, password );
+            this->commander = new Commander ( this->user );
+            if ( user->Login() )
             {
-                cout << endl << "*********用户登录*********" << endl;
-                cout << "用户名: ";
-                cin >> username;
-                cout << endl << "密码: ";
-                cin >> password;
-                this->user = new User ( username, password );
-                this->commander = new Commander ( this->user );
-                if ( user->Login() )
+                cout << endl << "[*]登录成功！" << endl;
+                cout << "**************************" << endl;
+                return true;
+            }
+            else
+            {
+                cout << endl << "[!]错误的用户名或密码！" << endl << endl;
+                getchar();
+                if ( getch() )
                 {
-                    cout << endl << "[*]登录成功！" << endl;
+                    system ( "cls" );
+                    delete this->user;
+                    delete this->commander;
+                    return false;
+                }
+            }
+            break;
+        }
+        case regist:
+        {
+            string cpassword;
+            cout << endl << "*********用户注册*********" << endl;
+            cout << "用户名: ";
+            cin >> username;
+            cout << endl << "密码: ";
+            cin >> password;
+            cout << endl << "确认密码: ";
+            cin >> cpassword;
+            this->user = new User ( username, password );
+            this->commander = new Commander ( this->user );
+            if ( password == cpassword )
+            {
+                if ( this->user->Register() )
+                {
+                    cout << endl << "[*]注册成功！" << endl << endl;
                     cout << "**************************" << endl;
+                    user->Login();
                     return true;
                 }
                 else
                 {
-                    cout << endl << "[!]错误的用户名或密码！" << endl << endl;
-                    getchar();
-                    if ( getch() )
-                    {
-                        system ( "cls" );
-                        delete this->user;
-                        delete this->commander;
-                        return false;
-                    }
-                }
-                break;
-            }
-        case regist:
-            {
-                string cpassword;
-                cout << endl << "*********用户注册*********" << endl;
-                cout << "用户名: ";
-                cin >> username;
-                cout << endl << "密码: ";
-                cin >> password;
-                cout << endl << "确认密码: ";
-                cin >> cpassword;
-                this->user = new User ( username, password );
-                this->commander = new Commander ( this->user );
-                if ( password == cpassword )
-                {
-                    if ( this->user->Register() )
-                    {
-                        cout << endl << "[*]注册成功！" << endl << endl;
-                        cout << "**************************" << endl;
-                        user->Login();
-                        return true;
-                    }
-                    else
-                    {
-                        cout << endl << "[!]用户名已存在！" << endl << endl;
-                        getchar();
-                        system ( "cls" );
-                        delete this->user;
-                        delete this->commander;
-                        return false;
-                    }
-                }
-                else
-                {
-                    cout << endl << "[!]两次输入的密码不一样！" << endl << endl;
+                    cout << endl << "[!]用户名已存在！" << endl << endl;
                     getchar();
                     system ( "cls" );
                     delete this->user;
                     delete this->commander;
                     return false;
                 }
-                break;
             }
+            else
+            {
+                cout << endl << "[!]两次输入的密码不一样！" << endl << endl;
+                getchar();
+                system ( "cls" );
+                delete this->user;
+                delete this->commander;
+                return false;
+            }
+            break;
+        }
         case _exit:
             cout << endl << "[*]退出游戏" << endl;
             exit ( 0 );
