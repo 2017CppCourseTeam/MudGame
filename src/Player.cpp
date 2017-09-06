@@ -7,7 +7,7 @@ Player::Player()
     this->second = 10;
     this->war_num = 0;
     this->name = "";
-    handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    handle = GetStdHandle ( STD_OUTPUT_HANDLE );
     srand ( unsigned ( time ( NULL ) ) );
 }
 
@@ -32,8 +32,8 @@ void Player::Restart_War()
 
 void Player::Show_Status()
 {
-    handle = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY | BACKGROUND_INTENSITY | BACKGROUND_GREEN | FOREGROUND_RED);//设置为红色
+    handle = GetStdHandle ( STD_OUTPUT_HANDLE );
+    SetConsoleTextAttribute ( handle, FOREGROUND_INTENSITY | BACKGROUND_INTENSITY | BACKGROUND_GREEN | FOREGROUND_RED ); //设置为红色
     cout << " ---------------------- " << endl;
     cout << "|属性值：              |" << endl;
     cout << "|                      |" << endl;
@@ -43,14 +43,18 @@ void Player::Show_Status()
     cout << "|                      |" << endl;
     cout << "|                " << setw ( 3 ) << this->second << "s  |" << endl;
     cout << " ---------------------- " << endl;
+<<<<<<< HEAD
     SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN);
+=======
+    SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_BLUE );
+>>>>>>> 6729415ffba56967d04c58f1f4224bd6a083faa8
     return;
 }
 
 void Player::Train_Coder()
 {
-    handle = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(handle, FOREGROUND_BLUE|FOREGROUND_GREEN|FOREGROUND_RED|BACKGROUND_BLUE);
+    handle = GetStdHandle ( STD_OUTPUT_HANDLE );
+    SetConsoleTextAttribute ( handle, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | BACKGROUND_BLUE );
     cout << " ------------------------------------------- " << endl;
     cout << "|   正在进行：训练码农（您有80%几率成功）   |" << endl;
     cout << "|                                           |" << endl;
@@ -83,13 +87,17 @@ void Player::Train_Coder()
         cout << "|                          暴力值-5，-1s    |" << endl;
     }
     Player::Random_Event();
+<<<<<<< HEAD
     SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN);
+=======
+    SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_BLUE );
+>>>>>>> 6729415ffba56967d04c58f1f4224bd6a083faa8
     return;
 }
 void Player::Dig_Mine()
 {
-    handle = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(handle, FOREGROUND_BLUE|FOREGROUND_GREEN|FOREGROUND_RED|BACKGROUND_BLUE);
+    handle = GetStdHandle ( STD_OUTPUT_HANDLE );
+    SetConsoleTextAttribute ( handle, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | BACKGROUND_BLUE );
     cout << " ------------------------------------------- " << endl;
     cout << "|   正在进行：挖比特币矿                    |" << endl;
     cout << "|                                           |" << endl;
@@ -122,13 +130,17 @@ void Player::Dig_Mine()
         cout << "|                          比特币+0.5，+1s  |" << endl;
     }
     Player::Random_Event();
+<<<<<<< HEAD
     SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN);
+=======
+    SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_BLUE );
+>>>>>>> 6729415ffba56967d04c58f1f4224bd6a083faa8
     return;
 }
 void Player::Wash_Brain()
 {
-    handle = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(handle, FOREGROUND_BLUE|FOREGROUND_GREEN|FOREGROUND_RED|BACKGROUND_BLUE);
+    handle = GetStdHandle ( STD_OUTPUT_HANDLE );
+    SetConsoleTextAttribute ( handle, FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED | BACKGROUND_BLUE );
     cout << " ------------------------------------------- " << endl;
     cout << "|   正在进行： 政治洗脑                     |" << endl;
     cout << "|    ～～～～～～～～～～～～～～ ～～～    |" << endl;
@@ -160,7 +172,11 @@ void Player::Wash_Brain()
         cout << "|                            威望-5， -1s   |" << endl;
     }
     Player::Random_Event();
+<<<<<<< HEAD
     SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN);
+=======
+    SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_BLUE );
+>>>>>>> 6729415ffba56967d04c58f1f4224bd6a083faa8
     return;
 }
 
@@ -178,8 +194,13 @@ void Player::Random_Event()
 
 void Player::Mine_Crash()
 {
+<<<<<<< HEAD
     this->second -= 1;
     this->bitcoin -= 1;
+=======
+    this->second -= 2;
+    this->bitcoin -= 2;
+>>>>>>> 6729415ffba56967d04c58f1f4224bd6a083faa8
     cout << " ------------------------------------------- " << endl;
     cout << "|  发生突发事件：比特币矿难                 |" << endl;
     cout << "|                            比特币-1，-1s  |" << endl;
@@ -282,12 +303,25 @@ bool Player::Is_First()
     return this->war_first;
 }
 
-void Player::Select_Point ( unsigned int _x, unsigned int _y )
+bool Player::Select_Point ( unsigned int _x, unsigned int _y )
 {
-    this->war->Select_Point ( _x, _y );
+    if(this->war->Select_Point ( _x, _y ))
+        return true;
+    else
+        return false;
 }
 
 void Player::Show_Ponit_Status()
 {
     this->war->Show_Point_Status();
+}
+
+bool Player::Select_Soldier(unsigned int id)
+{
+    this->war->Select_Soldier(id);
+}
+
+void Player::Show_Soldier_Status(unsigned int id)
+{
+    this->war->Show_Soldier_Status(id);
 }

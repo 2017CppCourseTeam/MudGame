@@ -24,9 +24,8 @@ T Commander::_ConvertStringToNum ( const string& str )
 void Commander::_Show_Manual()
 {
     HANDLE handle;
-
-    handle = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY | BACKGROUND_RED |BACKGROUND_GREEN | FOREGROUND_GREEN);
+    handle = GetStdHandle ( STD_OUTPUT_HANDLE );
+    SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_GREEN );
     cout << endl;
     cout << "                                                                   " << endl;
     cout << "[*]游戏介绍:                                                       " << endl;
@@ -44,12 +43,19 @@ void Commander::_Show_Manual()
     cout << "  通过挖矿，获得比特币                        " << endl;
     cout << "  通过政治洗脑，提升威望值                    " << endl;
     cout << "  通过发动战争，攻克各个关卡，获得最终的胜利！" << endl;
+<<<<<<< HEAD
     cout << "                                              "<< endl;
     SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN);
     cout << "按任意键继续"<< endl;
     if (getch())
+=======
+    cout << "                                              " << endl;
+    SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_BLUE );
+    cout << "按任意键继续" << endl;
+    if ( getch() )
+>>>>>>> 6729415ffba56967d04c58f1f4224bd6a083faa8
     {
-        SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_GREEN);
+        SetConsoleTextAttribute ( handle, FOREGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_GREEN );
         cout << "+----------------------------------+" << endl;
         cout << "|[*]全局命令:                      |" << endl;
         cout << "|manual         获得详细游戏帮助   |" << endl;
@@ -77,7 +83,11 @@ void Commander::_Show_Manual()
         cout << "+----------------------------------+" << endl;
         cout << "|[*]战争界面命令:                  |" << endl;
         cout << "+----------------------------------+" << endl;
+<<<<<<< HEAD
         SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN);
+=======
+        SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_BLUE );
+>>>>>>> 6729415ffba56967d04c58f1f4224bd6a083faa8
     }
 }
 
@@ -253,33 +263,37 @@ bool Commander::Eval ( string& cmd )
                 cout << endl << "[*]战争开始";
                 this->user->ai = new Player();
                 bool _first = this->user->player->Is_First();
+                if ( _first )
+                    cout << endl << "[*]第一回合玩家先手" << endl;
+                else
+                    cout << endl << "[*]第一回合电脑先手" << endl;
                 switch ( this->user->player->Get_War_Num() )
                 {
                     case 1:
-                        {
-                            this->user->ai->Ai_Init ( AI_PRESTIGE_1, AI_BITCOIN_1, AI_VIOLENCE_1, AI_SECOND_1, 1, !_first );
-                            break;
-                        }
+                    {
+                        this->user->ai->Ai_Init ( AI_PRESTIGE_1, AI_BITCOIN_1, AI_VIOLENCE_1, AI_SECOND_1, 1, !_first );
+                        break;
+                    }
                     case 2:
-                        {
-                            this->user->ai->Ai_Init ( AI_PRESTIGE_2, AI_BITCOIN_2, AI_VIOLENCE_2, AI_SECOND_2, 2, !_first );
-                            break;
-                        }
+                    {
+                        this->user->ai->Ai_Init ( AI_PRESTIGE_2, AI_BITCOIN_2, AI_VIOLENCE_2, AI_SECOND_2, 2, !_first );
+                        break;
+                    }
                     case 3:
-                        {
-                            this->user->ai->Ai_Init ( AI_PRESTIGE_3, AI_BITCOIN_3, AI_VIOLENCE_3, AI_SECOND_3, 3, !_first );
-                            break;
-                        }
+                    {
+                        this->user->ai->Ai_Init ( AI_PRESTIGE_3, AI_BITCOIN_3, AI_VIOLENCE_3, AI_SECOND_3, 3, !_first );
+                        break;
+                    }
                     case 4:
-                        {
-                            this->user->ai->Ai_Init ( AI_PRESTIGE_4, AI_BITCOIN_4, AI_VIOLENCE_4, AI_SECOND_4, 4, !_first );
-                            break;
-                        }
+                    {
+                        this->user->ai->Ai_Init ( AI_PRESTIGE_4, AI_BITCOIN_4, AI_VIOLENCE_4, AI_SECOND_4, 4, !_first );
+                        break;
+                    }
                     case 5:
-                        {
-                            this->user->ai->Ai_Init ( AI_PRESTIGE_5, AI_BITCOIN_5, AI_VIOLENCE_5, AI_SECOND_5, 5, !_first );
-                            break;
-                        }
+                    {
+                        this->user->ai->Ai_Init ( AI_PRESTIGE_5, AI_BITCOIN_5, AI_VIOLENCE_5, AI_SECOND_5, 5, !_first );
+                        break;
+                    }
                 }
                 this->user->ai->Start_War();
             }
@@ -348,13 +362,16 @@ bool Commander::Eval ( string& cmd )
                 {
                     if ( cmd.substr ( 0 + 6 + 1 + 8, 1 ) == string ( " " ) )
                     {
-                        string _subcmd = cmd.substr ( 0 + 6 + 1 + 8 + 1, 3 );
-                        if ( _subcmd.substr ( 1, 1 ) == string ( "," ) )
+                        string _subcmd = cmd.substr ( 0 + 6 + 1 + 8 + 1 );
+                        string::size_type position = _subcmd.find ( ',' );
+                        if ( position != string::npos && position != 0 && position != ( _subcmd.size() - 1 ) )
                         {
-                            unsigned int _x = this->_ConvertStringToNum<unsigned int> ( _subcmd.substr ( 0, 1 ) );
-                            unsigned int _y = this->_ConvertStringToNum<unsigned int> ( _subcmd.substr ( 2, 1 ) );
-                            this->user->player->Select_Point ( _x, _y );
-                            this->user->player->Show_Ponit_Status();
+                            unsigned int _x = this->_ConvertStringToNum<unsigned int> ( _subcmd.substr ( 0, position ) );
+                            unsigned int _y = this->_ConvertStringToNum<unsigned int> ( _subcmd.substr ( position + 1 ) );
+                            if ( this->user->player->Select_Point ( _x, _y ) )
+                                this->user->player->Show_Ponit_Status();
+                            else
+                                return false;
                         }
                         else
                             return false;
@@ -366,6 +383,12 @@ bool Commander::Eval ( string& cmd )
                 {
                     if ( cmd.substr (  0 + 6 + 1 + 7, 1 ) == string ( " " ) )
                     {
+                        string _subcmd = cmd.substr(0 + 6 + 1 + 7 + 1);
+                        unsigned int _id = this->_ConvertStringToNum<unsigned int> (_subcmd);
+                        if(this->user->player->Select_Soldier(_id))
+                            this->user->player->Show_Soldier_Status(_id);
+                        else
+                            return false;
                     }
                     else
                         return false;

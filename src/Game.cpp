@@ -15,6 +15,7 @@ Game::~Game()
 
 void Game::_Logo()
 {
+<<<<<<< HEAD
     handle = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(handle, FOREGROUND_RED|FOREGROUND_GREEN|BACKGROUND_BLUE);
     cout << endl;
@@ -106,6 +107,30 @@ SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_G
          << "|  正在进行着一场天翻地覆的反政权运动。传奇正在继续，请开始你的表演！   |" << endl;
     cout << " -----------------------------------------------------------------------" << endl << endl;
 SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN);
+=======
+    cout << endl << "               ,ggddY\"\"\"Ybbgg," << endl;
+    cout << "          .agd888b._ \"Y8. ___`\"\"Ybga." << endl;
+    cout << "        .gdP\"\"88888888baa,\"\"8b    \"888g." << endl;
+    cout << "      .dP\"     ]888888888P'  \"Y     `888Yb." << endl;
+    cout << "    .dP\"      .88888888P\"  db.       \"8P\"\"Yb." << endl;
+    cout << "   .8\"       .888888888b. d8888a           \"8." << endl;
+    cout << "  .8'        d88888888888.88P\"' a.          `8." << endl;
+    cout << " .8'         88888888888888PP\"  \"\"           `8." << endl;
+    cout << " d'          I88888888888P\"                   `b" << endl;
+    cout << " 8           `8\"88P\"\"Y8P'                      8" << endl;
+    cout << " 8            Y 8[  _ \"                        8" << endl;
+    cout << " 8              \"Y8d8b  \"Y a                   8" << endl;
+    cout << " 8                 `\"\"8d.   __                 8" << endl;
+    cout << " Y.                    `\"8bd888b.             .P" << endl;
+    cout << " `8.                     .d8888888baaa       .8'" << endl;
+    cout << "  `8.                    888888888888'      .8'" << endl;
+    cout << "   `8a                   \"8888888888I      a8'" << endl;
+    cout << "    `Yba                  `Y8888888P'    adP'" << endl;
+    cout << "      \"Yba                 `888888P'   adY\"" << endl;
+    cout << "        `\"Yba.             d8888P\" .adP\"'" << endl;
+    cout << "           `\"Y8baa.      .d888P.ad8P\"'" << endl;
+    cout << "                ``\"\"YYba8888P\"\"''" << endl << endl;
+>>>>>>> 6729415ffba56967d04c58f1f4224bd6a083faa8
 }
 
 bool Game::Init ( )

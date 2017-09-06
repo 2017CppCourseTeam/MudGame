@@ -2,6 +2,7 @@
 #define WAR_H
 #include <iostream>
 #include "Map.h"
+#include "Soldier.h"
 
 using namespace std;
 
@@ -12,16 +13,20 @@ class War
         ~War();
         void Show_Status();
         void Show_Map ( bool show_detail = false );
-        void Select_Point ( unsigned int _x, unsigned int _y );
+        bool Select_Point ( unsigned int _x, unsigned int _y );
         void Show_Point_Status();
+        bool Select_Soldier(unsigned int id);
+        void Show_Soldier_Status(unsigned int id);
     private:
         double life;
         double magic;
         int coin;
         double lucky;
+        unsigned int _id;
 
         Map* _map;
-        Point* selecter;
+        Point* poing_selecter;
+        Soldier* soldier_selecter;
 
         bool _Load_Map ( string name, unsigned short level );
         template <class T>

@@ -6,6 +6,8 @@ War::War ( double prestige, double bitcoin, double violence, int second, unsigne
     this->magic = violence ;
     this->coin = bitcoin ;
     this->lucky =  war_num ;
+    this->poing_selecter = 0;
+    this->soldier_selecter = 0;
     this->_Load_Map ( string ( "standard" ), war_num + 1 );
 }
 
@@ -125,17 +127,30 @@ void War::Show_Map ( bool show_detail )
     this->_map->Show_Map ( show_detail );
 }
 
-void War::Select_Point ( unsigned int _x, unsigned int _y )
+bool War::Select_Point ( unsigned int _x, unsigned int _y )
 {
-    this->selecter = this->_map->Get_Point ( _x, _y );
+    if(_x > this->_map->rwidth || _y > this->_map->rheight )
+        return false;
+    this->poing_selecter = this->_map->Get_Point ( _x, _y );
+    return true;
 }
 
 void War::Show_Point_Status()
 {
-    cout << endl << "[*]当前地点(" << this->selecter->GetX() << this->selecter->GetY() << ")状态：" << endl;
-    cout << "归属势力: " << this->selecter->GetPower() << endl;
-    cout << "生命值: " << this->selecter->GetLife() << endl;
-    cout << "攻击力: " << this->selecter->GetAttack() << endl;
-    cout << "防御力: " << this->selecter->GetDefense() << endl;
-    cout << "士兵总数: " << this->selecter->GetNumber() << endl;
+    cout << endl << "[*]当前地点(" << this->poing_selecter->GetX() << this->poing_selecter->GetY() << ")状态：" << endl;
+    cout << "归属势力: " << this->poing_selecter->SGetPower() << endl;
+    cout << "生命值: " << this->poing_selecter->GetLife() << endl;
+    cout << "攻击力: " << this->poing_selecter->GetAttack() << endl;
+    cout << "防御力: " << this->poing_selecter->GetDefense() << endl;
+    cout << "士兵总数: " << this->poing_selecter->GetNumber() << endl;
+}
+
+bool War::Select_Soldier(unsigned int id)
+{
+
+}
+
+void War::Show_Soldier_Status(unsigned int id)
+{
+
 }

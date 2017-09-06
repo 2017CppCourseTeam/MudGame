@@ -19,6 +19,7 @@ Map::Map ( unsigned int height, unsigned int width, string name, unsigned short 
         }
     }
     this->_Init_Map_Points();
+    this->Update();
 }
 
 void Map::_Init_Map_Points()
@@ -31,13 +32,6 @@ void Map::_Init_Map_Points()
         for ( unsigned int j = 0; j < this->rwidth; j++ )
         {
             points[i][j].Reset ( id++, i, j );
-        }
-    }
-    for ( unsigned int i = 1; i < this->height; i += 2 )
-    {
-        for ( unsigned int j = 1; j < this->width; j += 3 )
-        {
-            //if (this->_map[i][j] == "X")
         }
     }
 }
@@ -123,37 +117,41 @@ Point* Map::Get_Point ( unsigned int _x, unsigned int _y )
 
 void Map::Update()
 {
-    for ( unsigned int i = 1; i < this->height; i += 2 )
+    for ( unsigned int i = 1, k = 0; i < this->height - 1; i += 2, k++ )
     {
-        for ( unsigned int j = 1; j < this->width; j += 3 )
+        for ( unsigned int j = 1, l = 0; j < this->width - 1; j += 3, l++ )
         {
-            switch ( this->points[i][j].GetPower() )
+            if ( this->_map[i][j] == '+' )
             {
-                case _empty:
-                    {
-                        break;
-                    }
-                case player:
-                    {
-                        break;
-                    }
-                case ai:
-                    {
-                        break;
-                    }
-                case player_city:
-                    {
-                        break;
-                    }
-                case ai_city:
-                    {
-                        break;
-                    }
+                if ( this->_map[i][j + 1] == '+' )
+                {
+                    this->points[k][l].UpdatePower ( empty_city );
+                }
+                else if ( this->_map[i][j + 1] == '*' )
+                {
+                    this->points[k][l].UpdatePower ( player_city );
+                }
+                else if ( this->_map[i][j + 1] == 'X' )
+                {
+                    this->points[k][l].UpdatePower ( ai_city );
+                }
             }
+            else if ( this->_map[i][j] == '*' && this->_map[i][j + 1] == '*' )
+            {
+                this->points[k][l].UpdatePower ( player );
+            }
+            else if ( this->_map[i][j] == 'X' && this->_map[i][j + 1] == 'X' )
+            {
+                this->points[k][l].UpdatePower ( ai );
+            }
+            else
+            {
+                this->points[k][l].UpdatePower ( _empty );
+            }
+
         }
     }
 }
-
 
 unsigned int Point::GetX()
 {
@@ -226,6 +224,43 @@ int Point::GetLife()
 enum LocalPower Point::GetPower()
 {
     return this->power;
+}
+
+string Point::SGetPower()
+{
+    switch ( this->GetPower() )
+    {
+        case _empty:
+        {
+            return string ( "Null" );
+            break;
+        }
+        case player:
+        {
+            return string ( "Player Base" );
+            break;
+        }
+        case ai:
+        {
+            return string ( "AI Base" );
+            break;
+        }
+        case player_city:
+        {
+            return string ( "Player City" );
+            break;
+        }
+        case ai_city:
+        {
+            return string ( "AI City" );
+            break;
+        }
+        case empty_city:
+        {
+            return string ( "Empty City" );
+            break;
+        }
+    }
 }
 
 void Point::UpdateNumber ( unsigned int number )

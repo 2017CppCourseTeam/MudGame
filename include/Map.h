@@ -8,7 +8,7 @@
 
 using namespace std;
 
-enum LocalPower {_empty, player, ai, player_city, ai_city};
+enum LocalPower {_empty, player, ai, player_city, ai_city, empty_city};
 
 class Point
 {
@@ -21,6 +21,7 @@ class Point
         unsigned int GetX();
         unsigned int GetY();
         enum LocalPower GetPower();
+        string SGetPower();
         int GetLife();
 
         void Reset ( unsigned int id, unsigned int _x, unsigned int _y );
@@ -40,31 +41,6 @@ class Point
         unsigned int attack;
         unsigned int defense;
         int life;
-};
-
-class BaseBuilding: private Point
-{
-    public:
-        BaseBuilding ( );
-        ~BaseBuilding();
-    private:
-};
-
-class City: private Point
-{
-    public:
-        City ( );
-        ~City();
-    private:
-
-};
-
-class EmptyPoint: private Point
-{
-    public:
-        EmptyPoint ( );
-        ~EmptyPoint();
-    private:
 };
 
 class Map
