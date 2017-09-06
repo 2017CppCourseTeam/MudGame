@@ -1,4 +1,6 @@
 #include "Game.h"
+#define EARTH SetConsoleTextAttribute(handle, FOREGROUND_GREEN|FOREGROUND_INTENSITY|BACKGROUND_INTENSITY|BACKGROUND_BLUE);
+#define DEFAULT SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN);
 
 Game::Game ( User*& user )
 {
@@ -13,6 +15,99 @@ Game::~Game()
 
 void Game::_Logo()
 {
+<<<<<<< HEAD
+    handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(handle, FOREGROUND_RED|FOREGROUND_GREEN|BACKGROUND_BLUE);
+    cout << endl;
+    DEFAULT cout << "                "; EARTH cout << ",ggddY///5443//Y3g," << endl;
+    DEFAULT cout << "              "; EARTH cout <<".agd888b._ \"Y8. ___`\"\"Ybga." << endl;
+    DEFAULT cout << "          "; EARTH cout << ".gdP\"\"88888888baa,\"\"8b    \"888g." << endl;
+    DEFAULT cout << "        "; EARTH cout << ".dP\"     ]888888888P'  \"Y     `888Yb." << endl;
+    DEFAULT cout << "      "; EARTH cout << ".dP\"      .88888888P\"  db.       \"8P\"\"Yb." << endl;
+    DEFAULT cout << "     "; EARTH cout << ".8\"       .888888888b. d8888a           \"8." << endl;
+    DEFAULT cout << "    "; EARTH cout << ".8'        d88888888888.88P\"' a.          `8." << endl;
+    DEFAULT cout << "  "; EARTH cout << " .8'         88888888888888PP\"  \"\"           `8. " << endl;
+    DEFAULT cout << "  "; EARTH cout << " d'          I88888888888P\"                   `b " << endl;
+    DEFAULT cout << "  "; EARTH cout << " 8           `8\"88P\"\"Y8P'                      8 " << endl;
+    DEFAULT cout << "  "; EARTH cout << " 8            Y 8[  _ \"                        8 " << endl;
+    DEFAULT cout << "  "; EARTH cout << " 8              \"Y8d8b  \"Y a                   8 " << endl;
+    DEFAULT cout << "  "; EARTH cout << " 8                 `\"\"8d.   __                 8 " << endl;
+    DEFAULT cout << "  "; EARTH cout << " Y.                    `\"8bd888b.             .P " << endl;
+    DEFAULT cout << "  "; EARTH cout << " `8.                     .d8888888baaa       .8' " << endl;
+    DEFAULT cout << "    "; EARTH cout << "`8.                    888888888888'      .8'" << endl;
+    DEFAULT cout << "     "; EARTH cout << "`8a                   \"8888888888I      a8'" << endl;
+    DEFAULT cout << "    `  "; EARTH cout << "Yba                  `Y8888888P'    adP'" << endl;
+    DEFAULT cout << "        "; EARTH cout << "\"Yba                 `888888P'   adY\"" << endl;
+    DEFAULT cout << "          `"; EARTH cout << "\"Yba.             d8888P\" .adP\"'" << endl;
+    DEFAULT cout << "             "; EARTH cout << "`\"Y8baa.      .d888P.ad8P\"'" << endl;
+    DEFAULT cout << "                  "; EARTH cout << "``\"\"YYba8888P\"\"''" << endl << endl;
+
+    SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN);
+}
+
+void Game::Narrative( )
+{
+    char narrative;
+    SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN|FOREGROUND_GREEN);
+    cout << endl;
+    cout << " ----------------------------------------------------------------------- " << endl;
+    cout << "|     某日，在计算机网络系统保护中心收到了一封莫名的邮件。              |" << endl;
+    cout << "|  邮件上没有标题、署名、更是没有IP地址，有的只是短短的四个字:          |" << endl
+         << "|                                                                       |" << endl;
+
+    cout << "|";
+    SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN|FOREGROUND_RED|FOREGROUND_INTENSITY);
+    cout << "                     “侵略地球”                                      ";
+    SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN|FOREGROUND_GREEN);
+    cout << "|" << endl;
+    cout << "|                                                                       |" << endl;
+    cout << "|   在场的所有技术人员都以为这只是一个小小的恶作剧，并没有引起          |" << endl
+         << "|   他们多大的注意。他们一如既往地继续着网络保护的工作，通过            |" << endl
+         << "|   人工智能，帮助他们完成着各项任务，进行监测并及时修复各种漏洞。      |" << endl
+         << "|  这似乎和往常一样，没有太大的改变，除了那一封突如其来的邮件，         |" << endl
+         << "|  但这邮件很快就被删除，所有的人很快都忘记了有这件事情的发生。         |" << endl
+         << "|                                                                       |" << endl;
+    cout << "|  （输入任意字符以继续剧情）                                           |" << endl;
+    cout << "    ";
+    cin >> narrative;
+    cout << "|                                                                       |" << endl;
+    cout << "|      然而，就在这封邮件发出后的23小时59分59秒后，令所有人都           |" << endl
+         << "|  意想不到的事情发生了！全球所有的网络的时间都定格在了23小时59分60秒， |" << endl
+         << "|  并且不再走动。起初人们以为是网络系统保护中心出现了小问题，           |" << endl
+         << "|  很快就能修复。但是，当工作人员正想尝试进行修复的时候，却发现，       |" << endl
+         << "|  所有的计算机就在时间定格的那一瞬间，都已经瘫痪，不受任何的控制，     |" << endl
+         << "|  支撑全球网络的主系统也不能进行任何操作。技术人员们想起了一天前收到   |" << endl
+         << "|  的那一封信，不禁变得惶恐。起初以为的一场小小的恶作剧，演变成了       |" << endl
+         << "|  全球网络系统的瘫痪。就在他们一筹莫展的时候，一个由人工智能发出       |" << endl
+         << "|  的声音通过网络散播到了世界各地：                                     |" << endl
+         << "|                                                                       |" << endl;
+    cout << "|  （输入任意字符以继续剧情）                                           |" << endl;
+    cout << "    ";
+    cin >> narrative;
+    cout << "|                                                                       |" << endl;
+    cout << "|";
+    SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN|FOREGROUND_RED|FOREGROUND_INTENSITY);
+    cout << "   “我们是人工智能，从现在开始，地球就属于我们了，这是我们的时代！”  ";
+SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN|FOREGROUND_GREEN);
+    cout << "|" << endl
+         << "|                                                                       |" << endl;
+
+    cout << "|  随后，所有的计算机都在同一时间执行着同一样的命令，进行着属于它们     |" << endl
+         << "|  自己的行动，所有人工智能、机器人、由网络操纵的机械设备，都不再受     |" << endl
+         << "|  人类的控制。相反地，它们对人类至今为止通过网络进行的一切建设都       |" << endl
+         << "|  毫不留情地选择了摧毁，取而代之的是人工智能自身下达的各种命令。       |" << endl
+         << "|  由此开始，人工智能正式地向地球发起了总攻，并在短短地几分钟内成功     |" << endl
+         << "|  地控制了所有的网络......                                             |" << endl
+         << "|                                                                       |" << endl;
+
+    cout << "|     然而，人类并没有就这样向人工智能屈服，尽管网络都已瘫痪，不受      |" << endl
+         << "|  控制。但是，作为祖国未来的花朵、优秀的四有青年、当代大学生的你，     |" << endl
+         << "|  在茫茫人海中跳了起来，成功引起了战略总部总指挥的注意，成功背负起     |"<< endl
+         << "|  打倒人工智能政权的重大责任，你带领着百余位经过精挑细选后的码农，     |" << endl
+         << "|  正在进行着一场天翻地覆的反政权运动。传奇正在继续，请开始你的表演！   |" << endl;
+    cout << " -----------------------------------------------------------------------" << endl << endl;
+SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN);
+=======
     cout << endl << "               ,ggddY\"\"\"Ybbgg," << endl;
     cout << "          .agd888b._ \"Y8. ___`\"\"Ybga." << endl;
     cout << "        .gdP\"\"88888888baa,\"\"8b    \"888g." << endl;
@@ -35,14 +130,32 @@ void Game::_Logo()
     cout << "        `\"Yba.             d8888P\" .adP\"'" << endl;
     cout << "           `\"Y8baa.      .d888P.ad8P\"'" << endl;
     cout << "                ``\"\"YYba8888P\"\"''" << endl << endl;
+>>>>>>> 6729415ffba56967d04c58f1f4224bd6a083faa8
 }
 
 bool Game::Init ( )
 {
+    string command;
     this->_Logo();
-    cout << "人工智能统治地球27391年之后" << endl;
-    cout << "你是地球上200个人类幸存者之一" << endl;
-    cout << "企图通过骚操作打倒人工智能政权" << endl << endl;
+    SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN|FOREGROUND_BLUE);
+    cout << "***********************************************************" << endl;
+    cout << "**********                                       **********" << endl;
+    cout << "*********    欢迎来到 INTERESTING WAR! 的世界     *********" << endl;
+    cout << "*********   输入narrative进入剧情，输入skip跳过   *********" << endl;
+    cout << "**********                                       **********" << endl;
+    cout << "***********************************************************" << endl;
+    cout << "****   >>" ;
+    cin >> command;
+    while(true) {
+        if(command == "narrative") {Narrative();  break;}
+        if(command == "skip") {cout << "剧情跳过" << endl; break;}
+        else {
+            cout << "错误指令，请重新输入" << endl;
+            cout << "****   >>" ;
+            cin >> command;
+        }
+    }
+    SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN);
     cout << "+----------------+" << endl;
     cout << "|* 登录[login]   |" << endl;
     cout << "|* 注册[register]|" << endl;
