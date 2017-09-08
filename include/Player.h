@@ -68,6 +68,7 @@ class Player
         unsigned int GetPlayerBaseY(); // 得到玩家基地的绝对Y坐标
         unsigned int GetAIBaseX(); // 得到AI基地的绝对X坐标
         unsigned int GetAIBaseY(); // 得到AI基地的绝对Y坐标
+        War* GetCurrentWar();
 
         void Create_Soldier ( enum AllSoldiers soldier, unsigned int x, unsigned int y ); // 在地图上x，y绝对坐标处生成一个士兵
         void Delete_Soldier ( unsigned int _id ); // 删除该id的士兵
@@ -87,6 +88,7 @@ class Player
         HANDLE handle;
         War* war;
         friend class User;
+        friend class Commander;
 
 };
 

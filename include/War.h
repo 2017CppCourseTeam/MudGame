@@ -44,6 +44,7 @@ class War
         Soldier* soldier_selecter;
 
         friend class Player;
+        friend class Commander;
 
 };
 

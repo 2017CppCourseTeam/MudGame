@@ -324,6 +324,10 @@ void Player::Delete_Soldier ( unsigned int _id )
     this->war->_Delete_Soldier ( _id );
 }
 
+War* Player::GetCurrentWar() {
+    return war;
+}
+
 bool Player::IsSelectSoldier()
 {
     return this->war->_IsSelectSoldier();

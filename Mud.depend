@@ -183,7 +183,7 @@
 1504539777 source:d:\mudgame\player.cpp
 	"Game.h"
 
-1504854315 d:\mudgame\include\player.h
+1504858210 d:\mudgame\include\player.h
 	<iostream>
 	<ctime>
 	<cstdlib>
@@ -199,7 +199,7 @@
 	"War.h"
 	"AI-Settings.h"
 
-1504855240 d:\mudgame\include\war.h
+1504858288 d:\mudgame\include\war.h
 	"Map.h"
 	"Soldier.h"
 	<math.h>
@@ -215,14 +215,15 @@
 
 1504657926 d:\mudgame\include\ai-settings.h
 
-1504854516 source:d:\mudgame\src\commander.cpp
+1504859582 source:d:\mudgame\src\commander.cpp
 	"Game.h"
+	"War.h"
 
 1504854315 d:\mudgame\include\game.h
 	"Commander.h"
 	"windows.h"
 
-1504854315 d:\mudgame\include\commander.h
+1504857982 d:\mudgame\include\commander.h
 	<iostream>
 	<vector>
 	<string>
@@ -237,7 +238,7 @@
 1504854315 source:d:\mudgame\src\map.cpp
 	"Map.h"
 
-1504854315 source:d:\mudgame\src\player.cpp
+1504858568 source:d:\mudgame\src\player.cpp
 	"Game.h"
 
 1504854315 source:d:\mudgame\src\soldier.cpp
@@ -250,6 +251,6 @@
 1504657927 source:d:\mudgame\src\user.cpp
 	"Game.h"
 
-1504854315 source:d:\mudgame\src\war.cpp
+1504858653 source:d:\mudgame\src\war.cpp
 	"War.h"
 

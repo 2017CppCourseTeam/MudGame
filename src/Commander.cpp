@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "War.h"
 
 Commander::Commander ( User*& user )
 {
@@ -522,15 +523,23 @@ bool Commander::Eval ( string& cmd )
             {
                 if ( cmd.substr ( 0 + 4 + 1 ) == string ( "up" ) )
                 {
+                    this->user->player->GetCurrentWar()->soldier_selecter->UpdateY(this->user->player->GetCurrentWar()->soldier_selecter->GetY()-1);
+                    this->user->player->GetCurrentWar()->_Show_Soldier_Status ( );
                 }
                 else if ( cmd.substr ( 0 + 4 + 1 ) == string ( "down" ) )
                 {
+                    this->user->player->GetCurrentWar()->soldier_selecter->UpdateY(this->user->player->GetCurrentWar()->soldier_selecter->GetY()+1);
+                    this->user->player->GetCurrentWar()->_Show_Soldier_Status ();
                 }
                 else if ( cmd.substr ( 0 + 4 + 1 ) == string ( "left" ) )
                 {
+                    this->user->player->GetCurrentWar()->soldier_selecter->UpdateX(this->user->player->GetCurrentWar()->soldier_selecter->GetX()-1);
+                    this->user->player->GetCurrentWar()->_Show_Soldier_Status ();
                 }
                 else if ( cmd.substr ( 0 + 4 + 1 ) == string ( "right" ) )
                 {
+                    this->user->player->GetCurrentWar()->soldier_selecter->UpdateX(this->user->player->GetCurrentWar()->soldier_selecter->GetX()+1);
+                    this->user->player->GetCurrentWar()->_Show_Soldier_Status ();
                 }
             }
             else

@@ -8,7 +8,8 @@ War::War ( double prestige, double bitcoin, double violence, int second, unsigne
     this->lucky = sqrt((10-war_num)*0.03) + prestige * 0.05 + violence + 0.05 ;
     this->poing_selecter = 0;
     this->soldier_selecter = 0;
-    this->_Load_Map ( string ( "standard" ), war_num + 1 );
+    this->_id = 0;
+    this->_map = _map;
 }
 
 War::~War()
