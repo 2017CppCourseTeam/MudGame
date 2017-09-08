@@ -77,9 +77,23 @@ void Commander::_Show_Manual()
         cout << "|continue       继续战争           |" << endl;
         cout << "|restart        重新开始战争       |" << endl;
         cout << "|back           返回主界面         |" << endl;
-        cout << "+----------------------------------+" << endl;
-        cout << "|[*]战争界面命令:                  |" << endl;
-        cout << "+----------------------------------+" << endl;
+        cout << "+--------------------------------------+" << endl;
+        cout << "|[*]战争界面命令:                      |" << endl;
+        cout << "|show  status     获得战争属性         |" << endl;
+        cout << "|      map        获得当前地图         |" << endl;
+        cout << "|      all        获得属性与地图       |" << endl;
+        cout << "|                                      |" << endl;
+        cout << "|select build x,y   选择某一坐标的建筑 |" << endl;
+        cout << "|       soldier n   选择ID为n的士兵    |" << endl;
+        cout << "|                                      |" << endl;
+        cout << "|move {up,down,left,right}  移动士兵   |" << endl;
+        cout << "|                                      |" << endl;
+        cout << "|build    （工人）占领并建造根据地     |" << endl;
+        cout << "|                                      |" << endl;
+        cout << "|produce TYPE 生产TYPE类型的士兵       |" << endl;
+        cout << "|                                      |" << endl;
+        cout << "|exit   退出战争                       |" << endl;
+        cout << "+--------------------------------------+" << endl;
         SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN );
     }
 }
@@ -410,6 +424,23 @@ bool Commander::Eval ( string& cmd )
         }
         else if ( cmd == string ( "help" ) )
         {
+            cout << "+--------------------------------------+" << endl;
+            cout << "|[*]战争界面命令:                      |" << endl;
+            cout << "|show  status     获得战争属性         |" << endl;
+            cout << "|      map        获得当前地图         |" << endl;
+            cout << "|      all        获得属性与地图       |" << endl;
+            cout << "|                                      |" << endl;
+            cout << "|select build x,y   选择某一坐标的建筑 |" << endl;
+            cout << "|       soldier n   选择ID为n的士兵    |" << endl;
+            cout << "|                                      |" << endl;
+            cout << "|move {up,down,left,right}  移动士兵   |" << endl;
+            cout << "|                                      |" << endl;
+            cout << "|build    （工人）占领并建造根据地     |" << endl;
+            cout << "|                                      |" << endl;
+            cout << "|produce TYPE 生产TYPE类型的士兵       |" << endl;
+            cout << "|                                      |" << endl;
+            cout << "|exit   退出战争                       |" << endl;
+            cout << "+--------------------------------------+" << endl;
         }
         else if ( cmd.substr ( 0, 4 ) == string ( "show" ) )
         {

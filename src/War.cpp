@@ -2,14 +2,13 @@
 
 War::War ( double prestige, double bitcoin, double violence, int second, unsigned short war_num, Map*& _map )
 {
-    this->life =  prestige ;
-    this->magic = violence ;
-    this->coin = bitcoin ;
-    this->lucky = war_num ;
+    this->life =  prestige * 30 ;
+    this->magic = violence * 20 ;
+    this->coin = bitcoin * 10 ;
+    this->lucky = sqrt((10-war_num)*0.03) + prestige * 0.05 + violence + 0.05 ;
     this->poing_selecter = 0;
     this->soldier_selecter = 0;
-    this->_id = 0;
-    this->_map = _map;
+    this->_Load_Map ( string ( "standard" ), war_num + 1 );
 }
 
 War::~War()

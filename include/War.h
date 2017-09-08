@@ -3,6 +3,7 @@
 
 #include "Map.h"
 #include "Soldier.h"
+#include <math.h>
 #include <vector>
 
 using namespace std;
@@ -15,6 +16,7 @@ class War
         ~War();
         void _Show_Status();
         void _Show_Map ( bool show_detail = false );
+        bool _Load_Map ( string name, unsigned short level );
         bool _Select_Point ( unsigned int _x, unsigned int _y );
         void _Show_Point_Status();
         bool _Select_Soldier ( unsigned int id );

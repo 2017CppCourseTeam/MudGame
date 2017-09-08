@@ -131,14 +131,14 @@ bool Game::Init ( )
     cout << "***********************************************************" << endl;
     cout << "**********                                       **********" << endl;
     cout << "*********    欢迎来到 INTERESTING WAR! 的世界     *********" << endl;
-    cout << "*********   输入narrative进入剧情，输入skip跳过   *********" << endl;
+    cout << "*********   输入 'plot' 进入剧情，输入 'skip' 跳过   *********" << endl;
     cout << "**********                                       **********" << endl;
     cout << "***********************************************************" << endl;
-    cout << ">>" ;
+    cout << "****   >>" ;
     cin >> command;
     while ( true )
     {
-        if ( command == "narrative" )
+        if ( command == "plot" )
         {
             Narrative();
             break;
