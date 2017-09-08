@@ -1,119 +1,22 @@
 #include "War.h"
 
-War::War ( double prestige, double bitcoin, double violence, int second, unsigned short war_num )
+War::War ( double prestige, double bitcoin, double violence, int second, unsigned short war_num, Map*& _map )
 {
     this->life =  prestige ;
     this->magic = violence ;
     this->coin = bitcoin ;
-    this->lucky =  war_num ;
+    this->lucky = war_num ;
     this->poing_selecter = 0;
     this->soldier_selecter = 0;
-    this->_Load_Map ( string ( "standard" ), war_num + 1 );
+    this->_id = 0;
+    this->_map = _map;
 }
 
 War::~War()
 {
-    delete this->_map;
 }
 
-bool War::_Load_Map ( string name, unsigned short level )
-{
-    ifstream load;
-    switch ( level )
-    {
-        case 1:
-        {
-            load.open (   ( string ( ".\\map\\" ) + name + string ( "1.dat" ) ).c_str(), ios::in );
-            break;
-        }
-        case 2:
-        {
-            load.open ( ( ( string ( ".\\map\\" ) + name + string ( "2.dat" ) ).c_str() ), ios::in );
-            break;
-        }
-        case 3:
-        {
-            load.open ( ( ( string ( ".\\map\\" ) + name + string ( "3.dat" ) ).c_str() ), ios::in );
-            break;
-        }
-        case 4:
-        {
-            load.open ( ( ( string ( ".\\map\\" ) + name + string ( "4.dat" ) ).c_str() ), ios::in );
-            break;
-        }
-        case 5:
-        {
-            load.open ( ( ( string ( ".\\map\\" ) + name + string ( "5.dat" ) ).c_str() ), ios::in );
-            break;
-        }
-    }
-    string _name = this->_Read ( load );
-    string _level = this->_Read ( load );
-    unsigned int _height = this->_ConvertStringToNum<unsigned int> ( this->_Read ( load ) );
-    unsigned int _width = this->_ConvertStringToNum<unsigned int> ( this->_Read ( load ) );
-    unsigned char** data;
-    data = new unsigned char* [ _height ];
-    for ( unsigned int i = 0; i < _height; i++ )
-        data [ i ] = new unsigned char [ _width ];
-    string _tmp;
-    getline ( load, _tmp );
-    for ( unsigned int i = 0, k = 0; i < _height; i++ )
-    {
-        for ( unsigned int j = 0; j < _width; j++ )
-        {
-            data[i][j] = _tmp[k++];
-        }
-    }
-    this->_map = new Map ( _height, _width, _name, level, data );
-    for ( unsigned int i = 0; i < _height; i++ )
-        delete [ ]data [ i ];
-    delete [ ]data;
-    load.close();
-}
-
-template <class T>
-T War::_ConvertStringToNum ( const string& str )
-{
-    istringstream iss ( str );
-    T num;
-    iss >> num;
-    return num;
-}
-
-string War::_Decrypt ( string str )
-{
-    int c = str.length ( );
-    string h = "";
-    string o = "";
-    for ( int i = 0; i < c; i++ )
-    {
-        if ( str [ i ] >= 'F' && str [ i ] <= '_' )
-        {
-            h = int ( str [ i ] ) + 27;
-        }
-        else if ( str [ i ] >= 'L' && str [ i ] <= 'e' )
-        {
-            h = int ( str [ i ] ) - 11;
-        }
-        else
-        {
-            h = int ( str [ i ] ) + 14;
-        }
-        o.append ( string ( h ) );
-    }
-    return o;
-}
-
-
-string War::_Read ( ifstream & f )
-{
-    string _tmp;
-    getline ( f, _tmp );
-    return this->_Decrypt ( _tmp );
-}
-
-
-void War::Show_Status()
+void War::_Show_Status()
 {
     cout << endl << endl << "[*]当前状态:" << endl;
     cout << endl << "[*]生命源: " << this->life << endl;
@@ -122,12 +25,12 @@ void War::Show_Status()
     cout << endl << "[*]幸运值: " << this->lucky << endl;
 }
 
-void War::Show_Map ( bool show_detail )
+void War::_Show_Map ( bool show_detail )
 {
     this->_map->Show_Map ( show_detail );
 }
 
-bool War::Select_Point ( unsigned int _x, unsigned int _y )
+bool War::_Select_Point ( unsigned int _x, unsigned int _y )
 {
     if ( _x > this->_map->rwidth || _y > this->_map->rheight )
         return false;
@@ -135,7 +38,7 @@ bool War::Select_Point ( unsigned int _x, unsigned int _y )
     return true;
 }
 
-void War::Show_Point_Status()
+void War::_Show_Point_Status()
 {
     cout << endl << "[*]当前地点(" << this->poing_selecter->GetX() << this->poing_selecter->GetY() << ")状态：" << endl;
     cout << "归属势力: " << this->poing_selecter->SGetPower() << endl;
@@ -145,10 +48,152 @@ void War::Show_Point_Status()
     cout << "士兵总数: " << this->poing_selecter->GetNumber() << endl;
 }
 
-bool War::Select_Soldier ( unsigned int id )
+bool War::_Select_Soldier ( unsigned int id )
 {
+    if ( id >= this->_id ) return false;
+    this->soldier_selecter = &this->created_soldier[id];
+    return true;
 }
 
-void War::Show_Soldier_Status ( unsigned int id )
+void War::_Show_Soldier_Status ( unsigned int id )
 {
+    cout << endl << "战士ID: " << this->created_soldier[id].GetID() << endl;
+    cout << "种族: " << this->created_soldier[id].SGetSpecies() << endl;
+    cout << "兵种: " << this->created_soldier[id].SGetName() << endl;
+    cout << "生命值: " << this->created_soldier[id].GetLife() << endl;
+    cout << "攻击力: " << this->created_soldier[id].GetAttack() << endl;
+    cout << "防御力: " << this->created_soldier[id].GetDefence() << endl;
+    cout << "位置: " << this->created_soldier[id].GetX() << ", " << this->created_soldier[id].GetY() << endl;
+}
+
+void War::_Show_Soldier_Status()
+{
+    cout << endl << "战士ID: " << this->soldier_selecter->GetID() << endl;
+    cout << "种族: " << this->soldier_selecter->SGetSpecies() << endl;
+    cout << "兵种: " << this->soldier_selecter->SGetName() << endl;
+    cout << "生命值: " << this->soldier_selecter->GetLife() << endl;
+    cout << "攻击力: " << this->soldier_selecter->GetAttack() << endl;
+    cout << "防御力: " << this->soldier_selecter->GetDefence() << endl;
+    cout << "位置: " << this->soldier_selecter->GetX() << ", " << this->soldier_selecter->GetY() << endl;
+}
+
+
+void War::_Create_Soldier ( enum AllSoldiers soldier, unsigned int x, unsigned int y )
+{
+    switch ( soldier )
+    {
+        case _Worker:
+        {
+            this->created_soldier.push_back ( Worker ( this->_id, x, y ) );
+            break;
+        }
+        case _Archer:
+        {
+            this->created_soldier.push_back ( Archer ( this->_id, x, y ) );
+            break;
+        }
+        case _SwordsMan:
+        {
+            this->created_soldier.push_back ( SwordsMan ( this->_id, x, y ) );
+            break;
+        }
+        case _Priest:
+        {
+            this->created_soldier.push_back ( Priest ( this->_id, x, y ) );
+            break;
+        }
+        case _SiegCar:
+        {
+            this->created_soldier.push_back ( SiegCar ( this->_id, x, y ) );
+            break;
+        }
+        case _Dragon:
+        {
+            this->created_soldier.push_back ( Dragon ( this->_id, x, y ) );
+            break;
+        }
+        case _Wolf:
+        {
+            this->created_soldier.push_back ( Wolf ( this->_id, x, y ) );
+            break;
+        }
+        case _Slime:
+        {
+            this->created_soldier.push_back ( Slime ( this->_id, x, y  ) );
+            break;
+        }
+        case _Goblin:
+        {
+            this->created_soldier.push_back ( Goblin ( this->_id, x, y ) );
+            break;
+        }
+        case _IceGiant:
+        {
+            this->created_soldier.push_back ( IceGiant ( this->_id, x, y ) );
+            break;
+        }
+        case _FlameBirds:
+        {
+            this->created_soldier.push_back ( FlameBirds ( this->_id, x, y ) );
+            break;
+        }
+        case _Naga:
+        {
+            this->created_soldier.push_back ( Naga ( this->_id, x, y ) );
+            break;
+        }
+        case _Phoenix:
+        {
+            this->created_soldier.push_back ( Phoenix ( this->_id, x, y ) );
+            break;
+        }
+    }
+    cout << endl << "[*]生产成功" << endl;
+    this->_AddSoldierToMap ( '*', x, y, this->created_soldier[this->created_soldier.size() - 1] );
+    this->_Show_Soldier_Status ( this->_id++ );
+}
+
+void War::_AddSoldierToMap ( const char& _c, unsigned int _x, unsigned int _y, Soldier& _soldier )
+{
+    this->_map->AddSoldierToMap ( _c, _x, _y );
+    this->_map->AddSoldierToPoint ( _x, _y, _soldier );
+}
+
+
+void War::_Delete_Soldier ( unsigned int _id )
+{
+    this->created_soldier.erase ( vector<Soldier>::iterator ( this->created_soldier.begin() + _id ) );
+    cout << endl << "[*]ID为: " << _id << "的战士死亡，原ID为: " << _id + 1 << "的战士取代该ID" << endl;
+    for ( vector<int>::size_type i = _id; i != this->created_soldier.size(); i++ )
+    {
+        this->created_soldier[i].UpdateID ( created_soldier[i].GetID() - 1 );
+    }
+}
+
+bool War::_IsSelectSoldier()
+{
+    if ( this->soldier_selecter != 0 )
+        return true;
+    else
+        return false;
+}
+
+unsigned int War::_GetPlayerBaseX()
+{
+    return this->_map->player_base_x;
+}
+
+unsigned int War::_GetPlayerBaseY()
+{
+    return this->_map->player_base_y;
+}
+
+unsigned int War::_GetAIBaseX()
+{
+    return this->_map->ai_base_x;
+}
+
+unsigned int War::_GetAIBaseY()
+{
+    return this->_map->ai_base_y;
 }

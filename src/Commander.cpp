@@ -20,6 +20,10 @@ T Commander::_ConvertStringToNum ( const string& str )
     return num;
 }
 
+void Commander::_To_Lower ( string& s )
+{
+    transform ( s.begin(), s.end(), s.begin(), ::tolower );
+}
 
 void Commander::_Show_Manual()
 {
@@ -98,6 +102,94 @@ void Commander::_Current_Page()
     }
 }
 
+string Commander::_Decrypt ( string str )
+{
+    int c = str.length ( );
+    string h = "";
+    string o = "";
+    for ( int i = 0; i < c; i++ )
+    {
+        if ( str [ i ] >= 'F' && str [ i ] <= '_' )
+        {
+            h = int ( str [ i ] ) + 27;
+        }
+        else if ( str [ i ] >= 'L' && str [ i ] <= 'e' )
+        {
+            h = int ( str [ i ] ) - 11;
+        }
+        else
+        {
+            h = int ( str [ i ] ) + 14;
+        }
+        o.append ( string ( h ) );
+    }
+    return o;
+}
+
+string Commander::_Read ( ifstream & f )
+{
+    string _tmp;
+    getline ( f, _tmp );
+    return this->_Decrypt ( _tmp );
+}
+
+bool Commander::LoadMap ( string name, unsigned short level )
+{
+    ifstream load;
+    switch ( level )
+    {
+        case 1:
+        {
+            load.open (   ( string ( ".\\map\\" ) + name + string ( "1.dat" ) ).c_str(), ios::in );
+            break;
+        }
+        case 2:
+        {
+            load.open ( ( ( string ( ".\\map\\" ) + name + string ( "2.dat" ) ).c_str() ), ios::in );
+            break;
+        }
+        case 3:
+        {
+            load.open ( ( ( string ( ".\\map\\" ) + name + string ( "3.dat" ) ).c_str() ), ios::in );
+            break;
+        }
+        case 4:
+        {
+            load.open ( ( ( string ( ".\\map\\" ) + name + string ( "4.dat" ) ).c_str() ), ios::in );
+            break;
+        }
+        case 5:
+        {
+            load.open ( ( ( string ( ".\\map\\" ) + name + string ( "5.dat" ) ).c_str() ), ios::in );
+            break;
+        }
+    }
+    if ( !load ) return false;
+    string _name = this->_Read ( load );
+    string _level = this->_Read ( load );
+    unsigned int _height = this->_ConvertStringToNum<unsigned int> ( this->_Read ( load ) );
+    unsigned int _width = this->_ConvertStringToNum<unsigned int> ( this->_Read ( load ) );
+    unsigned char** data;
+    data = new unsigned char* [ _height ];
+    for ( unsigned int i = 0; i < _height; i++ )
+        data [ i ] = new unsigned char [ _width ];
+    string _tmp;
+    getline ( load, _tmp );
+    for ( unsigned int i = 0, k = 0; i < _height; i++ )
+    {
+        for ( unsigned int j = 0; j < _width; j++ )
+        {
+            data[i][j] = _tmp[k++];
+        }
+    }
+    this->_map = new Map ( _height, _width, _name, level, data );
+    for ( unsigned int i = 0; i < _height; i++ )
+        delete [ ]data [ i ];
+    delete [ ]data;
+    load.close();
+    return true;
+}
+
 void Commander::_Show_History()
 {
     cout << endl << "[*]历史命令: " << endl;
@@ -107,6 +199,7 @@ void Commander::_Show_History()
 
 bool Commander::Eval ( string& cmd )
 {
+    _To_Lower ( cmd );
     this->history.insert ( history.begin(), cmd );
     // Global command
     if ( cmd == string ( "status" ) )
@@ -233,7 +326,8 @@ bool Commander::Eval ( string& cmd )
         {
             cout << endl << "[*]继续战争" << endl;
             this->status = start_war;
-            this->user->player->Start_War();
+            this->LoadMap ( string ( "standard" ), this->user->player->Get_War_Num() + 1 );
+            this->user->player->Start_War ( this->_map );
             cout << endl << "[*]当前关卡: " << this->user->player->Get_War_Num() << endl;
             this->user->player->Show_Status();
             this->user->player->Show_War_Status();
@@ -245,7 +339,7 @@ bool Commander::Eval ( string& cmd )
             if ( _choice != string ( "y" ) && _choice != string ( "Y" ) )
             {
                 this->status = war;
-                this->user->player->End_War();
+                this->user->player->End_War ( this->_map );
             }
             else
             {
@@ -284,7 +378,7 @@ bool Commander::Eval ( string& cmd )
                         break;
                     }
                 }
-                this->user->ai->Start_War();
+                this->user->ai->Start_War ( this->_map );
             }
         }
         else if ( cmd == string ( "back" ) )
@@ -298,8 +392,6 @@ bool Commander::Eval ( string& cmd )
     }
     else if ( this->status == start_war )
     {
-        //this->user->player->Show_War_Status();
-        //this->user->player->Show_Map ( false );
         if ( cmd == string ( "exit" ) )
         {
             cout << endl << "[*]本局游戏将不会被保存，也不会获得任何奖励，确认退出吗？(y/n)" << endl << ">>";
@@ -309,7 +401,7 @@ bool Commander::Eval ( string& cmd )
             if ( _choice == string ( "y" ) || _choice == string ( "Y" ) )
             {
                 cout << endl << "[*]退出战争" << endl;
-                this->user->player->End_War();
+                this->user->player->End_War ( this->_map );
                 this->status = war;
                 return true;
             }
@@ -390,8 +482,25 @@ bool Commander::Eval ( string& cmd )
         }
         else if ( cmd.substr ( 0, 4 ) == string ( "move" ) )
         {
-            if ( cmd.substr ( 0 + 4, 1 ) == string ( " " ) )
+            if ( !this->user->player->IsSelectSoldier() )
             {
+                cout << endl << "[!]未选择任何战士" << endl;
+                return false;
+            }
+            else if ( cmd.substr ( 0 + 4, 1 ) == string ( " " ) )
+            {
+                if ( cmd.substr ( 0 + 4 + 1 ) == string ( "up" ) )
+                {
+                }
+                else if ( cmd.substr ( 0 + 4 + 1 ) == string ( "down" ) )
+                {
+                }
+                else if ( cmd.substr ( 0 + 4 + 1 ) == string ( "left" ) )
+                {
+                }
+                else if ( cmd.substr ( 0 + 4 + 1 ) == string ( "right" ) )
+                {
+                }
             }
             else
                 return false;
@@ -400,12 +509,77 @@ bool Commander::Eval ( string& cmd )
         {
             if ( cmd.substr ( 0 + 7, 1 ) == string ( " " ) )
             {
+                string _subcmd = cmd.substr ( 8 );
+                unsigned int _x = this->user->player->GetPlayerBaseX();
+                unsigned int _y = this->user->player->GetPlayerBaseY();
+                if ( _y == this->_map->GetHeight() - 1 )
+                    _y = _y - 2;
+                else
+                    _y = _y + 2;
+                if ( _subcmd == string ( "worker" ) )
+                {
+                    this->user->player->Create_Soldier ( _Worker, _x, _y );
+                }
+                else if ( _subcmd == string ( "archer" ) )
+                {
+                    this->user->player->Create_Soldier ( _Archer, _x, _y );
+                }
+                else if ( _subcmd == string ( "swordsman" ) )
+                {
+                    this->user->player->Create_Soldier ( _SwordsMan, _x, _y );
+                }
+                else if ( _subcmd == string ( "priest" ) )
+                {
+                    this->user->player->Create_Soldier ( _Priest, _x, _y );
+                }
+                else if ( _subcmd == string ( "siegcar" ) )
+                {
+                    this->user->player->Create_Soldier ( _SiegCar, _x, _y );
+                }
+                else if ( _subcmd == string ( "dragon" ) )
+                {
+                    this->user->player->Create_Soldier ( _Dragon, _x, _y );
+                }
+                else if ( _subcmd == string ( "wolf" ) )
+                {
+                    this->user->player->Create_Soldier ( _Wolf, _x, _y );
+                }
+                else if ( _subcmd == string ( "slime" ) )
+                {
+                    this->user->player->Create_Soldier ( _Slime, _x, _y );
+                }
+                else if ( _subcmd == string ( "goblin" ) )
+                {
+                    this->user->player->Create_Soldier ( _Goblin, _x, _y );
+                }
+                else if ( _subcmd == string ( "icegiant" ) )
+                {
+                    this->user->player->Create_Soldier ( _IceGiant, _x, _y );
+                }
+                else if ( _subcmd == string ( "flamebirds" ) )
+                {
+                    this->user->player->Create_Soldier ( _FlameBirds, _x, _y );
+                }
+                else if ( _subcmd == string ( "naga" ) )
+                {
+                    this->user->player->Create_Soldier ( _Naga, _x, _y );
+                }
+                else if ( _subcmd == string ( "phoenix" ) )
+                {
+                    this->user->player->Create_Soldier ( _Phoenix, _x, _y );
+                }
+                else
+                    return false;
             }
             else
                 return false;
         }
         else
             return false;
+        this->_map->Update();
+        this->user->player->Show_Map ( false );
         return true;
     }
+    return false;
 }
+

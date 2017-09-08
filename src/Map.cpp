@@ -115,6 +115,38 @@ Point* Map::Get_Point ( unsigned int _x, unsigned int _y )
     return &this->points[_x][_y];
 }
 
+unsigned int Map::GetRHeight()
+{
+    return this->rheight;
+}
+
+unsigned int Map::GetRWidth()
+{
+    return this->rwidth;
+}
+
+void Map::AddSoldierToMap ( const char& _c, unsigned int _x, unsigned int _y )
+{
+    this->_map[_y][_x] = _c;
+}
+
+
+unsigned int Map::GetHeight()
+{
+    return this->height;
+}
+
+unsigned int Map::GetWidth()
+{
+    return this->width;
+}
+
+void Map::AddSoldierToPoint ( unsigned int _x, unsigned int _y, Soldier& _soldier )
+{
+    this->points[ ( _x - 1 ) / 2][ ( _y - 1 ) / 2].AddToCurrentSoldier ( _soldier );
+}
+
+
 void Map::Update()
 {
     for ( unsigned int i = 1, k = 0; i < this->height - 1; i += 2, k++ )
@@ -136,13 +168,20 @@ void Map::Update()
                     this->points[k][l].UpdatePower ( ai_city );
                 }
             }
-            else if ( this->_map[i][j] == '*' && this->_map[i][j + 1] == '*' )
+            else if ( this->_map[i][j] == '*' )
             {
-                this->points[k][l].UpdatePower ( player );
+                if ( this->_map[i][j + 1] == '*' )
+                {
+                    this->points[k][l].UpdatePower ( player );
+                    this->player_base_x = j;
+                    this->player_base_y = i;
+                }
             }
             else if ( this->_map[i][j] == 'X' && this->_map[i][j + 1] == 'X' )
             {
                 this->points[k][l].UpdatePower ( ai );
+                this->ai_base_x = i;
+                this->ai_base_y = j;
             }
             else
             {
@@ -264,25 +303,41 @@ string Point::SGetPower()
 
 void Point::UpdateNumber ( unsigned int number )
 {
-    this->number = number;
+    this->number += number;
 }
 
 void Point::UpdateAttack ( unsigned int attack )
 {
-    this->attack = attack;
+    this->attack += attack;
 }
 
 void Point::UpdateDefense ( unsigned int defense )
 {
-    this->defense = defense;
+    this->defense += defense;
 }
 
 void Point::UpdateLife ( unsigned int life )
 {
-    this->life = life;
+    this->life += life;
 }
 
 void Point::UpdatePower ( enum LocalPower power )
 {
     this->power = power;
+}
+
+void Point::AddToCurrentSoldier ( Soldier& soldier )
+{
+    this->current_soldiers.push_back ( soldier );
+    this->UpdateAttack ( soldier.GetAttack() );
+    this->UpdateLife ( soldier.GetLife() );
+    this->UpdateNumber ( 1 );
+}
+
+void Point::RemoveFromCurrentSoldier ( unsigned int _id )
+{
+    this->UpdateAttack ( -this->current_soldiers[_id].GetAttack() );
+    this->UpdateLife ( -this->current_soldiers[_id].GetLife() );
+    this->UpdateNumber ( -1 );
+    this->current_soldiers.erase ( this->current_soldiers.end() - 1 );
 }

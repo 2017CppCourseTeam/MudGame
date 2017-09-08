@@ -249,32 +249,34 @@ void Player::Ai_Init ( double prestige, double bitcoin, double violence, int sec
     this->war_first = first;
 }
 
-void Player::Start_War()
+void Player::Start_War ( Map*& _map )
 {
     this->war = new War ( this->prestige,
                           this->bitcoin,
                           this->violence,
                           this->second,
-                          this->war_num );
+                          this->war_num,
+                          _map );
     if ( ( rand() / double ( RAND_MAX ) ) <= 0.5 )
         this->war_first = true;
     else
         this->war_first = false;
 }
 
-void Player::End_War()
+void Player::End_War ( Map*& _map )
 {
     delete this->war;
+    delete _map;
 }
 
 void Player::Show_War_Status()
 {
-    this->war->Show_Status();
+    this->war->_Show_Status();
 }
 
 void Player::Show_Map ( bool show_detail )
 {
-    this->war->Show_Map ( show_detail );
+    this->war->_Show_Map ( show_detail );
 }
 
 bool Player::Is_First()
@@ -284,7 +286,7 @@ bool Player::Is_First()
 
 bool Player::Select_Point ( unsigned int _x, unsigned int _y )
 {
-    if ( this->war->Select_Point ( _x, _y ) )
+    if ( this->war->_Select_Point ( _x, _y ) )
         return true;
     else
         return false;
@@ -292,15 +294,57 @@ bool Player::Select_Point ( unsigned int _x, unsigned int _y )
 
 void Player::Show_Ponit_Status()
 {
-    this->war->Show_Point_Status();
+    this->war->_Show_Point_Status();
 }
 
 bool Player::Select_Soldier ( unsigned int id )
 {
-    this->war->Select_Soldier ( id );
+    return this->war->_Select_Soldier ( id );
 }
 
 void Player::Show_Soldier_Status ( unsigned int id )
 {
-    this->war->Show_Soldier_Status ( id );
+    this->war->_Show_Soldier_Status ( id );
+}
+
+void Player::Show_Soldier_Status()
+{
+    this->war->_Show_Soldier_Status();
+}
+
+
+void Player::Create_Soldier ( enum AllSoldiers soldier, unsigned int x, unsigned int y )
+{
+    this->war->_Create_Soldier ( soldier, x, y );
+}
+
+
+void Player::Delete_Soldier ( unsigned int _id )
+{
+    this->war->_Delete_Soldier ( _id );
+}
+
+bool Player::IsSelectSoldier()
+{
+    return this->war->_IsSelectSoldier();
+}
+
+unsigned int Player::GetPlayerBaseX()
+{
+    return this->war->_GetPlayerBaseX();
+}
+
+unsigned int Player::GetPlayerBaseY()
+{
+    return this->war->_GetPlayerBaseY();
+}
+
+unsigned int Player::GetAIBaseX()
+{
+    return this->war->_GetAIBaseY();
+}
+
+unsigned int Player::GetAIBaseY()
+{
+    return this->war->_GetAIBaseY();
 }
