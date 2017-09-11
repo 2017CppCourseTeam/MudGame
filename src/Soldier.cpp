@@ -1,12 +1,14 @@
 #include "Soldier.h"
 
-Soldier::Soldier ( unsigned int id,  int life, int attack, int defence, enum Species species, unsigned int price )
+Soldier::Soldier ( unsigned int id, int life, int attack, int defence, enum Species species, double pdclife, double pdcmagic, unsigned int pdccoin )
 {
     this->life = life;
     this->attack = attack;
     this->defence = defence;
     this->species = species;
-    this->price = price;
+    this->pdclife = pdclife;
+    this->pdcmagic = pdcmagic;
+    this->pdccoin = pdccoin;
     this->id = id;
 }
 
@@ -25,10 +27,10 @@ int Soldier::GetLife()
     return this->life;
 }
 
-unsigned int Soldier::GetPrice()
+/*unsigned int Soldier::GetPrice()
 {
     return this->price;
-}
+}*/
 
 unsigned int Soldier::GetID()
 {
@@ -41,101 +43,105 @@ enum Species Soldier::GetSpecies()
     return this->species;
 }
 
-unsigned int Soldier::GetX()
-{
-    return ( this->x - 1 ) / 2;
-}
-
 unsigned int Soldier::GetY()
 {
-    return ( this->y - 1 ) / 3;
+    return this->y ;
+}
+
+unsigned int Soldier::GetX()
+{
+    return this->x;
 }
 
 
 string Soldier::SGetSpecies()
 {
+    string _result;
     switch ( this->GetSpecies() )
     {
         case humanity:
         {
-            return string ( "Humanity" );
+            _result =   "Humanity" ;
         }
         case mechanical:
         {
-            return string ( "Mechanical" );
+            _result = "Mechanical" ;
         }
         case beast:
         {
-            return string ( "Beast" );
+            _result = "Beast" ;
         }
         case wizard:
         {
-            return string ( "Wizard" );
+            _result = "Wizard" ;
         }
         case warcraft:
         {
-            return string ( "Warcraft" );
+            _result = "Warcraft" ;
         }
     }
+    return _result;
 }
 
 string Soldier::SGetName()
 {
+    string _result;
     switch ( this->GetSoldierName() )
     {
         case _Worker:
         {
-            return string ( "Worker" );
+            _result = "Worker";
         }
         case _Archer:
         {
-            return string ( "Archer" );
+            _result = "Archer";
         }
         case _SwordsMan:
         {
-            return string ( "Swords Man" );
+            _result = "Swords Man";
         }
         case _Priest:
         {
-            return string ( "Priest" );
+            _result = "Priest";
         }
         case _SiegCar:
         {
-            return string ( "Sieg Car" );
+            _result = "Sieg Car";
         }
         case _Dragon:
         {
-            return string ( "Dragon" );
+            _result = "Dragon";
         }
         case _Wolf:
         {
-            return string ( "Wolf" );
+            _result = "Wolf";
         }
         case _Slime:
         {
-            return string ( "Slime" );
+            _result = "Slime";
         }
         case _Goblin:
         {
-            return string ( "Goblin" );
+            _result = "Goblin";
         }
         case _IceGiant:
         {
-            return string ( "IceGiant" );
+            _result = "IceGiant";
         }
         case _FlameBirds:
         {
-            return string ( "FlameBirds" );
+            _result = "FlameBirds";
         }
         case _Naga:
         {
-            return string ( "Naga" );
+            _result = "Naga";
         }
         case _Phoenix:
         {
-            return string ( "Phoenix" );
+            _result = "Phoenix";
         }
     }
+    return _result;
 }
 
 
@@ -161,15 +167,20 @@ void Soldier::UpdateID ( unsigned int id )
 
 void Soldier::UpdateX ( unsigned int x )
 {
-    this->x += ( 2 * x ) + 1;
+    this->x += x;
 }
 
 void Soldier::UpdateY ( unsigned int y )
 {
-    this->y += ( 3 * y ) + 1;
+    this->y += y;
 }
 
 enum AllSoldiers Soldier::GetSoldierName()
 {
     return this->_name;
+}
+
+enum LocalPower Soldier::GetPower()
+{
+    return this->power;
 }

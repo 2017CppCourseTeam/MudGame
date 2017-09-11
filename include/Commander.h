@@ -1,11 +1,7 @@
 #ifndef COMMDER_H
 #define COMMDER_H
-#include <iostream>
-#include <vector>
-#include <string>
-#include "User.h"
 
-using namespace std;
+#include "User.h"
 
 class Commander
 {

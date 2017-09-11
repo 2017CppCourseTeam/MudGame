@@ -125,7 +125,7 @@ void Game::Narrative( )
 
 bool Game::Init ( )
 {
-    string command;
+    string _choice;
     this->_Logo();
     SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_BLUE );
     cout << "***********************************************************" << endl;
@@ -134,29 +134,29 @@ bool Game::Init ( )
     cout << "*********   输入 'plot' 进入剧情，输入 'skip' 跳过   *********" << endl;
     cout << "**********                                       **********" << endl;
     cout << "***********************************************************" << endl;
-    cout << "****   >>" ;
-    cin >> command;
+    cout << "****" << endl << ">>" ;
+    cin >> _choice;
     while ( true )
     {
-        if ( command == "plot" )
+        if ( _choice == "plot" )
         {
             Narrative();
             break;
         }
-        if ( command == "skip" )
+        if ( _choice == "skip" )
         {
-            cout << "剧情跳过" << endl;
+            cout << endl << "[*]剧情跳过" << endl;
             break;
         }
         else
         {
-            cout << "错误指令，请重新输入" << endl;
-            cout << "****   >>" ;
-            cin >> command;
+            cout << endl << "[!]错误的命令: " << _choice << endl;
+            cout << ">>" ;
+            cin >> _choice;
         }
     }
     SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN );
-    cout << "+----------------+" << endl;
+    cout << endl << "+----------------+" << endl;
     cout << "|* 登录[login]   |" << endl;
     cout << "|* 注册[register]|" << endl;
     cout << "|* 退出[exit]    |" << endl;
@@ -187,6 +187,7 @@ bool Game::Init ( )
             cout << endl << "[!]错误的命令: " << _choice << endl;
     }
     string username, password;
+    bool _result = false;
     switch ( _choice_ )
     {
         case login:
@@ -202,7 +203,7 @@ bool Game::Init ( )
             {
                 cout << endl << "[*]登录成功！" << endl;
                 cout << "**************************" << endl;
-                return true;
+                _result = true;
             }
             else
             {
@@ -213,7 +214,7 @@ bool Game::Init ( )
                     system ( "cls" );
                     delete this->user;
                     delete this->commander;
-                    return false;
+                    _result = false;
                 }
             }
             break;
@@ -237,7 +238,7 @@ bool Game::Init ( )
                     cout << endl << "[*]注册成功！" << endl << endl;
                     cout << "**************************" << endl;
                     user->Login();
-                    return true;
+                    _result = true;
                 }
                 else
                 {
@@ -246,7 +247,7 @@ bool Game::Init ( )
                     system ( "cls" );
                     delete this->user;
                     delete this->commander;
-                    return false;
+                    _result = false;
                 }
             }
             else
@@ -256,16 +257,15 @@ bool Game::Init ( )
                 system ( "cls" );
                 delete this->user;
                 delete this->commander;
-                return false;
+                _result = false;
             }
             break;
         }
         case _exit:
             cout << endl << "[*]退出游戏" << endl;
             exit ( 0 );
-        default:
-            return false;
     }
+    return _result;
 }
 
 void Game::Select_Archive ( )
@@ -350,6 +350,9 @@ bool Game::Run ( )
             string cmd;
             cout << endl << "输入命令: " << endl << ">>";
             getline ( cin, cmd );
+            /**
+            * Here for AI first
+            **/
             if ( !this->commander->Eval ( cmd ) )
                 cout << endl << "[!]未知命令: " << cmd << endl;
         }

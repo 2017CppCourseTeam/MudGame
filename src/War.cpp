@@ -5,8 +5,8 @@ War::War ( double prestige, double bitcoin, double violence, int second, unsigne
     this->life =  prestige * 30 ;
     this->magic = violence * 20 ;
     this->coin = bitcoin * 10 ;
-    this->lucky = sqrt((10-war_num)*0.03) + prestige * 0.05 + violence + 0.05 ;
-    this->poing_selecter = 0;
+    this->lucky = sqrt ( ( 10 - war_num ) * 0.03 ) + prestige * 0.05 + violence + 0.05 ;
+    this->point_selecter = 0;
     this->soldier_selecter = 0;
     this->_id = 0;
     this->_map = _map;
@@ -35,18 +35,18 @@ bool War::_Select_Point ( unsigned int _x, unsigned int _y )
 {
     if ( _x > this->_map->rwidth || _y > this->_map->rheight )
         return false;
-    this->poing_selecter = this->_map->Get_Point ( _x, _y );
+    this->point_selecter = this->_map->Get_Point ( _x, _y );
     return true;
 }
 
 void War::_Show_Point_Status()
 {
-    cout << endl << "[*]当前地点(" << this->poing_selecter->GetX() << this->poing_selecter->GetY() << ")状态：" << endl;
-    cout << "归属势力: " << this->poing_selecter->SGetPower() << endl;
-    cout << "生命值: " << this->poing_selecter->GetLife() << endl;
-    cout << "攻击力: " << this->poing_selecter->GetAttack() << endl;
-    cout << "防御力: " << this->poing_selecter->GetDefense() << endl;
-    cout << "士兵总数: " << this->poing_selecter->GetNumber() << endl;
+    cout << endl << "[*]当前地点(" << this->point_selecter->GetX() << this->point_selecter->GetY() << ")状态：" << endl;
+    cout << "归属势力: " << this->point_selecter->SGetPower() << endl;
+    cout << "生命值: " << this->point_selecter->GetLife() << endl;
+    cout << "攻击力: " << this->point_selecter->GetAttack() << endl;
+    cout << "防御力: " << this->point_selecter->GetDefense() << endl;
+    cout << "士兵总数: " << this->point_selecter->GetNumber() << endl;
 }
 
 bool War::_Select_Soldier ( unsigned int id )
@@ -79,87 +79,276 @@ void War::_Show_Soldier_Status()
 }
 
 
-void War::_Create_Soldier ( enum AllSoldiers soldier, unsigned int x, unsigned int y )
+bool War::_Create_Soldier ( enum AllSoldiers soldier, enum LocalPower power, unsigned int x, unsigned int y, double* _life, double* _magic, unsigned int* _coin )
 {
+    bool _result = false;
     switch ( soldier )
     {
         case _Worker:
         {
-            this->created_soldier.push_back ( Worker ( this->_id, x, y ) );
+            if ( *_life >= WORKER_COST_LIFE && *_magic >= WORKER_COST_MAGIC && *_coin >= WORKER_COST_COIN )
+            {
+                this->created_soldier.push_back ( Worker (
+                                                      this->_id,
+                                                      x,
+                                                      y,
+                                                      power,
+                                                      WORKER_COST_LIFE,
+                                                      WORKER_COST_MAGIC,
+                                                      WORKER_COST_COIN ) );
+                *_life -= WORKER_COST_LIFE;
+                *_magic -= WORKER_COST_MAGIC;
+                *_coin -= WORKER_COST_COIN;
+                _result = true;
+            }
             break;
         }
         case _Archer:
         {
-            this->created_soldier.push_back ( Archer ( this->_id, x, y ) );
+            if ( *_life >= ARCHER_COST_LIFE && *_magic >= ARCHER_COST_MAGIC && *_coin >= ARCHER_COST_COIN )
+            {
+                this->created_soldier.push_back ( Archer (
+                                                      this->_id,
+                                                      x,
+                                                      y,
+                                                      power,
+                                                      ARCHER_COST_LIFE,
+                                                      ARCHER_COST_MAGIC,
+                                                      ARCHER_COST_COIN ) );
+                *_life -= ARCHER_COST_LIFE;
+                *_magic -= ARCHER_COST_MAGIC;
+                *_coin -= ARCHER_COST_COIN;
+                _result = true;
+            }
             break;
         }
         case _SwordsMan:
         {
-            this->created_soldier.push_back ( SwordsMan ( this->_id, x, y ) );
+            if ( *_life >= SWORDSMAN_COST_LIFE && *_magic >= SWORDSMAN_COST_MAGIC && *_coin >= SWORDSMAN_COST_COIN )
+            {
+                this->created_soldier.push_back ( SwordsMan (
+                                                      this->_id,
+                                                      x,
+                                                      y,
+                                                      power,
+                                                      SWORDSMAN_COST_LIFE,
+                                                      SWORDSMAN_COST_MAGIC,
+                                                      SWORDSMAN_COST_COIN ) );
+                *_life -= SWORDSMAN_COST_LIFE;
+                *_magic -= SWORDSMAN_COST_MAGIC;
+                *_coin -= SWORDSMAN_COST_COIN;
+                _result = true;
+            }
             break;
         }
         case _Priest:
         {
-            this->created_soldier.push_back ( Priest ( this->_id, x, y ) );
-            break;
+            if ( *_life >= PRIEST_COST_LIFE && *_magic >= PRIEST_COST_MAGIC && *_coin >= PRIEST_COST_COIN )
+            {
+                this->created_soldier.push_back ( Priest (
+                                                      this->_id,
+                                                      x,
+                                                      y,
+                                                      power,
+                                                      PRIEST_COST_LIFE,
+                                                      PRIEST_COST_MAGIC,
+                                                      PRIEST_COST_COIN ) );
+                *_life -= PRIEST_COST_LIFE;
+                *_magic -= PRIEST_COST_MAGIC;
+                *_coin -= PRIEST_COST_COIN;
+                _result = true;
+                break;
+            }
         }
         case _SiegCar:
         {
-            this->created_soldier.push_back ( SiegCar ( this->_id, x, y ) );
+            if ( *_life >= SIEGCAR_COST_LIFE && *_magic >= SIEGCAR_COST_MAGIC && *_coin >= SIEGCAR_COST_COIN )
+            {
+                this->created_soldier.push_back ( SiegCar (
+                                                      this->_id,
+                                                      x,
+                                                      y,
+                                                      power,
+                                                      SIEGCAR_COST_LIFE,
+                                                      SIEGCAR_COST_MAGIC,
+                                                      SIEGCAR_COST_COIN ) );
+                *_life -= SIEGCAR_COST_LIFE;
+                *_magic -= SIEGCAR_COST_MAGIC;
+                *_coin -= SIEGCAR_COST_COIN;
+                _result = true;
+            }
             break;
         }
         case _Dragon:
         {
-            this->created_soldier.push_back ( Dragon ( this->_id, x, y ) );
+            if ( *_life >= DRAGON_COST_LIFE && *_magic >= DRAGON_COST_MAGIC && *_coin >= DRAGON_COST_COIN )
+            {
+                this->created_soldier.push_back ( Dragon (
+                                                      this->_id,
+                                                      x,
+                                                      y,
+                                                      power,
+                                                      DRAGON_COST_LIFE,
+                                                      DRAGON_COST_MAGIC,
+                                                      DRAGON_COST_COIN ) );
+                *_life -= DRAGON_COST_LIFE;
+                *_magic -= DRAGON_COST_MAGIC;
+                *_coin -= DRAGON_COST_COIN;
+                _result = true;
+            }
             break;
         }
         case _Wolf:
         {
-            this->created_soldier.push_back ( Wolf ( this->_id, x, y ) );
+            if ( *_life >= WOLF_COST_LIFE && *_magic >= WOLF_COST_MAGIC && *_coin >= WOLF_COST_COIN )
+            {
+                this->created_soldier.push_back ( Wolf (
+                                                      this->_id,
+                                                      x,
+                                                      y,
+                                                      power,
+                                                      WOLF_COST_LIFE,
+                                                      WOLF_COST_MAGIC,
+                                                      WOLF_COST_COIN ) );
+                *_life -= WOLF_COST_LIFE;
+                *_magic -= WOLF_COST_MAGIC;
+                *_coin -= WOLF_COST_COIN;
+                _result = true;
+            }
             break;
         }
         case _Slime:
         {
-            this->created_soldier.push_back ( Slime ( this->_id, x, y  ) );
-            break;
+            if ( *_life >= SLIME_COST_LIFE && *_magic >= SLIME_COST_MAGIC && *_coin >= SLIME_COST_COIN )
+            {
+                this->created_soldier.push_back ( Slime (
+                                                      this->_id,
+                                                      x,
+                                                      y,
+                                                      power,
+                                                      SLIME_COST_LIFE,
+                                                      SLIME_COST_MAGIC,
+                                                      SLIME_COST_COIN ) );
+                *_life -= SLIME_COST_LIFE;
+                *_magic -= SLIME_COST_MAGIC;
+                *_coin -= SLIME_COST_COIN;
+                _result = true;
+                break;
+            }
         }
         case _Goblin:
         {
-            this->created_soldier.push_back ( Goblin ( this->_id, x, y ) );
-            break;
-        }
-        case _IceGiant:
-        {
-            this->created_soldier.push_back ( IceGiant ( this->_id, x, y ) );
-            break;
-        }
-        case _FlameBirds:
-        {
-            this->created_soldier.push_back ( FlameBirds ( this->_id, x, y ) );
-            break;
-        }
-        case _Naga:
-        {
-            this->created_soldier.push_back ( Naga ( this->_id, x, y ) );
-            break;
-        }
-        case _Phoenix:
-        {
-            this->created_soldier.push_back ( Phoenix ( this->_id, x, y ) );
-            break;
+            if ( *_life >= GOBLIN_COST_LIFE && *_magic >= GOBLIN_COST_MAGIC && *_coin >= GOBLIN_COST_COIN )
+            {
+                this->created_soldier.push_back ( Goblin (
+                                                      this->_id,
+                                                      x,
+                                                      y,
+                                                      power,
+                                                      GOBLIN_COST_LIFE,
+                                                      GOBLIN_COST_MAGIC,
+                                                      GOBLIN_COST_COIN ) );
+                *_life -= GOBLIN_COST_LIFE;
+                *_magic -= GOBLIN_COST_MAGIC;
+                *_coin -= GOBLIN_COST_COIN;
+                _result = true;
+                break;
+            }
+            case _IceGiant:
+            {
+                if ( *_life >= ICEGIANT_COST_LIFE && *_magic >= ICEGIANT_COST_MAGIC && *_coin >= ICEGIANT_COST_COIN )
+                {
+                    this->created_soldier.push_back ( IceGiant (
+                                                          this->_id,
+                                                          x,
+                                                          y,
+                                                          power,
+                                                          ICEGIANT_COST_LIFE,
+                                                          ICEGIANT_COST_MAGIC,
+                                                          ICEGIANT_COST_COIN ) );
+                    *_life -= ICEGIANT_COST_LIFE;
+                    *_magic -= ICEGIANT_COST_MAGIC;
+                    *_coin -= ICEGIANT_COST_COIN;
+                    _result = true;
+                }
+                break;
+            }
+            case _FlameBirds:
+            {
+                if ( *_life >= FLAMEBIRDS_COST_LIFE && *_magic >= FLAMEBIRDS_COST_MAGIC && *_coin >= FLAMEBIRDS_COST_COIN )
+                {
+                    this->created_soldier.push_back ( FlameBirds (
+                                                          this->_id,
+                                                          x,
+                                                          y,
+                                                          power,
+                                                          FLAMEBIRDS_COST_LIFE,
+                                                          FLAMEBIRDS_COST_MAGIC,
+                                                          FLAMEBIRDS_COST_COIN ) );
+                    *_life -= FLAMEBIRDS_COST_LIFE;
+                    *_magic -= FLAMEBIRDS_COST_MAGIC;
+                    *_coin -= FLAMEBIRDS_COST_COIN;
+                    _result = true;
+                }
+                break;
+            }
+            case _Naga:
+            {
+                if ( *_life >= NAGA_COST_LIFE && *_magic >= NAGA_COST_MAGIC && *_coin >= NAGA_COST_COIN )
+                {
+                    this->created_soldier.push_back ( Naga (
+                                                          this->_id,
+                                                          x,
+                                                          y,
+                                                          power,
+                                                          NAGA_COST_LIFE,
+                                                          NAGA_COST_MAGIC,
+                                                          NAGA_COST_COIN ) );
+                    *_life -= NAGA_COST_LIFE;
+                    *_magic -= NAGA_COST_MAGIC;
+                    *_coin -= NAGA_COST_COIN;
+                    _result = true;
+                }
+                break;
+            }
+            case _Phoenix:
+            {
+                if ( *_life >= PHOENIX_COST_LIFE && *_magic >= PHOENIX_COST_MAGIC && *_coin >= PHOENIX_COST_COIN )
+                {
+                    this->created_soldier.push_back ( Phoenix (
+                                                          this->_id,
+                                                          x,
+                                                          y,
+                                                          power,
+                                                          PHOENIX_COST_LIFE,
+                                                          PHOENIX_COST_MAGIC,
+                                                          PHOENIX_COST_COIN ) );
+                    *_life -= PHOENIX_COST_LIFE;
+                    *_magic -= PHOENIX_COST_MAGIC;
+                    *_coin -= PHOENIX_COST_COIN;
+                    _result = true;
+                }
+                break;
+            }
         }
     }
-    cout << endl << "[*]生产成功" << endl;
-    this->_AddSoldierToMap ( '*', x, y, this->created_soldier[this->created_soldier.size() - 1] );
-    this->_Show_Soldier_Status ( this->_id++ );
+    if ( _result == true )
+    {
+        cout << endl << "[*]生产成功" << endl;
+        this->_AddSoldierToMap ( '*', x, y, this->created_soldier[this->created_soldier.size() - 1] );
+        this->_Show_Soldier_Status ( this->_id++ );
+    }
+    else
+        cout << endl << "[!]生产失败" << endl;
+    return _result;
 }
+
 
 void War::_AddSoldierToMap ( const char& _c, unsigned int _x, unsigned int _y, Soldier& _soldier )
 {
-    this->_map->AddSoldierToMap ( _c, _x, _y );
+    this->_map->DrawToMap ( _c, _x, _y, false );
     this->_map->AddSoldierToPoint ( _x, _y, _soldier );
 }
-
 
 void War::_Delete_Soldier ( unsigned int _id )
 {
@@ -170,7 +359,6 @@ void War::_Delete_Soldier ( unsigned int _id )
         this->created_soldier[i].UpdateID ( created_soldier[i].GetID() - 1 );
     }
 }
-
 bool War::_IsSelectSoldier()
 {
     if ( this->soldier_selecter != 0 )
@@ -178,23 +366,35 @@ bool War::_IsSelectSoldier()
     else
         return false;
 }
-
 unsigned int War::_GetPlayerBaseX()
 {
-    return this->_map->player_base_x;
+    return ( ( this->_map->player_base_x - 1 ) / 3 );
 }
-
 unsigned int War::_GetPlayerBaseY()
 {
-    return this->_map->player_base_y;
+    return ( ( this->_map->player_base_y - 1 ) / 2 );
 }
-
 unsigned int War::_GetAIBaseX()
 {
     return this->_map->ai_base_x;
 }
-
 unsigned int War::_GetAIBaseY()
 {
     return this->_map->ai_base_y;
+}
+enum AllSoldiers War::_GetCurrentSoldierName()
+{
+    return this->soldier_selecter->GetSoldierName();
+}
+enum LocalPower War::_GetCityPower()
+{
+    return this->_map->points[this->soldier_selecter->GetX()][this->soldier_selecter->GetY()].GetPower();
+}
+void War::_BuildCity()
+{
+    this->_map->points[this->soldier_selecter->GetX()][this->soldier_selecter->GetY()].UpdatePower ( this->soldier_selecter->GetPower() );
+    if ( this->soldier_selecter->GetPower() == player_city )
+        this->_map->DrawToMap ( '*', this->soldier_selecter->GetX(), this->soldier_selecter->GetY(), true);
+    else
+        this->_map->DrawToMap ( 'X', this->soldier_selecter->GetX(), this->soldier_selecter->GetY(), true);
 }
