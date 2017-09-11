@@ -1,4 +1,5 @@
-#include "Game.h"
+#include "Player.h"
+
 Player::Player()
 {
     this->prestige = 50.0;
@@ -7,6 +8,7 @@ Player::Player()
     this->second = 10;
     this->war_num = 0;
     this->name = "";
+    this->SetIdentity ( _player_ );
     handle = GetStdHandle ( STD_OUTPUT_HANDLE );
     srand ( unsigned ( time ( NULL ) ) );
 }
@@ -247,6 +249,7 @@ void Player::Ai_Init ( double prestige, double bitcoin, double violence, int sec
     this->second = second;
     this->war_num = war_num;
     this->war_first = first;
+    this->SetIdentity ( _ai_ );
 }
 
 void Player::Start_War ( Map*& _map )
@@ -266,7 +269,7 @@ void Player::Start_War ( Map*& _map )
 void Player::End_War ( Map*& _map )
 {
     delete this->war;
-    delete _map;
+    //delete _map;
 }
 
 void Player::Show_War_Status()
@@ -312,20 +315,14 @@ void Player::Show_Soldier_Status()
     this->war->_Show_Soldier_Status();
 }
 
-
-void Player::Create_Soldier ( enum AllSoldiers soldier, unsigned int x, unsigned int y )
+bool Player::Create_Soldier ( enum AllSoldiers soldier, enum LocalPower power, unsigned int x, unsigned int y )
 {
-    this->war->_Create_Soldier ( soldier, x, y );
+    return this->war->_Create_Soldier ( soldier, power, x, y, &this->war->life, &this->war->magic, &this->war->coin );
 }
-
 
 void Player::Delete_Soldier ( unsigned int _id )
 {
     this->war->_Delete_Soldier ( _id );
-}
-
-War* Player::GetCurrentWar() {
-    return war;
 }
 
 bool Player::IsSelectSoldier()
@@ -351,4 +348,117 @@ unsigned int Player::GetAIBaseX()
 unsigned int Player::GetAIBaseY()
 {
     return this->war->_GetAIBaseY();
+}
+
+enum AllSoldiers Player::GetCurrentSoldierName()
+{
+    return this->war->_GetCurrentSoldierName();
+}
+
+enum LocalPower Player::GetCityPower()
+{
+    return this->war->_GetCityPower();
+}
+
+void Player::BuildCity()
+{
+    this->war->_BuildCity();
+}
+
+void Player::Recover()
+{
+}
+
+enum IDENTITY Player::GetIdentity()
+{
+    return this->identity;
+}
+
+void Player::SetIdentity ( enum IDENTITY identity )
+{
+    this->identity = identity;
+}
+
+bool Player::MoveUp()
+{
+    unsigned int _y = this->war->soldier_selecter->GetY();
+    unsigned int _x = this->war->soldier_selecter->GetX();
+    if ( _y != 0 )
+    {
+        this->war->soldier_selecter->UpdateY ( - 1 );
+        if ( this->GetIdentity() == _player_ )
+            this->war->_map->DrawToMap ( '*', _x, _y - 1 , false);
+        else
+            this->war->_map->DrawToMap ( 'X', _x, _y - 1 , false );
+        this->war->_map->AddSoldierToPoint ( _x, _y - 1, *this->war->soldier_selecter );
+        this->war->_map->RemoveSoldierFromPoint ( _x, _y, this->war->soldier_selecter->GetID() );
+        if ( this->war->_map->IsEmptyCity ( _x, _y ) )
+            this->war->_map->DrawToMap ( this->war->_map->WhosCity ( _x, _y ), _x, _y, false );
+        return true;
+    }
+    else
+        return false;
+}
+
+bool Player::MoveDown()
+{
+    unsigned int _y = this->war->soldier_selecter->GetY();
+    unsigned int _x = this->war->soldier_selecter->GetX();
+    if ( _y != this->war->_map->GetRHeight() )
+    {
+        this->war->soldier_selecter->UpdateY ( 1 );
+        if ( this->GetIdentity() == _player_ )
+            this->war->_map->DrawToMap ( '*', _x, _y + 1, false );
+        else
+            this->war->_map->DrawToMap ( 'X', _x, _y + 1, false );
+        this->war->_map->AddSoldierToPoint ( _x, _y + 1, *this->war->soldier_selecter );
+        this->war->_map->RemoveSoldierFromPoint ( _x, _y, this->war->soldier_selecter->GetID() );
+        if ( this->war->_map->IsEmptyCity ( _x, _y ) )
+            this->war->_map->DrawToMap ( this->war->_map->WhosCity ( _x, _y ), _x, _y, false );
+        return true;
+    }
+    else
+        return false;
+}
+
+bool Player::MoveLeft()
+{
+    unsigned int _y = this->war->soldier_selecter->GetY();
+    unsigned int _x = this->war->soldier_selecter->GetX();
+    if ( _x != 0 )
+    {
+        this->war->soldier_selecter->UpdateX ( - 1 );
+        if ( this->GetIdentity() == _player_ )
+            this->war->_map->DrawToMap ( '*', _x - 1, _y, false );
+        else
+            this->war->_map->DrawToMap ( 'X', _x - 1, _y, false );
+        this->war->_map->AddSoldierToPoint ( _x - 1, _y, *this->war->soldier_selecter );
+        this->war->_map->RemoveSoldierFromPoint ( _x, _y, this->war->soldier_selecter->GetID() );
+        if ( this->war->_map->IsEmptyCity ( _x, _y ) )
+            this->war->_map->DrawToMap ( this->war->_map->WhosCity ( _x, _y ), _x, _y, false );
+        return true;
+    }
+    else
+        return false;
+}
+
+bool Player::MoveRight()
+{
+    unsigned int _y = this->war->soldier_selecter->GetY();
+    unsigned int _x = this->war->soldier_selecter->GetX();
+    if ( _x !=  this->war->_map->GetRWidth() )
+    {
+        this->war->soldier_selecter->UpdateX ( 1 );
+        if ( this->GetIdentity() == _player_ )
+            this->war->_map->DrawToMap ( '*', _x + 1, _y, false );
+        else
+            this->war->_map->DrawToMap ( 'X', _x + 1, _y, false );
+        this->war->_map->AddSoldierToPoint ( _x + 1, _y, *this->war->soldier_selecter );
+        this->war->_map->RemoveSoldierFromPoint ( _x, _y, this->war->soldier_selecter->GetID() );
+        if ( this->war->_map->IsEmptyCity ( _x, _y ) )
+            this->war->_map->DrawToMap ( this->war->_map->WhosCity ( _x, _y ), _x, _y, false );
+        return true;
+    }
+    else
+        return false;
 }

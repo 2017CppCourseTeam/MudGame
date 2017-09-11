@@ -1,5 +1,4 @@
-#include "Game.h"
-#include "War.h"
+#include "Commander.h"
 
 Commander::Commander ( User*& user )
 {
@@ -214,6 +213,7 @@ void Commander::_Show_History()
 
 bool Commander::Eval ( string& cmd )
 {
+    bool _result = false;
     _To_Lower ( cmd );
     this->history.insert ( history.begin(), cmd );
     // Global command
@@ -255,24 +255,27 @@ bool Commander::Eval ( string& cmd )
             cout << "|* 退出[exit]     |" << endl;
             cout << "+-----------------+" << endl;
             cout << "[*]输入相应命令执行操作" << endl;
+            _result = true;
         }
         else if ( cmd == string ( "practice" ) )
         {
             this->status = practice;
             cout << endl << "[*]训练界面" << endl;
+            _result = true;
         }
         else if ( cmd == string ( "war" ) )
         {
             this->status = war;
             cout << endl << "[*]战争界面" << endl;
+            _result = true;
         }
         else if ( cmd == string ( "exit" ) )
         {
             this->status = quit;
+            _result = true;
         }
         else
-            return false;
-        return true;
+            _result = false;
     }
     // Practice page
     else if  ( this->status == practice )
@@ -287,29 +290,33 @@ bool Commander::Eval ( string& cmd )
             cout << "|* 返回[back]         |" << endl;
             cout << "+---------------------+" << endl;
             cout << "[*]输入相应命令执行操作" << endl;
+            _result = true;
         }
         else if ( cmd == string ( "train coder" ) )
         {
             this->user->player->Train_Coder();
+            _result = true;
         }
         else if ( cmd == string ( "dig mine" ) )
         {
             this->user->player->Dig_Mine();
+            _result = true;
         }
         else if ( cmd == string ( "wash brain" ) )
         {
             this->user->player->Wash_Brain();
+            _result = true;
         }
         else if ( cmd == string ( "back" ) )
         {
             this->status = _main;
             cout << endl << "[*]返回主界面" << endl;
+            _result = true;
         }
         else
-            return false;
+            _result = false;;
         if ( this->user->player->Get_Second() == 0 )
             this->status = lose;
-        return true;
     }
     // War page
     else if ( this->status == war )
@@ -323,7 +330,7 @@ bool Commander::Eval ( string& cmd )
             cout << "|* 返回[back]         |" << endl;
             cout << "+---------------------+" << endl;
             cout << "[*]输入相应命令执行操作" << endl;
-            return true;
+            _result = true;
         }
         else if ( cmd == string ( "restart" ) )
         {
@@ -336,6 +343,7 @@ bool Commander::Eval ( string& cmd )
                 cout << endl << "[*]重新开始战争" << endl;
                 this->user->player->Restart_War();
             }
+            _result = true;
         }
         else if ( cmd == string ( "continue" ) )
         {
@@ -395,15 +403,16 @@ bool Commander::Eval ( string& cmd )
                 }
                 this->user->ai->Start_War ( this->_map );
             }
+            _result = true;
         }
         else if ( cmd == string ( "back" ) )
         {
             this->status = _main;
             cout << endl << "[*]返回主界面" << endl;
+            _result = true;
         }
         else
-            return false;
-        return true;
+            _result = false;
     }
     else if ( this->status == start_war )
     {
@@ -418,10 +427,8 @@ bool Commander::Eval ( string& cmd )
                 cout << endl << "[*]退出战争" << endl;
                 this->user->player->End_War ( this->_map );
                 this->status = war;
-                return true;
+                _result = true;
             }
-            else
-                return false;
         }
         else if ( cmd == string ( "help" ) )
         {
@@ -451,21 +458,24 @@ bool Commander::Eval ( string& cmd )
                 if ( subcmd == string ( "status" ) )
                 {
                     this->user->player->Show_War_Status();
+                    _result = true;
                 }
                 else if ( subcmd == string ( "map" ) )
                 {
                     this->user->player->Show_Map ( true );
+                    _result = true;
                 }
                 else if ( subcmd == string ( "all" ) )
                 {
                     this->user->player->Show_War_Status();
                     this->user->player->Show_Map ( true );
+                    _result = true;
                 }
                 else
-                    return false;
+                    _result = false;
             }
             else
-                return false;
+                _result = false;
         }
         else if ( cmd.substr ( 0, 6 ) == string ( "select" ) )
         {
@@ -482,15 +492,18 @@ bool Commander::Eval ( string& cmd )
                             unsigned int _x = this->_ConvertStringToNum<unsigned int> ( _subcmd.substr ( 0, position ) );
                             unsigned int _y = this->_ConvertStringToNum<unsigned int> ( _subcmd.substr ( position + 1 ) );
                             if ( this->user->player->Select_Point ( _x, _y ) )
+                            {
                                 this->user->player->Show_Ponit_Status();
+                                _result = true;
+                            }
                             else
-                                return false;
+                                _result = false;;
                         }
                         else
-                            return false;
+                            _result = false;
                     }
                     else
-                        return false;
+                        _result = false;
                 }
                 else if ( cmd.substr ( 0 + 6 + 1, 7 ) == string ( "soldier" ) )
                 {
@@ -499,51 +512,86 @@ bool Commander::Eval ( string& cmd )
                         string _subcmd = cmd.substr ( 0 + 6 + 1 + 7 + 1 );
                         unsigned int _id = this->_ConvertStringToNum<unsigned int> ( _subcmd );
                         if ( this->user->player->Select_Soldier ( _id ) )
+                        {
                             this->user->player->Show_Soldier_Status ( _id );
+                            _result = true;
+                        }
                         else
-                            return false;
+                            _result = false;
                     }
                     else
-                        return false;
+                        _result = false;
                 }
                 else
-                    return false;
+                    _result = false;
             }
             else
-                return false;
+                _result = false;
         }
         else if ( cmd.substr ( 0, 4 ) == string ( "move" ) )
         {
             if ( !this->user->player->IsSelectSoldier() )
             {
                 cout << endl << "[!]未选择任何战士" << endl;
-                return false;
+                _result = false;
             }
             else if ( cmd.substr ( 0 + 4, 1 ) == string ( " " ) )
             {
                 if ( cmd.substr ( 0 + 4 + 1 ) == string ( "up" ) )
                 {
-                    this->user->player->GetCurrentWar()->soldier_selecter->UpdateY(this->user->player->GetCurrentWar()->soldier_selecter->GetY()-1);
-                    this->user->player->GetCurrentWar()->_Show_Soldier_Status ( );
+                    if ( this->user->player->MoveUp() )
+                    {
+                        this->user->player->Show_Soldier_Status();
+                        _result = true;
+                    }
+                    else
+                    {
+                        cout << endl << "[!]移动方向有障碍物，无法移动" << endl;
+                        _result = false;
+                    }
                 }
                 else if ( cmd.substr ( 0 + 4 + 1 ) == string ( "down" ) )
                 {
-                    this->user->player->GetCurrentWar()->soldier_selecter->UpdateY(this->user->player->GetCurrentWar()->soldier_selecter->GetY()+1);
-                    this->user->player->GetCurrentWar()->_Show_Soldier_Status ();
+                    if ( this->user->player->MoveDown() )
+                    {
+                        this->user->player->Show_Soldier_Status();
+                        _result = true;
+                    }
+                    else
+                    {
+                        cout << endl << "[!]移动方向有障碍物，无法移动" << endl;
+                        _result = false;
+                    }
                 }
                 else if ( cmd.substr ( 0 + 4 + 1 ) == string ( "left" ) )
                 {
-                    this->user->player->GetCurrentWar()->soldier_selecter->UpdateX(this->user->player->GetCurrentWar()->soldier_selecter->GetX()-1);
-                    this->user->player->GetCurrentWar()->_Show_Soldier_Status ();
+                    if ( this->user->player->MoveLeft() )
+                    {
+                        this->user->player->Show_Soldier_Status();
+                        _result = true;
+                    }
+                    else
+                    {
+                        cout << endl << "[!]移动方向有障碍物，无法移动" << endl;
+                        _result = false;
+                    }
                 }
                 else if ( cmd.substr ( 0 + 4 + 1 ) == string ( "right" ) )
                 {
-                    this->user->player->GetCurrentWar()->soldier_selecter->UpdateX(this->user->player->GetCurrentWar()->soldier_selecter->GetX()+1);
-                    this->user->player->GetCurrentWar()->_Show_Soldier_Status ();
+                    if ( this->user->player->MoveRight() )
+                    {
+                        this->user->player->Show_Soldier_Status();
+                        _result = true;
+                    }
+                    else
+                    {
+                        cout << endl << "[!]移动方向有障碍物，无法移动" << endl;
+                        _result = false;
+                    }
                 }
             }
             else
-                return false;
+                _result = false;
         }
         else if ( cmd.substr ( 0, 7 ) == string ( "produce" ) )
         {
@@ -552,74 +600,176 @@ bool Commander::Eval ( string& cmd )
                 string _subcmd = cmd.substr ( 8 );
                 unsigned int _x = this->user->player->GetPlayerBaseX();
                 unsigned int _y = this->user->player->GetPlayerBaseY();
-                if ( _y == this->_map->GetHeight() - 1 )
-                    _y = _y - 2;
+                if ( _y == this->_map->GetRHeight() )
+                    _y = _y - 1;
                 else
-                    _y = _y + 2;
+                    _y = _y + 1;
                 if ( _subcmd == string ( "worker" ) )
                 {
-                    this->user->player->Create_Soldier ( _Worker, _x, _y );
+                    if ( this->user->player->Create_Soldier ( _Worker, player_city, _x, _y ) )
+                        _result = true;
+                    else
+                    {
+                        cout << endl << "[!]生产资源不足" << endl;
+                        _result = false;
+                    }
                 }
                 else if ( _subcmd == string ( "archer" ) )
                 {
-                    this->user->player->Create_Soldier ( _Archer, _x, _y );
+                    if ( this->user->player->Create_Soldier ( _Archer, player_city, _x, _y ) )
+                        _result = true;
+                    else
+                    {
+                        cout << endl << "[!]生产资源不足" << endl;
+                        _result = false;
+                    }
                 }
                 else if ( _subcmd == string ( "swordsman" ) )
                 {
-                    this->user->player->Create_Soldier ( _SwordsMan, _x, _y );
+                    if ( this->user->player->Create_Soldier ( _SwordsMan, player_city, _x, _y ) )
+                        _result = true;
+                    else
+                    {
+                        cout << endl << "[!]生产资源不足" << endl;
+                        _result = false;
+                    }
                 }
                 else if ( _subcmd == string ( "priest" ) )
                 {
-                    this->user->player->Create_Soldier ( _Priest, _x, _y );
+                    if ( this->user->player->Create_Soldier ( _Priest, player_city, _x, _y ) )
+                        _result = true;
+                    else
+                    {
+                        cout << endl << "[!]生产资源不足" << endl;
+                        _result = false;
+                    }
                 }
                 else if ( _subcmd == string ( "siegcar" ) )
                 {
-                    this->user->player->Create_Soldier ( _SiegCar, _x, _y );
+                    if ( this->user->player->Create_Soldier ( _SiegCar, player_city, _x, _y ) )
+                        _result = true;
+                    else
+                    {
+                        cout << endl << "[!]生产资源不足" << endl;
+                        _result = false;
+                    }
                 }
                 else if ( _subcmd == string ( "dragon" ) )
                 {
-                    this->user->player->Create_Soldier ( _Dragon, _x, _y );
+                    if ( this->user->player->Create_Soldier ( _Dragon, player_city, _x, _y ) )
+                        _result = true;
+                    else
+                    {
+                        cout << endl << "[!]生产资源不足" << endl;
+                        _result = false;
+                    }
                 }
                 else if ( _subcmd == string ( "wolf" ) )
                 {
-                    this->user->player->Create_Soldier ( _Wolf, _x, _y );
+                    if ( this->user->player->Create_Soldier ( _Wolf, player_city, _x, _y ) )
+                        _result = true;
+                    else
+                    {
+                        cout << endl << "[!]生产资源不足" << endl;
+                        _result = false;
+                    }
                 }
                 else if ( _subcmd == string ( "slime" ) )
                 {
-                    this->user->player->Create_Soldier ( _Slime, _x, _y );
+                    if ( this->user->player->Create_Soldier ( _Slime, player_city, _x, _y ) )
+                        _result = true;
+                    else
+                    {
+                        cout << endl << "[!]生产资源不足" << endl;
+                        _result = false;
+                    }
                 }
                 else if ( _subcmd == string ( "goblin" ) )
                 {
-                    this->user->player->Create_Soldier ( _Goblin, _x, _y );
+                    if ( this->user->player->Create_Soldier ( _Goblin, player_city, _x, _y ) )
+                        _result = true;
+                    else
+                    {
+                        cout << endl << "[!]生产资源不足" << endl;
+                        _result = false;
+                    }
                 }
                 else if ( _subcmd == string ( "icegiant" ) )
                 {
-                    this->user->player->Create_Soldier ( _IceGiant, _x, _y );
+                    if ( this->user->player->Create_Soldier ( _IceGiant, player_city, _x, _y ) )
+                        _result = true;
+                    else
+                    {
+                        cout << endl << "[!]生产资源不足" << endl;
+                        _result = false;
+                    }
                 }
                 else if ( _subcmd == string ( "flamebirds" ) )
                 {
-                    this->user->player->Create_Soldier ( _FlameBirds, _x, _y );
+                    if ( this->user->player->Create_Soldier ( _FlameBirds, player_city, _x, _y ) )
+                        _result = true;
+                    else
+                    {
+                        cout << endl << "[!]生产资源不足" << endl;
+                        _result = false;
+                    }
                 }
                 else if ( _subcmd == string ( "naga" ) )
                 {
-                    this->user->player->Create_Soldier ( _Naga, _x, _y );
+                    if ( this->user->player->Create_Soldier ( _Naga, player_city, _x, _y ) )
+                        _result = true;
+                    else
+                    {
+                        cout << endl << "[!]生产资源不足" << endl;
+                        _result = false;
+                    }
                 }
                 else if ( _subcmd == string ( "phoenix" ) )
                 {
-                    this->user->player->Create_Soldier ( _Phoenix, _x, _y );
+                    if ( this->user->player->Create_Soldier ( _Phoenix, player_city, _x, _y ) )
+                        _result = true;
+                    else
+                    {
+                        cout << endl << "[!]生产资源不足" << endl;
+                        _result = false;
+                    }
                 }
                 else
-                    return false;
+                    _result = false;
             }
             else
-                return false;
+                _result = false;
+        }
+        else if ( cmd.substr ( 0, 5 ) == string ( "build" ) )
+        {
+            if ( this->user->player->GetCurrentSoldierName() == _Worker )
+            {
+                if ( this->user->player->GetCityPower() == empty_city )
+                {
+                    this->user->player->BuildCity();
+                    cout << endl << "[*]建造成功" << endl;
+                    _result = true;
+                }
+                else
+                {
+                    cout << endl << "[!]建造失败，当前城市不是一个可建造的城市！" << endl;
+                    _result = false;
+                }
+            }
+            else
+            {
+                cout << endl << "[!]只有Worker可以建造城市，当前选择的士兵并不是Worker，请重新选择。";
+                _result = false;
+            }
         }
         else
-            return false;
-        this->_map->Update();
-        this->user->player->Show_Map ( false );
-        return true;
+            _result = false;
+        //this->_map->Update();
+        /**
+        * Here for AI second.
+        **/
+        //this->user->player->Recover();
+        //this->user->player->Show_Map ( false );
     }
-    return false;
+    return _result;
 }
-

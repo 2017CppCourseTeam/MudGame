@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1504666688 source:f:\文档\学习资料\mudgame\main.cpp
+1504930901 source:f:\文档\学习资料\mudgame\main.cpp
 	"Game.h"
 	<windows.h>
 	<string>
@@ -70,55 +70,35 @@
 	"War.h"
 	"AI-Settings.h"
 
-1504840634 f:\文档\学习资料\mudgame\include\war.h
+1505095477 f:\文档\学习资料\mudgame\include\war.h
 	"Map.h"
-	"Soldier.h"
-	<vector>
 
-1504840694 source:f:\文档\学习资料\mudgame\src\war.cpp
+1505099113 source:f:\文档\学习资料\mudgame\src\war.cpp
 	"War.h"
 
 1504340809 f:\文档\学习资料\mudgame\ai-settings.h
 
-1504838553 source:f:\文档\学习资料\mudgame\src\map.cpp
+1505099442 source:f:\文档\学习资料\mudgame\src\map.cpp
 	"Map.h"
 
-1504841759 f:\文档\学习资料\mudgame\include\map.h
-	<iostream>
+1505099458 f:\文档\学习资料\mudgame\include\map.h
 	<string>
-	<fstream>
-	<sstream>
-	<vector>
 	"Soldier.h"
 
-1504841399 f:\文档\学习资料\mudgame\include\game.h
+1505022478 f:\文档\学习资料\mudgame\include\game.h
+	"Global.h"
+	"User.h"
 	"Commander.h"
 	"windows.h"
 
-1504841345 f:\文档\学习资料\mudgame\include\commander.h
-	<iostream>
-	<vector>
-	<string>
+1505022205 f:\文档\学习资料\mudgame\include\commander.h
 	"User.h"
 
-1504657522 f:\文档\学习资料\mudgame\include\user.h
+1505022077 f:\文档\学习资料\mudgame\include\user.h
 	"Player.h"
 
-1504841060 f:\文档\学习资料\mudgame\include\player.h
-	<iostream>
-	<ctime>
-	<cstdlib>
-	<cmath>
-	<iomanip>
-	<string>
-	<fstream>
-	<conio.h>
-	<cstdio>
-	<windows.h>
-	<sstream>
-	<algorithm>
+1505096474 f:\文档\学习资料\mudgame\include\player.h
 	"War.h"
-	"AI-Settings.h"
 
 1504539364 source:d:\mudgame\commander.cpp
 	"Game.h"
@@ -148,26 +128,25 @@
 	<string>
 	<fstream>
 
-1504657522 f:\文档\学习资料\mudgame\include\ai-settings.h
+1504930901 f:\文档\学习资料\mudgame\include\ai-settings.h
 
-1504666979 source:f:\文档\学习资料\mudgame\src\game.cpp
+1504942707 source:f:\文档\学习资料\mudgame\src\game.cpp
 	"Game.h"
 
-1504840634 source:f:\文档\学习资料\mudgame\src\player.cpp
-	"Game.h"
+1505098370 source:f:\文档\学习资料\mudgame\src\player.cpp
+	"Player.h"
 
-1504657525 source:f:\文档\学习资料\mudgame\src\user.cpp
-	"Game.h"
+1505022007 source:f:\文档\学习资料\mudgame\src\user.cpp
+	"User.h"
 
-1504841211 source:f:\文档\学习资料\mudgame\src\commander.cpp
-	"Game.h"
+1505099408 source:f:\文档\学习资料\mudgame\src\commander.cpp
+	"Commander.h"
 
-1504840068 source:f:\文档\学习资料\mudgame\src\soldier.cpp
+1505050066 source:f:\文档\学习资料\mudgame\src\soldier.cpp
 	"Soldier.h"
 
-1504841060 f:\文档\学习资料\mudgame\include\soldier.h
-	<string>
-	<algorithm>
+1505096474 f:\文档\学习资料\mudgame\include\soldier.h
+	"Global.h"
 
 1504539113 source:d:\mudgame\game.cpp
 	"Game.h"
@@ -253,4 +232,20 @@
 
 1504858653 source:d:\mudgame\src\war.cpp
 	"War.h"
+
+1505056843 f:\文档\学习资料\mudgame\include\global.h
+	<ctime>
+	<cstdlib>
+	<cmath>
+	<iomanip>
+	<fstream>
+	<conio.h>
+	<cstdio>
+	<windows.h>
+	<sstream>
+	<math.h>
+	<iostream>
+	<string>
+	<algorithm>
+	<vector>
 

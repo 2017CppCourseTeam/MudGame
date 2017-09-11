@@ -35,9 +35,9 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="include/AI-Settings.h" />
 		<Unit filename="include/Commander.h" />
 		<Unit filename="include/Game.h" />
+		<Unit filename="include/Global.h" />
 		<Unit filename="include/Map.h" />
 		<Unit filename="include/Player.h" />
 		<Unit filename="include/Soldier.h" />

@@ -1,5 +1,8 @@
 #ifndef MUDGAME_H
 #define MUDGAME_H
+
+#include "Global.h"
+#include "User.h"
 #include "Commander.h"
 #include "windows.h"
 

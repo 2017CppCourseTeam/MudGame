@@ -1,25 +1,7 @@
 #ifndef PLAYER1_H_INCLUDED
 #define PLAYER1_H_INCLUDED
 
-#include <iostream>
-#include <ctime>
-#include <cstdlib>
-#include <cmath>
-#include <iomanip>
-#include <string>
-#include <fstream>
-#include <conio.h>
-#include <cstdio>
-#include <windows.h>
-#include <sstream>
-#include <algorithm>
-
 #include "War.h"
-#include "AI-Settings.h"
-
-using namespace std;
-
-enum STATUS {_main = 0, practice, war, quit, start_war, win, lose};
 
 class Player
 {
@@ -47,6 +29,9 @@ class Player
         void Set_name ( string name ); // 设置该玩家姓名
         bool Check_Win(); // 检查玩家是否胜利
 
+        enum IDENTITY GetIdentity();
+        void SetIdentity ( enum IDENTITY identity );
+
         /**
         * 以下函数用于战争
         * 将War类中所有接口转入该类中
@@ -64,13 +49,25 @@ class Player
         void Show_Soldier_Status ( unsigned int id ); // 打印该士兵的状态（根据id）
         void Show_Soldier_Status (  ); // 打印该士兵的状态（根据选择器） 重载
         bool IsSelectSoldier(); // 判断选择器是否选择了一个士兵
+
         unsigned int GetPlayerBaseX(); // 得到玩家基地的绝对X坐标
         unsigned int GetPlayerBaseY(); // 得到玩家基地的绝对Y坐标
         unsigned int GetAIBaseX(); // 得到AI基地的绝对X坐标
         unsigned int GetAIBaseY(); // 得到AI基地的绝对Y坐标
-        War* GetCurrentWar();
 
-        void Create_Soldier ( enum AllSoldiers soldier, unsigned int x, unsigned int y ); // 在地图上x，y绝对坐标处生成一个士兵
+        enum AllSoldiers GetCurrentSoldierName();
+
+        enum LocalPower GetCityPower(); // 得到当前士兵选择器所指向的士兵所在的城市归属（枚举类型）
+
+        void BuildCity(); // 在当前士兵选择器所选择的士兵的地点处建立一个城市
+
+        bool MoveUp();
+        bool MoveDown();
+        bool MoveLeft();
+        bool MoveRight();
+        void Recover();
+
+        bool Create_Soldier ( enum AllSoldiers soldier, enum LocalPower power, unsigned int x, unsigned int y ); // 在地图上x，y绝对坐标处生成一个士兵
         void Delete_Soldier ( unsigned int _id ); // 删除该id的士兵
 
         void Ai_Init ( double prestige, double bitcoin, double violence, int second, unsigned short war_num, bool first ); // 初始化AI的接口
@@ -83,12 +80,12 @@ class Player
         bool war_first;
         string name;
 
+        enum IDENTITY identity;
         //enum Species allow_species[];
 
         HANDLE handle;
         War* war;
         friend class User;
-        friend class Commander;
 
 };
 
