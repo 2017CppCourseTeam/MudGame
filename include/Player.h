@@ -55,6 +55,8 @@ class Player
         unsigned int GetAIBaseX(); // 得到AI基地的绝对X坐标
         unsigned int GetAIBaseY(); // 得到AI基地的绝对Y坐标
 
+        bool CheckWin();
+
         enum AllSoldiers GetCurrentSoldierName();
 
         enum LocalPower GetCityPower(); // 得到当前士兵选择器所指向的士兵所在的城市归属（枚举类型）
@@ -72,6 +74,8 @@ class Player
 
         void Ai_Init ( double prestige, double bitcoin, double violence, int second, unsigned short war_num, bool first ); // 初始化AI的接口
     private:
+        enum Is_Win _Result();
+
         double prestige;
         double bitcoin;
         double violence;

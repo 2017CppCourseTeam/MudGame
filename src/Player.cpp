@@ -381,30 +381,35 @@ void Player::SetIdentity ( enum IDENTITY identity )
 
 bool Player::MoveUp()
 {
+    bool _result = false;
     unsigned int _y = this->war->soldier_selecter->GetY();
     unsigned int _x = this->war->soldier_selecter->GetX();
-    if ( _y != 0 )
+    if ( _y != 0 &&
+            ( ( this->GetIdentity() == _player_ && this->war->_map->Get_Point ( _x, _y - 1 )->GetPower() != _player ) ||
+              ( this->GetIdentity() == _ai_ && this->war->_map->Get_Point ( _x, _y - 1 )->GetPower() != _ai ) ) )
     {
         this->war->soldier_selecter->UpdateY ( - 1 );
         if ( this->GetIdentity() == _player_ )
-            this->war->_map->DrawToMap ( '*', _x, _y - 1 , false);
+            this->war->_map->DrawToMap ( '*', _x, _y - 1, false );
         else
-            this->war->_map->DrawToMap ( 'X', _x, _y - 1 , false );
+            this->war->_map->DrawToMap ( 'X', _x, _y - 1, false );
         this->war->_map->AddSoldierToPoint ( _x, _y - 1, *this->war->soldier_selecter );
         this->war->_map->RemoveSoldierFromPoint ( _x, _y, this->war->soldier_selecter->GetID() );
         if ( this->war->_map->IsEmptyCity ( _x, _y ) )
             this->war->_map->DrawToMap ( this->war->_map->WhosCity ( _x, _y ), _x, _y, false );
-        return true;
+        _result = true;
     }
-    else
-        return false;
+    return _result;
 }
 
 bool Player::MoveDown()
 {
+    bool _result = false;
     unsigned int _y = this->war->soldier_selecter->GetY();
     unsigned int _x = this->war->soldier_selecter->GetX();
-    if ( _y != this->war->_map->GetRHeight() )
+    if ( _y != this->war->_map->GetRHeight() &&
+            ( ( this->GetIdentity() == _player_ && this->war->_map->Get_Point ( _x, _y + 1 )->GetPower() != _player ) ||
+              ( this->GetIdentity() == _ai_ && this->war->_map->Get_Point ( _x, _y + 1 )->GetPower() != _ai ) ) )
     {
         this->war->soldier_selecter->UpdateY ( 1 );
         if ( this->GetIdentity() == _player_ )
@@ -415,17 +420,19 @@ bool Player::MoveDown()
         this->war->_map->RemoveSoldierFromPoint ( _x, _y, this->war->soldier_selecter->GetID() );
         if ( this->war->_map->IsEmptyCity ( _x, _y ) )
             this->war->_map->DrawToMap ( this->war->_map->WhosCity ( _x, _y ), _x, _y, false );
-        return true;
+        _result = true;
     }
-    else
-        return false;
+    return _result;
 }
 
 bool Player::MoveLeft()
 {
+    bool _result = false;
     unsigned int _y = this->war->soldier_selecter->GetY();
     unsigned int _x = this->war->soldier_selecter->GetX();
-    if ( _x != 0 )
+    if ( _x != 0 &&
+            ( ( this->GetIdentity() == _player_ && this->war->_map->Get_Point ( _x - 1, _y )->GetPower() != _player ) ||
+              ( this->GetIdentity() == _ai_ && this->war->_map->Get_Point ( _x - 1, _y )->GetPower() != _ai ) ) )
     {
         this->war->soldier_selecter->UpdateX ( - 1 );
         if ( this->GetIdentity() == _player_ )
@@ -436,17 +443,19 @@ bool Player::MoveLeft()
         this->war->_map->RemoveSoldierFromPoint ( _x, _y, this->war->soldier_selecter->GetID() );
         if ( this->war->_map->IsEmptyCity ( _x, _y ) )
             this->war->_map->DrawToMap ( this->war->_map->WhosCity ( _x, _y ), _x, _y, false );
-        return true;
+        _result = true;
     }
-    else
-        return false;
+    return _result;
 }
 
 bool Player::MoveRight()
 {
+    bool _result = false;
     unsigned int _y = this->war->soldier_selecter->GetY();
     unsigned int _x = this->war->soldier_selecter->GetX();
-    if ( _x !=  this->war->_map->GetRWidth() )
+    if ( _x !=  this->war->_map->GetRWidth() &&
+            ( ( this->GetIdentity() == _player_ && this->war->_map->Get_Point ( _x + 1, _y )->GetPower() != _player ) ||
+              ( this->GetIdentity() == _ai_ && this->war->_map->Get_Point ( _x + 1, _y )->GetPower() != _ai ) ) )
     {
         this->war->soldier_selecter->UpdateX ( 1 );
         if ( this->GetIdentity() == _player_ )
@@ -457,8 +466,50 @@ bool Player::MoveRight()
         this->war->_map->RemoveSoldierFromPoint ( _x, _y, this->war->soldier_selecter->GetID() );
         if ( this->war->_map->IsEmptyCity ( _x, _y ) )
             this->war->_map->DrawToMap ( this->war->_map->WhosCity ( _x, _y ), _x, _y, false );
-        return true;
+        _result = true;
     }
+    return _result;
+}
+
+enum Is_Win Player::_Result()
+{
+    int player_x, player_y;
+    int ai_x, ai_y;
+    player_x = GetPlayerBaseX();
+    player_y = GetPlayerBaseY();
+    ai_x = GetAIBaseX();
+    ai_y = GetAIBaseY();
+    if ( this->war->_map->Get_Point ( player_x, player_y )->GetLife() <= 0 )
+        return _lose;
+    else if ( this->war->_map->Get_Point ( ai_x, ai_y )->GetLife() <= 0 )
+        return _win;
     else
-        return false;
+        return _draw;
+}
+
+
+bool Player::CheckWin( )
+{
+    enum Is_Win _result;
+    _result = this->_Result( );
+    if ( _result != _draw )
+    {
+        if ( _result == _win )
+        {
+            cout << endl << "[*]恭喜你赢得了这场战争，所有属性增加" << endl;
+            this->prestige *= 1.2;
+            this->bitcoin *= 1.2;
+            this->violence *= 1.2;
+            this->second *= 1.2;
+        }
+        else if ( _result == _lose )
+        {
+            cout << endl << "[*]抱歉你输掉了这场战争，所有属性减少" << endl;
+            this->prestige *= 0.2;
+            this->bitcoin *= 0.2;
+            this->violence *= 0.2;
+            this->second *= 0.2;
+        }
+        this->End_War ( this -> war -> _map );
+    }
 }

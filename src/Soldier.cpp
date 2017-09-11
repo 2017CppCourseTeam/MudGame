@@ -27,11 +27,6 @@ int Soldier::GetLife()
     return this->life;
 }
 
-/*unsigned int Soldier::GetPrice()
-{
-    return this->price;
-}*/
-
 unsigned int Soldier::GetID()
 {
     return this->id;
@@ -62,24 +57,30 @@ string Soldier::SGetSpecies()
         case humanity:
         {
             _result =   "Humanity" ;
+            break;
         }
         case mechanical:
         {
             _result = "Mechanical" ;
+            break;
         }
         case beast:
         {
             _result = "Beast" ;
+            break;
         }
         case wizard:
         {
             _result = "Wizard" ;
+            break;
         }
         case warcraft:
         {
             _result = "Warcraft" ;
+            break;
         }
     }
+    cout << _result;
     return _result;
 }
 
@@ -91,54 +92,67 @@ string Soldier::SGetName()
         case _Worker:
         {
             _result = "Worker";
+            break;
         }
         case _Archer:
         {
             _result = "Archer";
+            break;
         }
         case _SwordsMan:
         {
             _result = "Swords Man";
+            break;
         }
         case _Priest:
         {
             _result = "Priest";
+            break;
         }
         case _SiegCar:
         {
             _result = "Sieg Car";
+            break;
         }
         case _Dragon:
         {
             _result = "Dragon";
+            break;
         }
         case _Wolf:
         {
             _result = "Wolf";
+            break;
         }
         case _Slime:
         {
             _result = "Slime";
+            break;
         }
         case _Goblin:
         {
             _result = "Goblin";
+            break;
         }
         case _IceGiant:
         {
             _result = "IceGiant";
+            break;
         }
         case _FlameBirds:
         {
             _result = "FlameBirds";
+            break;
         }
         case _Naga:
         {
             _result = "Naga";
+            break;
         }
         case _Phoenix:
         {
             _result = "Phoenix";
+            break;
         }
     }
     return _result;

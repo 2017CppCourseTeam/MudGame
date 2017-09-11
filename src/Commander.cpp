@@ -25,6 +25,54 @@ void Commander::_To_Lower ( string& s )
     transform ( s.begin(), s.end(), s.begin(), ::tolower );
 }
 
+void Commander::_ShowSoldierType()
+{
+    cout << endl << "[*] 士兵生产列表:" << endl;
+    cout << "+---------------------------------------------------------------------------------------------+" << endl;
+    cout << "|       种类         |    种族    | 生命值 | 攻击力 | 防御力 | 生产所需 | 生产所需 | 生产所需 |" << endl;
+    cout << "|      (Type)        |            |        |        |        |  生命值  |  魔法值  |   金币   | " << endl;
+    cout << "+--------------------+------------+--------+--------+--------+----------+----------+----------+" << endl;
+    cout <<
+         "| 工人(Worker)       | humanity   |  " << WORKER_LIFE << "   |  " << WORKER_ATTACK << "    |  " << WORKER_DEFENCE << "    |   " << WORKER_COST_LIFE << "     |   " << WORKER_COST_MAGIC << "      |   " << WORKER_COST_COIN << "     |" << endl;
+    cout << "+--------------------+------------+--------+--------+--------+----------+----------+----------+" << endl;
+    cout <<
+         "| 弓箭手(Archer)     | humanity   |  " << ARCHER_LIFE << "   |  " << ARCHER_ATTACK << "   |  " << ARCHER_DEFENCE << "    |   " << ARCHER_COST_LIFE << "     |   " << ARCHER_COST_MAGIC << "      |   " << ARCHER_COST_COIN << "     |" << endl;
+    cout << "+--------------------+------------+--------+--------+--------+----------+----------+----------+" << endl;
+    cout <<
+         "| 剑士(SwordsMan)    | humanity   |  " << SWORDSMAN_LIFE << "   |  " << SWORDSMAN_ATTACK << "   |  " << SWORDSMAN_DEFENCE << "   |   " << SWORDSMAN_COST_LIFE << "    |   " << SWORDSMAN_COST_MAGIC << "      |   " << SWORDSMAN_COST_COIN << "    |" << endl;
+    cout << "+--------------------+------------+--------+--------+--------+----------+----------+----------+" << endl;
+    cout <<
+         "| 牧师(Priest)       | humanity   |  " << PRIEST_LIFE << "   |  " << PRIEST_ATTACK << "     |  " << PRIEST_DEFENCE << "    |   " << PRIEST_COST_LIFE << "     |   " << PRIEST_COST_MAGIC << "      |   " << PRIEST_COST_COIN << "    |" << endl;
+    cout << "+--------------------+------------+--------+--------+--------+----------+----------+----------+" << endl;
+    cout <<
+         "| 攻城车(SiegCar)    | mechanical |  " << SIEGCAR_LIFE << "   |  " << SIEGCAR_ATTACK << "   |  " << SIEGCAR_DEFENCE << "   |   " << SIEGCAR_COST_LIFE << "    |   " << SIEGCAR_COST_MAGIC << "      |   " << SIEGCAR_COST_COIN << "    |" << endl;
+    cout << "+--------------------+------------+--------+--------+--------+----------+----------+----------+" << endl;
+    cout <<
+         "| 飞龙(Dragon)       | beast      |  " << DRAGON_LIFE << "   |  " << DRAGON_ATTACK << "   |  " << DRAGON_DEFENCE << "   |   " << DRAGON_COST_LIFE << "    |   " << DRAGON_COST_MAGIC << "    |   " << DRAGON_COST_COIN << "    |" << endl;
+    cout << "+--------------------+------------+--------+--------+--------+----------+----------+----------+" << endl;
+    cout <<
+         "| 恶狼(Wolf)         | beast      |  " << WOLF_LIFE << "   |  " << WOLF_ATTACK << "   |  " << WOLF_DEFENCE << "   |   " << WOLF_COST_LIFE << "    |   " << WOLF_COST_MAGIC << "      |   " << WOLF_COST_COIN << "     |" << endl;
+    cout << "+--------------------+------------+--------+--------+--------+----------+----------+----------+" << endl;
+    cout <<
+         "| 史莱姆(Slime)      | wizard     |  " << ARCHER_LIFE << "   |  " << ARCHER_ATTACK << "   |  " << ARCHER_DEFENCE << "    |   " << ARCHER_COST_LIFE << "     |   " << ARCHER_COST_MAGIC << "      |   " << ARCHER_COST_COIN << "     |" << endl;
+    cout << "+--------------------+------------+--------+--------+--------+----------+----------+----------+" << endl;
+    cout <<
+         "| 哥布林(Goblin)     | wizard     |  " << GOBLIN_LIFE << "   |  " << GOBLIN_ATTACK << "   |  " << GOBLIN_DEFENCE << "   |   " << GOBLIN_COST_LIFE << "    |   " << GOBLIN_COST_MAGIC << "     |   " << GOBLIN_COST_COIN << "     |" << endl;
+    cout << "+--------------------+------------+--------+--------+--------+----------+----------+----------+" << endl;
+    cout <<
+         "| 冰巨人(IceGiant)   | warcraft   |  " << ICEGIANT_LIFE << "   |  " << ICEGIANT_ATTACK << "   |  " << ICEGIANT_DEFENCE << "   |   " << ICEGIANT_COST_LIFE << "    |   " << ICEGIANT_COST_MAGIC << "    |   " << ICEGIANT_COST_COIN << "    |" << endl;
+    cout << "+--------------------+------------+--------+--------+--------+----------+----------+----------+" << endl;
+    cout <<
+         "| 火焰鸟(FlameBirds) | warcraft   |  " << FLAMEBIRDS_LIFE << "   |  " << FLAMEBIRDS_ATTACK << "   |  " << FLAMEBIRDS_DEFENCE << "   |   " << FLAMEBIRDS_COST_LIFE << "    |   " << FLAMEBIRDS_COST_MAGIC << "    |   " << FLAMEBIRDS_COST_COIN << "    |" << endl;
+    cout << "+--------------------+------------+--------+--------+--------+----------+----------+----------+" << endl;
+    cout <<
+         "| 娜迦(Naga)         | warcraft   |  " << NAGA_LIFE << "   |  " << NAGA_ATTACK << "   |  " << NAGA_DEFENCE << "   |   " << NAGA_COST_LIFE << "    |   " << NAGA_COST_MAGIC << "    |   " << NAGA_COST_COIN << "    |" << endl;
+    cout << "+--------------------+------------+--------+--------+--------+----------+----------+----------+" << endl;
+    cout <<
+         "| 凤凰(Phoenix)      | warcraft   |  " << PHOENIX_LIFE << "   |  " << PHOENIX_ATTACK << "   |  " << PHOENIX_DEFENCE << "   |   " << PHOENIX_COST_LIFE << "    |   " << PHOENIX_COST_MAGIC << "    |   " << PHOENIX_COST_COIN << "    |" << endl;
+    cout << "+--------------------+------------+--------+--------+--------+----------+----------+----------+" << endl;
+}
+
 void Commander::_Show_Manual()
 {
     HANDLE handle;
@@ -53,47 +101,53 @@ void Commander::_Show_Manual()
     if ( getch() )
     {
         SetConsoleTextAttribute ( handle, FOREGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_GREEN );
-        cout << "+----------------------------------+" << endl;
-        cout << "|[*]全局命令:                      |" << endl;
-        cout << "|manual         获得详细游戏帮助   |" << endl;
-        cout << "|help           获得当前界面帮助   |" << endl;
-        cout << "|history        获得历史命令       |" << endl;
-        cout << "|status         显示用户状态       |" << endl;
-        cout << "|save           保存游戏           |" << endl;
-        cout << "|current page   显示当前界面       |" << endl;
-        cout << "+----------------------------------+" << endl;
-        cout << "|[*]主界面命令:                    |" << endl;
-        cout << "|war            开始战争           |" << endl;
-        cout << "|practice       训练               |" << endl;
-        cout << "|exit           退出游戏           |" << endl;
-        cout << "+----------------------------------+" << endl;
-        cout << "|[*]训练界面命令:                  |" << endl;
-        cout << "|train coder    训练码农           |" << endl;
-        cout << "|dig mine       挖矿               |" << endl;
-        cout << "|wash brain     政治洗脑           |" << endl;
-        cout << "|back           返回主界面         |" << endl;
-        cout << "+----------------------------------+" << endl;
-        cout << "|[*]战争初始界面命令:              |" << endl;
-        cout << "|continue       继续战争           |" << endl;
-        cout << "|restart        重新开始战争       |" << endl;
-        cout << "|back           返回主界面         |" << endl;
-        cout << "+--------------------------------------+" << endl;
-        cout << "|[*]战争界面命令:                      |" << endl;
-        cout << "|show  status     获得战争属性         |" << endl;
-        cout << "|      map        获得当前地图         |" << endl;
-        cout << "|      all        获得属性与地图       |" << endl;
-        cout << "|                                      |" << endl;
-        cout << "|select build x,y   选择某一坐标的建筑 |" << endl;
-        cout << "|       soldier n   选择ID为n的士兵    |" << endl;
-        cout << "|                                      |" << endl;
-        cout << "|move {up,down,left,right}  移动士兵   |" << endl;
-        cout << "|                                      |" << endl;
-        cout << "|build    （工人）占领并建造根据地     |" << endl;
-        cout << "|                                      |" << endl;
-        cout << "|produce TYPE 生产TYPE类型的士兵       |" << endl;
-        cout << "|                                      |" << endl;
-        cout << "|exit   退出战争                       |" << endl;
-        cout << "+--------------------------------------+" << endl;
+        cout << endl << "[*]所有命令:" << endl;
+        cout << "+-------------------------------------------------------+" << endl;
+        cout << "|[*]全局命令:                                           |" << endl;
+        cout << "|manual             获得详细游戏帮助                    |" << endl;
+        cout << "|help               获得当前界面帮助                    |" << endl;
+        cout << "|history            获得历史命令                        |" << endl;
+        cout << "|status             显示用户状态                        |" << endl;
+        cout << "|save               保存游戏                            |" << endl;
+        cout << "|current page       显示当前界面                        |" << endl;
+        cout << "+-------------------------------------------------------+" << endl;
+        cout << "|[*]主界面命令:                                         |" << endl;
+        cout << "|war                开始战争                            |" << endl;
+        cout << "|practice           训练                                |" << endl;
+        cout << "|exit               退出游戏                            |" << endl;
+        cout << "+-------------------------------------------------------+" << endl;
+        cout << "|[*]训练界面命令:                                       |" << endl;
+        cout << "|train coder        训练码农                            |" << endl;
+        cout << "|dig mine           挖矿                                |" << endl;
+        cout << "|wash brain         政治洗脑                            |" << endl;
+        cout << "|back               返回主界面                          |" << endl;
+        cout << "+-------------------------------------------------------+" << endl;
+        cout << "|[*]战争初始界面命令:                                   |" << endl;
+        cout << "|continue           继续战争                            |" << endl;
+        cout << "|restart            重新开始战争                        |" << endl;
+        cout << "|back               返回主界面                          |" << endl;
+        cout << "+-------------------------------------------------------+" << endl;
+        cout << "|[*]战争界面命令:                                       |" << endl;
+        cout << "|show status        显示战争属性                        |" << endl;
+        cout << "|show map           显示当前地图                        |" << endl;
+        cout << "|show all           显示属性与地图                      |" << endl;
+        cout << "|show type          显示士兵详细列表                    |" << endl;
+        cout << "|                                                       |" << endl;
+        cout << "|select build x,y   显示 x,y 坐标的建筑属性             |" << endl;
+        cout << "|select soldier n   选择ID为n的士兵，并显示该士兵的属性 |" << endl;
+        cout << "|                                                       |" << endl;
+        cout << "|move up            当前选择的士兵向上移动              |" << endl;
+        cout << "|move down          当前选择的士兵向下移动              |" << endl;
+        cout << "|move left          当前选择的士兵向左移动              |" << endl;
+        cout << "|move right         当前选择的士兵向右移动              |" << endl;
+        cout << "|                                                       |" << endl;
+        cout << "|produce type       生产type类型的士兵                  |" << endl;
+        cout << "|                   详情请参考 show type 指令           |" << endl;
+        cout << "|                                                       |" << endl;
+        cout << "|build              当前选择的士兵(工人)占领该城市      |" << endl;
+        cout << "|help               显示本页面                          |" << endl;
+        cout << "|exit               退出战争                            |" << endl;
+        cout << "+-------------------------------------------------------+" << endl;
         SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN );
     }
 }
@@ -274,8 +328,6 @@ bool Commander::Eval ( string& cmd )
             this->status = quit;
             _result = true;
         }
-        else
-            _result = false;
     }
     // Practice page
     else if  ( this->status == practice )
@@ -315,8 +367,6 @@ bool Commander::Eval ( string& cmd )
         }
         else
             _result = false;;
-        if ( this->user->player->Get_Second() == 0 )
-            this->status = lose;
     }
     // War page
     else if ( this->status == war )
@@ -411,8 +461,6 @@ bool Commander::Eval ( string& cmd )
             cout << endl << "[*]返回主界面" << endl;
             _result = true;
         }
-        else
-            _result = false;
     }
     else if ( this->status == start_war )
     {
@@ -432,23 +480,28 @@ bool Commander::Eval ( string& cmd )
         }
         else if ( cmd == string ( "help" ) )
         {
-            cout << "+--------------------------------------+" << endl;
-            cout << "|[*]战争界面命令:                      |" << endl;
-            cout << "|show  status     获得战争属性         |" << endl;
-            cout << "|      map        获得当前地图         |" << endl;
-            cout << "|      all        获得属性与地图       |" << endl;
-            cout << "|                                      |" << endl;
-            cout << "|select build x,y   选择某一坐标的建筑 |" << endl;
-            cout << "|       soldier n   选择ID为n的士兵    |" << endl;
-            cout << "|                                      |" << endl;
-            cout << "|move {up,down,left,right}  移动士兵   |" << endl;
-            cout << "|                                      |" << endl;
-            cout << "|build    （工人）占领并建造根据地     |" << endl;
-            cout << "|                                      |" << endl;
-            cout << "|produce TYPE 生产TYPE类型的士兵       |" << endl;
-            cout << "|                                      |" << endl;
-            cout << "|exit   退出战争                       |" << endl;
-            cout << "+--------------------------------------+" << endl;
+            cout << endl << "+-------------------------------------------------------+" << endl;
+            cout << "|[*]战争界面命令:                                       |" << endl;
+            cout << "|show status        显示战争属性                        |" << endl;
+            cout << "|show map           显示当前地图                        |" << endl;
+            cout << "|show all           显示属性与地图                      |" << endl;
+            cout << "|show type          显示士兵详细列表                    |" << endl;
+            cout << "+-------------------------------------------------------+" << endl;
+            cout << "|select build x,y   显示 x,y 坐标的建筑属性             |" << endl;
+            cout << "|select soldier n   选择ID为n的士兵，并显示该士兵的属性 |" << endl;
+            cout << "+-------------------------------------------------------+" << endl;
+            cout << "|move up            当前选择的士兵向上移动              |" << endl;
+            cout << "|move down          当前选择的士兵向下移动              |" << endl;
+            cout << "|move left          当前选择的士兵向左移动              |" << endl;
+            cout << "|move right         当前选择的士兵向右移动              |" << endl;
+            cout << "+-------------------------------------------------------+" << endl;
+            cout << "|produce type       生产type类型的士兵                  |" << endl;
+            cout << "|                   详情请参考 show type 指令           |" << endl;
+            cout << "+-------------------------------------------------------+" << endl;
+            cout << "|build              当前选择的士兵(工人)占领该城市      |" << endl;
+            cout << "|help               显示本页面                          |" << endl;
+            cout << "|exit               退出战争                            |" << endl;
+            cout << "+-------------------------------------------------------+" << endl;
         }
         else if ( cmd.substr ( 0, 4 ) == string ( "show" ) )
         {
@@ -471,11 +524,12 @@ bool Commander::Eval ( string& cmd )
                     this->user->player->Show_Map ( true );
                     _result = true;
                 }
-                else
-                    _result = false;
+                else if ( subcmd == string ( "type" ) )
+                {
+                    this->_ShowSoldierType();
+                    _result = true;
+                }
             }
-            else
-                _result = false;
         }
         else if ( cmd.substr ( 0, 6 ) == string ( "select" ) )
         {
@@ -496,14 +550,8 @@ bool Commander::Eval ( string& cmd )
                                 this->user->player->Show_Ponit_Status();
                                 _result = true;
                             }
-                            else
-                                _result = false;;
                         }
-                        else
-                            _result = false;
                     }
-                    else
-                        _result = false;
                 }
                 else if ( cmd.substr ( 0 + 6 + 1, 7 ) == string ( "soldier" ) )
                 {
@@ -516,25 +564,14 @@ bool Commander::Eval ( string& cmd )
                             this->user->player->Show_Soldier_Status ( _id );
                             _result = true;
                         }
-                        else
-                            _result = false;
                     }
-                    else
-                        _result = false;
                 }
-                else
-                    _result = false;
             }
-            else
-                _result = false;
         }
         else if ( cmd.substr ( 0, 4 ) == string ( "move" ) )
         {
             if ( !this->user->player->IsSelectSoldier() )
-            {
                 cout << endl << "[!]未选择任何战士" << endl;
-                _result = false;
-            }
             else if ( cmd.substr ( 0 + 4, 1 ) == string ( " " ) )
             {
                 if ( cmd.substr ( 0 + 4 + 1 ) == string ( "up" ) )
@@ -545,10 +582,7 @@ bool Commander::Eval ( string& cmd )
                         _result = true;
                     }
                     else
-                    {
                         cout << endl << "[!]移动方向有障碍物，无法移动" << endl;
-                        _result = false;
-                    }
                 }
                 else if ( cmd.substr ( 0 + 4 + 1 ) == string ( "down" ) )
                 {
@@ -558,10 +592,7 @@ bool Commander::Eval ( string& cmd )
                         _result = true;
                     }
                     else
-                    {
                         cout << endl << "[!]移动方向有障碍物，无法移动" << endl;
-                        _result = false;
-                    }
                 }
                 else if ( cmd.substr ( 0 + 4 + 1 ) == string ( "left" ) )
                 {
@@ -571,10 +602,7 @@ bool Commander::Eval ( string& cmd )
                         _result = true;
                     }
                     else
-                    {
                         cout << endl << "[!]移动方向有障碍物，无法移动" << endl;
-                        _result = false;
-                    }
                 }
                 else if ( cmd.substr ( 0 + 4 + 1 ) == string ( "right" ) )
                 {
@@ -584,14 +612,9 @@ bool Commander::Eval ( string& cmd )
                         _result = true;
                     }
                     else
-                    {
                         cout << endl << "[!]移动方向有障碍物，无法移动" << endl;
-                        _result = false;
-                    }
                 }
             }
-            else
-                _result = false;
         }
         else if ( cmd.substr ( 0, 7 ) == string ( "produce" ) )
         {
@@ -609,136 +632,93 @@ bool Commander::Eval ( string& cmd )
                     if ( this->user->player->Create_Soldier ( _Worker, player_city, _x, _y ) )
                         _result = true;
                     else
-                    {
                         cout << endl << "[!]生产资源不足" << endl;
-                        _result = false;
-                    }
                 }
                 else if ( _subcmd == string ( "archer" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _Archer, player_city, _x, _y ) )
                         _result = true;
                     else
-                    {
                         cout << endl << "[!]生产资源不足" << endl;
-                        _result = false;
-                    }
                 }
                 else if ( _subcmd == string ( "swordsman" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _SwordsMan, player_city, _x, _y ) )
                         _result = true;
                     else
-                    {
                         cout << endl << "[!]生产资源不足" << endl;
-                        _result = false;
-                    }
                 }
                 else if ( _subcmd == string ( "priest" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _Priest, player_city, _x, _y ) )
                         _result = true;
                     else
-                    {
                         cout << endl << "[!]生产资源不足" << endl;
-                        _result = false;
-                    }
                 }
                 else if ( _subcmd == string ( "siegcar" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _SiegCar, player_city, _x, _y ) )
                         _result = true;
                     else
-                    {
                         cout << endl << "[!]生产资源不足" << endl;
-                        _result = false;
-                    }
                 }
                 else if ( _subcmd == string ( "dragon" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _Dragon, player_city, _x, _y ) )
                         _result = true;
                     else
-                    {
                         cout << endl << "[!]生产资源不足" << endl;
-                        _result = false;
-                    }
                 }
                 else if ( _subcmd == string ( "wolf" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _Wolf, player_city, _x, _y ) )
                         _result = true;
                     else
-                    {
                         cout << endl << "[!]生产资源不足" << endl;
-                        _result = false;
-                    }
                 }
                 else if ( _subcmd == string ( "slime" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _Slime, player_city, _x, _y ) )
                         _result = true;
                     else
-                    {
                         cout << endl << "[!]生产资源不足" << endl;
-                        _result = false;
-                    }
                 }
                 else if ( _subcmd == string ( "goblin" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _Goblin, player_city, _x, _y ) )
                         _result = true;
                     else
-                    {
                         cout << endl << "[!]生产资源不足" << endl;
-                        _result = false;
-                    }
                 }
                 else if ( _subcmd == string ( "icegiant" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _IceGiant, player_city, _x, _y ) )
                         _result = true;
                     else
-                    {
                         cout << endl << "[!]生产资源不足" << endl;
-                        _result = false;
-                    }
                 }
                 else if ( _subcmd == string ( "flamebirds" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _FlameBirds, player_city, _x, _y ) )
                         _result = true;
                     else
-                    {
                         cout << endl << "[!]生产资源不足" << endl;
-                        _result = false;
-                    }
                 }
                 else if ( _subcmd == string ( "naga" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _Naga, player_city, _x, _y ) )
                         _result = true;
                     else
-                    {
                         cout << endl << "[!]生产资源不足" << endl;
-                        _result = false;
-                    }
                 }
                 else if ( _subcmd == string ( "phoenix" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _Phoenix, player_city, _x, _y ) )
                         _result = true;
                     else
-                    {
                         cout << endl << "[!]生产资源不足" << endl;
-                        _result = false;
-                    }
                 }
-                else
-                    _result = false;
             }
-            else
-                _result = false;
         }
         else if ( cmd.substr ( 0, 5 ) == string ( "build" ) )
         {
@@ -751,25 +731,21 @@ bool Commander::Eval ( string& cmd )
                     _result = true;
                 }
                 else
-                {
-                    cout << endl << "[!]建造失败，当前城市不是一个可建造的城市！" << endl;
-                    _result = false;
-                }
+                    cout << endl << "[!]建造失败，当前地点不是一个可建造的城市！" << endl;
             }
             else
-            {
                 cout << endl << "[!]只有Worker可以建造城市，当前选择的士兵并不是Worker，请重新选择。";
-                _result = false;
-            }
         }
-        else
-            _result = false;
-        //this->_map->Update();
         /**
         * Here for AI second.
         **/
-        //this->user->player->Recover();
-        //this->user->player->Show_Map ( false );
+        if(this->user->player->CheckWin())
+        {
+            cout <<endl<< "[*]战争结束，返回主页面" << endl;
+            this->status = _main;
+        }
+        else
+            this->user->player->Recover();
     }
     return _result;
 }

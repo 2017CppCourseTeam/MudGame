@@ -23,6 +23,7 @@ class Commander
 
         void _Show_History(); // 打印出玩家的历史命令
         void _Show_Manual(); // 打印出详细帮助菜单
+        void _ShowSoldierType();
         void _To_Lower ( string& s ); // 将s转换为小写
         template <class T>
         T _ConvertStringToNum ( const string& str ); // 将str转换为数字类型

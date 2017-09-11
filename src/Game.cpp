@@ -345,7 +345,7 @@ bool Game::Run ( )
     cout << endl << "[*]ÊäÈë'manual'»ñµÃÓÎÏ·ÏêÏ¸°ïÖú" << endl;
     while ( true )
     {
-        if ( this->_Check() )
+        if ( /*this->_Check()*/1 )
         {
             string cmd;
             cout << endl << "ÊäÈëÃüÁî: " << endl << ">>";
@@ -361,7 +361,7 @@ bool Game::Run ( )
     }
     return true;
 }
-
+/*
 bool Game::_Check()
 {
     if ( this->commander->Get_Status() == lose )
@@ -386,7 +386,7 @@ bool Game::_Check()
         return false;
     }
     return true;
-}
+}*/
 
 void Game::Exit()
 {

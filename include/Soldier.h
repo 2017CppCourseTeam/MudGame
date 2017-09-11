@@ -61,7 +61,15 @@ class Worker: public Soldier
                  enum LocalPower power,
                  double pdclife,
                  double pdcmagic,
-                 unsigned int pdccoin ) : Soldier ( id, 100, 20, 50, humanity, pdclife, pdcmagic, pdccoin )
+                 unsigned int pdccoin ) :
+            Soldier ( id,
+                      WORKER_LIFE,
+                      WORKER_ATTACK,
+                      WORKER_DEFENCE,
+                      humanity,
+                      pdclife,
+                      pdcmagic,
+                      pdccoin )
         {
             this->power = power;
             this->_name = _Worker;
@@ -79,7 +87,15 @@ class Archer: public Soldier
                  enum LocalPower power,
                  double pdclife,
                  double pdcmagic,
-                 unsigned int pdccoin ) : Soldier ( id, 200, 150, 80, humanity, pdclife, pdcmagic, pdccoin )
+                 unsigned int pdccoin ) :
+            Soldier ( id,
+                      ARCHER_LIFE,
+                      ARCHER_ATTACK,
+                      ARCHER_DEFENCE,
+                      humanity,
+                      pdclife,
+                      pdcmagic,
+                      pdccoin )
         {
             this->power = power;
             this->_name = _Archer;
@@ -98,7 +114,15 @@ class SwordsMan: public Soldier
                     enum LocalPower power,
                     double pdclife,
                     double pdcmagic,
-                    unsigned int pdccoin ) : Soldier ( id, 250, 210, 140, humanity, pdclife, pdcmagic, pdccoin )
+                    unsigned int pdccoin ) :
+            Soldier ( id,
+                      SWORDSMAN_LIFE,
+                      SWORDSMAN_ATTACK,
+                      SWORDSMAN_DEFENCE,
+                      humanity,
+                      pdclife,
+                      pdcmagic,
+                      pdccoin )
         {
             this->power = power;
             this->_name = _SwordsMan;
@@ -117,7 +141,15 @@ class Priest: public Soldier
                  enum LocalPower power,
                  double pdclife,
                  double pdcmagic,
-                 unsigned int pdccoin ) : Soldier ( id, 160, 0, 70, humanity, pdclife, pdcmagic, pdccoin )
+                 unsigned int pdccoin ) :
+            Soldier ( id,
+                      PRIEST_LIFE,
+                      PRIEST_ATTACK,
+                      PRIEST_DEFENCE,
+                      humanity,
+                      pdclife,
+                      pdcmagic,
+                      pdccoin )
         {
             this->power = power;
             this->_name = _Priest;
@@ -136,7 +168,15 @@ class SiegCar: public Soldier
                   enum LocalPower power,
                   double pdclife,
                   double pdcmagic,
-                  unsigned int pdccoin ) : Soldier ( id, 500, 700, 310, mechanical, pdclife, pdcmagic, pdccoin )
+                  unsigned int pdccoin ) :
+            Soldier ( id,
+                      SIEGCAR_LIFE,
+                      SIEGCAR_ATTACK,
+                      SIEGCAR_DEFENCE,
+                      mechanical,
+                      pdclife,
+                      pdcmagic,
+                      pdccoin )
         {
             this->power = power;
             this->_name = _SiegCar;
@@ -155,7 +195,15 @@ class Dragon: public Soldier
                  enum LocalPower power,
                  double pdclife,
                  double pdcmagic,
-                 unsigned int pdccoin ) : Soldier ( id, 450, 525, 430, beast, pdclife, pdcmagic, pdccoin )
+                 unsigned int pdccoin ) :
+            Soldier ( id,
+                      DRAGON_LIFE,
+                      DRAGON_ATTACK,
+                      DRAGON_DEFENCE,
+                      beast,
+                      pdclife,
+                      pdcmagic,
+                      pdccoin )
         {
             this->power = power;
             this->_name = _Dragon;
@@ -175,7 +223,15 @@ class Wolf: public Soldier
                enum LocalPower power,
                double pdclife,
                double pdcmagic,
-               unsigned int pdccoin ) : Soldier ( id, 210, 200, 160, beast, pdclife, pdcmagic, pdccoin )
+               unsigned int pdccoin ) :
+            Soldier ( id,
+                      WOLF_LIFE,
+                      WOLF_ATTACK,
+                      WOLF_DEFENCE,
+                      beast,
+                      pdclife,
+                      pdcmagic,
+                      pdccoin )
         {
             this->power = power;
             this->_name = _Wolf;
@@ -193,7 +249,15 @@ class Slime: public Soldier
                 enum LocalPower power,
                 double pdclife,
                 double pdcmagic,
-                unsigned int pdccoin ) : Soldier ( id, 140, 120, 75, wizard, pdclife, pdcmagic, pdccoin )
+                unsigned int pdccoin ) :
+            Soldier ( id,
+                      SLIME_LIFE,
+                      SLIME_ATTACK,
+                      SLIME_DEFENCE,
+                      wizard,
+                      pdclife,
+                      pdcmagic,
+                      pdccoin )
         {
             this->power = power;
             this->_name = _Slime;
@@ -211,7 +275,15 @@ class Goblin: public Soldier
                  enum LocalPower power,
                  double pdclife,
                  double pdcmagic,
-                 unsigned int pdccoin ) : Soldier ( id, 210, 185, 120, wizard, pdclife, pdcmagic, pdccoin )
+                 unsigned int pdccoin ) :
+            Soldier ( id,
+                      GOBLIN_LIFE,
+                      GOBLIN_ATTACK,
+                      GOBLIN_DEFENCE,
+                      wizard,
+                      pdclife,
+                      pdcmagic,
+                      pdccoin )
         {
             this->power = power;
             this->_name = _Goblin;
@@ -231,7 +303,15 @@ class IceGiant: public Soldier
                    enum LocalPower power,
                    double pdclife,
                    double pdcmagic,
-                   unsigned int pdccoin ) : Soldier ( id, 400, 575, 500, warcraft, pdclife, pdcmagic, pdccoin )
+                   unsigned int pdccoin ) :
+            Soldier ( id,
+                      ICEGIANT_LIFE,
+                      ICEGIANT_ATTACK,
+                      ICEGIANT_DEFENCE,
+                      warcraft,
+                      pdclife,
+                      pdcmagic,
+                      pdccoin )
         {
             this->power = power;
             this->_name = _IceGiant;
@@ -250,7 +330,15 @@ class FlameBirds: public Soldier
                      enum LocalPower power,
                      double pdclife,
                      double pdcmagic,
-                     unsigned int pdccoin ) : Soldier ( id, 450, 670, 260, warcraft, pdclife, pdcmagic, pdccoin )
+                     unsigned int pdccoin ) :
+            Soldier ( id,
+                      FLAMEBIRDS_LIFE,
+                      FLAMEBIRDS_ATTACK,
+                      FLAMEBIRDS_DEFENCE,
+                      warcraft,
+                      pdclife,
+                      pdcmagic,
+                      pdccoin )
         {
             this->power = power;
             this->_name = _FlameBirds;
@@ -268,7 +356,15 @@ class Naga: public Soldier
                enum LocalPower power,
                double pdclife,
                double pdcmagic,
-               unsigned int pdccoin ) : Soldier ( id, 380, 430, 350, warcraft, pdclife, pdcmagic, pdccoin )
+               unsigned int pdccoin ) :
+            Soldier ( id,
+                      NAGA_LIFE,
+                      NAGA_ATTACK,
+                      NAGA_DEFENCE,
+                      warcraft,
+                      pdclife,
+                      pdcmagic,
+                      pdccoin )
         {
             this->power = power;
             this->_name = _Naga;
@@ -286,7 +382,15 @@ class Phoenix: public Soldier
                   enum LocalPower power,
                   double pdclife,
                   double pdcmagic,
-                  unsigned int pdccoin ) : Soldier ( id, 350, 770, 120, warcraft, pdclife, pdcmagic, pdccoin )
+                  unsigned int pdccoin ) :
+            Soldier ( id,
+                      PHOENIX_LIFE,
+                      PHOENIX_ATTACK,
+                      PHOENIX_DEFENCE,
+                      warcraft,
+                      pdclife,
+                      pdcmagic,
+                      pdccoin )
         {
             this->power = power;
             this->_name = _Phoenix;

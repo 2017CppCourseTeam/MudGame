@@ -17,9 +17,10 @@ class Game
         void Exit( ); // ”Œœ∑Ω· ¯
         void Narrative( );
     private:
-        bool _Check();
+        //bool _Check();
         void _Logo();
         User* user;
+        bool _Check();
         HANDLE handle;
         Commander* commander;
 };
