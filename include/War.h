@@ -41,11 +41,8 @@ class War
         Soldier* soldier_selecter;
 
         friend class Player;
-<<<<<<< HEAD
         friend class Commander;
         friend class AI;
-=======
->>>>>>> acbadf8fde47ffe048f458d2c5a504baec69387f
 
 };
 

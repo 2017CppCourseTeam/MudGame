@@ -466,14 +466,6 @@ bool Commander::Eval ( string& cmd )
     else if ( this->status == start_war )
     {
         //cout << "*******第" << this->user->ai->getAct_num() << "回合********" << endl << endl;
-        if (this->user->ai->getIfFirst()) {
-            cout << "AI先手：" << endl;
-            this->user->ai->action();
-            cout << "您后手：" << endl;
-        }
-        else {
-            cout << "您先手：" << endl;
-        }
         if ( cmd == string ( "exit" ) )
         {
             cout << endl << "[*]本局游戏将不会被保存，也不会获得任何奖励，确认退出吗？(y/n)" << endl << ">>";
@@ -746,10 +738,9 @@ bool Commander::Eval ( string& cmd )
             else
                 cout << endl << "[!]只有Worker可以建造城市，当前选择的士兵并不是Worker，请重新选择。";
         }
-<<<<<<< HEAD
-        /**
-        * Here for AI second.
-        **/
+        if (this->user->player->Is_First()) {
+                this->user->ai->action();
+            }
         if(this->user->player->CheckWin())
         {
             cout <<endl<< "[*]战争结束，返回主页面" << endl;
@@ -757,26 +748,6 @@ bool Commander::Eval ( string& cmd )
         }
         else
             this->user->player->Recover();
-=======
-<<<<<<< HEAD
-        if (!this->user->ai->getIfFirst()) {
-                cout << "AI后手：" << endl;
-                this->user->ai->action();
-            }
-        this->_map->Update();
-        this->user->player->Show_Map ( false );
-        return true;
-=======
-        else
-            _result = false;
-        //this->_map->Update();
-        /**
-        * Here for AI second.
-        **/
-        //this->user->player->Recover();
-        //this->user->player->Show_Map ( false );
->>>>>>> acbadf8fde47ffe048f458d2c5a504baec69387f
->>>>>>> origin/master
     }
     return _result;
 }

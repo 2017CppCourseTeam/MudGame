@@ -233,6 +233,12 @@ unsigned short Player::Get_War_Num()
     return this->war_num;
 }
 
+War* Player::CurrentWar()
+{
+    return this->war;
+}
+
+
 bool Player::Check_Win()
 {
     if ( this->war_num == 6 )
@@ -350,7 +356,6 @@ unsigned int Player::GetAIBaseY()
     return this->war->_GetAIBaseY();
 }
 
-<<<<<<< HEAD
 AI::AI() {
     this->ifFirst = true;
     act_num = 1;
@@ -373,22 +378,22 @@ void AI::action() {
     switch(manipulator) {
         case 1:
             if(act_num == 1)
-                this->Create_Soldier(_Worker, 7, 8);
+                this->Create_Soldier(_Worker, ai_city, 7, 8);
             else
-                this->Create_Soldier(_Archer, 7, 8);
+                this->Create_Soldier(_Archer, ai_city, 7, 8);
             break;
         case 2:
         case 3:
         case 4:
-            this->GetCurrentWar()->soldier_selecter->UpdateX(this->GetCurrentWar()->soldier_selecter->GetX()-1);
-            this->GetCurrentWar()->_Show_Soldier_Status ( );
+            this->CurrentWar()->soldier_selecter->UpdateX(this->CurrentWar()->soldier_selecter->GetX()-1);
+            this->CurrentWar()->_Show_Soldier_Status ( );
             break;
         case 5:
         case 6:
         case 7:
         case 0:
-            this->GetCurrentWar()->soldier_selecter->UpdateY(this->GetCurrentWar()->soldier_selecter->GetY()-1);
-            this->GetCurrentWar()->_Show_Soldier_Status ( );
+            this->CurrentWar()->soldier_selecter->UpdateY(this->CurrentWar()->soldier_selecter->GetY()-1);
+            this->CurrentWar()->_Show_Soldier_Status ( );
             if(act_num == 8)    //bulid
             break;
             }
@@ -396,21 +401,21 @@ void AI::action() {
             switch(manipulator){
         case 1:
             this->Select_Soldier ((act_num - 40) / 8);
-            this->GetCurrentWar()->soldier_selecter->UpdateY(this->GetCurrentWar()->soldier_selecter->GetY()-1);
-            this->GetCurrentWar()->_Show_Soldier_Status ( );
+            this->CurrentWar()->soldier_selecter->UpdateY(this->CurrentWar()->soldier_selecter->GetY()-1);
+            this->CurrentWar()->_Show_Soldier_Status ( );
             break;
         case 2:
         case 3:
         case 4:
-            this->GetCurrentWar()->soldier_selecter->UpdateY(this->GetCurrentWar()->soldier_selecter->GetY()-1);
-            this->GetCurrentWar()->_Show_Soldier_Status ( );
+            this->CurrentWar()->soldier_selecter->UpdateY(this->CurrentWar()->soldier_selecter->GetY()-1);
+            this->CurrentWar()->_Show_Soldier_Status ( );
             break;
         case 5:
         case 6:
         case 7:
         case 0:
-            this->GetCurrentWar()->soldier_selecter->UpdateX(this->GetCurrentWar()->soldier_selecter->GetX()-1);
-            this->GetCurrentWar()->_Show_Soldier_Status ( );
+            this->CurrentWar()->soldier_selecter->UpdateX(this->CurrentWar()->soldier_selecter->GetX()-1);
+            this->CurrentWar()->_Show_Soldier_Status ( );
             break;
             }
         }
@@ -421,24 +426,24 @@ void AI::action() {
     switch(manipulator) {
         case 1:
             if(act_num == 1)
-                {this->Create_Soldier(_Worker, 7, 8);}
+                {this->Create_Soldier(_Worker, ai_city, 7, 8);}
             else if(act_num == 9 && act_num == 17 && act_num == 25)
-                {this->Create_Soldier(_Slime, 7, 8);}
+                {this->Create_Soldier(_Slime, ai_city, 7, 8);}
             else
-                {this->Create_Soldier(_Goblin, 7, 8);}
+                {this->Create_Soldier(_Goblin, ai_city, 7, 8);}
             break;
         case 2:
         case 3:
         case 4:
-            this->GetCurrentWar()->soldier_selecter->UpdateX(this->GetCurrentWar()->soldier_selecter->GetX()-1);
-            this->GetCurrentWar()->_Show_Soldier_Status ( );
+            this->CurrentWar()->soldier_selecter->UpdateX(this->CurrentWar()->soldier_selecter->GetX()-1);
+            this->CurrentWar()->_Show_Soldier_Status ( );
             break;
         case 5:
         case 6:
         case 7:
         case 0:
-            this->GetCurrentWar()->soldier_selecter->UpdateY(this->GetCurrentWar()->soldier_selecter->GetY()-1);
-            this->GetCurrentWar()->_Show_Soldier_Status ( );
+            this->CurrentWar()->soldier_selecter->UpdateY(this->CurrentWar()->soldier_selecter->GetY()-1);
+            this->CurrentWar()->_Show_Soldier_Status ( );
             if(act_num == 8)    //bulid
             break;
             }
@@ -446,21 +451,21 @@ void AI::action() {
             switch(manipulator){
         case 1:
             this->Select_Soldier ((act_num - 56) / 8);
-            this->GetCurrentWar()->soldier_selecter->UpdateY(this->GetCurrentWar()->soldier_selecter->GetY()-1);
-            this->GetCurrentWar()->_Show_Soldier_Status ( );
+            this->CurrentWar()->soldier_selecter->UpdateY(this->CurrentWar()->soldier_selecter->GetY()-1);
+            this->CurrentWar()->_Show_Soldier_Status ( );
             break;
         case 2:
         case 3:
         case 4:
-            this->GetCurrentWar()->soldier_selecter->UpdateY(this->GetCurrentWar()->soldier_selecter->GetY()-1);
-            this->GetCurrentWar()->_Show_Soldier_Status ( );
+            this->CurrentWar()->soldier_selecter->UpdateY(this->CurrentWar()->soldier_selecter->GetY()-1);
+            this->CurrentWar()->_Show_Soldier_Status ( );
             break;
         case 5:
         case 6:
         case 7:
         case 0:
-            this->GetCurrentWar()->soldier_selecter->UpdateX(this->GetCurrentWar()->soldier_selecter->GetX()-1);
-            this->GetCurrentWar()->_Show_Soldier_Status ( );
+            this->CurrentWar()->soldier_selecter->UpdateX(this->CurrentWar()->soldier_selecter->GetX()-1);
+            this->CurrentWar()->_Show_Soldier_Status ( );
             break;
             }
         }
@@ -470,24 +475,24 @@ void AI::action() {
     switch(manipulator) {
         case 1:
             if(act_num == 1)
-                {this->Create_Soldier(_Worker, 7, 8);}
+                {this->Create_Soldier(_Worker, ai_city, 7, 8);}
             if(act_num == 9 || act_num == 17 || act_num == 25 || act_num == 33)
-                {this->Create_Soldier(_SwordsMan, 7, 8);}
+                {this->Create_Soldier(_SwordsMan, ai_city, 7, 8);}
             if(act_num == 57|| act_num == 41 || act_num == 49 || act_num == 65)
-                {this->Create_Soldier(_Dragon, 7, 8);}
+                {this->Create_Soldier(_Dragon, ai_city, 7, 8);}
             break;
         case 2:
         case 3:
         case 4:
-            this->GetCurrentWar()->soldier_selecter->UpdateX(this->GetCurrentWar()->soldier_selecter->GetX()-1);
-            this->GetCurrentWar()->_Show_Soldier_Status ( );
+            this->CurrentWar()->soldier_selecter->UpdateX(this->CurrentWar()->soldier_selecter->GetX()-1);
+            this->CurrentWar()->_Show_Soldier_Status ( );
             break;
         case 5:
         case 6:
         case 7:
         case 0:
-            this->GetCurrentWar()->soldier_selecter->UpdateY(this->GetCurrentWar()->soldier_selecter->GetY()-1);
-            this->GetCurrentWar()->_Show_Soldier_Status ( );
+            this->CurrentWar()->soldier_selecter->UpdateY(this->CurrentWar()->soldier_selecter->GetY()-1);
+            this->CurrentWar()->_Show_Soldier_Status ( );
             if(act_num == 8)    //bulid
             break;
             }
@@ -497,12 +502,12 @@ void AI::action() {
         case 1:
             this->Select_Soldier(soldier_num);
             if(soldier_num == 1 && soldier_num == 2 && soldier_num == 3 && soldier_num == 4) {
-            this->GetCurrentWar()->soldier_selecter->UpdateY(this->GetCurrentWar()->soldier_selecter->GetY()-1);
-            this->GetCurrentWar()->_Show_Soldier_Status ( );
+            this->CurrentWar()->soldier_selecter->UpdateY(this->CurrentWar()->soldier_selecter->GetY()-1);
+            this->CurrentWar()->_Show_Soldier_Status ( );
             }
             else {
-            this->GetCurrentWar()->soldier_selecter->UpdateX(this->GetCurrentWar()->soldier_selecter->GetX()-1);
-            this->GetCurrentWar()->_Show_Soldier_Status ( );
+            this->CurrentWar()->soldier_selecter->UpdateX(this->CurrentWar()->soldier_selecter->GetX()-1);
+            this->CurrentWar()->_Show_Soldier_Status ( );
             }
             break;
         case 2:
@@ -510,12 +515,12 @@ void AI::action() {
         case 4:
             this->Select_Soldier(soldier_num);
             if(soldier_num == 1 && soldier_num == 2 && soldier_num == 3 && soldier_num == 4) {
-                this->GetCurrentWar()->soldier_selecter->UpdateY(this->GetCurrentWar()->soldier_selecter->GetY()-1);
-                this->GetCurrentWar()->_Show_Soldier_Status ( );
+                this->CurrentWar()->soldier_selecter->UpdateY(this->CurrentWar()->soldier_selecter->GetY()-1);
+                this->CurrentWar()->_Show_Soldier_Status ( );
             }
             else {
-                this->GetCurrentWar()->soldier_selecter->UpdateX(this->GetCurrentWar()->soldier_selecter->GetX()-1);
-                this->GetCurrentWar()->_Show_Soldier_Status ( );
+                this->CurrentWar()->soldier_selecter->UpdateX(this->CurrentWar()->soldier_selecter->GetX()-1);
+                this->CurrentWar()->_Show_Soldier_Status ( );
             }
             break;
         case 5:
@@ -524,12 +529,12 @@ void AI::action() {
         case 0:
             this->Select_Soldier(soldier_num);
             if(soldier_num == 1 && soldier_num == 2 && soldier_num == 3 && soldier_num == 4) {
-                this->GetCurrentWar()->soldier_selecter->UpdateX(this->GetCurrentWar()->soldier_selecter->GetX()-1);
-                this->GetCurrentWar()->_Show_Soldier_Status ( );
+                this->CurrentWar()->soldier_selecter->UpdateX(this->CurrentWar()->soldier_selecter->GetX()-1);
+                this->CurrentWar()->_Show_Soldier_Status ( );
             }
             else {
-                this->GetCurrentWar()->soldier_selecter->UpdateY(this->GetCurrentWar()->soldier_selecter->GetY()-1);
-                this->GetCurrentWar()->_Show_Soldier_Status ( );
+                this->CurrentWar()->soldier_selecter->UpdateY(this->CurrentWar()->soldier_selecter->GetY()-1);
+                this->CurrentWar()->_Show_Soldier_Status ( );
             }
             break;
             }
@@ -542,26 +547,26 @@ void AI::action() {
     switch(manipulator) {
         case 1:
             if(act_num == 1)
-                {this->Create_Soldier(_Worker, 7, 8);}
+                {this->Create_Soldier(_Worker, ai_city, 7, 8);}
             if(act_num == 9 || act_num == 17 || act_num == 25 || act_num == 33 || act_num == 41 || act_num == 49 || act_num == 57)
-                {this->Create_Soldier(_SiegCar, 7, 8);}
+                {this->Create_Soldier(_SiegCar, ai_city, 7, 8);}
             if(act_num == 65 || act_num == 73 || act_num == 81 || act_num == 89)
-                {this->Create_Soldier(_Naga, 7, 8);}
+                {this->Create_Soldier(_Naga, ai_city, 7, 8);}
             if(act_num == 97)
-                {this->Create_Soldier(_IceGiant, 7, 8);}
+                {this->Create_Soldier(_IceGiant, ai_city, 7, 8);}
             break;
         case 2:
         case 3:
         case 4:
-            this->GetCurrentWar()->soldier_selecter->UpdateX(this->GetCurrentWar()->soldier_selecter->GetX()-1);
-            this->GetCurrentWar()->_Show_Soldier_Status ( );
+            this->CurrentWar()->soldier_selecter->UpdateX(this->CurrentWar()->soldier_selecter->GetX()-1);
+            this->CurrentWar()->_Show_Soldier_Status ( );
             break;
         case 5:
         case 6:
         case 7:
         case 0:
-            this->GetCurrentWar()->soldier_selecter->UpdateY(this->GetCurrentWar()->soldier_selecter->GetY()-1);
-            this->GetCurrentWar()->_Show_Soldier_Status ( );
+            this->CurrentWar()->soldier_selecter->UpdateY(this->CurrentWar()->soldier_selecter->GetY()-1);
+            this->CurrentWar()->_Show_Soldier_Status ( );
             if(act_num == 8)    //bulid
             break;
             }
@@ -571,12 +576,12 @@ void AI::action() {
         case 1:
             this->Select_Soldier(soldier_num);
             if(soldier_num >= 1 && soldier_num <= 7) {
-            this->GetCurrentWar()->soldier_selecter->UpdateY(this->GetCurrentWar()->soldier_selecter->GetY()-1);
-            this->GetCurrentWar()->_Show_Soldier_Status ( );
+            this->CurrentWar()->soldier_selecter->UpdateY(this->CurrentWar()->soldier_selecter->GetY()-1);
+            this->CurrentWar()->_Show_Soldier_Status ( );
             }
             else {
-            this->GetCurrentWar()->soldier_selecter->UpdateX(this->GetCurrentWar()->soldier_selecter->GetX()-1);
-            this->GetCurrentWar()->_Show_Soldier_Status ( );
+            this->CurrentWar()->soldier_selecter->UpdateX(this->CurrentWar()->soldier_selecter->GetX()-1);
+            this->CurrentWar()->_Show_Soldier_Status ( );
             }
             break;
         case 2:
@@ -584,12 +589,12 @@ void AI::action() {
         case 4:
             this->Select_Soldier(soldier_num);
             if(soldier_num >= 1 && soldier_num <= 7) {
-                this->GetCurrentWar()->soldier_selecter->UpdateY(this->GetCurrentWar()->soldier_selecter->GetY()-1);
-                this->GetCurrentWar()->_Show_Soldier_Status ( );
+                this->CurrentWar()->soldier_selecter->UpdateY(this->CurrentWar()->soldier_selecter->GetY()-1);
+                this->CurrentWar()->_Show_Soldier_Status ( );
             }
             else {
-                this->GetCurrentWar()->soldier_selecter->UpdateX(this->GetCurrentWar()->soldier_selecter->GetX()-1);
-                this->GetCurrentWar()->_Show_Soldier_Status ( );
+                this->CurrentWar()->soldier_selecter->UpdateX(this->CurrentWar()->soldier_selecter->GetX()-1);
+                this->CurrentWar()->_Show_Soldier_Status ( );
             }
             break;
         case 5:
@@ -598,12 +603,12 @@ void AI::action() {
         case 0:
             this->Select_Soldier(soldier_num);
             if(soldier_num >= 1 && soldier_num <= 7) {
-                this->GetCurrentWar()->soldier_selecter->UpdateX(this->GetCurrentWar()->soldier_selecter->GetX()-1);
-                this->GetCurrentWar()->_Show_Soldier_Status ( );
+                this->CurrentWar()->soldier_selecter->UpdateX(this->CurrentWar()->soldier_selecter->GetX()-1);
+                this->CurrentWar()->_Show_Soldier_Status ( );
             }
             else {
-                this->GetCurrentWar()->soldier_selecter->UpdateY(this->GetCurrentWar()->soldier_selecter->GetY()-1);
-                this->GetCurrentWar()->_Show_Soldier_Status ( );
+                this->CurrentWar()->soldier_selecter->UpdateY(this->CurrentWar()->soldier_selecter->GetY()-1);
+                this->CurrentWar()->_Show_Soldier_Status ( );
             }
             break;
             }
@@ -613,9 +618,9 @@ void AI::action() {
 
     if(war_num == 5) {
         if(act_num == 1) {
-            this->Create_Soldier(_Naga, 8, 6);
-            this->Create_Soldier(_Naga, 7, 7);
-            this->Create_Soldier(_Naga, 6, 8);
+            this->Create_Soldier(_Naga, ai_city, 8, 6);
+            this->Create_Soldier(_Naga, ai_city, 7, 7);
+            this->Create_Soldier(_Naga, ai_city, 6, 8);
         cout << "蛤蛤蛤，三个蛙人部署完毕。" << endl;
         }
         int manipulator = act_num % 8;
@@ -623,28 +628,28 @@ void AI::action() {
         switch(manipulator){
         case 1:
             if(act_num >= 1)
-                {this->Create_Soldier(_Worker, 7, 8);}
+                {this->Create_Soldier(_Worker, ai_city, 7, 8);}
             if(act_num >= 9 && act_num <= 73)
-                {this->Create_Soldier(_Dragon, 7, 8);}
+                {this->Create_Soldier(_Dragon, ai_city, 7, 8);}
             if(act_num >= 81 && act_num <= 105)
-                {this->Create_Soldier(_IceGiant, 7, 8);}
+                {this->Create_Soldier(_IceGiant, ai_city, 7, 8);}
             if(act_num >= 113 && act_num <= 137)
-                {this->Create_Soldier(_FlameBirds, 7, 8);}
+                {this->Create_Soldier(_FlameBirds, ai_city, 7, 8);}
             if(act_num >= 145 && act_num <= 169)
-                {this->Create_Soldier(_Phoenix, 7, 8);}
+                {this->Create_Soldier(_Phoenix, ai_city, 7, 8);}
             break;
         case 2:
         case 3:
         case 4:
-            this->GetCurrentWar()->soldier_selecter->UpdateX(this->GetCurrentWar()->soldier_selecter->GetX()-1);
-            this->GetCurrentWar()->_Show_Soldier_Status ( );
+            this->CurrentWar()->soldier_selecter->UpdateX(this->CurrentWar()->soldier_selecter->GetX()-1);
+            this->CurrentWar()->_Show_Soldier_Status ( );
             break;
         case 5:
         case 6:
         case 7:
         case 0:
-            this->GetCurrentWar()->soldier_selecter->UpdateY(this->GetCurrentWar()->soldier_selecter->GetY()-1);
-            this->GetCurrentWar()->_Show_Soldier_Status ( );
+            this->CurrentWar()->soldier_selecter->UpdateY(this->CurrentWar()->soldier_selecter->GetY()-1);
+            this->CurrentWar()->_Show_Soldier_Status ( );
             if(act_num == 8)    //bulid
             break;
             }
@@ -655,12 +660,12 @@ void AI::action() {
         if(soldier_num % 3 == 1) {
             if(manipulator == 1) this->Select_Soldier(soldier_num);
             if(manipulator % 2 == 0) {
-                this->GetCurrentWar()->soldier_selecter->UpdateY(this->GetCurrentWar()->soldier_selecter->GetY()-1);
-                this->GetCurrentWar()->_Show_Soldier_Status ( );
+                this->CurrentWar()->soldier_selecter->UpdateY(this->CurrentWar()->soldier_selecter->GetY()-1);
+                this->CurrentWar()->_Show_Soldier_Status ( );
             }
             else {
-                this->GetCurrentWar()->soldier_selecter->UpdateX(this->GetCurrentWar()->soldier_selecter->GetX()-1);
-                this->GetCurrentWar()->_Show_Soldier_Status ( );
+                this->CurrentWar()->soldier_selecter->UpdateX(this->CurrentWar()->soldier_selecter->GetX()-1);
+                this->CurrentWar()->_Show_Soldier_Status ( );
             }
         }
         else {
@@ -669,12 +674,12 @@ void AI::action() {
         case 1:
             this->Select_Soldier(soldier_num);
             if(soldier_num % 3 == 0) {
-                this->GetCurrentWar()->soldier_selecter->UpdateY(this->GetCurrentWar()->soldier_selecter->GetY()-1);
-                this->GetCurrentWar()->_Show_Soldier_Status ( );
+                this->CurrentWar()->soldier_selecter->UpdateY(this->CurrentWar()->soldier_selecter->GetY()-1);
+                this->CurrentWar()->_Show_Soldier_Status ( );
             }
             else {
-                this->GetCurrentWar()->soldier_selecter->UpdateX(this->GetCurrentWar()->soldier_selecter->GetX()-1);
-                this->GetCurrentWar()->_Show_Soldier_Status ( );
+                this->CurrentWar()->soldier_selecter->UpdateX(this->CurrentWar()->soldier_selecter->GetX()-1);
+                this->CurrentWar()->_Show_Soldier_Status ( );
             }
             break;
         case 2:
@@ -682,12 +687,12 @@ void AI::action() {
         case 4:
             this->Select_Soldier(soldier_num);
             if(soldier_num % 3 == 0) {
-                this->GetCurrentWar()->soldier_selecter->UpdateY(this->GetCurrentWar()->soldier_selecter->GetY()-1);
-                this->GetCurrentWar()->_Show_Soldier_Status ( );
+                this->CurrentWar()->soldier_selecter->UpdateY(this->CurrentWar()->soldier_selecter->GetY()-1);
+                this->CurrentWar()->_Show_Soldier_Status ( );
             }
             else {
-                this->GetCurrentWar()->soldier_selecter->UpdateX(this->GetCurrentWar()->soldier_selecter->GetX()-1);
-                this->GetCurrentWar()->_Show_Soldier_Status ( );
+                this->CurrentWar()->soldier_selecter->UpdateX(this->CurrentWar()->soldier_selecter->GetX()-1);
+                this->CurrentWar()->_Show_Soldier_Status ( );
             }
             break;
         case 5:
@@ -696,12 +701,12 @@ void AI::action() {
         case 0:
             this->Select_Soldier(soldier_num);
             if(soldier_num >= 1 && soldier_num <= 7) {
-                this->GetCurrentWar()->soldier_selecter->UpdateX(this->GetCurrentWar()->soldier_selecter->GetX()-1);
-                this->GetCurrentWar()->_Show_Soldier_Status ( );
+                this->CurrentWar()->soldier_selecter->UpdateX(this->CurrentWar()->soldier_selecter->GetX()-1);
+                this->CurrentWar()->_Show_Soldier_Status ( );
             }
             else {
-                this->GetCurrentWar()->soldier_selecter->UpdateY(this->GetCurrentWar()->soldier_selecter->GetY()-1);
-                this->GetCurrentWar()->_Show_Soldier_Status ( );
+                this->CurrentWar()->soldier_selecter->UpdateY(this->CurrentWar()->soldier_selecter->GetY()-1);
+                this->CurrentWar()->_Show_Soldier_Status ( );
             }
             break;
             }
@@ -726,8 +731,6 @@ bool AI::getIfFirst() {
     return ifFirst;
 }
 
-
-=======
 enum AllSoldiers Player::GetCurrentSoldierName()
 {
     return this->war->_GetCurrentSoldierName();
@@ -865,14 +868,14 @@ enum Is_Win Player::_Result()
         return _draw;
 }
 
-
 bool Player::CheckWin( )
 {
-    enum Is_Win _result;
-    _result = this->_Result( );
-    if ( _result != _draw )
+    bool _result = false;
+    enum Is_Win win_result;
+    win_result = this->_Result( );
+    if ( win_result != _draw )
     {
-        if ( _result == _win )
+        if ( win_result == _win )
         {
             cout << endl << "[*]恭喜你赢得了这场战争，所有属性增加" << endl;
             this->prestige *= 1.2;
@@ -880,7 +883,7 @@ bool Player::CheckWin( )
             this->violence *= 1.2;
             this->second *= 1.2;
         }
-        else if ( _result == _lose )
+        else if ( win_result == _lose )
         {
             cout << endl << "[*]抱歉你输掉了这场战争，所有属性减少" << endl;
             this->prestige *= 0.2;
@@ -889,6 +892,7 @@ bool Player::CheckWin( )
             this->second *= 0.2;
         }
         this->End_War ( this -> war -> _map );
+        _result = true;
     }
+    return _result;
 }
->>>>>>> acbadf8fde47ffe048f458d2c5a504baec69387f

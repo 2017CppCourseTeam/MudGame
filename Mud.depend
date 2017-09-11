@@ -63,17 +63,17 @@
 1504445066 source:f:\文档\学习资料\mudgame\game.cpp
 	"Game.h"
 
-1504537762 D
+1505115368 D
 	<conio.h>
 	<cstdio>
 	<sstream>
 	"War.h"
 	"AI-Settings.h"
 
-1505095477 f:\文档\学习资料\mudgame\include\war.h
+1505116323 f:\文档\学习资料\mudgame\include\war.h
 	"Map.h"
 
-1505099113 source:f:\文档\学习资料\mudgame\src\war.cpp
+1505116240 source:f:\文档\学习资料\mudgame\src\war.cpp
 	"War.h"
 
 1504340809 f:\文档\学习资料\mudgame\ai-settings.h
@@ -85,19 +85,19 @@
 	<string>
 	"Soldier.h"
 
-1505115659 f:\文档\学习资料\mudgame\include\game.h
+1505116238 f:\文档\学习资料\mudgame\include\game.h
 	"Global.h"
 	"User.h"
 	"Commander.h"
 	"windows.h"
 
-1505112675 f:\文档\学习资料\mudgame\include\commander.h
+1505116238 f:\文档\学习资料\mudgame\include\commander.h
 	"User.h"
 
-1505022077 f:\文档\学习资料\mudgame\include\user.h
+1505116240 f:\文档\学习资料\mudgame\include\user.h
 	"Player.h"
 
-1505115955 f:\文档\学习资料\mudgame\include\player.h
+1505116854 f:\文档\学习资料\mudgame\include\player.h
 	"War.h"
 
 1504539364 source:d:\mudgame\commander.cpp
@@ -119,7 +119,7 @@
 
 1504537762 d:\mudgame\player.h
 
-1504539777 gin/master
+1505056843 gin/master
 	<iostream>
 	<ctime>
 	<cstdlib>
@@ -127,25 +127,39 @@
 	<iomanip>
 	<string>
 	<fstream>
+	<ctime>
+	<cstdlib>
+	<cmath>
+	<iomanip>
+	<fstream>
+	<conio.h>
+	<cstdio>
+	<windows.h>
+	<sstream>
+	<math.h>
+	<iostream>
+	<string>
+	<algorithm>
+	<vector>
 
 1504930901 f:\文档\学习资料\mudgame\include\ai-settings.h
 
-1505115414 source:f:\文档\学习资料\mudgame\src\game.cpp
+1505116238 source:f:\文档\学习资料\mudgame\src\game.cpp
 	"Game.h"
 
-1505109060 source:f:\文档\学习资料\mudgame\src\player.cpp
+1505117041 source:f:\文档\学习资料\mudgame\src\player.cpp
 	"Player.h"
 
-1505022007 source:f:\文档\学习资料\mudgame\src\user.cpp
+1505116240 source:f:\文档\学习资料\mudgame\src\user.cpp
 	"User.h"
 
-1505115376 source:f:\文档\学习资料\mudgame\src\commander.cpp
+1505116738 source:f:\文档\学习资料\mudgame\src\commander.cpp
 	"Commander.h"
 
-1505112333 source:f:\文档\学习资料\mudgame\src\soldier.cpp
+1505116238 source:f:\文档\学习资料\mudgame\src\soldier.cpp
 	"Soldier.h"
 
-1505112333 f:\文档\学习资料\mudgame\include\soldier.h
+1505116238 f:\文档\学习资料\mudgame\include\soldier.h
 	"Global.h"
 
 1504539113 source:d:\mudgame\game.cpp
@@ -233,19 +247,7 @@
 1504866872 source:d:\mudgame\src\war.cpp
 	"War.h"
 
-<<<<<<< HEAD
-1505115368 f:\文档\学习资料\mudgame\include\global.h
-=======
-<<<<<<< HEAD
-1505090421 d:\mudgame\include\ai.h
-	"Player.h"
-	<cmath>
-
-1505090158 source:d:\mudgame\src\ai.cpp
-	"AI.h"
-=======
-1505056843 f:\文档\学习资料\mudgame\include\global.h
->>>>>>> origin/master
+1505116238 f:\文档\学习资料\mudgame\include\global.h
 	<ctime>
 	<cstdlib>
 	<cmath>
@@ -260,5 +262,13 @@
 	<string>
 	<algorithm>
 	<vector>
->>>>>>> acbadf8fde47ffe048f458d2c5a504baec69387f
+
+1505090421 d:\mudgame\include\ai.h
+	"Player.h"
+	<cmath>
+
+1505090158 source:d:\mudgame\src\ai.cpp
+	"AI.h"
+
+1505056843 adf8fde47ffe048f458d2c5a504baec69387f
 

@@ -2,13 +2,6 @@
 #define PLAYER_H_INCLUDED
 
 #include "War.h"
-<<<<<<< HEAD
-
-using namespace std;
-
-enum STATUS {_main = 0, practice, war, quit, start_war, win, lose};
-=======
->>>>>>> acbadf8fde47ffe048f458d2c5a504baec69387f
 
 class Player
 {
@@ -80,6 +73,8 @@ class Player
         void Delete_Soldier ( unsigned int _id ); // 删除该id的士兵
 
         void Ai_Init ( double prestige, double bitcoin, double violence, int second, unsigned short war_num, bool first ); // 初始化AI的接口
+
+        War* CurrentWar();
     private:
         enum Is_Win _Result();
 
