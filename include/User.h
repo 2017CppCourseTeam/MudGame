@@ -17,7 +17,7 @@ class User
         bool Register ( );
         bool Save ( );
         bool DeleteUser ( );
-        AI* ai;
+        Player* ai;
         Player* player;
     private:
         string* username;

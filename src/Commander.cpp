@@ -399,7 +399,7 @@ bool Commander::Eval ( string& cmd )
         {
             cout << endl << "[*]继续战争" << endl;
             this->status = start_war;
-            this->LoadMap ( string ( "standard" ), this->user->player->Get_War_Num() + 1 );
+            this->LoadMap ( string ( "standard" ), this->user->player->Get_War_Num() );
             this->user->player->Start_War ( this->_map );
             cout << endl << "[*]当前关卡: " << this->user->player->Get_War_Num() << endl;
             this->user->player->Show_Status();
@@ -417,42 +417,69 @@ bool Commander::Eval ( string& cmd )
             else
             {
                 cout << endl << "[*]战争开始";
-                this->user->ai = new AI();
+                this->user->player->First();
+                this->user->ai = new Player();
                 bool _first = this->user->player->Is_First();
-                this->user->ai->Init_Order(!_first);
                 if ( _first )
-                    {cout << endl << "[*]第一回合玩家先手" << endl;}
+                    cout << endl << "[*]第一回合玩家先手" << endl;
                 else
-                    {cout << endl << "[*]第一回合电脑先手" << endl;}
+                    cout << endl << "[*]第一回合电脑先手" << endl;
                 switch ( this->user->player->Get_War_Num() )
                 {
                     case 1:
                     {
-                        this->user->ai->AI_Init (100, 100, 100, 1);
+                        this->user->ai->AI_Init ( AI_PRESTIGE_1,
+                                                  AI_BITCOIN_1,
+                                                  AI_VIOLENCE_1,
+                                                  AI_BITCOIN_1,
+                                                  1,
+                                                  !_first );
                         break;
                     }
                     case 2:
                     {
-                        this->user->ai->AI_Init (200, 200, 200, 2);
+                        this->user->ai->AI_Init ( AI_PRESTIGE_2,
+                                                  AI_BITCOIN_2,
+                                                  AI_VIOLENCE_2,
+                                                  AI_BITCOIN_2,
+                                                  2,
+                                                  !_first );
                         break;
                     }
                     case 3:
                     {
-                        this->user->ai->AI_Init (300, 300, 300, 3);
+                        this->user->ai->AI_Init ( AI_PRESTIGE_3,
+                                                  AI_BITCOIN_3,
+                                                  AI_VIOLENCE_3,
+                                                  AI_BITCOIN_3,
+                                                  3,
+                                                  !_first );
                         break;
                     }
                     case 4:
                     {
-                        this->user->ai->AI_Init (400, 400, 400, 4);
+                        this->user->ai->AI_Init ( AI_PRESTIGE_4,
+                                                  AI_BITCOIN_4,
+                                                  AI_VIOLENCE_4,
+                                                  AI_BITCOIN_4,
+                                                  4,
+                                                  !_first );
                         break;
                     }
                     case 5:
                     {
-                        this->user->ai->AI_Init (500, 500, 500, 5);
+                        this->user->ai->AI_Init ( AI_PRESTIGE_5,
+                                                  AI_BITCOIN_5,
+                                                  AI_VIOLENCE_5,
+                                                  AI_BITCOIN_5,
+                                                  5,
+                                                  !_first );
                         break;
                     }
                 }
                 this->user->ai->Start_War ( this->_map );
+                if ( this->user->ai->Is_First() )
+                    this->user->ai->Action();
             }
             _result = true;
         }
@@ -465,7 +492,8 @@ bool Commander::Eval ( string& cmd )
     }
     else if ( this->status == start_war )
     {
-        //cout << "*******第" << this->user->ai->getAct_num() << "回合********" << endl << endl;
+        if ( this->user->ai->Is_First() )
+            this->user->ai->Action();
         if ( cmd == string ( "exit" ) )
         {
             cout << endl << "[*]本局游戏将不会被保存，也不会获得任何奖励，确认退出吗？(y/n)" << endl << ">>";
@@ -616,6 +644,8 @@ bool Commander::Eval ( string& cmd )
                     else
                         cout << endl << "[!]移动方向有障碍物，无法移动" << endl;
                 }
+                if ( !this->user->ai->Is_First() )
+                    this->user->ai->Action();
             }
         }
         else if ( cmd.substr ( 0, 7 ) == string ( "produce" ) )
@@ -720,6 +750,8 @@ bool Commander::Eval ( string& cmd )
                     else
                         cout << endl << "[!]生产资源不足" << endl;
                 }
+                if ( !this->user->ai->Is_First() )
+                    this->user->ai->Action();
             }
         }
         else if ( cmd.substr ( 0, 5 ) == string ( "build" ) )
@@ -737,13 +769,13 @@ bool Commander::Eval ( string& cmd )
             }
             else
                 cout << endl << "[!]只有Worker可以建造城市，当前选择的士兵并不是Worker，请重新选择。";
+
+                    if ( !this->user->ai->Is_First() )
+                        this->user->ai->Action();
         }
-        if (this->user->player->Is_First()) {
-                this->user->ai->action();
-            }
-        if(this->user->player->CheckWin())
+        if ( this->user->player->CheckWin() )
         {
-            cout <<endl<< "[*]战争结束，返回主页面" << endl;
+            cout << endl << "[*]战争结束，返回主页面" << endl;
             this->status = _main;
         }
         else

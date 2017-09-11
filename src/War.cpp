@@ -10,7 +10,6 @@ War::War ( double prestige, double bitcoin, double violence, int second, unsigne
     this->soldier_selecter = 0;
     this->_id = 0;
     this->_map = _map;
-
 }
 
 War::~War()
@@ -394,7 +393,7 @@ void War::_BuildCity()
 {
     this->_map->points[this->soldier_selecter->GetX()][this->soldier_selecter->GetY()].UpdatePower ( this->soldier_selecter->GetPower() );
     if ( this->soldier_selecter->GetPower() == player_city )
-        this->_map->DrawToMap ( '*', this->soldier_selecter->GetX(), this->soldier_selecter->GetY(), true);
+        this->_map->DrawToMap ( '*', this->soldier_selecter->GetX(), this->soldier_selecter->GetY(), true );
     else
-        this->_map->DrawToMap ( 'X', this->soldier_selecter->GetX(), this->soldier_selecter->GetY(), true);
+        this->_map->DrawToMap ( 'X', this->soldier_selecter->GetX(), this->soldier_selecter->GetY(), true );
 }

@@ -7,7 +7,6 @@ User::User ( const string username, const string password )
     this->filename = new string ( string ( ".\\userdata\\" ) + *this->username + string ( ".dat" ) );
     this->is_login = false;
     this->player = 0;
-    ai = new AI();
 }
 
 User::~User()

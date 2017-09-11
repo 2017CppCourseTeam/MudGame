@@ -211,7 +211,7 @@ void Map::DrawToMap ( const char& _c, unsigned int _x, unsigned int _y, bool _ri
 {
     unsigned int _y_ = ( _x * 3 ) + 1;
     unsigned int _x_ = ( _y * 2 ) + 1;
-    if (_right == true)
+    if ( _right == true )
         _y_ += 1;
     this->_map[_x_][_y_] = _c;
 }

@@ -36,6 +36,7 @@ class Player
         * 以下函数用于战争
         * 将War类中所有接口转入该类中
         **/
+        void First();
         bool Is_First(); // 判断玩家是否先手
         void Restart_War(); //　重置战争进度
         void Start_War ( Map*& _map ); // 开始战争
@@ -72,9 +73,12 @@ class Player
         bool Create_Soldier ( enum AllSoldiers soldier, enum LocalPower power, unsigned int x, unsigned int y ); // 在地图上x，y绝对坐标处生成一个士兵
         void Delete_Soldier ( unsigned int _id ); // 删除该id的士兵
 
-        void Ai_Init ( double prestige, double bitcoin, double violence, int second, unsigned short war_num, bool first ); // 初始化AI的接口
+        /** This for AI **/
+        void AI_Init ( double prestige, double bitcoin, double violence, int second, unsigned short war_num, bool first ); // 初始化AI的接口
+        void Action();
+        int getAct_num();
+        /** This for AI **/
 
-        War* CurrentWar();
     private:
         enum Is_Win _Result();
 
@@ -89,31 +93,16 @@ class Player
         enum IDENTITY identity;
         //enum Species allow_species[];
 
+        /** This for AI **/
+        int act_num;
+        int act[10];
+        int coldness;
+        /** This for AI **/
+
         HANDLE handle;
         War* war;
         friend class User;
 
 };
-
-class AI: public Player {
-public:
-    AI ();
-    bool getIfFirst();
-    ~AI();
-    void Init_Order(bool ifFirst);
-    void action();
-    int getAct_num();
-    void AI_Init(int prestige, int violence, int bitcoin, int war_num);
-private:
-    bool ifFirst;
-    int war_num;
-    int act_num;
-    int intellegence;
-    int strength;
-    int wealth;
-    int coldness;
-    int act[10];
-};
-
 
 #endif // PLAYER1_H_INCLUDED
