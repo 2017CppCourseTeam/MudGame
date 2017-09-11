@@ -2,9 +2,9 @@
 #define EARTH SetConsoleTextAttribute(handle, FOREGROUND_GREEN|FOREGROUND_INTENSITY|BACKGROUND_INTENSITY|BACKGROUND_BLUE);
 #define DEFAULT SetConsoleTextAttribute(handle, BACKGROUND_INTENSITY|BACKGROUND_RED|BACKGROUND_GREEN);
 
-Game::Game ( User*& user )
+Game::Game ( )
 {
-    this->user = user;
+    this->user = 0;
 }
 
 Game::~Game()

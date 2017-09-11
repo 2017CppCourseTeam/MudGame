@@ -4,8 +4,7 @@
 
 int main()
 {
-    User* user;
-    Game* game = new Game ( user );
+    Game* game = new Game ( );
     while ( true )
     {
         system ( "color E0" );

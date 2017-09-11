@@ -663,92 +663,66 @@ bool Commander::Eval ( string& cmd )
                 {
                     if ( this->user->player->Create_Soldier ( _Worker, player_city, _x, _y ) )
                         _result = true;
-                    else
-                        cout << endl << "[!]生产资源不足" << endl;
                 }
                 else if ( _subcmd == string ( "archer" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _Archer, player_city, _x, _y ) )
                         _result = true;
-                    else
-                        cout << endl << "[!]生产资源不足" << endl;
                 }
                 else if ( _subcmd == string ( "swordsman" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _SwordsMan, player_city, _x, _y ) )
                         _result = true;
-                    else
-                        cout << endl << "[!]生产资源不足" << endl;
                 }
                 else if ( _subcmd == string ( "priest" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _Priest, player_city, _x, _y ) )
                         _result = true;
-                    else
-                        cout << endl << "[!]生产资源不足" << endl;
                 }
                 else if ( _subcmd == string ( "siegcar" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _SiegCar, player_city, _x, _y ) )
                         _result = true;
-                    else
-                        cout << endl << "[!]生产资源不足" << endl;
                 }
                 else if ( _subcmd == string ( "dragon" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _Dragon, player_city, _x, _y ) )
                         _result = true;
-                    else
-                        cout << endl << "[!]生产资源不足" << endl;
                 }
                 else if ( _subcmd == string ( "wolf" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _Wolf, player_city, _x, _y ) )
                         _result = true;
-                    else
-                        cout << endl << "[!]生产资源不足" << endl;
                 }
                 else if ( _subcmd == string ( "slime" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _Slime, player_city, _x, _y ) )
                         _result = true;
-                    else
-                        cout << endl << "[!]生产资源不足" << endl;
                 }
                 else if ( _subcmd == string ( "goblin" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _Goblin, player_city, _x, _y ) )
                         _result = true;
-                    else
-                        cout << endl << "[!]生产资源不足" << endl;
                 }
                 else if ( _subcmd == string ( "icegiant" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _IceGiant, player_city, _x, _y ) )
                         _result = true;
-                    else
-                        cout << endl << "[!]生产资源不足" << endl;
                 }
                 else if ( _subcmd == string ( "flamebirds" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _FlameBirds, player_city, _x, _y ) )
                         _result = true;
-                    else
-                        cout << endl << "[!]生产资源不足" << endl;
                 }
                 else if ( _subcmd == string ( "naga" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _Naga, player_city, _x, _y ) )
                         _result = true;
-                    else
-                        cout << endl << "[!]生产资源不足" << endl;
                 }
                 else if ( _subcmd == string ( "phoenix" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _Phoenix, player_city, _x, _y ) )
                         _result = true;
-                    else
-                        cout << endl << "[!]生产资源不足" << endl;
                 }
                 if ( !this->user->ai->Is_First() )
                     this->user->ai->Action();
@@ -769,9 +743,8 @@ bool Commander::Eval ( string& cmd )
             }
             else
                 cout << endl << "[!]只有Worker可以建造城市，当前选择的士兵并不是Worker，请重新选择。";
-
-                    if ( !this->user->ai->Is_First() )
-                        this->user->ai->Action();
+            if ( !this->user->ai->Is_First() )
+                this->user->ai->Action();
         }
         if ( this->user->player->CheckWin() )
         {

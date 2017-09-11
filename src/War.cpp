@@ -331,14 +331,8 @@ bool War::_Create_Soldier ( enum AllSoldiers soldier, enum LocalPower power, uns
             }
         }
     }
-    if ( _result == true )
-    {
-        cout << endl << "[*]生产成功" << endl;
+    if ( _result )
         this->_AddSoldierToMap ( '*', x, y, this->created_soldier[this->created_soldier.size() - 1] );
-        this->_Show_Soldier_Status ( this->_id++ );
-    }
-    else
-        cout << endl << "[!]生产失败" << endl;
     return _result;
 }
 
@@ -375,11 +369,11 @@ unsigned int War::_GetPlayerBaseY()
 }
 unsigned int War::_GetAIBaseX()
 {
-    return this->_map->ai_base_x;
+    return ( ( this->_map->ai_base_x - 1 ) / 3 );
 }
 unsigned int War::_GetAIBaseY()
 {
-    return this->_map->ai_base_y;
+    return ( ( this->_map->ai_base_y - 1 ) / 2 );
 }
 enum AllSoldiers War::_GetCurrentSoldierName()
 {

@@ -306,7 +306,15 @@ void Player::Show_Soldier_Status()
 
 bool Player::Create_Soldier ( enum AllSoldiers soldier, enum LocalPower power, unsigned int x, unsigned int y )
 {
-    return this->war->_Create_Soldier ( soldier, power, x, y, &this->war->life, &this->war->magic, &this->war->coin );
+    bool _result = this->war->_Create_Soldier ( soldier, power, x, y, &this->war->life, &this->war->magic, &this->war->coin );
+    if ( _result )
+    {
+        cout << endl << "[*]生产成功" << endl;
+        this->war->_Show_Soldier_Status ( this->war->_id++ );
+    }
+    else
+        cout << endl << "[!]生产失败，资源不足" << endl;
+    return _result;
 }
 
 void Player::Delete_Soldier ( unsigned int _id )
@@ -367,17 +375,20 @@ void Player::Action()
                     if ( this->act_num == 1 )
                     {
                         this->Create_Soldier ( _Worker, ai_city, 7, 8 );
-                        //this->Select_Soldier(this->war->created_soldier[])
+                        this->Select_Soldier ( this->war->_id );
                     }
                     else
+                    {
                         this->Create_Soldier ( _Archer, ai_city, 7, 8 );
+                        this->Select_Soldier ( this->war->_id );
+                    }
                     break;
                 }
                 case 2:
                 case 3:
                 case 4:
                 {
-                    this->war->soldier_selecter->UpdateX ( -1 );
+                    this->MoveUp();
                     break;
                 }
                 case 5:
@@ -398,7 +409,7 @@ void Player::Action()
             {
                 case 1:
                 {
-                    this->Select_Soldier ( ( act_num - 40 ) / 8 );
+                    this->Select_Soldier ( ( this->act_num - 40 ) / 8 );
                     this->war->soldier_selecter->UpdateY ( -1 );
                     break;
                 }
@@ -542,13 +553,15 @@ void Player::Action()
                 case 5:
                 case 6:
                 case 7:
-                case 0:{
+                case 0:
+                {
                     this->Select_Soldier ( soldier_num );
                     if ( soldier_num == 1 && soldier_num == 2 && soldier_num == 3 && soldier_num == 4 )
                         this->war->soldier_selecter->UpdateX ( -1 );
                     else
                         this->war->soldier_selecter->UpdateY ( -1 );
-                    break;}
+                    break;
+                }
             }
         }
     }
@@ -742,8 +755,8 @@ void Player::Action()
                 }
             }
         }
-        this->act_num++;
     }
+    this->act_num++;
 }
 int Player::getAct_num()
 {

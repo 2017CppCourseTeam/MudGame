@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1505121120 source:f:\文档\学习资料\mudgame\main.cpp
+1505128672 source:f:\文档\学习资料\mudgame\main.cpp
 	"Game.h"
 	<windows.h>
 	<string>
@@ -73,19 +73,19 @@
 1505116323 f:\文档\学习资料\mudgame\include\war.h
 	"Map.h"
 
-1505119310 source:f:\文档\学习资料\mudgame\src\war.cpp
+1505130263 source:f:\文档\学习资料\mudgame\src\war.cpp
 	"War.h"
 
 1504340809 f:\文档\学习资料\mudgame\ai-settings.h
 
-1505119310 source:f:\文档\学习资料\mudgame\src\map.cpp
+1505130510 source:f:\文档\学习资料\mudgame\src\map.cpp
 	"Map.h"
 
 1505099458 f:\文档\学习资料\mudgame\include\map.h
 	<string>
 	"Soldier.h"
 
-1505116238 f:\文档\学习资料\mudgame\include\game.h
+1505128657 f:\文档\学习资料\mudgame\include\game.h
 	"Global.h"
 	"User.h"
 	"Commander.h"
@@ -144,16 +144,16 @@
 
 1504930901 f:\文档\学习资料\mudgame\include\ai-settings.h
 
-1505116238 source:f:\文档\学习资料\mudgame\src\game.cpp
+1505128657 source:f:\文档\学习资料\mudgame\src\game.cpp
 	"Game.h"
 
-1505121722 source:f:\文档\学习资料\mudgame\src\player.cpp
+1505130185 source:f:\文档\学习资料\mudgame\src\player.cpp
 	"Player.h"
 
 1505118809 source:f:\文档\学习资料\mudgame\src\user.cpp
 	"User.h"
 
-1505122162 source:f:\文档\学习资料\mudgame\src\commander.cpp
+1505129958 source:f:\文档\学习资料\mudgame\src\commander.cpp
 	"Commander.h"
 
 1505116238 source:f:\文档\学习资料\mudgame\src\soldier.cpp

@@ -313,8 +313,8 @@ void Map::_Init_Power()
             else if ( this->_map[i][j] == 'X' && this->_map[i][j + 1] == 'X' )
             {
                 this->points[k][l].UpdatePower ( _ai );
-                this->ai_base_x = i;
-                this->ai_base_y = j;
+                this->ai_base_x = j;
+                this->ai_base_y = i;
             }
             else
             {
