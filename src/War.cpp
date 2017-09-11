@@ -10,6 +10,7 @@ War::War ( double prestige, double bitcoin, double violence, int second, unsigne
     this->soldier_selecter = 0;
     this->_id = 0;
     this->_map = _map;
+
 }
 
 War::~War()

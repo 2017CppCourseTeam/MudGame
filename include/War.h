@@ -1,5 +1,5 @@
-#ifndef WAR_H
-#define WAR_H
+#ifndef WAR_H_INCLUDED
+#define WAR_H_INCLUDED
 
 #include "Map.h"
 
@@ -41,6 +41,11 @@ class War
         Soldier* soldier_selecter;
 
         friend class Player;
+<<<<<<< HEAD
+        friend class Commander;
+        friend class AI;
+=======
+>>>>>>> acbadf8fde47ffe048f458d2c5a504baec69387f
 
 };
 

@@ -1,7 +1,14 @@
-#ifndef PLAYER1_H_INCLUDED
-#define PLAYER1_H_INCLUDED
+#ifndef PLAYER_H_INCLUDED
+#define PLAYER_H_INCLUDED
 
 #include "War.h"
+<<<<<<< HEAD
+
+using namespace std;
+
+enum STATUS {_main = 0, practice, war, quit, start_war, win, lose};
+=======
+>>>>>>> acbadf8fde47ffe048f458d2c5a504baec69387f
 
 class Player
 {
@@ -92,5 +99,26 @@ class Player
         friend class User;
 
 };
+
+class AI: public Player {
+public:
+    AI ();
+    bool getIfFirst();
+    ~AI();
+    void Init_Order(bool ifFirst);
+    void action();
+    int getAct_num();
+    void AI_Init(int prestige, int violence, int bitcoin, int war_num);
+private:
+    bool ifFirst;
+    int war_num;
+    int act_num;
+    int intellegence;
+    int strength;
+    int wealth;
+    int coldness;
+    int act[10];
+};
+
 
 #endif // PLAYER1_H_INCLUDED
