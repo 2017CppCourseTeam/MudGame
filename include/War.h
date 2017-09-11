@@ -1,5 +1,5 @@
-#ifndef WAR_H
-#define WAR_H
+#ifndef WAR_H_INCLUDED
+#define WAR_H_INCLUDED
 
 #include "Map.h"
 #include "Soldier.h"
@@ -45,6 +45,7 @@ class War
 
         friend class Player;
         friend class Commander;
+        friend class AI;
 
 };
 

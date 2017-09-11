@@ -25,4 +25,7 @@
 #define AI_SECOND_4 40
 #define AI_SECOND_5 50
 
+#include "User.h"
+
+
 #endif // AI_SETTINGS_H

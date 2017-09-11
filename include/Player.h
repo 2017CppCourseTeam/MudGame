@@ -1,5 +1,5 @@
-#ifndef PLAYER1_H_INCLUDED
-#define PLAYER1_H_INCLUDED
+#ifndef PLAYER_H_INCLUDED
+#define PLAYER_H_INCLUDED
 
 #include <iostream>
 #include <ctime>
@@ -15,7 +15,6 @@
 #include <algorithm>
 
 #include "War.h"
-#include "AI-Settings.h"
 
 using namespace std;
 
@@ -91,5 +90,26 @@ class Player
         friend class Commander;
 
 };
+
+class AI: public Player {
+public:
+    AI ();
+    bool getIfFirst();
+    ~AI();
+    void Init_Order(bool ifFirst);
+    void action();
+    int getAct_num();
+    void AI_Init(int prestige, int violence, int bitcoin, int war_num);
+private:
+    bool ifFirst;
+    int war_num;
+    int act_num;
+    int intellegence;
+    int strength;
+    int wealth;
+    int coldness;
+    int act[10];
+};
+
 
 #endif // PLAYER1_H_INCLUDED

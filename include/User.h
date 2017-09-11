@@ -1,5 +1,6 @@
 #ifndef USER_H_INCLUDED
 #define USER_H_INCLUDED
+
 #include "Player.h"
 
 class User
@@ -16,8 +17,7 @@ class User
         bool Register ( );
         bool Save ( );
         bool DeleteUser ( );
-
-        Player* ai;
+        AI* ai;
         Player* player;
     private:
         string* username;

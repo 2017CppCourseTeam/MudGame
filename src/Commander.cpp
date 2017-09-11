@@ -359,37 +359,38 @@ bool Commander::Eval ( string& cmd )
             else
             {
                 cout << endl << "[*]战争开始";
-                this->user->ai = new Player();
+                this->user->ai = new AI();
                 bool _first = this->user->player->Is_First();
+                this->user->ai->Init_Order(!_first);
                 if ( _first )
-                    cout << endl << "[*]第一回合玩家先手" << endl;
+                    {cout << endl << "[*]第一回合玩家先手" << endl;}
                 else
-                    cout << endl << "[*]第一回合电脑先手" << endl;
+                    {cout << endl << "[*]第一回合电脑先手" << endl;}
                 switch ( this->user->player->Get_War_Num() )
                 {
                     case 1:
                     {
-                        this->user->ai->Ai_Init ( AI_PRESTIGE_1, AI_BITCOIN_1, AI_VIOLENCE_1, AI_SECOND_1, 1, !_first );
+                        this->user->ai->AI_Init (100, 100, 100, 1);
                         break;
                     }
                     case 2:
                     {
-                        this->user->ai->Ai_Init ( AI_PRESTIGE_2, AI_BITCOIN_2, AI_VIOLENCE_2, AI_SECOND_2, 2, !_first );
+                        this->user->ai->AI_Init (200, 200, 200, 2);
                         break;
                     }
                     case 3:
                     {
-                        this->user->ai->Ai_Init ( AI_PRESTIGE_3, AI_BITCOIN_3, AI_VIOLENCE_3, AI_SECOND_3, 3, !_first );
+                        this->user->ai->AI_Init (300, 300, 300, 3);
                         break;
                     }
                     case 4:
                     {
-                        this->user->ai->Ai_Init ( AI_PRESTIGE_4, AI_BITCOIN_4, AI_VIOLENCE_4, AI_SECOND_4, 4, !_first );
+                        this->user->ai->AI_Init (400, 400, 400, 4);
                         break;
                     }
                     case 5:
                     {
-                        this->user->ai->Ai_Init ( AI_PRESTIGE_5, AI_BITCOIN_5, AI_VIOLENCE_5, AI_SECOND_5, 5, !_first );
+                        this->user->ai->AI_Init (500, 500, 500, 5);
                         break;
                     }
                 }
@@ -407,6 +408,15 @@ bool Commander::Eval ( string& cmd )
     }
     else if ( this->status == start_war )
     {
+        //cout << "*******第" << this->user->ai->getAct_num() << "回合********" << endl << endl;
+        if (this->user->ai->getIfFirst()) {
+            cout << "AI先手：" << endl;
+            this->user->ai->action();
+            cout << "您后手：" << endl;
+        }
+        else {
+            cout << "您先手：" << endl;
+        }
         if ( cmd == string ( "exit" ) )
         {
             cout << endl << "[*]本局游戏将不会被保存，也不会获得任何奖励，确认退出吗？(y/n)" << endl << ">>";
@@ -614,8 +624,10 @@ bool Commander::Eval ( string& cmd )
             else
                 return false;
         }
-        else
-            return false;
+        if (!this->user->ai->getIfFirst()) {
+                cout << "AI后手：" << endl;
+                this->user->ai->action();
+            }
         this->_map->Update();
         this->user->player->Show_Map ( false );
         return true;
