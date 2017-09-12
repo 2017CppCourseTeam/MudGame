@@ -165,7 +165,7 @@
 1504539113 source:d:\mudgame\game.cpp
 	"Game.h"
 
-1504667145 source:d:\mudgame\main.cpp
+1505194456 source:d:\mudgame\main.cpp
 	"Game.h"
 	<windows.h>
 	<string>
@@ -176,75 +176,53 @@
 1504539777 source:d:\mudgame\player.cpp
 	"Game.h"
 
-1505092672 d:\mudgame\include\player.h
-	<iostream>
-	<ctime>
-	<cstdlib>
-	<cmath>
-	<iomanip>
-	<string>
-	<fstream>
-	<conio.h>
-	<cstdio>
-	<windows.h>
-	<sstream>
-	<algorithm>
+1505200026 d:\mudgame\include\player.h
 	"War.h"
 
-1505097102 d:\mudgame\include\war.h
+1505194456 d:\mudgame\include\war.h
 	"Map.h"
-	"Soldier.h"
-	<math.h>
-	<vector>
 
-1504854315 d:\mudgame\include\map.h
-	<iostream>
+1505194456 d:\mudgame\include\map.h
 	<string>
-	<fstream>
-	<sstream>
-	<vector>
 	"Soldier.h"
 
 1504863310 d:\mudgame\include\ai-settings.h
 	"User.h"
 
-1505110172 source:d:\mudgame\src\commander.cpp
-	"Game.h"
-	"War.h"
+1505194457 source:d:\mudgame\src\commander.cpp
+	"Commander.h"
 
-1504854315 d:\mudgame\include\game.h
+1505194456 d:\mudgame\include\game.h
+	"Global.h"
+	"User.h"
 	"Commander.h"
 	"windows.h"
 
-1504857982 d:\mudgame\include\commander.h
-	<iostream>
-	<vector>
-	<string>
+1505194456 d:\mudgame\include\commander.h
 	"User.h"
 
-1505090573 d:\mudgame\include\user.h
+1505194456 d:\mudgame\include\user.h
 	"Player.h"
 
-1504851396 source:d:\mudgame\src\game.cpp
+1505194457 source:d:\mudgame\src\game.cpp
 	"Game.h"
 
-1504854315 source:d:\mudgame\src\map.cpp
+1505194457 source:d:\mudgame\src\map.cpp
 	"Map.h"
 
-1505109918 source:d:\mudgame\src\player.cpp
-	"Game.h"
+1505194457 source:d:\mudgame\src\player.cpp
+	"Player.h"
 
-1504854315 source:d:\mudgame\src\soldier.cpp
+1505194457 source:d:\mudgame\src\soldier.cpp
 	"Soldier.h"
 
-1504854315 d:\mudgame\include\soldier.h
-	<string>
-	<algorithm>
+1505194456 d:\mudgame\include\soldier.h
+	"Global.h"
 
-1505090911 source:d:\mudgame\src\user.cpp
-	"Game.h"
+1505194457 source:d:\mudgame\src\user.cpp
+	"User.h"
 
-1504866872 source:d:\mudgame\src\war.cpp
+1505194457 source:d:\mudgame\src\war.cpp
 	"War.h"
 
 1505116238 f:\文档\学习资料\mudgame\include\global.h
@@ -271,4 +249,20 @@
 	"AI.h"
 
 1505056843 adf8fde47ffe048f458d2c5a504baec69387f
+
+1505194456 d:\mudgame\include\global.h
+	<ctime>
+	<cstdlib>
+	<cmath>
+	<iomanip>
+	<fstream>
+	<conio.h>
+	<cstdio>
+	<windows.h>
+	<sstream>
+	<math.h>
+	<iostream>
+	<string>
+	<algorithm>
+	<vector>
 
