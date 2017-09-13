@@ -610,6 +610,7 @@ bool Commander::Eval ( string& cmd )
                     if ( this->user->player->MoveUp() )
                     {
                         this->user->player->Show_Soldier_Status();
+                        this->user->player->Recover();
                         _result = true;
                     }
                     else
@@ -620,6 +621,7 @@ bool Commander::Eval ( string& cmd )
                     if ( this->user->player->MoveDown() )
                     {
                         this->user->player->Show_Soldier_Status();
+                        this->user->player->Recover();
                         _result = true;
                     }
                     else
@@ -630,6 +632,7 @@ bool Commander::Eval ( string& cmd )
                     if ( this->user->player->MoveLeft() )
                     {
                         this->user->player->Show_Soldier_Status();
+                        this->user->player->Recover();
                         _result = true;
                     }
                     else
@@ -640,6 +643,7 @@ bool Commander::Eval ( string& cmd )
                     if ( this->user->player->MoveRight() )
                     {
                         this->user->player->Show_Soldier_Status();
+                        this->user->player->Recover();
                         _result = true;
                     }
                     else
@@ -663,66 +667,79 @@ bool Commander::Eval ( string& cmd )
                 if ( _subcmd == string ( "worker" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _Worker, player_city, _x, _y ) )
+                        this->user->player->Recover();
                         _result = true;
                 }
                 else if ( _subcmd == string ( "archer" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _Archer, player_city, _x, _y ) )
+                        this->user->player->Recover();
                         _result = true;
                 }
                 else if ( _subcmd == string ( "swordsman" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _SwordsMan, player_city, _x, _y ) )
+                        this->user->player->Recover();
                         _result = true;
                 }
                 else if ( _subcmd == string ( "priest" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _Priest, player_city, _x, _y ) )
+                        this->user->player->Recover();
                         _result = true;
                 }
                 else if ( _subcmd == string ( "siegcar" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _SiegCar, player_city, _x, _y ) )
+                        this->user->player->Recover();
                         _result = true;
                 }
                 else if ( _subcmd == string ( "dragon" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _Dragon, player_city, _x, _y ) )
+                        this->user->player->Recover();
                         _result = true;
                 }
                 else if ( _subcmd == string ( "wolf" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _Wolf, player_city, _x, _y ) )
+                        this->user->player->Recover();
                         _result = true;
                 }
                 else if ( _subcmd == string ( "slime" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _Slime, player_city, _x, _y ) )
+                        this->user->player->Recover();
                         _result = true;
                 }
                 else if ( _subcmd == string ( "goblin" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _Goblin, player_city, _x, _y ) )
+                        this->user->player->Recover();
                         _result = true;
                 }
                 else if ( _subcmd == string ( "icegiant" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _IceGiant, player_city, _x, _y ) )
+                        this->user->player->Recover();
                         _result = true;
                 }
                 else if ( _subcmd == string ( "flamebirds" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _FlameBirds, player_city, _x, _y ) )
+                        this->user->player->Recover();
                         _result = true;
                 }
                 else if ( _subcmd == string ( "naga" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _Naga, player_city, _x, _y ) )
+                        this->user->player->Recover();
                         _result = true;
                 }
                 else if ( _subcmd == string ( "phoenix" ) )
                 {
                     if ( this->user->player->Create_Soldier ( _Phoenix, player_city, _x, _y ) )
+                        this->user->player->Recover();
                         _result = true;
                 }
                 if(_result && !this->user->ai->Is_First() )
@@ -736,6 +753,7 @@ bool Commander::Eval ( string& cmd )
                 if ( this->user->player->GetCityPower() == empty_city )
                 {
                     this->user->player->BuildCity();
+                    this->user->player->Recover();
                     cout << endl << "[*]建造成功" << endl;
                     _result = true;
                 }
@@ -752,8 +770,7 @@ bool Commander::Eval ( string& cmd )
             cout << endl << "[*]战争结束，返回主页面" << endl;
             this->status = _main;
         }
-        else
-            this->user->player->Recover();
+        //this->user->player->Recover();
     }
     return _result;
 }

@@ -779,7 +779,9 @@ void Player::BuildCity()
 }
 void Player::Recover()
 {
-    //this->war->_UpdateLife();
+    this->war->_UpdateLife(20);
+    this->war->_UpdateMagic(10);
+    this->war->_UpdateCoin(4);
 }
 enum IDENTITY Player::GetIdentity()
 {
