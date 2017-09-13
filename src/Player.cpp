@@ -882,7 +882,12 @@ bool Player::MoveUp()
             {
                 _isattack = true;
                 if ( this->war->_map->GetChar ( _x, _y - 1, true ) == 'X' )
-                    this->AttackBase ( _x, _y - 1 );
+                {
+                    if ( this->war->_map->Get_Point ( _x, _y - 1 )->GetPower() == ai_city )
+                        this->AttackCity ( _x, _y - 1 );
+                    else
+                        this->AttackBase ( _x, _y - 1 );
+                }
                 else
                     this->AttackSoldier ( _x, _y - 1 );
             }
@@ -901,7 +906,12 @@ bool Player::MoveUp()
             {
                 _isattack = true;
                 if ( this->war->_map->GetChar ( _x, _y - 1, true ) == '*' )
-                    this->AttackBase ( _x, _y - 1 );
+                {
+                    if ( this->war->_map->Get_Point ( _x, _y - 1 )->GetPower() == player_city )
+                        this->AttackCity ( _x, _y - 1 );
+                    else
+                        this->AttackBase ( _x, _y - 1 );
+                }
                 else
                     this->AttackSoldier ( _x, _y - 1 );
             }
@@ -945,7 +955,12 @@ bool Player::MoveDown()
             {
                 _isattack = true;
                 if ( this->war->_map->GetChar ( _x, _y + 1, true ) == 'X' )
-                    this->AttackBase ( _x, _y + 1 );
+                {
+                    if ( this->war->_map->Get_Point ( _x, _y + 1 )->GetPower() == ai_city )
+                        this->AttackCity ( _x, _y + 1 );
+                    else
+                        this->AttackBase ( _x, _y + 1 );
+                }
                 else
                     this->AttackSoldier ( _x, _y + 1 );
             }
@@ -964,7 +979,12 @@ bool Player::MoveDown()
             {
                 _isattack = true;
                 if ( this->war->_map->GetChar ( _x, _y + 1, true ) == '*' )
-                    this->AttackBase ( _x, _y + 1 );
+                {
+                    if ( this->war->_map->Get_Point ( _x, _y + 1 )->GetPower() == player_city )
+                        this->AttackCity ( _x, _y + 1 );
+                    else
+                        this->AttackBase ( _x, _y + 1 );
+                }
                 else
                     this->AttackSoldier ( _x, _y + 1 );
             }
@@ -1006,7 +1026,12 @@ bool Player::MoveLeft()
             {
                 _isattack = true;
                 if ( this->war->_map->GetChar ( _x - 1, _y, true ) == 'X' )
-                    this->AttackBase ( _x - 1, _y );
+                {
+                    if ( this->war->_map->Get_Point ( _x - 1, _y )->GetPower() == ai_city )
+                        this->AttackCity ( _x - 1, _y );
+                    else
+                        this->AttackBase ( _x - 1, _y );
+                }
                 else
                     this->AttackSoldier ( _x - 1, _y );
             }
@@ -1025,7 +1050,12 @@ bool Player::MoveLeft()
             {
                 _isattack = true;
                 if ( this->war->_map->GetChar ( _x - 1, _y, true ) == '*' )
-                    this->AttackBase ( _x - 1, _y );
+                {
+                    if ( this->war->_map->Get_Point ( _x - 1, _y )->GetPower() == player_city )
+                        this->AttackCity ( _x - 1, _y );
+                    else
+                        this->AttackBase ( _x - 1, _y );
+                }
                 else
                     this->AttackSoldier ( _x - 1, _y );
             }
@@ -1066,7 +1096,12 @@ bool Player::MoveRight()
             {
                 _isattack = true;
                 if ( this->war->_map->GetChar ( _x + 1, _y, true ) == 'X' )
-                    this->AttackBase ( _x + 1, _y );
+                {
+                    if ( this->war->_map->Get_Point ( _x + 1, _y )->GetPower() == ai_city )
+                        this->AttackCity ( _x + 1, _y );
+                    else
+                        this->AttackBase ( _x + 1, _y );
+                }
                 else
                     this->AttackSoldier ( _x + 1, _y );
             }
@@ -1085,7 +1120,12 @@ bool Player::MoveRight()
             {
                 _isattack = true;
                 if ( this->war->_map->GetChar ( _x + 1, _y, true ) == '*' )
-                    this->AttackBase ( _x + 1, _y );
+                {
+                    if ( this->war->_map->Get_Point ( _x + 1, _y )->GetPower() == player_city )
+                        this->AttackCity ( _x + 1, _y );
+                    else
+                        this->AttackBase ( _x + 1, _y );
+                }
                 else
                     this->AttackSoldier ( _x + 1, _y );
             }
