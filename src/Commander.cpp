@@ -432,7 +432,7 @@ bool Commander::Eval ( string& cmd )
                                                   AI_BITCOIN_1,
                                                   AI_VIOLENCE_1,
                                                   AI_BITCOIN_1,
-                                                  1,
+                                                  0,
                                                   !_first );
                         break;
                     }
@@ -442,7 +442,7 @@ bool Commander::Eval ( string& cmd )
                                                   AI_BITCOIN_2,
                                                   AI_VIOLENCE_2,
                                                   AI_BITCOIN_2,
-                                                  2,
+                                                  1,
                                                   !_first );
                         break;
                     }
@@ -452,7 +452,7 @@ bool Commander::Eval ( string& cmd )
                                                   AI_BITCOIN_3,
                                                   AI_VIOLENCE_3,
                                                   AI_BITCOIN_3,
-                                                  3,
+                                                  2,
                                                   !_first );
                         break;
                     }
@@ -462,7 +462,7 @@ bool Commander::Eval ( string& cmd )
                                                   AI_BITCOIN_4,
                                                   AI_VIOLENCE_4,
                                                   AI_BITCOIN_4,
-                                                  4,
+                                                  3,
                                                   !_first );
                         break;
                     }
@@ -472,7 +472,7 @@ bool Commander::Eval ( string& cmd )
                                                   AI_BITCOIN_5,
                                                   AI_VIOLENCE_5,
                                                   AI_BITCOIN_5,
-                                                  5,
+                                                  4,
                                                   !_first );
                         break;
                     }
