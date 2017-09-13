@@ -370,7 +370,6 @@ void Player::Action()
     int manipulator = this->act_num % 4;
     //int times = this->act_num / 32 + 1;
     cout << endl << "[*]NO." << this->act_num << " action" << endl;
-        cout << manipulator << "asdsadasd" << this->Get_War_Num();
     if ( this->Get_War_Num() == 1 )
     {
         if ( this->act_num % 32 > 0 && this->act_num % 32 <= 16 )
@@ -381,15 +380,13 @@ void Player::Action()
                 {
                     if ( this->act_num % 32 == 1 )
                     {
-                        cout << "asdasdasd";
                         this->Create_Soldier ( _Worker, ai_city, 3, 4 );
-                        this->Select_Soldier ( this->war->_id );
-                        cout << "asdasdasd";
+                        this->Select_Soldier ( this->war->_id - 1 );
                     }
                     else
                     {
                         this->Create_Soldier ( _Archer, ai_city, 3, 4 );
-                        this->Select_Soldier ( this->war->_id );
+                        this->Select_Soldier ( this->war->_id - 1 );
                     }
                     break;
                 }
@@ -444,17 +441,17 @@ void Player::Action()
                     if ( this->act_num % 72 == 1 )
                     {
                         this->Create_Soldier ( _Worker, ai_city, 5, 6 );
-                        this->Select_Soldier ( this->war->_id );
+                        this->Select_Soldier ( this->war->_id - 1 );
                     }
                     else if ( this->act_num % 72 >= 7 && this->act_num % 72 <= 19 )
                     {
                         this->Create_Soldier ( _Slime, ai_city, 5, 6 );
-                        this->Select_Soldier ( this->war->_id );
+                        this->Select_Soldier ( this->war->_id - 1 );
                     }
                     else
                     {
                         this->Create_Soldier ( _Goblin, ai_city, 5, 6 );
-                        this->Select_Soldier ( this->war->_id );
+                        this->Select_Soldier ( this->war->_id - 1 );
                     }
                     break;
                 }
@@ -515,17 +512,17 @@ void Player::Action()
                     if ( this->act_num % 144 == 1 )
                     {
                         this->Create_Soldier ( _Worker, ai_city, 7, 8 );
-                        this->Select_Soldier ( this->war->_id );
+                        this->Select_Soldier ( this->war->_id - 1 );
                     }
                     if ( this->act_num % 144 >= 9 && this->act_num % 144 <= 33 )
                     {
                         this->Create_Soldier ( _SwordsMan, ai_city, 7, 8 );
-                        this->Select_Soldier ( this->war->_id );
+                        this->Select_Soldier ( this->war->_id - 1 );
                     }
                     if ( this->act_num % 144 >= 41 && this->act_num % 144 <= 65 )
                     {
                         this->Create_Soldier ( _Dragon, ai_city, 7, 8 );
-                        this->Select_Soldier ( this->war->_id );
+                        this->Select_Soldier ( this->war->_id - 1 );
                     }
                     break;
                 }
@@ -605,22 +602,22 @@ void Player::Action()
                     if ( this->act_num % 260 == 1 )
                     {
                         this->Create_Soldier ( _Worker, ai_city, 9, 10 );
-                        this->Select_Soldier ( this->war->_id );
+                        this->Select_Soldier ( this->war->_id - 1 );
                     }
                     if ( this->act_num % 260 >= 11 && this->act_num % 260 <= 71 )
                     {
                         this->Create_Soldier ( _SiegCar, ai_city, 9, 10 );
-                        this->Select_Soldier ( this->war->_id );
+                        this->Select_Soldier ( this->war->_id - 1 );
                     }
                     if ( this->act_num % 260 >= 81 && this->act_num % 260 <=  111 )
                     {
                         this->Create_Soldier ( _Naga, ai_city, 9, 10 );
-                        this->Select_Soldier ( this->war->_id );
+                        this->Select_Soldier ( this->war->_id - 1 );
                     }
                     if ( this->act_num % 260 == 121 )
                     {
                         this->Create_Soldier ( _IceGiant, ai_city, 9, 10 );
-                        this->Select_Soldier ( this->war->_id );
+                        this->Select_Soldier ( this->war->_id - 1 );
                     }
                     break;
                 }
@@ -739,23 +736,23 @@ void Player::Action()
                 this->Create_Soldier ( _IceGiant, ai_city, 7, manipulator * 2 );
             if ( round_num == 3 )
                 this->Create_Soldier ( _Phoenix, ai_city, 7, manipulator * 2 );
-            this->Select_Soldier ( this->war->_id );
+            this->Select_Soldier ( this->war->_id - 1 );
         }
         if ( manipulator >= 5 )
         {
             switch ( base_num )
             {
                 case 1:
-                    this->Select_Soldier ( this->war->_id - 3 );
+                    this->Select_Soldier ( this->war->_id - 4 );
                     break;
                 case 2:
-                    this->Select_Soldier ( this->war->_id - 2 );
+                    this->Select_Soldier ( this->war->_id - 3 );
                     break;
                 case 3:
-                    this->Select_Soldier ( this->war->_id - 1 );
+                    this->Select_Soldier ( this->war->_id - 2 );
                     break;
                 case 0:
-                    this->Select_Soldier ( this->war->_id );
+                    this->Select_Soldier ( this->war->_id - 1 );
                     break;
             }
             this->MoveLeft();

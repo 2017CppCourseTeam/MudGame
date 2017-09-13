@@ -366,6 +366,7 @@ void War::_Delete_Soldier ( unsigned int _id )
     {
         this->created_soldier[i].UpdateID ( created_soldier[i].GetID() - 1 );
     }
+    this->_id--;
 }
 bool War::_IsSelectSoldier()
 {
