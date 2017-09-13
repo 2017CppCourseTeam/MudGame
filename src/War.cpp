@@ -2,10 +2,10 @@
 
 War::War ( double prestige, double bitcoin, double violence, int second, unsigned short war_num, Map*& _map )
 {
-    this->life =  prestige * 30 ;
-    this->magic = violence * 20 ;
-    this->coin = bitcoin * 10 ;
-    this->lucky = sqrt ( ( 10 - war_num ) * 0.03 ) + prestige * 0.05 + violence + 0.05 ;
+    this->life =  prestige * 30;
+    this->magic = violence * 20;
+    this->coin = bitcoin * 10;
+    this->lucky = ( sqrt ( ( 10 - war_num ) * 0.03 ) + prestige * 0.05 + violence + 0.05 ) / 100.0;
     this->point_selecter = 0;
     this->soldier_selecter = 0;
     this->_id = 0;
@@ -19,10 +19,10 @@ War::~War()
 void War::_Show_Status()
 {
     cout << endl << endl << "[*]当前状态:" << endl;
-    cout << endl << "[*]生命源: " << this->life << endl;
-    cout << endl << "[*]魔法源: " << this->magic << endl;
-    cout << endl << "[*]金钱: " << this->coin << endl;
-    cout << endl << "[*]幸运值: " << this->lucky << endl;
+    cout << "[*]生命源: " << this->life << endl;
+    cout << "[*]魔法源: " << this->magic << endl;
+    cout << "[*]金钱: " << this->coin << endl;
+    cout << "[*]幸运值: " << this->lucky * 100 << "%" << endl;
 }
 
 void War::_Show_Map ( bool show_detail )
@@ -75,6 +75,21 @@ void War::_Show_Soldier_Status()
     cout << "攻击力: " << this->soldier_selecter->GetAttack() << endl;
     cout << "防御力: " << this->soldier_selecter->GetDefence() << endl;
     cout << "位置: " << this->soldier_selecter->GetX() << ", " << this->soldier_selecter->GetY() << endl;
+}
+
+void War::_UpdateLife(int _life)
+{
+    this->life += _life;
+}
+
+void War::_UpdateMagic(int _magic)
+{
+    this->magic += _magic;
+}
+
+void War::_UpdateCoin(int _coin)
+{
+    this->coin += _coin;
 }
 
 
@@ -379,6 +394,13 @@ enum AllSoldiers War::_GetCurrentSoldierName()
 {
     return this->soldier_selecter->GetSoldierName();
 }
+
+Soldier* War::_GetSoldierFromPoint ( unsigned int _x, unsigned int _y, unsigned int _id )
+{
+    return this->_map->points[_x][_y]._GetSoldier ( _id );
+}
+
+
 enum LocalPower War::_GetCityPower()
 {
     return this->_map->points[this->soldier_selecter->GetX()][this->soldier_selecter->GetY()].GetPower();

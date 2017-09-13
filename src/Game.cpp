@@ -345,7 +345,7 @@ bool Game::Run ( )
     cout << endl << "[*]ÊäÈë'manual'»ñµÃÓÎÏ·ÏêÏ¸°ïÖú" << endl;
     while ( true )
     {
-        if ( /*this->_Check()*/1 )
+        if ( this->_Check() )
         {
             string cmd;
             cout << endl << "ÊäÈëÃüÁî: " << endl << ">>";
@@ -354,17 +354,17 @@ bool Game::Run ( )
             * Here for AI first
             **/
             if ( !this->commander->Eval ( cmd ) )
-                cout << endl << "[!]Î´ÖªÃüÁî: " << cmd << endl;
+                cout << endl << "[!]´íÎóµÄÃüÁî: " << cmd << endl;
         }
         else
             break;
     }
     return true;
 }
-/*
+
 bool Game::_Check()
 {
-    if ( this->commander->Get_Status() == lose )
+    if ( this->commander->Get_Status() == _lose_ )
     {
         cout << endl << "[*]ÄãÊäÁË" << endl;
         this->user->player->Show_Status();
@@ -372,7 +372,7 @@ bool Game::_Check()
         if ( getch() )
             return false;
     }
-    if ( this->commander->Get_Status() == win )
+    if ( this->commander->Get_Status() == _win_ )
     {
         cout << endl << "[*]ÄãÓ®ÁË" << endl;
         this->user->player->Show_Status();
@@ -386,7 +386,7 @@ bool Game::_Check()
         return false;
     }
     return true;
-}*/
+}
 
 void Game::Exit()
 {

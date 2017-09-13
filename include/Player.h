@@ -48,7 +48,7 @@ class Player
         void Show_Ponit_Status(); // 打印该点状态
         bool Select_Soldier ( unsigned int id ); // 在地图上选择一个士兵（根据id使选择器指向该id的士兵）
         void Show_Soldier_Status ( unsigned int id ); // 打印该士兵的状态（根据id）
-        void Show_Soldier_Status (  ); // 打印该士兵的状态（根据选择器） 重载
+        void Show_Soldier_Status ( );  // 打印该士兵的状态（根据选择器） 重载
         bool IsSelectSoldier(); // 判断选择器是否选择了一个士兵
 
         unsigned int GetPlayerBaseX(); // 得到玩家基地的绝对X坐标
@@ -56,7 +56,7 @@ class Player
         unsigned int GetAIBaseX(); // 得到AI基地的绝对X坐标
         unsigned int GetAIBaseY(); // 得到AI基地的绝对Y坐标
 
-        bool CheckWin();
+        bool CheckWin(); // 检查是否胜利
 
         enum AllSoldiers GetCurrentSoldierName();
 
@@ -64,21 +64,25 @@ class Player
 
         void BuildCity(); // 在当前士兵选择器所选择的士兵的地点处建立一个城市
 
-        bool MoveUp();
-        bool MoveDown();
-        bool MoveLeft();
-        bool MoveRight();
-        void Recover();
+        bool MoveUp(); // 士兵选择器所指向的士兵上移
+        bool MoveDown(); // 士兵选择器所指向的士兵下移
+        bool MoveLeft(); // 士兵选择器所指向的士兵左移
+        bool MoveRight(); // 士兵选择器所指向的士兵右移
+        void Recover(); // 每回合自动回复
 
         bool Create_Soldier ( enum AllSoldiers soldier, enum LocalPower power, unsigned int x, unsigned int y ); // 在地图上x，y绝对坐标处生成一个士兵
         void Delete_Soldier ( unsigned int _id ); // 删除该id的士兵
+        Soldier* GetSoldierFromPoint ( unsigned int _x, unsigned int _y, unsigned int _id );
+        bool IsCounterAttack();
+        void AttackBase ( unsigned int _x, unsigned int _y );
+        void AttackSoldier ( unsigned int _x, unsigned int _y );
+        void AttackCity ( unsigned int _x, unsigned int _y );
 
         /** This for AI **/
         void AI_Init ( double prestige, double bitcoin, double violence, int second, unsigned short war_num, bool first ); // 初始化AI的接口
         void Action();
         int getAct_num();
         /** This for AI **/
-
     private:
         enum Is_Win _Result();
 

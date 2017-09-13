@@ -268,7 +268,7 @@ void Player::Show_Map ( bool show_detail )
 
 void Player::First()
 {
-    if (  ( rand() / double ( RAND_MAX ) ) <= 0.5 )
+    if ( ( rand() / double ( RAND_MAX ) ) <= 0.5 )
         this->war_first = true;
     else
         this->war_first = false;
@@ -322,6 +322,11 @@ void Player::Delete_Soldier ( unsigned int _id )
     this->war->_Delete_Soldier ( _id );
 }
 
+Soldier* Player::GetSoldierFromPoint ( unsigned int _x, unsigned int _y, unsigned int _id )
+{
+    return this->war->_GetSoldierFromPoint ( _x, _y, _id );
+}
+
 bool Player::IsSelectSoldier()
 {
     return this->war->_IsSelectSoldier();
@@ -362,402 +367,404 @@ void Player::AI_Init ( double prestige, double bitcoin, double violence, int sec
 
 void Player::Action()
 {
-    int manipulator = this->act_num % 8;
-    cout << endl << "[*]NO." << this->act_num << " action" << endl;
-    if ( this->Get_War_Num() == 1 )
-    {
-        if ( this->act_num <= 40 )
-        {
-            switch ( manipulator )
-            {
-                case 1:
-                {
-                    if ( this->act_num == 1 )
-                    {
-                        this->Create_Soldier ( _Worker, ai_city, 7, 8 );
-                        this->Select_Soldier ( this->war->_id );
-                    }
-                    else
-                    {
-                        this->Create_Soldier ( _Archer, ai_city, 7, 8 );
-                        this->Select_Soldier ( this->war->_id );
-                    }
-                    break;
-                }
-                case 2:
-                case 3:
-                case 4:
-                {
-                    this->MoveUp();
-                    break;
-                }
-                case 5:
-                case 6:
-                case 7:
-                case 0:
-                {
-                    this->war->soldier_selecter->UpdateY ( -1 );
-                    if ( this->act_num == 8 )
-                        this->BuildCity();
-                    break;
-                }
-            }
-        }
-        else if ( this->act_num > 40 && this->act_num <= 80 )
-        {
-            switch ( manipulator )
-            {
-                case 1:
-                {
-                    this->Select_Soldier ( ( this->act_num - 40 ) / 8 );
-                    this->war->soldier_selecter->UpdateY ( -1 );
-                    break;
-                }
-                case 2:
-                case 3:
-                case 4:
-                {
-                    this->war->soldier_selecter->UpdateY ( -1 );
-                    break;
-                }
-                case 5:
-                case 6:
-                case 7:
-                case 0:
-                {
-                    this->war->soldier_selecter->UpdateX ( -1 );
-                    break;
-                }
-            }
-        }
-    }
-    if ( this->Get_War_Num() == 2 )
-    {
-        if ( this->act_num <= 56 )
-        {
-            switch ( manipulator )
-            {
-                case 1:
-                {
-                    if ( this->act_num == 1 )
-                        this->Create_Soldier ( _Worker, ai_city, 7, 8 );
-                    else if ( this->act_num == 9 && this->act_num == 17 && this->act_num == 25 )
-                        this->Create_Soldier ( _Slime, ai_city, 7, 8 );
-                    else
-                        this->Create_Soldier ( _Goblin, ai_city, 7, 8 );
-                    break;
-                }
-                case 2:
-                case 3:
-                case 4:
-                {
-                    this->war->soldier_selecter->UpdateX ( -1 );
-                    break;
-                }
-                case 5:
-                case 6:
-                case 7:
-                case 0:
-                {
-                    this->war->soldier_selecter->UpdateY ( -1 );
-                    if ( this->act_num == 8 )
-                        this->BuildCity();
-                    break;
-                }
-            }
-        }
-        else if ( this->act_num > 56 && this->act_num <= 112 )
-            switch ( manipulator )
-            {
-                case 1:
-                {
-                    this->Select_Soldier ( ( this->act_num - 56 ) / 8 );
-                    this->war->soldier_selecter->UpdateY ( -1 );
-                    break;
-                }
-                case 2:
-                case 3:
-                case 4:
-                {
-                    this->war->soldier_selecter->UpdateY ( -1 );
-                    break;
-                }
-                case 5:
-                case 6:
-                case 7:
-                case 0:
-                {
-                    this->war->soldier_selecter->UpdateX ( -1 );
-                    break;
-                }
-            }
-    }
-    if ( this->Get_War_Num() == 3 )
-    {
-        if ( this->act_num <= 72 )
-            switch ( manipulator )
-            {
-                case 1:
-                {
-                    if ( this->act_num == 1 )
-                        this->Create_Soldier ( _Worker, ai_city, 7, 8 );
-                    if ( this->act_num == 9 || this->act_num == 17 || this->act_num == 25 || this->act_num == 33 )
-                        this->Create_Soldier ( _SwordsMan, ai_city, 7, 8 );
-                    if ( this->act_num == 57 || this->act_num == 41 || this->act_num == 49 || this->act_num == 65 )
-                        this->Create_Soldier ( _Dragon, ai_city, 7, 8 );
-                    break;
-                }
-                case 2:
-                case 3:
-                case 4:
-                {
-                    this->war->soldier_selecter->UpdateX ( - 1 );
-                    break;
-                }
-                case 5:
-                case 6:
-                case 7:
-                case 0:
-                {
-                    this->war->soldier_selecter->UpdateY ( - 1 );
-                    if ( this->act_num == 8 )
-                        this->BuildCity();
-                    break;
-                }
-            }
-        else if ( this->act_num > 72 && this->act_num <= 144 )
-        {
-            int soldier_num = ( this->act_num - 72 ) / 8;
-            switch ( manipulator )
-            {
-                case 1:
-                {
-                    this->Select_Soldier ( soldier_num );
-                    if ( soldier_num == 1 && soldier_num == 2 && soldier_num == 3 && soldier_num == 4 )
-                        this->war->soldier_selecter->UpdateY ( -1 );
-                    else
-                        this->war->soldier_selecter->UpdateX ( -1 );
-                    break;
-                }
-                case 2:
-                case 3:
-                case 4:
-                {
-                    this->Select_Soldier ( soldier_num );
-                    if ( soldier_num == 1 && soldier_num == 2 && soldier_num == 3 && soldier_num == 4 )
-                        this->war->soldier_selecter->UpdateY ( -1 );
-                    else
-                        this->war->soldier_selecter->UpdateX ( -1 );
-                    break;
-                }
-                case 5:
-                case 6:
-                case 7:
-                case 0:
-                {
-                    this->Select_Soldier ( soldier_num );
-                    if ( soldier_num == 1 && soldier_num == 2 && soldier_num == 3 && soldier_num == 4 )
-                        this->war->soldier_selecter->UpdateX ( -1 );
-                    else
-                        this->war->soldier_selecter->UpdateY ( -1 );
-                    break;
-                }
-            }
-        }
-    }
-    if ( this->Get_War_Num() == 4 )
-    {
-        if ( this->act_num <= 104 )
-            switch ( manipulator )
-            {
-                case 1:
-                {
-                    if ( this->act_num == 1 )
-                        this->Create_Soldier ( _Worker, ai_city, 7, 8 );
-                    if ( this->act_num == 9 ||
-                            this->act_num == 17 ||
-                            this->act_num == 25 ||
-                            this->act_num == 33 ||
-                            this->act_num == 41 ||
-                            this->act_num == 49 ||
-                            this->act_num == 57 )
-                        this->Create_Soldier ( _SiegCar, ai_city, 7, 8 );
-                    if ( this->act_num == 65 ||
-                            this->act_num == 73 ||
-                            this->act_num == 81 ||
-                            this->act_num == 89 )
-                        this->Create_Soldier ( _Naga, ai_city, 7, 8 );
-                    if ( this->act_num == 97 )
-                        this->Create_Soldier ( _IceGiant, ai_city, 7, 8 );
-                    break;
-                }
-                case 2:
-                case 3:
-                case 4:
-                {
-                    this->war->soldier_selecter->UpdateX ( -1 );
-                    this->war->_Show_Soldier_Status ( );
-                    break;
-                }
-                case 5:
-                case 6:
-                case 7:
-                case 0:
-                {
-                    this->war->soldier_selecter->UpdateY ( -1 );
-                    this->war->_Show_Soldier_Status ( );
-                    if ( act_num == 8 )
-                        this->BuildCity();
-                    break;
-                }
-            }
-        else if ( this->act_num > 104 && this->act_num <= 208 )
-        {
-            int soldier_num = ( this->act_num - 104 ) / 8;
-            switch ( manipulator )
-            {
-                case 1:
-                {
-                    this->Select_Soldier ( soldier_num );
-                    if ( soldier_num >= 1 && soldier_num <= 7 )
-                    {
-                        this->war->soldier_selecter->UpdateY ( -1 );
-                        this->war->_Show_Soldier_Status ( );
-                    }
-                    else
-                        this->war->soldier_selecter->UpdateX ( -1 );
-                    break;
-                }
-                case 2:
-                case 3:
-                case 4:
-                {
-                    this->Select_Soldier ( soldier_num );
-                    if ( soldier_num >= 1 && soldier_num <= 7 )
-                        this->war->soldier_selecter->UpdateY ( -1 );
-                    else
-                        this->war->soldier_selecter->UpdateX ( -1 );
-                    break;
-                }
-                case 5:
-                case 6:
-                case 7:
-                case 0:
-                {
-                    this->Select_Soldier ( soldier_num );
-                    if ( soldier_num >= 1 && soldier_num <= 7 )
-                        this->war->soldier_selecter->UpdateX ( -1 );
-                    else
-                        this->war->soldier_selecter->UpdateY ( -1 );
-                    break;
-                }
-            }
-        }
-    }
-    if ( this->Get_War_Num() == 5 )
-    {
-        if ( this->act_num == 1 )
-        {
-            this->Create_Soldier ( _Naga, ai_city, 8, 6 );
-            this->Create_Soldier ( _Naga, ai_city, 7, 7 );
-            this->Create_Soldier ( _Naga, ai_city, 6, 8 );
-            cout << "蛤蛤蛤，三个蛙人部署完毕。" << endl;
-        }
-        int manipulator = act_num % 8;
-        if ( this->act_num <= 176 )
-        {
-            switch ( manipulator )
-            {
-                case 1:
-                {
-                    if ( this->act_num >= 1 )
-                        this->Create_Soldier ( _Worker, ai_city, 7, 8 );
-                    if ( this->act_num >= 9 && this->act_num <= 73 )
-                        this->Create_Soldier ( _Dragon, ai_city, 7, 8 );
-                    if ( this->act_num >= 81 && this->act_num <= 105 )
-                        this->Create_Soldier ( _IceGiant, ai_city, 7, 8 );
-                    if ( this->act_num >= 113 && this->act_num <= 137 )
-                        this->Create_Soldier ( _FlameBirds, ai_city, 7, 8 );
-                    if ( this->act_num >= 145 && this->act_num <= 169 )
-                        this->Create_Soldier ( _Phoenix, ai_city, 7, 8 );
-                    break;
-                }
-                case 2:
-                case 3:
-                case 4:
-                {
-                    this->war->soldier_selecter->UpdateX ( -1 );
-                    this->war->_Show_Soldier_Status ( );
-                    break;
-                }
-                case 5:
-                case 6:
-                case 7:
-                case 0:
-                {
-                    this->war->soldier_selecter->UpdateY ( -1 );
-                    this->war->_Show_Soldier_Status ( );
-                    if ( this->act_num == 8 )
-                        this->BuildCity();
-                    break;
-                }
-            }
-        }
-        else if ( this->act_num > 176 && this->act_num <= 332 )
-        {
-            int soldier_num = ( this->act_num - 176 ) / 8;
-            if ( soldier_num % 3 == 1 )
-            {
-                if ( manipulator == 1 )
-                    this->Select_Soldier ( soldier_num );
-                if ( manipulator % 2 == 0 )
-                    this->war->soldier_selecter->UpdateY ( -1 );
-                else
-                    this->war->soldier_selecter->UpdateX ( -1 );
-            }
-            else
-            {
-                int soldier_num = ( this->act_num - 176 ) / 8;
-                switch ( manipulator )
-                {
-                    case 1:
-                    {
-                        this->Select_Soldier ( soldier_num );
-                        if ( soldier_num % 3 == 0 )
-                            this->war->soldier_selecter->UpdateY ( -1 );
-                        else
-                            this->war->soldier_selecter->UpdateX ( -1 );
-                        break;
-                    }
-                    case 2:
-                    case 3:
-                    case 4:
-                    {
-                        this->Select_Soldier ( soldier_num );
-                        if ( soldier_num % 3 == 0 )
-                            this->war->soldier_selecter->UpdateY ( -1 );
-                        else
-                            this->war->soldier_selecter->UpdateX ( -1 );
-                        break;
-                    }
-                    case 5:
-                    case 6:
-                    case 7:
-                    case 0:
-                    {
-                        this->Select_Soldier ( soldier_num );
-                        if ( soldier_num >= 1 && soldier_num <= 7 )
-                            this->war->soldier_selecter->UpdateX ( -1 );
-                        else
-                            this->war->soldier_selecter->UpdateY ( -1 );
-                        break;
-                    }
-                }
-            }
-        }
-    }
-    this->act_num++;
+    /*
+       int manipulator = this->act_num % 8;
+       cout << endl << "[*]NO." << this->act_num << " action" << endl;
+       if ( this->Get_War_Num() == 1 )
+       {
+           if ( this->act_num <= 40 )
+           {
+               switch ( manipulator )
+               {
+                   case 1:
+                   {
+                       if ( this->act_num == 1 )
+                       {
+                           this->Create_Soldier ( _Worker, ai_city, 7, 8 );
+                           this->Select_Soldier ( this->war->_id );
+                       }
+                       else
+                       {
+                           this->Create_Soldier ( _Archer, ai_city, 7, 8 );
+                           this->Select_Soldier ( this->war->_id );
+                       }
+                       break;
+                   }
+                   case 2:
+                   case 3:
+                   case 4:
+                   {
+                       this->MoveUp();
+                       break;
+                   }
+                   case 5:
+                   case 6:
+                   case 7:
+                   case 0:
+                   {
+                       this->war->soldier_selecter->UpdateY ( -1 );
+                       if ( this->act_num == 8 )
+                           this->BuildCity();
+                       break;
+                   }
+               }
+           }
+           else if ( this->act_num > 40 && this->act_num <= 80 )
+           {
+               switch ( manipulator )
+               {
+                   case 1:
+                   {
+                       this->Select_Soldier ( ( this->act_num - 40 ) / 8 );
+                       this->war->soldier_selecter->UpdateY ( -1 );
+                       break;
+                   }
+                   case 2:
+                   case 3:
+                   case 4:
+                   {
+                       this->war->soldier_selecter->UpdateY ( -1 );
+                       break;
+                   }
+                   case 5:
+                   case 6:
+                   case 7:
+                   case 0:
+                   {
+                       this->war->soldier_selecter->UpdateX ( -1 );
+                       break;
+                   }
+               }
+           }
+       }
+       if ( this->Get_War_Num() == 2 )
+       {
+           if ( this->act_num <= 56 )
+           {
+               switch ( manipulator )
+               {
+                   case 1:
+                   {
+                       if ( this->act_num == 1 )
+                           this->Create_Soldier ( _Worker, ai_city, 7, 8 );
+                       else if ( this->act_num == 9 && this->act_num == 17 && this->act_num == 25 )
+                           this->Create_Soldier ( _Slime, ai_city, 7, 8 );
+                       else
+                           this->Create_Soldier ( _Goblin, ai_city, 7, 8 );
+                       break;
+                   }
+                   case 2:
+                   case 3:
+                   case 4:
+                   {
+                       this->war->soldier_selecter->UpdateX ( -1 );
+                       break;
+                   }
+                   case 5:
+                   case 6:
+                   case 7:
+                   case 0:
+                   {
+                       this->war->soldier_selecter->UpdateY ( -1 );
+                       if ( this->act_num == 8 )
+                           this->BuildCity();
+                       break;
+                   }
+               }
+           }
+           else if ( this->act_num > 56 && this->act_num <= 112 )
+               switch ( manipulator )
+               {
+                   case 1:
+                   {
+                       this->Select_Soldier ( ( this->act_num - 56 ) / 8 );
+                       this->war->soldier_selecter->UpdateY ( -1 );
+                       break;
+                   }
+                   case 2:
+                   case 3:
+                   case 4:
+                   {
+                       this->war->soldier_selecter->UpdateY ( -1 );
+                       break;
+                   }
+                   case 5:
+                   case 6:
+                   case 7:
+                   case 0:
+                   {
+                       this->war->soldier_selecter->UpdateX ( -1 );
+                       break;
+                   }
+               }
+       }
+       if ( this->Get_War_Num() == 3 )
+       {
+           if ( this->act_num <= 72 )
+               switch ( manipulator )
+               {
+                   case 1:
+                   {
+                       if ( this->act_num == 1 )
+                           this->Create_Soldier ( _Worker, ai_city, 7, 8 );
+                       if ( this->act_num == 9 || this->act_num == 17 || this->act_num == 25 || this->act_num == 33 )
+                           this->Create_Soldier ( _SwordsMan, ai_city, 7, 8 );
+                       if ( this->act_num == 57 || this->act_num == 41 || this->act_num == 49 || this->act_num == 65 )
+                           this->Create_Soldier ( _Dragon, ai_city, 7, 8 );
+                       break;
+                   }
+                   case 2:
+                   case 3:
+                   case 4:
+                   {
+                       this->war->soldier_selecter->UpdateX ( - 1 );
+                       break;
+                   }
+                   case 5:
+                   case 6:
+                   case 7:
+                   case 0:
+                   {
+                       this->war->soldier_selecter->UpdateY ( - 1 );
+                       if ( this->act_num == 8 )
+                           this->BuildCity();
+                       break;
+                   }
+               }
+           else if ( this->act_num > 72 && this->act_num <= 144 )
+           {
+               int soldier_num = ( this->act_num - 72 ) / 8;
+               switch ( manipulator )
+               {
+                   case 1:
+                   {
+                       this->Select_Soldier ( soldier_num );
+                       if ( soldier_num == 1 && soldier_num == 2 && soldier_num == 3 && soldier_num == 4 )
+                           this->war->soldier_selecter->UpdateY ( -1 );
+                       else
+                           this->war->soldier_selecter->UpdateX ( -1 );
+                       break;
+                   }
+                   case 2:
+                   case 3:
+                   case 4:
+                   {
+                       this->Select_Soldier ( soldier_num );
+                       if ( soldier_num == 1 && soldier_num == 2 && soldier_num == 3 && soldier_num == 4 )
+                           this->war->soldier_selecter->UpdateY ( -1 );
+                       else
+                           this->war->soldier_selecter->UpdateX ( -1 );
+                       break;
+                   }
+                   case 5:
+                   case 6:
+                   case 7:
+                   case 0:
+                   {
+                       this->Select_Soldier ( soldier_num );
+                       if ( soldier_num == 1 && soldier_num == 2 && soldier_num == 3 && soldier_num == 4 )
+                           this->war->soldier_selecter->UpdateX ( -1 );
+                       else
+                           this->war->soldier_selecter->UpdateY ( -1 );
+                       break;
+                   }
+               }
+           }
+       }
+       if ( this->Get_War_Num() == 4 )
+       {
+           if ( this->act_num <= 104 )
+               switch ( manipulator )
+               {
+                   case 1:
+                   {
+                       if ( this->act_num == 1 )
+                           this->Create_Soldier ( _Worker, ai_city, 7, 8 );
+                       if ( this->act_num == 9 ||
+                               this->act_num == 17 ||
+                               this->act_num == 25 ||
+                               this->act_num == 33 ||
+                               this->act_num == 41 ||
+                               this->act_num == 49 ||
+                               this->act_num == 57 )
+                           this->Create_Soldier ( _SiegCar, ai_city, 7, 8 );
+                       if ( this->act_num == 65 ||
+                               this->act_num == 73 ||
+                               this->act_num == 81 ||
+                               this->act_num == 89 )
+                           this->Create_Soldier ( _Naga, ai_city, 7, 8 );
+                       if ( this->act_num == 97 )
+                           this->Create_Soldier ( _IceGiant, ai_city, 7, 8 );
+                       break;
+                   }
+                   case 2:
+                   case 3:
+                   case 4:
+                   {
+                       this->war->soldier_selecter->UpdateX ( -1 );
+                       this->war->_Show_Soldier_Status ( );
+                       break;
+                   }
+                   case 5:
+                   case 6:
+                   case 7:
+                   case 0:
+                   {
+                       this->war->soldier_selecter->UpdateY ( -1 );
+                       this->war->_Show_Soldier_Status ( );
+                       if ( act_num == 8 )
+                           this->BuildCity();
+                       break;
+                   }
+               }
+           else if ( this->act_num > 104 && this->act_num <= 208 )
+           {
+               int soldier_num = ( this->act_num - 104 ) / 8;
+               switch ( manipulator )
+               {
+                   case 1:
+                   {
+                       this->Select_Soldier ( soldier_num );
+                       if ( soldier_num >= 1 && soldier_num <= 7 )
+                       {
+                           this->war->soldier_selecter->UpdateY ( -1 );
+                           this->war->_Show_Soldier_Status ( );
+                       }
+                       else
+                           this->war->soldier_selecter->UpdateX ( -1 );
+                       break;
+                   }
+                   case 2:
+                   case 3:
+                   case 4:
+                   {
+                       this->Select_Soldier ( soldier_num );
+                       if ( soldier_num >= 1 && soldier_num <= 7 )
+                           this->war->soldier_selecter->UpdateY ( -1 );
+                       else
+                           this->war->soldier_selecter->UpdateX ( -1 );
+                       break;
+                   }
+                   case 5:
+                   case 6:
+                   case 7:
+                   case 0:
+                   {
+                       this->Select_Soldier ( soldier_num );
+                       if ( soldier_num >= 1 && soldier_num <= 7 )
+                           this->war->soldier_selecter->UpdateX ( -1 );
+                       else
+                           this->war->soldier_selecter->UpdateY ( -1 );
+                       break;
+                   }
+               }
+           }
+       }
+       if ( this->Get_War_Num() == 5 )
+       {
+           if ( this->act_num == 1 )
+           {
+               this->Create_Soldier ( _Naga, ai_city, 8, 6 );
+               this->Create_Soldier ( _Naga, ai_city, 7, 7 );
+               this->Create_Soldier ( _Naga, ai_city, 6, 8 );
+               cout << "蛤蛤蛤，三个蛙人部署完毕。" << endl;
+           }
+           int manipulator = act_num % 8;
+           if ( this->act_num <= 176 )
+           {
+               switch ( manipulator )
+               {
+                   case 1:
+                   {
+                       if ( this->act_num >= 1 )
+                           this->Create_Soldier ( _Worker, ai_city, 7, 8 );
+                       if ( this->act_num >= 9 && this->act_num <= 73 )
+                           this->Create_Soldier ( _Dragon, ai_city, 7, 8 );
+                       if ( this->act_num >= 81 && this->act_num <= 105 )
+                           this->Create_Soldier ( _IceGiant, ai_city, 7, 8 );
+                       if ( this->act_num >= 113 && this->act_num <= 137 )
+                           this->Create_Soldier ( _FlameBirds, ai_city, 7, 8 );
+                       if ( this->act_num >= 145 && this->act_num <= 169 )
+                           this->Create_Soldier ( _Phoenix, ai_city, 7, 8 );
+                       break;
+                   }
+                   case 2:
+                   case 3:
+                   case 4:
+                   {
+                       this->war->soldier_selecter->UpdateX ( -1 );
+                       this->war->_Show_Soldier_Status ( );
+                       break;
+                   }
+                   case 5:
+                   case 6:
+                   case 7:
+                   case 0:
+                   {
+                       this->war->soldier_selecter->UpdateY ( -1 );
+                       this->war->_Show_Soldier_Status ( );
+                       if ( this->act_num == 8 )
+                           this->BuildCity();
+                       break;
+                   }
+               }
+           }
+           else if ( this->act_num > 176 && this->act_num <= 332 )
+           {
+               int soldier_num = ( this->act_num - 176 ) / 8;
+               if ( soldier_num % 3 == 1 )
+               {
+                   if ( manipulator == 1 )
+                       this->Select_Soldier ( soldier_num );
+                   if ( manipulator % 2 == 0 )
+                       this->war->soldier_selecter->UpdateY ( -1 );
+                   else
+                       this->war->soldier_selecter->UpdateX ( -1 );
+               }
+               else
+               {
+                   int soldier_num = ( this->act_num - 176 ) / 8;
+                   switch ( manipulator )
+                   {
+                       case 1:
+                       {
+                           this->Select_Soldier ( soldier_num );
+                           if ( soldier_num % 3 == 0 )
+                               this->war->soldier_selecter->UpdateY ( -1 );
+                           else
+                               this->war->soldier_selecter->UpdateX ( -1 );
+                           break;
+                       }
+                       case 2:
+                       case 3:
+                       case 4:
+                       {
+                           this->Select_Soldier ( soldier_num );
+                           if ( soldier_num % 3 == 0 )
+                               this->war->soldier_selecter->UpdateY ( -1 );
+                           else
+                               this->war->soldier_selecter->UpdateX ( -1 );
+                           break;
+                       }
+                       case 5:
+                       case 6:
+                       case 7:
+                       case 0:
+                       {
+                           this->Select_Soldier ( soldier_num );
+                           if ( soldier_num >= 1 && soldier_num <= 7 )
+                               this->war->soldier_selecter->UpdateX ( -1 );
+                           else
+                               this->war->soldier_selecter->UpdateY ( -1 );
+                           break;
+                       }
+                   }
+               }
+           }
+       }
+       this->act_num++;*/
 }
+
 int Player::getAct_num()
 {
     return this->act_num;
@@ -776,6 +783,7 @@ void Player::BuildCity()
 }
 void Player::Recover()
 {
+    this->war->UpdateLife();
 }
 enum IDENTITY Player::GetIdentity()
 {
@@ -785,50 +793,207 @@ void Player::SetIdentity ( enum IDENTITY identity )
 {
     this->identity = identity;
 }
+
+bool Player::IsCounterAttack()
+{
+    bool _result = false;
+    return _result;
+}
+
+void Player::AttackBase ( unsigned int _x, unsigned int _y )
+{
+    cout << endl << "[*]";
+    if ( this->GetIdentity() == _player_ )
+        cout << "电脑";
+    else
+        cout << "玩家";
+    cout << "基地遭受攻击" << endl;
+    double _hurt = this->war->soldier_selecter->GetAttack();
+    cout << "[*]受到 " << _hurt << " 点伤害" << endl;
+    this->war->_map->Get_Point ( _x, _y )->UpdateLife ( -_hurt );
+    cout << "[*]当前剩余生命值为 " << this->war->_map->Get_Point ( _x, _y )->GetLife() << endl ;
+}
+
+void Player::AttackSoldier ( unsigned int _x, unsigned int _y )
+{
+    cout << endl << "[*]";
+    if ( this->GetIdentity() == _player_ )
+        cout << "电脑";
+    else
+        cout << "玩家";
+    cout << "士兵遭遇攻击" << endl;
+    unsigned int _pid = this->war->_map->Get_Point ( _x, _y )->GetCurrentSoldierNum() - 1;
+    double _hurt = this->war->soldier_selecter->GetAttack() - this->GetSoldierFromPoint ( _x, _y, _pid )->GetDefence();
+    if ( _hurt > 0 )
+    {
+        unsigned int _id = this->GetSoldierFromPoint ( _x, _y, _pid )->GetID();
+        cout << "[*]ID为 " << _id << " 的士兵受到 " << _hurt << " 点伤害" << endl;
+        this->GetSoldierFromPoint ( _x, _y, _pid )->UpdateLife ( _hurt );
+        if ( this->GetSoldierFromPoint ( _x, _y, _pid )->GetLife() <= 0 )
+            this->Delete_Soldier ( _id );
+        else if ( this->IsCounterAttack() )
+        {
+        }
+    }
+    else
+        cout << "[*]攻击力不足，未能击穿敌人的装甲" << endl;
+}
+
+void Player::AttackCity ( unsigned int _x, unsigned int _y )
+{
+    cout << endl << "[*]";
+    if ( this->GetIdentity() == _player_ )
+        cout << "电脑";
+    else
+        cout << "玩家";
+    cout << "城市遭遇攻击" << endl;
+    double _hurt = this->war->soldier_selecter->GetAttack();
+    if ( this->war->_map->Get_Point ( _x, _y )->GetLife() > 0 )
+    {
+        cout << "[*]该城市受到 " << _hurt << " 点伤害" << endl;
+        this->war->_map->Get_Point ( _x, _y )->UpdateLife ( -_hurt );
+    }
+    else
+    {
+        cout << "[*]该城市已被摧毁，城市中的士兵全部死亡" << endl;
+        while ( true )
+        {
+            unsigned int _pid = this->war->_map->Get_Point ( _x, _y )->GetCurrentSoldierNum() - 1;
+            if(_pid < 0)
+                break;
+            unsigned int _id = this->GetSoldierFromPoint ( _x, _y, _pid )->GetID();
+            this->Delete_Soldier ( _id );
+        }
+    }
+}
+
+
 bool Player::MoveUp()
 {
     bool _result = false;
     unsigned int _y = this->war->soldier_selecter->GetY();
     unsigned int _x = this->war->soldier_selecter->GetX();
     if ( _y != 0 &&
-            ( ( this->GetIdentity() == _player_ && this->war->_map->Get_Point ( _x, _y - 1 )->GetPower() != _player ) ||
-              ( this->GetIdentity() == _ai_ && this->war->_map->Get_Point ( _x, _y - 1 )->GetPower() != _ai ) ) )
+            ( ( this->GetIdentity() == _player_ &&
+                this->war->_map->Get_Point ( _x, _y - 1 )->GetPower() != _player ) ||
+              ( this->GetIdentity() == _ai_ &&
+                this->war->_map->Get_Point ( _x, _y - 1 )->GetPower() != _ai ) ) )
     {
-        this->war->soldier_selecter->UpdateY ( - 1 );
+        bool _isattack = false;
         if ( this->GetIdentity() == _player_ )
-            this->war->_map->DrawToMap ( '*', _x, _y - 1, false );
+        {
+            if ( this->war->_map->GetChar ( _x, _y - 1, false ) == 'X' )
+            {
+                _isattack = true;
+                if ( this->war->_map->GetChar ( _x, _y - 1, true ) == 'X' )
+                    this->AttackBase ( _x, _y - 1 );
+                else
+                    this->AttackSoldier ( _x, _y - 1 );
+            }
+            else if ( this->war->_map->GetChar ( _x, _y - 1, false ) == '+' &&
+                      this->war->_map->GetChar ( _x, _y - 1, true ) == 'X' )
+            {
+                _isattack = true;
+                this->AttackCity ( _x, _y - 1 );
+            }
+            else
+                this->war->_map->DrawToMap ( '*', _x, _y - 1, false );
+        }
         else
-            this->war->_map->DrawToMap ( 'X', _x, _y - 1, false );
-        this->war->_map->AddSoldierToPoint ( _x, _y - 1, *this->war->soldier_selecter );
-        this->war->_map->RemoveSoldierFromPoint ( _x, _y, this->war->soldier_selecter->GetID() );
-        if ( this->war->_map->IsEmptyCity ( _x, _y ) )
-            this->war->_map->DrawToMap ( this->war->_map->WhosCity ( _x, _y ), _x, _y, false );
+        {
+            if ( this->war->_map->GetChar ( _x, _y - 1, false ) == '*' )
+            {
+                _isattack = true;
+                if ( this->war->_map->GetChar ( _x, _y - 1, true ) == '*' )
+                    this->AttackBase ( _x, _y - 1 );
+                else
+                    this->AttackSoldier ( _x, _y - 1 );
+            }
+            else if ( this->war->_map->GetChar ( _x, _y - 1, false ) == '+' &&
+                      this->war->_map->GetChar ( _x, _y - 1, true ) == '*' )
+            {
+                _isattack = true;
+                this->AttackCity ( _x, _y - 1 );
+            }
+            else
+                this->war->_map->DrawToMap ( 'X', _x, _y - 1, false );
+        }
+        if ( !_isattack )
+        {
+            this->war->soldier_selecter->UpdateY ( - 1 );
+            this->war->_map->AddSoldierToPoint ( _x, _y - 1, *this->war->soldier_selecter );
+            this->war->_map->RemoveSoldierFromPoint ( _x, _y, this->war->soldier_selecter->GetID() );
+            if ( this->war->_map->IsEmptyCity ( _x, _y ) )
+                this->war->_map->DrawToMap ( this->war->_map->WhosCity ( _x, _y ), _x, _y, false );
+        }
         _result = true;
     }
     return _result;
 }
+
 bool Player::MoveDown()
 {
     bool _result = false;
     unsigned int _y = this->war->soldier_selecter->GetY();
     unsigned int _x = this->war->soldier_selecter->GetX();
-    if ( _y != this->war->_map->GetRHeight() &&
-            ( ( this->GetIdentity() == _player_ && this->war->_map->Get_Point ( _x, _y + 1 )->GetPower() != _player ) ||
-              ( this->GetIdentity() == _ai_ && this->war->_map->Get_Point ( _x, _y + 1 )->GetPower() != _ai ) ) )
+    if ( ( _y != this->war->_map->GetRHeight() - 1 ) &&
+            ( ( this->GetIdentity() == _player_ &&
+                this->war->_map->Get_Point ( _x, _y + 1 )->GetPower() != _player ) ||
+              ( this->GetIdentity() == _ai_ &&
+                this->war->_map->Get_Point ( _x, _y + 1 )->GetPower() != _ai ) ) )
     {
-        this->war->soldier_selecter->UpdateY ( 1 );
+        bool _isattack = false;
         if ( this->GetIdentity() == _player_ )
-            this->war->_map->DrawToMap ( '*', _x, _y + 1, false );
+        {
+            if ( this->war->_map->GetChar ( _x, _y + 1, false ) == 'X' )
+            {
+                _isattack = true;
+                if ( this->war->_map->GetChar ( _x, _y + 1, true ) == 'X' )
+                    this->AttackBase ( _x, _y + 1 );
+                else
+                    this->AttackSoldier ( _x, _y + 1 );
+            }
+            else if ( this->war->_map->GetChar ( _x, _y + 1, false ) == '+' &&
+                      this->war->_map->GetChar ( _x, _y + 1, true ) == 'X' )
+            {
+                _isattack = true;
+                this->AttackCity ( _x, _y + 1 );
+            }
+            else
+                this->war->_map->DrawToMap ( '*', _x, _y + 1, false );
+        }
         else
-            this->war->_map->DrawToMap ( 'X', _x, _y + 1, false );
-        this->war->_map->AddSoldierToPoint ( _x, _y + 1, *this->war->soldier_selecter );
-        this->war->_map->RemoveSoldierFromPoint ( _x, _y, this->war->soldier_selecter->GetID() );
-        if ( this->war->_map->IsEmptyCity ( _x, _y ) )
-            this->war->_map->DrawToMap ( this->war->_map->WhosCity ( _x, _y ), _x, _y, false );
+        {
+            if ( this->war->_map->GetChar ( _x, _y + 1, false ) == '*' )
+            {
+                _isattack = true;
+                if ( this->war->_map->GetChar ( _x, _y + 1, true ) == '*' )
+                    this->AttackBase ( _x, _y + 1 );
+                else
+                    this->AttackSoldier ( _x, _y + 1 );
+            }
+            else if ( this->war->_map->GetChar ( _x, _y + 1, false ) == '+' &&
+                      this->war->_map->GetChar ( _x, _y + 1, true ) == '*' )
+            {
+                _isattack = true;
+                this->AttackCity ( _x, _y + 1 );
+            }
+            else
+                this->war->_map->DrawToMap ( 'X', _x, _y + 1, false );
+        }
+        if ( !_isattack )
+        {
+            this->war->soldier_selecter->UpdateY ( 1 );
+            this->war->_map->AddSoldierToPoint ( _x, _y + 1, *this->war->soldier_selecter );
+            this->war->_map->RemoveSoldierFromPoint ( _x, _y, this->war->soldier_selecter->GetID() );
+            if ( this->war->_map->IsEmptyCity ( _x, _y ) )
+                this->war->_map->DrawToMap ( this->war->_map->WhosCity ( _x, _y ), _x, _y, false );
+        }
         _result = true;
     }
     return _result;
 }
+
 bool Player::MoveLeft()
 {
     bool _result = false;
@@ -838,15 +1003,53 @@ bool Player::MoveLeft()
             ( ( this->GetIdentity() == _player_ && this->war->_map->Get_Point ( _x - 1, _y )->GetPower() != _player ) ||
               ( this->GetIdentity() == _ai_ && this->war->_map->Get_Point ( _x - 1, _y )->GetPower() != _ai ) ) )
     {
-        this->war->soldier_selecter->UpdateX ( - 1 );
+        bool _isattack = false;
         if ( this->GetIdentity() == _player_ )
-            this->war->_map->DrawToMap ( '*', _x - 1, _y, false );
+        {
+            if ( this->war->_map->GetChar ( _x - 1, _y, false ) == 'X' )
+            {
+                _isattack = true;
+                if ( this->war->_map->GetChar ( _x - 1, _y, true ) == 'X' )
+                    this->AttackBase ( _x - 1, _y );
+                else
+                    this->AttackSoldier ( _x - 1, _y );
+            }
+            else if ( this->war->_map->GetChar ( _x - 1, _y, false ) == '+' &&
+                      this->war->_map->GetChar ( _x - 1, _y, true ) == 'X' )
+            {
+                _isattack = true;
+                this->AttackCity ( _x - 1, _y );
+            }
+            else
+                this->war->_map->DrawToMap ( '*', _x - 1, _y, false );
+        }
         else
-            this->war->_map->DrawToMap ( 'X', _x - 1, _y, false );
-        this->war->_map->AddSoldierToPoint ( _x - 1, _y, *this->war->soldier_selecter );
-        this->war->_map->RemoveSoldierFromPoint ( _x, _y, this->war->soldier_selecter->GetID() );
-        if ( this->war->_map->IsEmptyCity ( _x, _y ) )
-            this->war->_map->DrawToMap ( this->war->_map->WhosCity ( _x, _y ), _x, _y, false );
+        {
+            if ( this->war->_map->GetChar ( _x - 1, _y, false ) == '*' )
+            {
+                _isattack = true;
+                if ( this->war->_map->GetChar ( _x - 1, _y, true ) == '*' )
+                    this->AttackBase ( _x - 1, _y );
+                else
+                    this->AttackSoldier ( _x - 1, _y );
+            }
+            else if ( this->war->_map->GetChar ( _x - 1, _y, false ) == '+' &&
+                      this->war->_map->GetChar ( _x - 1, _y, true ) == '*' )
+            {
+                _isattack = true;
+                this->AttackCity ( _x - 1, _y );
+            }
+            else
+                this->war->_map->DrawToMap ( 'X', _x - 1, _y, false );
+        }
+        if ( !_isattack )
+        {
+            this->war->soldier_selecter->UpdateX ( - 1 );
+            this->war->_map->AddSoldierToPoint ( _x - 1, _y, *this->war->soldier_selecter );
+            this->war->_map->RemoveSoldierFromPoint ( _x, _y, this->war->soldier_selecter->GetID() );
+            if ( this->war->_map->IsEmptyCity ( _x, _y ) )
+                this->war->_map->DrawToMap ( this->war->_map->WhosCity ( _x, _y ), _x, _y, false );
+        }
         _result = true;
     }
     return _result;
@@ -856,19 +1059,57 @@ bool Player::MoveRight()
     bool _result = false;
     unsigned int _y = this->war->soldier_selecter->GetY();
     unsigned int _x = this->war->soldier_selecter->GetX();
-    if ( _x !=  this->war->_map->GetRWidth() &&
+    if ( ( _x !=  this->war->_map->GetRWidth() - 1 ) &&
             ( ( this->GetIdentity() == _player_ && this->war->_map->Get_Point ( _x + 1, _y )->GetPower() != _player ) ||
               ( this->GetIdentity() == _ai_ && this->war->_map->Get_Point ( _x + 1, _y )->GetPower() != _ai ) ) )
     {
-        this->war->soldier_selecter->UpdateX ( 1 );
+        bool _isattack = false;
         if ( this->GetIdentity() == _player_ )
-            this->war->_map->DrawToMap ( '*', _x + 1, _y, false );
+        {
+            if ( this->war->_map->GetChar ( _x + 1, _y, false ) == 'X' )
+            {
+                _isattack = true;
+                if ( this->war->_map->GetChar ( _x + 1, _y, true ) == 'X' )
+                    this->AttackBase ( _x + 1, _y );
+                else
+                    this->AttackSoldier ( _x + 1, _y );
+            }
+            else if ( this->war->_map->GetChar ( _x + 1, _y, false ) == '+' &&
+                      this->war->_map->GetChar ( _x + 1, _y, true ) == 'X' )
+            {
+                _isattack = true;
+                this->AttackCity ( _x + 1, _y );
+            }
+            else
+                this->war->_map->DrawToMap ( '*', _x + 1, _y, false );
+        }
         else
-            this->war->_map->DrawToMap ( 'X', _x + 1, _y, false );
-        this->war->_map->AddSoldierToPoint ( _x + 1, _y, *this->war->soldier_selecter );
-        this->war->_map->RemoveSoldierFromPoint ( _x, _y, this->war->soldier_selecter->GetID() );
-        if ( this->war->_map->IsEmptyCity ( _x, _y ) )
-            this->war->_map->DrawToMap ( this->war->_map->WhosCity ( _x, _y ), _x, _y, false );
+        {
+            if ( this->war->_map->GetChar ( _x + 1, _y, false ) == '*' )
+            {
+                _isattack = true;
+                if ( this->war->_map->GetChar ( _x + 1, _y, true ) == '*' )
+                    this->AttackBase ( _x + 1, _y );
+                else
+                    this->AttackSoldier ( _x + 1, _y );
+            }
+            else if ( this->war->_map->GetChar ( _x + 1, _y, false ) == '+' &&
+                      this->war->_map->GetChar ( _x + 1, _y, true ) == '*' )
+            {
+                _isattack = true;
+                this->AttackCity ( _x + 1, _y );
+            }
+            else
+                this->war->_map->DrawToMap ( 'X', _x + 1, _y, false );
+        }
+        if ( !_isattack )
+        {
+            this->war->soldier_selecter->UpdateX ( 1 );
+            this->war->_map->AddSoldierToPoint ( _x + 1, _y, *this->war->soldier_selecter );
+            this->war->_map->RemoveSoldierFromPoint ( _x, _y, this->war->soldier_selecter->GetID() );
+            if ( this->war->_map->IsEmptyCity ( _x, _y ) )
+                this->war->_map->DrawToMap ( this->war->_map->WhosCity ( _x, _y ), _x, _y, false );
+        }
         _result = true;
     }
     return _result;

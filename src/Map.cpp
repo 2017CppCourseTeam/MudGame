@@ -3,7 +3,7 @@
 Map::Map ( unsigned int height, unsigned int width, string name, unsigned short level, unsigned char**& data )
 {
     this->height = height;
-    this->rheight =  ( height - 1 ) / 2;
+    this->rheight = ( height - 1 ) / 2;
     this->width = width;
     this->rwidth = ( width - 1 ) / 3 ;
     this->name =  name;
@@ -207,19 +207,31 @@ unsigned int Map::GetRWidth()
     return this->rwidth;
 }
 
+Soldier* Point::_GetSoldier ( unsigned int _id )
+{
+    return &this->current_soldiers[_id];
+}
+
+unsigned int Point::GetCurrentSoldierNum()
+{
+    return this->current_soldiers.size();
+}
+
 void Map::DrawToMap ( const char& _c, unsigned int _x, unsigned int _y, bool _right )
 {
     unsigned int _y_ = ( _x * 3 ) + 1;
     unsigned int _x_ = ( _y * 2 ) + 1;
-    if ( _right == true )
+    if ( _right )
         _y_ += 1;
     this->_map[_x_][_y_] = _c;
 }
 
-const char Map::GetChar ( unsigned int _x, unsigned int _y )
+const char Map::GetChar ( unsigned int _x, unsigned int _y, bool _right )
 {
     unsigned int _y_ = ( _x * 3 ) + 1;
     unsigned int _x_ = ( _y * 2 ) + 1;
+    if ( _right )
+        _y_ += 1;
     return this->_map[_x_][_y_];
 }
 
@@ -441,22 +453,22 @@ string Point::SGetPower()
     return _result;
 }
 
-void Point::UpdateNumber ( unsigned int number )
+void Point::UpdateNumber ( int number )
 {
     this->number += number;
 }
 
-void Point::UpdateAttack ( unsigned int attack )
+void Point::UpdateAttack ( int attack )
 {
     this->attack += attack;
 }
 
-void Point::UpdateDefense ( unsigned int defense )
+void Point::UpdateDefense ( int defense )
 {
     this->defense += defense;
 }
 
-void Point::UpdateLife ( unsigned int life )
+void Point::UpdateLife ( int life )
 {
     this->life += life;
 }

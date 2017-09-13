@@ -24,9 +24,13 @@ class War
         unsigned int _GetAIBaseY();
         void _AddSoldierToMap ( const char& _c, unsigned int _x, unsigned int _y, Soldier& _soldier );
         void _Show_Soldier_Status();
+        Soldier* _GetSoldierFromPoint ( unsigned int _x, unsigned int _y, unsigned int _id );
         enum AllSoldiers _GetCurrentSoldierName();
         enum LocalPower _GetCityPower();
         void _BuildCity();
+        void _UpdateLife(int _life);
+        void _UpdateMagic(int _magic);
+        void _UpdateCoin(int _coin);
 
         double life;
         double magic;
@@ -42,7 +46,6 @@ class War
 
         friend class Player;
         friend class Commander;
-        friend class AI;
 
 };
 

@@ -14,19 +14,19 @@ class Point
         ~Point();
 
         int GetLife(); // 得到该点的生命值
-        void UpdateLife ( unsigned int life ); //  更新该点生命值
+        void UpdateLife ( int life ); //  更新该点生命值
         void SetLife ( unsigned int life );
 
         unsigned int GetAttack(); // 得带该点的攻击力
-        void UpdateAttack ( unsigned int attack ); //  更新该点攻击力
+        void UpdateAttack ( int attack ); //  更新该点攻击力
         void SetAttack ( unsigned int attack );
 
         unsigned int GetDefense(); // 得到该点的防御力
-        void UpdateDefense ( unsigned int defense ); // 更新该点防御力
+        void UpdateDefense ( int defense ); // 更新该点防御力
         void SetDefence ( unsigned int defence );
 
         unsigned int GetNumber(); // 得到地图上该点士兵的数目
-        void UpdateNumber ( unsigned int number ); // 更新该点士兵数目
+        void UpdateNumber ( int number ); // 更新该点士兵数目
         void SetNumber ( unsigned int number );
 
         enum LocalPower GetPower(); // 得到该点所属势力（枚举类型）
@@ -38,6 +38,8 @@ class Point
 
         void AddToCurrentSoldier ( Soldier& soldier ); // 在该点所有的士兵列表中添加一个士兵
         void RemoveFromCurrentSoldier ( unsigned int _id ); // 在该点所有的士兵列表中删除一个士兵
+        Soldier* _GetSoldier ( unsigned int _id );
+        unsigned int GetCurrentSoldierNum();
     private:
         unsigned int id;
         unsigned int x;
@@ -54,11 +56,11 @@ class Map
 {
     public:
         Map ( unsigned int height, unsigned int width, string name, unsigned short level, unsigned char**& data );
-        Point* Get_Point ( unsigned int _x, unsigned int _y ); // 得到相对坐标x y点的指针
+        Point * Get_Point ( unsigned int _x, unsigned int _y ); // 得到相对坐标x y点的指针
 
         void InitMap(); // 初始化地图
 
-        const char GetChar ( unsigned int _x, unsigned int _y );
+        const char GetChar ( unsigned int _x, unsigned int _y, bool _right );
         void DrawToMap ( const char& _c, unsigned int _x, unsigned int _y, bool _right ); // 在地图上绝对坐标画一个标志
 
         unsigned int GetRHeight(); // 得到该地图的相对高度

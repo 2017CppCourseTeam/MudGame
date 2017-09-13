@@ -133,7 +133,7 @@
 
 using namespace std;
 
-enum STATUS {_main = 0, practice, war, quit, start_war};
+enum STATUS {_main = 0, practice, war, quit, start_war, _win_, _lose_};
 enum IDENTITY {_player_, _ai_};
 enum Species {humanity, mechanical, beast, wizard, warcraft};
 enum AllSoldiers {_Worker, _Archer, _SwordsMan, _Priest, _SiegCar, _Dragon, _Wolf, _Slime, _Goblin, _IceGiant, _FlameBirds, _Naga, _Phoenix};
