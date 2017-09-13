@@ -99,6 +99,7 @@ class Player
 
         /** This for AI **/
         int act_num;
+        int round_num;
         int act[10];
         int coldness;
         /** This for AI **/

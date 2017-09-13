@@ -367,6 +367,7 @@ void Player::AI_Init ( double prestige, double bitcoin, double violence, int sec
 
 void Player::Action()
 {
+<<<<<<< HEAD
     /*
        int manipulator = this->act_num % 8;
        cout << endl << "[*]NO." << this->act_num << " action" << endl;
@@ -764,6 +765,387 @@ void Player::Action()
        }
        this->act_num++;*/
 }
+=======
+    int manipulator = this->act_num % 4;
+    //int times = this->act_num / 32 + 1;
+    cout << endl << "[*]NO." << this->act_num << " action" << endl;
+    if ( this->Get_War_Num() == 1 )
+    {
+        if ( this->act_num % 32 > 0 && this->act_num % 32 <= 16 )
+        {
+            switch ( manipulator )
+            {
+                case 1:
+                {
+                    if ( this->act_num % 32 == 1 )
+                    {
+                        this->Create_Soldier ( _Worker, ai_city, 3, 4);
+                        this->Select_Soldier ( this->war->_id );
+                    }
+                    else
+                    {
+                        this->Create_Soldier ( _Archer, ai_city, 3, 4 );
+                        this->Select_Soldier ( this->war->_id );
+                    }
+                    break;
+                }
+                case 2:
+                {
+                    this->MoveLeft();
+                    break;
+                }
+                case 3:
+                case 0:
+                {
+                    this->MoveUp();
+                    if ( this->act_num & 32 == 4 )
+                        this->BuildCity();
+                    break;
+                }
+            }
+        }
+        else if ( this->act_num % 32 > 16 || this->act_num % 32 == 0 )
+        {
+            switch ( manipulator )
+            {
+                case 1:
+                {
+                    this->Select_Soldier ( ( this->act_num % 32 - 16 ) / 4 );
+                    this->MoveUp();
+                    break;
+                }
+                case 2:
+                {
+                    this->MoveUp();
+                    break;
+                }
+                case 3:
+                case 0:
+                {
+                    this->MoveLeft();
+                    break;
+                }
+            }
+        }
+    }
+    if ( this->Get_War_Num() == 2 )
+    {
+        if ( this->act_num % 72 > 0 && this->act_num % 72 <= 36 )
+        {
+            manipulator = act_num % 6;
+            switch ( manipulator )
+            {
+                case 1:
+                {
+                    if ( this->act_num % 72 == 1 ) {
+                        this->Create_Soldier ( _Worker, ai_city, 5, 6 );
+                        this->Select_Soldier ( this->war->_id );
+                    }
+                    else if ( this->act_num % 72 >= 7 && this->act_num % 72 <= 19 ) {
+                        this->Create_Soldier ( _Slime, ai_city, 5, 6 );
+                        this->Select_Soldier ( this->war->_id );
+                    }
+                    else {
+                        this->Create_Soldier ( _Goblin, ai_city, 5, 6 );
+                        this->Select_Soldier ( this->war->_id );
+                    }
+                    break;
+                }
+                case 2:
+                case 3:
+                case 4:
+                {
+                    this->MoveUp();
+                    if(act_num == 4) this->BuildCity();
+                    break;
+                }
+                case 5:
+                case 0:
+                {
+                    this->MoveLeft();
+                    if ( this->act_num == 6 )
+                        this->BuildCity();
+                    break;
+                }
+            }
+        }
+        else if ( this->act_num % 72 > 36 )
+            switch ( manipulator )
+            {
+                case 1:
+                {
+                    this->Select_Soldier ( ( this->act_num - 36 ) / 8 );
+                    this->MoveLeft();
+                    break;
+                }
+                case 2:
+                {
+                    this->MoveLeft();
+                    break;
+                }
+                case 3:
+                case 4:
+                case 5:
+                {
+                    this->MoveUp();
+                    break;
+                }
+                case 0:
+                {
+                    this->MoveLeft();
+                    break;
+                }
+            }
+    }
+    if ( this->Get_War_Num() == 3 )
+    {
+        manipulator = act_num % 8;
+        if ( this->act_num % 144 > 0 && this->act_num % 144 <= 72 )
+            switch ( manipulator )
+            {
+                case 1:
+                {
+                    if ( this->act_num % 144 == 1 ) {
+                        this->Create_Soldier ( _Worker, ai_city, 7, 8 );
+                        this->Select_Soldier ( this->war->_id );
+                        }
+                    if ( this->act_num % 144 >= 9 && this->act_num % 144 <= 33 ) {
+                        this->Create_Soldier ( _SwordsMan, ai_city, 7, 8 );
+                        this->Select_Soldier ( this->war->_id );
+                        }
+                    if ( this->act_num % 144 >= 41 && this->act_num % 144 <= 65 ) {
+                        this->Create_Soldier ( _Dragon, ai_city, 7, 8 );
+                        this->Select_Soldier ( this->war->_id );
+                        }
+                    break;
+                }
+                case 2:
+                case 3:
+                {
+                    this->MoveUp();
+                    break;
+                }
+                case 4:
+                case 5:
+                {
+                    this->MoveLeft();
+                    if(act_num == 4)    this->BuildCity();
+                    break;
+                }
+                case 6:
+                case 7:
+                {
+                    this->MoveUp();
+                    break;
+                }
+                case 0:
+                {
+                    this->MoveLeft();
+                    if ( this->act_num == 8 )
+                        this->BuildCity();
+                    break;
+                }
+            }
+        else if ( this->act_num % 144 > 72 )
+        {
+            int soldier_num = ( this->act_num & 144 - 72 ) / 8;
+            //int flag = act_num % 2;
+            switch ( manipulator )
+            {
+                case 1:
+                {
+                    this->Select_Soldier ( soldier_num );
+                    if ( soldier_num == 1 || soldier_num == 2 || soldier_num == 3 || soldier_num == 0)
+                        this->MoveUp();
+                    else
+                        this->MoveLeft();
+                    break;
+                }
+                case 2:
+                case 3:
+                case 4:
+                {
+                    if ( soldier_num == 1 || soldier_num == 2 || soldier_num == 3 || soldier_num == 0 )
+                        this->MoveUp();
+                    else
+                        this->MoveLeft();
+                    break;
+                }
+                case 5:
+                case 6:
+                case 7:
+                case 0:
+                {
+                    if ( soldier_num == 1 || soldier_num == 2 || soldier_num == 3 || soldier_num == 0 )
+                        this->MoveLeft();
+                    else
+                        this->MoveUp();
+                    break;
+                }
+            }
+        }
+    }
+    if ( this->Get_War_Num() == 4 )
+    {
+        if ( this->act_num % 260 > 0 && this->act_num % 260<= 130 )
+            switch ( manipulator )
+            {
+                case 1:
+                {
+                    if ( this->act_num % 260 == 1 ) {
+                        this->Create_Soldier ( _Worker, ai_city, 9, 10 );
+                        this->Select_Soldier ( this->war->_id );
+                        }
+                    if ( this->act_num % 260 >= 11 && this->act_num % 260 <= 71 ) {
+                        this->Create_Soldier ( _SiegCar, ai_city, 9, 10 );
+                        this->Select_Soldier ( this->war->_id );
+                        }
+                    if ( this->act_num % 260 >= 81 && this->act_num % 260 <=  111) {
+                        this->Create_Soldier ( _Naga, ai_city, 9, 10 );
+                        this->Select_Soldier ( this->war->_id );
+                        }
+                    if ( this->act_num % 260 == 121 ) {
+                        this->Create_Soldier ( _IceGiant, ai_city, 9, 10 );
+                        this->Select_Soldier ( this->war->_id );
+                        }
+                    break;
+                }
+                case 2:
+                case 3:
+                case 4:
+                {
+                    this->MoveUp();
+                    break;
+                }
+                case 5:
+                case 6:
+                {
+                this->MoveLeft();
+                if ( act_num == 6 )
+                    this->BuildCity();
+                break;
+                }
+                case 7:
+                case 8:
+                {
+                    this->MoveUp();
+                    break;
+                }
+                case 9:
+                case 0:
+                {
+                    this->MoveLeft();
+                    if(act_num == 10)
+                        this->BuildCity();
+                    break;
+                }
+            }
+        else if ( this->act_num & 260 > 130)
+        {
+            int soldier_num = ( this->act_num - 130 ) / 10;
+            switch ( manipulator )
+            {
+                case 1:
+                {
+                    this->Select_Soldier ( soldier_num );
+                    if(soldier_num % 2 == 1)
+                        this->MoveUp();
+                    else
+                        this->MoveLeft();
+                    break;
+                }
+                case 2:
+                {
+                    if(soldier_num % 2 == 1)
+                        this->MoveUp();
+                    else
+                        this->MoveLeft();
+                    break;
+                }
+                case 3:
+                case 4:
+                {
+                    if(soldier_num % 2 == 1)
+                        this->MoveLeft();
+                    else
+                        this->MoveUp();
+                    if(act_num == 134)  this->BuildCity();
+                    break;
+                }
+                case 5:
+                case 6:
+                case 7:
+                {
+                    if(soldier_num % 2 == 1)
+                        this->MoveLeft();
+                    else
+                        this->MoveUp();
+                }
+                case 8:
+                case 9:
+                case 0:
+                {
+                    if(soldier_num % 2 == 1)
+                        this->MoveUp();
+                    else
+                        this->MoveLeft();
+                }
+            }
+        }
+    }
+    if ( this->Get_War_Num() == 5 )
+    {
+        int round_num = act_num / 28 + 1;
+        int base_num = act_num % 4;
+        int manipulator = act_num % 28;
+        if ( this->act_num == 1 )
+        {
+            for(int i = 0 ; i < 5; i++) {
+            this->Create_Soldier ( _Naga, ai_city, 6, 1 );
+            this->Create_Soldier ( _Naga, ai_city, 6, 5 );
+            this->Create_Soldier ( _Naga, ai_city, 6, 9 );
+            }
+            cout << "蛤蛤蛤*5，15个蛙人部署完毕。" << endl;
+            for(int i = 15; i <= 17; i++)
+            for(int j = 1; j <= 3 ; j++) {
+                this->Create_Soldier (_FlameBirds, ai_city, i, 3);
+                this->Create_Soldier (_FlameBirds, ai_city, i, 7);
+            }
+            for(int i = 4; i <= 6; i++)
+            for(int j = 1; j <= 3 ; j++)
+                this->Create_Soldier (_FlameBirds, ai_city, 15, i);
+        }
+            if (manipulator >= 1 && manipulator <= 4) {
+                if(round_num == 1)
+                this->Create_Soldier ( _Dragon, ai_city, 7, manipulator * 2);
+                if(round_num == 2)
+                this->Create_Soldier ( _IceGiant, ai_city, 7, manipulator * 2);
+                if(round_num == 3)
+                this->Create_Soldier ( _Phoenix, ai_city, 7, manipulator * 2);
+                this->Select_Soldier ( this->war->_id );
+            }
+            if(manipulator >= 5) {
+                switch(base_num) {
+                    case 1:
+                        this->Select_Soldier (this->war->_id - 3);
+                        break;
+                    case 2:
+                        this->Select_Soldier (this->war->_id - 2);
+                        break;
+                    case 3:
+                        this->Select_Soldier (this->war->_id - 1);
+                        break;
+                    case 0:
+                        this->Select_Soldier (this->war->_id);
+                        break;
+                }
+                this->MoveLeft();
+            }
+    }
+        this->act_num++;
+    }
+
+>>>>>>> origin/master
 
 int Player::getAct_num()
 {
