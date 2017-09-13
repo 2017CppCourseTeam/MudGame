@@ -266,3 +266,70 @@
 	<algorithm>
 	<vector>
 
+1505263799 source:f:\github\mudgame\main.cpp
+	"Game.h"
+	<windows.h>
+	<string>
+
+1505263799 f:\github\mudgame\include\game.h
+	"Global.h"
+	"User.h"
+	"Commander.h"
+	"windows.h"
+
+1505263799 f:\github\mudgame\include\global.h
+	<ctime>
+	<cstdlib>
+	<cmath>
+	<iomanip>
+	<fstream>
+	<conio.h>
+	<cstdio>
+	<windows.h>
+	<sstream>
+	<math.h>
+	<iostream>
+	<string>
+	<algorithm>
+	<vector>
+
+1505263799 f:\github\mudgame\include\user.h
+	"Player.h"
+
+1505263799 f:\github\mudgame\include\player.h
+	"War.h"
+
+1505263799 f:\github\mudgame\include\war.h
+	"Map.h"
+
+1505263799 f:\github\mudgame\include\map.h
+	<string>
+	"Soldier.h"
+
+1505263799 f:\github\mudgame\include\soldier.h
+	"Global.h"
+
+1505263799 f:\github\mudgame\include\commander.h
+	"User.h"
+
+1505266487 source:f:\github\mudgame\src\commander.cpp
+	"Commander.h"
+
+1505263799 source:f:\github\mudgame\src\game.cpp
+	"Game.h"
+
+1505263799 source:f:\github\mudgame\src\map.cpp
+	"Map.h"
+
+1505265944 source:f:\github\mudgame\src\player.cpp
+	"Player.h"
+
+1505263799 source:f:\github\mudgame\src\soldier.cpp
+	"Soldier.h"
+
+1505263799 source:f:\github\mudgame\src\user.cpp
+	"User.h"
+
+1505263799 source:f:\github\mudgame\src\war.cpp
+	"War.h"
+
