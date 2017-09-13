@@ -266,3 +266,49 @@
 	<algorithm>
 	<vector>
 
+1505263512 source:c:\users\lx\desktop\mudgame\main.cpp
+	"Game.h"
+	<windows.h>
+	<string>
+
+1505263512 c:\users\lx\desktop\mudgame\include\game.h
+	"Global.h"
+	"User.h"
+	"Commander.h"
+	"windows.h"
+
+1505263512 c:\users\lx\desktop\mudgame\include\global.h
+	<ctime>
+	<cstdlib>
+	<cmath>
+	<iomanip>
+	<fstream>
+	<conio.h>
+	<cstdio>
+	<windows.h>
+	<sstream>
+	<math.h>
+	<iostream>
+	<string>
+	<algorithm>
+	<vector>
+
+1505263512 c:\users\lx\desktop\mudgame\include\user.h
+	"Player.h"
+
+1505263512 c:\users\lx\desktop\mudgame\include\player.h
+	"War.h"
+
+1505263512 c:\users\lx\desktop\mudgame\include\war.h
+	"Map.h"
+
+1505263512 c:\users\lx\desktop\mudgame\include\map.h
+	<string>
+	"Soldier.h"
+
+1505263512 c:\users\lx\desktop\mudgame\include\soldier.h
+	"Global.h"
+
+1505263512 c:\users\lx\desktop\mudgame\include\commander.h
+	"User.h"
+
