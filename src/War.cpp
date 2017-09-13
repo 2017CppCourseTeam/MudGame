@@ -16,6 +16,8 @@ War::~War()
 {
 }
 
+
+
 void War::_Show_Status()
 {
     cout << endl << endl << "[*]当前状态:" << endl;
@@ -40,7 +42,7 @@ bool War::_Select_Point ( unsigned int _x, unsigned int _y )
 
 void War::_Show_Point_Status()
 {
-    cout << endl << "[*]当前地点(" << this->point_selecter->GetX() << this->point_selecter->GetY() << ")状态：" << endl;
+    cout << endl << "[*]当前地点(" << this->point_selecter->GetX() << " ," << this->point_selecter->GetY() << ")状态：" << endl;
     cout << "归属势力: " << this->point_selecter->SGetPower() << endl;
     cout << "生命值: " << this->point_selecter->GetLife() << endl;
     cout << "攻击力: " << this->point_selecter->GetAttack() << endl;
@@ -406,6 +408,26 @@ Soldier* War::_GetSoldierFromPoint ( unsigned int _x, unsigned int _y, unsigned 
     return this->_map->points[_x][_y]._GetSoldier ( _id );
 }
 
+double War::_GetLife()
+{
+    return this->life;
+}
+
+double War::_GetMagic()
+{
+    return this->magic;
+}
+
+unsigned int War::_GetCoin()
+{
+    return this->coin;
+}
+
+double War::_GetLucky()
+{
+    return this->lucky;
+}
+
 
 enum LocalPower War::_GetCityPower()
 {
@@ -413,9 +435,12 @@ enum LocalPower War::_GetCityPower()
 }
 void War::_BuildCity()
 {
-    this->_map->points[this->soldier_selecter->GetX()][this->soldier_selecter->GetY()].UpdatePower ( this->soldier_selecter->GetPower() );
-    if ( this->soldier_selecter->GetPower() == player_city )
-        this->_map->DrawToMap ( '*', this->soldier_selecter->GetX(), this->soldier_selecter->GetY(), true );
-    else
-        this->_map->DrawToMap ( 'X', this->soldier_selecter->GetX(), this->soldier_selecter->GetY(), true );
+    if ( this->_map->points[this->soldier_selecter->GetX()][this->soldier_selecter->GetY()].GetPower() == empty_city )
+    {
+        this->_map->points[this->soldier_selecter->GetX()][this->soldier_selecter->GetY()].UpdatePower ( this->soldier_selecter->GetPower() );
+        if ( this->soldier_selecter->GetPower() == player_city )
+            this->_map->DrawToMap ( '*', this->soldier_selecter->GetX(), this->soldier_selecter->GetY(), true );
+        else
+            this->_map->DrawToMap ( 'X', this->soldier_selecter->GetX(), this->soldier_selecter->GetY(), true );
+    }
 }

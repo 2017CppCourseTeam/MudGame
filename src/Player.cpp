@@ -793,6 +793,8 @@ void Player::SetIdentity ( enum IDENTITY identity )
 bool Player::IsCounterAttack()
 {
     bool _result = false;
+    if ( ( rand() / RAND_MAX ) < this->war->_GetLucky() )
+        _result = true;
     return _result;
 }
 
@@ -869,11 +871,7 @@ bool Player::MoveUp()
     bool _result = false;
     unsigned int _y = this->war->soldier_selecter->GetY();
     unsigned int _x = this->war->soldier_selecter->GetX();
-    if ( _y != 0 &&
-            ( ( this->GetIdentity() == _player_ &&
-                this->war->_map->Get_Point ( _x, _y - 1 )->GetPower() != _player ) ||
-              ( this->GetIdentity() == _ai_ &&
-                this->war->_map->Get_Point ( _x, _y - 1 )->GetPower() != _ai ) ) )
+    if ( _y != 0 && ( ( this->GetIdentity() == _player_ &&  this->war->_map->Get_Point ( _x, _y - 1 )->GetPower() != _player ) || ( this->GetIdentity() == _ai_ && this->war->_map->Get_Point ( _x, _y - 1 )->GetPower() != _ai ) || ( this->war->soldier_selecter->GetSoldierName() == _Worker  && this->war->_map->Get_Point ( _x, _y - 1 )->GetPower() == empty_city ) ) )
     {
         bool _isattack = false;
         if ( this->GetIdentity() == _player_ )
@@ -942,11 +940,7 @@ bool Player::MoveDown()
     bool _result = false;
     unsigned int _y = this->war->soldier_selecter->GetY();
     unsigned int _x = this->war->soldier_selecter->GetX();
-    if ( ( _y != this->war->_map->GetRHeight() - 1 ) &&
-            ( ( this->GetIdentity() == _player_ &&
-                this->war->_map->Get_Point ( _x, _y + 1 )->GetPower() != _player ) ||
-              ( this->GetIdentity() == _ai_ &&
-                this->war->_map->Get_Point ( _x, _y + 1 )->GetPower() != _ai ) ) )
+    if ( ( _y != this->war->_map->GetRHeight() - 1 ) && ( ( this->GetIdentity() == _player_ &&  this->war->_map->Get_Point ( _x, _y + 1 )->GetPower() != _player ) || ( this->GetIdentity() == _ai_ && this->war->_map->Get_Point ( _x, _y + 1 )->GetPower() != _ai ) || ( this->war->soldier_selecter->GetSoldierName() == _Worker  && this->war->_map->Get_Point ( _x, _y + 1 )->GetPower() == empty_city ) ) )
     {
         bool _isattack = false;
         if ( this->GetIdentity() == _player_ )
@@ -1015,9 +1009,7 @@ bool Player::MoveLeft()
     bool _result = false;
     unsigned int _y = this->war->soldier_selecter->GetY();
     unsigned int _x = this->war->soldier_selecter->GetX();
-    if ( _x != 0 &&
-            ( ( this->GetIdentity() == _player_ && this->war->_map->Get_Point ( _x - 1, _y )->GetPower() != _player ) ||
-              ( this->GetIdentity() == _ai_ && this->war->_map->Get_Point ( _x - 1, _y )->GetPower() != _ai ) ) )
+    if ( _x != 0 && ( ( this->GetIdentity() == _player_ &&  this->war->_map->Get_Point ( _x - 1, _y )->GetPower() != _player ) || ( this->GetIdentity() == _ai_ && this->war->_map->Get_Point ( _x - 1, _y )->GetPower() != _ai ) || ( this->war->soldier_selecter->GetSoldierName() == _Worker  && this->war->_map->Get_Point ( _x - 1, _y )->GetPower() == empty_city ) ) )
     {
         bool _isattack = false;
         if ( this->GetIdentity() == _player_ )
@@ -1085,9 +1077,7 @@ bool Player::MoveRight()
     bool _result = false;
     unsigned int _y = this->war->soldier_selecter->GetY();
     unsigned int _x = this->war->soldier_selecter->GetX();
-    if ( ( _x !=  this->war->_map->GetRWidth() - 1 ) &&
-            ( ( this->GetIdentity() == _player_ && this->war->_map->Get_Point ( _x + 1, _y )->GetPower() != _player ) ||
-              ( this->GetIdentity() == _ai_ && this->war->_map->Get_Point ( _x + 1, _y )->GetPower() != _ai ) ) )
+    if ( ( _x !=  this->war->_map->GetRWidth() - 1 ) && ( ( this->GetIdentity() == _player_ &&  this->war->_map->Get_Point ( _x + 1, _y )->GetPower() != _player ) || ( this->GetIdentity() == _ai_ && this->war->_map->Get_Point ( _x + 1, _y )->GetPower() != _ai ) || ( this->war->soldier_selecter->GetSoldierName() == _Worker  && this->war->_map->Get_Point ( _x + 1, _y )->GetPower() == empty_city ) ) )
     {
         bool _isattack = false;
         if ( this->GetIdentity() == _player_ )

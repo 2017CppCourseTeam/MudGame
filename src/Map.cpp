@@ -59,7 +59,7 @@ void Map::_InitCity ( )
                 }
                 case empty_city:
                 {
-                    points[i][j].SetLife ( 1000 );
+                    points[i][j].SetLife ( 200 );
                     points[i][j].SetAttack ( 0 );
                     points[i][j].SetDefence ( 0 );
                     break;

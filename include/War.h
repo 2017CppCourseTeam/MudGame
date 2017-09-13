@@ -22,6 +22,10 @@ class War
         unsigned int _GetPlayerBaseY();
         unsigned int _GetAIBaseX();
         unsigned int _GetAIBaseY();
+        double _GetLife();
+        double _GetMagic();
+        unsigned int _GetCoin();
+        double _GetLucky();
         void _AddSoldierToMap ( const char& _c, unsigned int _x, unsigned int _y, Soldier& _soldier );
         void _Show_Soldier_Status();
         Soldier* _GetSoldierFromPoint ( unsigned int _x, unsigned int _y, unsigned int _id );
