@@ -532,6 +532,7 @@ bool Commander::Eval ( string& cmd )
             cout << "|help                  显示本页面                          |" << endl;
             cout << "|exit                  退出战争                            |" << endl;
             cout << "+----------------------------------------------------------+" << endl;
+            _result = true;
         }
         else if ( cmd.substr ( 0, 4 ) == string ( "show" ) )
         {
@@ -648,7 +649,7 @@ bool Commander::Eval ( string& cmd )
                     else
                         cout << endl << "[!]移动方向有障碍物，无法移动" << endl;
                 }
-                if ( !this->user->ai->Is_First() )
+                if(_result && !this->user->ai->Is_First() )
                     this->user->ai->Action();
             }
         }
@@ -741,7 +742,7 @@ bool Commander::Eval ( string& cmd )
                         this->user->player->Recover();
                         _result = true;
                 }
-                if ( !this->user->ai->Is_First() )
+                if(_result && !this->user->ai->Is_First() )
                     this->user->ai->Action();
             }
         }
@@ -761,7 +762,7 @@ bool Commander::Eval ( string& cmd )
             }
             else
                 cout << endl << "[!]只有Worker可以建造城市，当前选择的士兵并不是Worker，请重新选择。";
-            if ( !this->user->ai->Is_First() )
+                if(_result && !this->user->ai->Is_First() )
                 this->user->ai->Action();
         }
         if ( this->user->player->CheckWin() )

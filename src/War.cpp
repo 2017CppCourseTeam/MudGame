@@ -77,17 +77,17 @@ void War::_Show_Soldier_Status()
     cout << "Î»ÖÃ: " << this->soldier_selecter->GetX() << ", " << this->soldier_selecter->GetY() << endl;
 }
 
-void War::_UpdateLife(int _life)
+void War::_UpdateLife ( int _life )
 {
     this->life += _life;
 }
 
-void War::_UpdateMagic(int _magic)
+void War::_UpdateMagic ( int _magic )
 {
     this->magic += _magic;
 }
 
-void War::_UpdateCoin(int _coin)
+void War::_UpdateCoin ( int _coin )
 {
     this->coin += _coin;
 }
@@ -347,7 +347,12 @@ bool War::_Create_Soldier ( enum AllSoldiers soldier, enum LocalPower power, uns
         }
     }
     if ( _result )
-        this->_AddSoldierToMap ( '*', x, y, this->created_soldier[this->created_soldier.size() - 1] );
+    {
+        if ( power == player_city )
+            this->_AddSoldierToMap ( '*', x, y, this->created_soldier[this->created_soldier.size() - 1] );
+        else
+            this->_AddSoldierToMap ( 'X', x, y, this->created_soldier[this->created_soldier.size() - 1] );
+    }
     return _result;
 }
 

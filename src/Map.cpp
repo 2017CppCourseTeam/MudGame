@@ -483,7 +483,8 @@ void Point::AddToCurrentSoldier ( Soldier& soldier )
     this->current_soldiers.push_back ( soldier );
     this->UpdateLife ( soldier.GetLife() );
     this->UpdateAttack ( soldier.GetAttack() );
-    //this->UpdateDefense ( soldier.GetDefence() );
+    if(this->GetPower() != _empty)
+        this->UpdateDefense ( soldier.GetDefence() );
     this->UpdateNumber ( 1 );
 }
 

@@ -73,7 +73,7 @@
 1505261660 f:\文档\学习资料\mudgame\include\war.h
 	"Map.h"
 
-1505262024 source:f:\文档\学习资料\mudgame\src\war.cpp
+1505262729 source:f:\文档\学习资料\mudgame\src\war.cpp
 	"War.h"
 
 1504340809 f:\文档\学习资料\mudgame\ai-settings.h
@@ -147,7 +147,7 @@
 1505261660 source:f:\文档\学习资料\mudgame\src\game.cpp
 	"Game.h"
 
-1505262460 source:f:\文档\学习资料\mudgame\src\player.cpp
+1505263801 source:f:\文档\学习资料\mudgame\src\player.cpp
 	"Player.h"
 
 1505118809 source:f:\文档\学习资料\mudgame\src\user.cpp
@@ -266,18 +266,30 @@
 	<algorithm>
 	<vector>
 
+<<<<<<< HEAD
 1505263799 source:f:\github\mudgame\main.cpp
+=======
+1505263512 source:c:\users\lx\desktop\mudgame\main.cpp
+>>>>>>> a9c7f88cba2a7cdaa1c167742c9778e180e0ffa4
 	"Game.h"
 	<windows.h>
 	<string>
 
+<<<<<<< HEAD
 1505263799 f:\github\mudgame\include\game.h
+=======
+1505263512 c:\users\lx\desktop\mudgame\include\game.h
+>>>>>>> a9c7f88cba2a7cdaa1c167742c9778e180e0ffa4
 	"Global.h"
 	"User.h"
 	"Commander.h"
 	"windows.h"
 
+<<<<<<< HEAD
 1505263799 f:\github\mudgame\include\global.h
+=======
+1505263512 c:\users\lx\desktop\mudgame\include\global.h
+>>>>>>> a9c7f88cba2a7cdaa1c167742c9778e180e0ffa4
 	<ctime>
 	<cstdlib>
 	<cmath>
@@ -293,6 +305,7 @@
 	<algorithm>
 	<vector>
 
+<<<<<<< HEAD
 1505263799 f:\github\mudgame\include\user.h
 	"Player.h"
 
@@ -333,3 +346,24 @@
 1505263799 source:f:\github\mudgame\src\war.cpp
 	"War.h"
 
+=======
+1505263512 c:\users\lx\desktop\mudgame\include\user.h
+	"Player.h"
+
+1505263512 c:\users\lx\desktop\mudgame\include\player.h
+	"War.h"
+
+1505263512 c:\users\lx\desktop\mudgame\include\war.h
+	"Map.h"
+
+1505263512 c:\users\lx\desktop\mudgame\include\map.h
+	<string>
+	"Soldier.h"
+
+1505263512 c:\users\lx\desktop\mudgame\include\soldier.h
+	"Global.h"
+
+1505263512 c:\users\lx\desktop\mudgame\include\commander.h
+	"User.h"
+
+>>>>>>> a9c7f88cba2a7cdaa1c167742c9778e180e0ffa4
