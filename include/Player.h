@@ -9,19 +9,19 @@ class Player
         Player();
         ~Player();
 
-        void Show_Status(); // 打印玩家状态
+        void ShowStatus(); // 打印玩家状态
 
-        void Train_Coder(); // 训练码农
-        void Dig_Mine(); // 挖矿
-        void Wash_Brain(); // 洗脑
+        void TrainCoder(); // 训练码农
+        void DigMine(); // 挖矿
+        void WashBrain(); // 洗脑
 
-        void Random_Event(); // 随机事件
-        void Mine_Crash(); // 矿难
-        void Brain_Unwashed(); // 洗脑失败
-        void AI_Rebel(); // AI反叛
+        void RandomEvent(); // 随机事件
+        void MineCrash(); // 矿难
+        void BrainUnwashed(); // 洗脑失败
+        void AIRebel(); // AI反叛
 
-        double Get_Prestige(); // 得到威望
-        double Get_Bitcoin(); // 得到比特币
+        double GetPrestige(); // 得到威望
+        double GetBitcoin(); // 得到比特币
         double Get_Violence(); // 得到暴力值
         int Get_Second(); // 得到时间
         unsigned short Get_War_Num(); // 得到战争进度

@@ -273,7 +273,7 @@ bool Commander::Eval ( string& cmd )
     // Global command
     if ( cmd == string ( "status" ) )
     {
-        this->user->player->Show_Status();
+        this->user->player->ShowStatus();
         return true;
     }
     else if ( cmd == string ( "current page" ) )
@@ -325,7 +325,7 @@ bool Commander::Eval ( string& cmd )
         }
         else if ( cmd == string ( "exit" ) )
         {
-            this->status = quit;
+            this->status = _quit;
             _result = true;
         }
     }
@@ -346,17 +346,17 @@ bool Commander::Eval ( string& cmd )
         }
         else if ( cmd == string ( "train coder" ) )
         {
-            this->user->player->Train_Coder();
+            this->user->player->TrainCoder();
             _result = true;
         }
         else if ( cmd == string ( "dig mine" ) )
         {
-            this->user->player->Dig_Mine();
+            this->user->player->DigMine();
             _result = true;
         }
         else if ( cmd == string ( "wash brain" ) )
         {
-            this->user->player->Wash_Brain();
+            this->user->player->WashBrain();
             _result = true;
         }
         else if ( cmd == string ( "back" ) )
@@ -402,7 +402,7 @@ bool Commander::Eval ( string& cmd )
             this->LoadMap ( string ( "standard" ), this->user->player->Get_War_Num() );
             this->user->player->Start_War ( this->_map );
             cout << endl << "[*]当前关卡: " << this->user->player->Get_War_Num() << endl;
-            this->user->player->Show_Status();
+            this->user->player->ShowStatus();
             this->user->player->Show_War_Status();
             this->user->player->Show_Map ( true );
             cout << "[*]确认开始？(y/n)" << endl << ">>";
@@ -492,8 +492,6 @@ bool Commander::Eval ( string& cmd )
     }
     else if ( this->status == start_war )
     {
-        if ( this->user->ai->Is_First() )
-            this->user->ai->Action();
         if ( cmd == string ( "exit" ) )
         {
             cout << endl << "[*]本局游戏将不会被保存，也不会获得任何奖励，确认退出吗？(y/n)" << endl << ">>";

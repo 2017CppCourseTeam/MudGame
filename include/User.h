@@ -9,14 +9,15 @@ class User
         User ( const string username, const string password );
         ~User();
 
-        string Get_Username ( );
-        string Get_Password ( );
-        int Select_Player ( short _no );
-        bool Is_Login ( );
-        bool Login ( );
-        bool Register ( );
-        bool Save ( );
-        bool DeleteUser ( );
+        string GetUsername ( ); // 得到用户名
+        string GetPassword ( ); // 得到密码
+        unsigned int SelectPlayer ( short _no ); // 用户选择存档
+        bool IsLogin ( ); // 判断用户当前是否登录
+        bool Login ( ); // 登录
+        bool Register ( ); // 注册
+        bool Save ( ); // 保存用户当前状态
+        bool DeleteUser ( ); // 删除用户
+
         Player* ai;
         Player* player;
     private:
@@ -29,11 +30,11 @@ class User
         Player player2;
         Player player3;
 
-        void _Write ( ofstream &f );
-        string _Read ( ifstream &f );
-        string _Encrypt ( string str );
-        string _Decrypt ( string str );
-        void _Load_Player ( ifstream& login );
+        void _Write ( ofstream &f ); // 写入文件
+        string _Read ( ifstream &f ); // 读取文件
+        string _Encrypt ( string str ); // 加密函数
+        string _Decrypt ( string str ); // 解密函数
+        void _LoadPlayer ( ifstream& login ); // 加载Player状态
 
         template <class T>
         string _ConverNumToString ( T d );

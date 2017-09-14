@@ -80,7 +80,6 @@ string Soldier::SGetSpecies()
             break;
         }
     }
-    cout << _result;
     return _result;
 }
 

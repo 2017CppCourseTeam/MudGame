@@ -65,7 +65,7 @@ void Game::_Logo()
     SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN );
 }
 
-void Game::Narrative( )
+void Game::_Narrative( )
 {
     SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_GREEN );
     cout << endl;
@@ -131,7 +131,7 @@ bool Game::Init ( )
     cout << "***********************************************************" << endl;
     cout << "**********                                       **********" << endl;
     cout << "*********    欢迎来到 INTERESTING WAR! 的世界     *********" << endl;
-    cout << "*********   输入 'plot' 进入剧情，输入 'skip' 跳过   *********" << endl;
+    cout << "*********   输入 'plot' 进入剧情，输入 'skip' 跳过   ******" << endl;
     cout << "**********                                       **********" << endl;
     cout << "***********************************************************" << endl;
     cout << "****" << endl << ">>" ;
@@ -140,7 +140,7 @@ bool Game::Init ( )
     {
         if ( _choice == "plot" )
         {
-            Narrative();
+            this->_Narrative();
             break;
         }
         if ( _choice == "skip" )
@@ -151,7 +151,7 @@ bool Game::Init ( )
         else
         {
             cout << endl << "[!]错误的命令: " << _choice << endl;
-            cout << ">>" ;
+            cout << endl << ">>" ;
             cin >> _choice;
         }
     }
@@ -161,7 +161,7 @@ bool Game::Init ( )
     cout << "|* 注册[register]|" << endl;
     cout << "|* 退出[exit]    |" << endl;
     cout << "+----------------+" << endl;
-    enum _CHOICE {login, regist, _exit};
+    enum _CHOICE {_login, _regist, _exit};
     enum _CHOICE _choice_;
     while ( true )
     {
@@ -170,12 +170,12 @@ bool Game::Init ( )
         cin >> _choice;
         if ( _choice == string ( "login" ) )
         {
-            _choice_ = login;
+            _choice_ = _login;
             break;
         }
         else if ( _choice == string ( "register" ) )
         {
-            _choice_ = regist;
+            _choice_ = _regist;
             break;
         }
         else if ( _choice == string ( "exit" ) )
@@ -186,18 +186,18 @@ bool Game::Init ( )
         else
             cout << endl << "[!]错误的命令: " << _choice << endl;
     }
-    string username, password;
+    string _username, _password;
     bool _result = false;
     switch ( _choice_ )
     {
-        case login:
+        case _login:
         {
             cout << endl << "*********用户登录*********" << endl;
             cout << "用户名: ";
-            cin >> username;
+            cin >> _username;
             cout << endl << "密码: ";
-            cin >> password;
-            this->user = new User ( username, password );
+            cin >> _password;
+            this->user = new User ( _username, _password );
             this->commander = new Commander ( this->user );
             if ( user->Login() )
             {
@@ -208,7 +208,6 @@ bool Game::Init ( )
             else
             {
                 cout << endl << "[!]错误的用户名或密码！" << endl << endl;
-                getchar();
                 if ( getch() )
                 {
                     system ( "cls" );
@@ -219,45 +218,49 @@ bool Game::Init ( )
             }
             break;
         }
-        case regist:
+        case _regist:
         {
-            string cpassword;
+            string _cpassword;
             cout << endl << "*********用户注册*********" << endl;
             cout << "用户名: ";
-            cin >> username;
+            cin >> _username;
             cout << endl << "密码: ";
-            cin >> password;
+            cin >> _password;
             cout << endl << "确认密码: ";
-            cin >> cpassword;
-            this->user = new User ( username, password );
+            cin >> _cpassword;
+            this->user = new User ( _username, _password );
             this->commander = new Commander ( this->user );
-            if ( password == cpassword )
+            if ( _password == _cpassword )
             {
                 if ( this->user->Register() )
                 {
                     cout << endl << "[*]注册成功！" << endl << endl;
                     cout << "**************************" << endl;
-                    user->Login();
+                    this->user->Login();
                     _result = true;
                 }
                 else
                 {
                     cout << endl << "[!]用户名已存在！" << endl << endl;
-                    getchar();
-                    system ( "cls" );
-                    delete this->user;
-                    delete this->commander;
-                    _result = false;
+                    if ( getche() )
+                    {
+                        system ( "cls" );
+                        delete this->user;
+                        delete this->commander;
+                        _result = false;
+                    }
                 }
             }
             else
             {
                 cout << endl << "[!]两次输入的密码不一样！" << endl << endl;
-                getchar();
-                system ( "cls" );
-                delete this->user;
-                delete this->commander;
-                _result = false;
+                if ( getche() )
+                {
+                    system ( "cls" );
+                    delete this->user;
+                    delete this->commander;
+                    _result = false;
+                }
             }
             break;
         }
@@ -268,45 +271,33 @@ bool Game::Init ( )
     return _result;
 }
 
-void Game::Select_Archive ( )
+void Game::SelectArchive ( )
 {
     cout << endl << "*********选择存档*********" << endl;
     // Print archives
     cout << "1) ";
-    this->user->Select_Player ( 1 );
+    this->user->SelectPlayer ( 1 );
     if ( this->user->player->Get_name() == string ( "" ) )
-    {
         cout << "无" << endl;
-    }
     else
-    {
         cout << this->user->player->Get_name() << endl;
-    }
     cout << "2) ";
-    this->user->Select_Player ( 2 );
+    this->user->SelectPlayer ( 2 );
     if ( this->user->player->Get_name() == string ( "" ) )
-    {
         cout << "无" << endl;
-    }
     else
-    {
         cout << this->user->player->Get_name() << endl;
-    }
     cout << "3) ";
-    this->user->Select_Player ( 3 );
+    this->user->SelectPlayer ( 3 );
     if ( this->user->player->Get_name() == string ( "" ) )
-    {
         cout << "无" << endl;
-    }
     else
-    {
         cout << this->user->player->Get_name() << endl;
-    }
     string _choice;
     short _choice_;
     while ( true )
     {
-        cout << ">>";
+        cout << endl << ">>";
         cin >> _choice; // BUG
         if ( _choice == string ( "1" ) )
         {
@@ -327,7 +318,7 @@ void Game::Select_Archive ( )
             cout << endl << "[*]未知存档" << endl;
     }
     // Set arhcive name
-    this->user->Select_Player ( _choice_ );
+    this->user->SelectPlayer ( _choice_ );
     if ( user->player->Get_name() == string ( "" ) )
     {
         cout << "请输入存档名称: ";
@@ -350,9 +341,6 @@ bool Game::Run ( )
             string cmd;
             cout << endl << "输入命令: " << endl << ">>";
             getline ( cin, cmd );
-            /**
-            * Here for AI first
-            **/
             if ( !this->commander->Eval ( cmd ) )
                 cout << endl << "[!]错误的命令: " << cmd << endl;
         }
@@ -364,28 +352,29 @@ bool Game::Run ( )
 
 bool Game::_Check()
 {
+    bool _result = true;
     if ( this->commander->Get_Status() == _lose_ )
     {
-        cout << endl << "[*]你输了" << endl;
-        this->user->player->Show_Status();
+        cout << endl << "[*]很遗憾你输了游戏" << endl;
+        this->user->player->ShowStatus();
         cout << endl << "[*]按任意键退出" << endl;
         if ( getch() )
-            return false;
+            _result = false;
     }
     if ( this->commander->Get_Status() == _win_ )
     {
-        cout << endl << "[*]你赢了" << endl;
-        this->user->player->Show_Status();
+        cout << endl << "[*]你恭喜你赢了游戏" << endl;
+        this->user->player->ShowStatus();
         cout << endl << "[*]按任意键退出" << endl;
         if ( getch() )
-            return false;
+            _result = false;
     }
-    if ( this->commander->Get_Status() == quit )
+    if ( this->commander->Get_Status() == _quit )
     {
         cout << endl << "[*]玩家退出" << endl;
-        return false;
+        _result = false;
     }
-    return true;
+    return _result;
 }
 
 void Game::Exit()

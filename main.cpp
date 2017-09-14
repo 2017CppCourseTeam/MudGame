@@ -10,7 +10,7 @@ int main()
         system ( "color E0" );
         if ( game->Init ( ) )   // 游戏初始化（登录、注册）
         {
-            game->Select_Archive ( ); // 选择存档
+            game->SelectArchive ( ); // 选择存档
             if ( game->Run ( ) )
             {
                 game->Exit( );
