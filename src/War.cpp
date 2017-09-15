@@ -2,10 +2,14 @@
 
 War::War ( double prestige, double bitcoin, double violence, int second, unsigned short war_num, Map*& _map )
 {
-    this->life =  prestige * 30;
-    this->magic = violence * 20;
-    this->coin = bitcoin * 10;
+    this->occupied_city = 1;
     this->lucky = ( sqrt ( ( 10 - war_num ) * 0.03 ) + prestige * 0.05 + violence + 0.05 ) / 100.0;
+    this->life = ( prestige / 2 ) * 300 + this->lucky * 100;
+    this->recover_life = 30;
+    this->magic = ( violence / 2 ) * 150 + this->lucky * 100;
+    this->recover_magic = 10;
+    this->coin = ( bitcoin / 3 ) * 100 + this->lucky * 100;
+    this->recover_coin = 25;
     this->point_selecter = 0;
     this->soldier_selecter = 0;
     this->_id = 0;
@@ -18,7 +22,7 @@ War::~War()
 
 
 
-void War::_Show_Status()
+void War::_ShowStatus()
 {
     cout << endl << endl << "[*]当前状态:" << endl;
     cout << "[*]生命源: " << this->life << endl;
@@ -27,20 +31,20 @@ void War::_Show_Status()
     cout << "[*]幸运值: " << this->lucky * 100 << "%" << endl;
 }
 
-void War::_Show_Map ( bool show_detail )
+void War::_ShowMap ( bool show_detail )
 {
-    this->_map->Show_Map ( show_detail );
+    this->_map->ShowMap ( show_detail );
 }
 
-bool War::_Select_Point ( unsigned int _x, unsigned int _y )
+bool War::_SelectPoint ( unsigned int _x, unsigned int _y )
 {
     if ( _x > this->_map->rwidth || _y > this->_map->rheight )
         return false;
-    this->point_selecter = this->_map->Get_Point ( _x, _y );
+    this->point_selecter = this->_map->GetPoint ( _x, _y );
     return true;
 }
 
-void War::_Show_Point_Status()
+void War::_ShowPointStatus()
 {
     cout << endl << "[*]当前地点(" << this->point_selecter->GetX() << " ," << this->point_selecter->GetY() << ")状态：" << endl;
     cout << "归属势力: " << this->point_selecter->SGetPower() << endl;
@@ -50,14 +54,14 @@ void War::_Show_Point_Status()
     cout << "士兵总数: " << this->point_selecter->GetNumber() << endl;
 }
 
-bool War::_Select_Soldier ( unsigned int id )
+bool War::_SelectSoldier ( unsigned int id )
 {
     if ( id >= this->_id ) return false;
     this->soldier_selecter = &this->created_soldier[id];
     return true;
 }
 
-void War::_Show_Soldier_Status ( unsigned int id )
+void War::_ShowSoldierStatus ( unsigned int id )
 {
     cout << endl << "战士ID: " << this->created_soldier[id].GetID() << endl;
     cout << "种族: " << this->created_soldier[id].SGetSpecies() << endl;
@@ -68,7 +72,7 @@ void War::_Show_Soldier_Status ( unsigned int id )
     cout << "位置: " << this->created_soldier[id].GetX() << ", " << this->created_soldier[id].GetY() << endl;
 }
 
-void War::_Show_Soldier_Status()
+void War::_ShowSoldierStatus()
 {
     cout << endl << "战士ID: " << this->soldier_selecter->GetID() << endl;
     cout << "种族: " << this->soldier_selecter->SGetSpecies() << endl;
@@ -95,7 +99,7 @@ void War::_UpdateCoin ( int _coin )
 }
 
 
-bool War::_Create_Soldier ( enum AllSoldiers soldier, enum LocalPower power, unsigned int x, unsigned int y, double* _life, double* _magic, unsigned int* _coin )
+bool War::_CreateSoldier ( enum AllSoldiers soldier, enum LocalPower power, unsigned int x, unsigned int y, double* _life, double* _magic, unsigned int* _coin )
 {
     bool _result = false;
     switch ( soldier )
@@ -365,7 +369,7 @@ void War::_AddSoldierToMap ( const char& _c, unsigned int _x, unsigned int _y, S
     this->_map->AddSoldierToPoint ( _x, _y, _soldier );
 }
 
-void War::_Delete_Soldier ( unsigned int _id )
+void War::_DeleteSoldier ( unsigned int _id )
 {
     this->created_soldier.erase ( vector<Soldier>::iterator ( this->created_soldier.begin() + _id ) );
     cout << endl << "[*]ID为: " << _id << "的战士死亡，原ID为: " << _id + 1 << "的战士取代该ID" << endl;
@@ -442,5 +446,6 @@ void War::_BuildCity()
             this->_map->DrawToMap ( '*', this->soldier_selecter->GetX(), this->soldier_selecter->GetY(), true );
         else
             this->_map->DrawToMap ( 'X', this->soldier_selecter->GetX(), this->soldier_selecter->GetY(), true );
+        this->occupied_city++;
     }
 }

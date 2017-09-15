@@ -16,17 +16,17 @@ Player::~Player()
 {
 }
 
-string Player::Get_name()
+string Player::GetName()
 {
     return this->name;
 }
 
-void Player::Set_name ( string name )
+void Player::SetName ( string name )
 {
     this->name = name;
 }
 
-void Player::Restart_War()
+void Player::RestartWar()
 {
     this->war_num = 0;
 }
@@ -217,22 +217,22 @@ double Player::GetPrestige()
     return this->prestige;
 }
 
-double Player::Get_Violence()
+double Player::GetViolence()
 {
     return this->violence;
 }
 
-int Player::Get_Second()
+int Player::GetSecond()
 {
     return this->second;
 }
 
-unsigned short Player::Get_War_Num()
+unsigned short Player::GetWarNum()
 {
     return this->war_num + 1;
 }
 
-bool Player::Check_Win()
+bool Player::CheckWin()
 {
     if ( this->war_num == 6 )
         return true;
@@ -240,7 +240,16 @@ bool Player::Check_Win()
         return false;
 }
 
-void Player::Start_War ( Map*& _map )
+bool Player::CheckLose()
+{
+    if ( this->second <= 0 )
+        return true;
+    else
+        return false;
+}
+
+
+void Player::StartWar ( Map*& _map )
 {
     this->war = new War ( this->prestige,
                           this->bitcoin,
@@ -250,20 +259,20 @@ void Player::Start_War ( Map*& _map )
                           _map );
 }
 
-void Player::End_War ( Map*& _map )
+void Player::EndWar ( Map*& _map )
 {
     delete this->war;
     //delete _map;
 }
 
-void Player::Show_War_Status()
+void Player::ShowWarStatus()
 {
-    this->war->_Show_Status();
+    this->war->_ShowStatus();
 }
 
-void Player::Show_Map ( bool show_detail )
+void Player::ShowMap ( bool show_detail )
 {
-    this->war->_Show_Map ( show_detail );
+    this->war->_ShowMap ( show_detail );
 }
 
 void Player::First()
@@ -274,52 +283,52 @@ void Player::First()
         this->war_first = false;
 }
 
-bool Player::Is_First()
+bool Player::IsFirst()
 {
     return this->war_first;
 }
 
-bool Player::Select_Point ( unsigned int _x, unsigned int _y )
+bool Player::SelectPoint ( unsigned int _x, unsigned int _y )
 {
-    return this->war->_Select_Point ( _x, _y );
+    return this->war->_SelectPoint ( _x, _y );
 }
 
-void Player::Show_Ponit_Status()
+void Player::ShowPonitStatus()
 {
-    this->war->_Show_Point_Status();
+    this->war->_ShowPointStatus();
 }
 
-bool Player::Select_Soldier ( unsigned int id )
+bool Player::SelectSoldier ( unsigned int id )
 {
-    return this->war->_Select_Soldier ( id );
+    return this->war->_SelectSoldier ( id );
 }
 
-void Player::Show_Soldier_Status ( unsigned int id )
+void Player::ShowSoldierStatus ( unsigned int id )
 {
-    this->war->_Show_Soldier_Status ( id );
+    this->war->_ShowSoldierStatus ( id );
 }
 
-void Player::Show_Soldier_Status()
+void Player::ShowSoldierStatus()
 {
-    this->war->_Show_Soldier_Status();
+    this->war->_ShowSoldierStatus();
 }
 
-bool Player::Create_Soldier ( enum AllSoldiers soldier, enum LocalPower power, unsigned int x, unsigned int y )
+bool Player::CreateSoldier ( enum AllSoldiers soldier, enum LocalPower power, unsigned int x, unsigned int y )
 {
-    bool _result = this->war->_Create_Soldier ( soldier, power, x, y, &this->war->life, &this->war->magic, &this->war->coin );
+    bool _result = this->war->_CreateSoldier ( soldier, power, x, y, &this->war->life, &this->war->magic, &this->war->coin );
     if ( _result )
     {
         cout << endl << "[*]生产成功" << endl;
-        this->war->_Show_Soldier_Status ( this->war->_id++ );
+        this->war->_ShowSoldierStatus ( this->war->_id++ );
     }
     else
         cout << endl << "[!]生产失败，资源不足" << endl;
     return _result;
 }
 
-void Player::Delete_Soldier ( unsigned int _id )
+void Player::DeleteSoldier ( unsigned int _id )
 {
-    this->war->_Delete_Soldier ( _id );
+    this->war->_DeleteSoldier ( _id );
 }
 
 Soldier* Player::GetSoldierFromPoint ( unsigned int _x, unsigned int _y, unsigned int _id )
@@ -352,7 +361,7 @@ unsigned int Player::GetAIBaseY()
     return this->war->_GetAIBaseY();
 }
 
-void Player::AI_Init ( double prestige, double bitcoin, double violence, int second, unsigned short war_num, bool first )
+void Player::AIInit ( double prestige, double bitcoin, double violence, int second, unsigned short war_num, bool first )
 {
     this->prestige = prestige;
     this->bitcoin = bitcoin;
@@ -370,7 +379,7 @@ void Player::Action()
     int manipulator = this->act_num % 4;
     //int times = this->act_num / 32 + 1;
     cout << endl << "[*]NO." << this->act_num << " action" << endl;
-    if ( this->Get_War_Num() == 1 )
+    if ( this->GetWarNum() == 1 )
     {
         if ( this->act_num % 32 > 0 && this->act_num % 32 <= 16 )
         {
@@ -380,13 +389,13 @@ void Player::Action()
                 {
                     if ( this->act_num % 32 == 1 )
                     {
-                        this->Create_Soldier ( _Worker, ai_city, 3, 4 );
-                        this->Select_Soldier ( this->war->_id - 1 );
+                        this->CreateSoldier ( _Worker, ai_city, 3, 4 );
+                        this->SelectSoldier ( this->war->_id - 1 );
                     }
                     else
                     {
-                        this->Create_Soldier ( _Archer, ai_city, 3, 4 );
-                        this->Select_Soldier ( this->war->_id - 1 );
+                        this->CreateSoldier ( _Archer, ai_city, 3, 4 );
+                        this->SelectSoldier ( this->war->_id - 1 );
                     }
                     break;
                 }
@@ -411,7 +420,7 @@ void Player::Action()
             {
                 case 1:
                 {
-                    this->Select_Soldier ( ( this->act_num % 32 - 16 ) / 4 );
+                    this->SelectSoldier ( ( this->act_num % 32 - 16 ) / 4 );
                     this->MoveUp();
                     break;
                 }
@@ -429,7 +438,7 @@ void Player::Action()
             }
         }
     }
-    if ( this->Get_War_Num() == 2 )
+    if ( this->GetWarNum() == 2 )
     {
         if ( this->act_num % 72 > 0 && this->act_num % 72 <= 36 )
         {
@@ -440,18 +449,18 @@ void Player::Action()
                 {
                     if ( this->act_num % 72 == 1 )
                     {
-                        this->Create_Soldier ( _Worker, ai_city, 5, 6 );
-                        this->Select_Soldier ( this->war->_id - 1 );
+                        this->CreateSoldier ( _Worker, ai_city, 5, 6 );
+                        this->SelectSoldier ( this->war->_id - 1 );
                     }
                     else if ( this->act_num % 72 >= 7 && this->act_num % 72 <= 19 )
                     {
-                        this->Create_Soldier ( _Slime, ai_city, 5, 6 );
-                        this->Select_Soldier ( this->war->_id - 1 );
+                        this->CreateSoldier ( _Slime, ai_city, 5, 6 );
+                        this->SelectSoldier ( this->war->_id - 1 );
                     }
                     else
                     {
-                        this->Create_Soldier ( _Goblin, ai_city, 5, 6 );
-                        this->Select_Soldier ( this->war->_id - 1 );
+                        this->CreateSoldier ( _Goblin, ai_city, 5, 6 );
+                        this->SelectSoldier ( this->war->_id - 1 );
                     }
                     break;
                 }
@@ -478,7 +487,7 @@ void Player::Action()
             {
                 case 1:
                 {
-                    this->Select_Soldier ( ( this->act_num - 36 ) / 8 );
+                    this->SelectSoldier ( ( this->act_num - 36 ) / 8 );
                     this->MoveLeft();
                     break;
                 }
@@ -501,7 +510,7 @@ void Player::Action()
                 }
             }
     }
-    if ( this->Get_War_Num() == 3 )
+    if ( this->GetWarNum() == 3 )
     {
         manipulator = act_num % 8;
         if ( this->act_num % 144 > 0 && this->act_num % 144 <= 72 )
@@ -511,18 +520,18 @@ void Player::Action()
                 {
                     if ( this->act_num % 144 == 1 )
                     {
-                        this->Create_Soldier ( _Worker, ai_city, 7, 8 );
-                        this->Select_Soldier ( this->war->_id - 1 );
+                        this->CreateSoldier ( _Worker, ai_city, 7, 8 );
+                        this->SelectSoldier ( this->war->_id - 1 );
                     }
                     if ( this->act_num % 144 >= 9 && this->act_num % 144 <= 33 )
                     {
-                        this->Create_Soldier ( _SwordsMan, ai_city, 7, 8 );
-                        this->Select_Soldier ( this->war->_id - 1 );
+                        this->CreateSoldier ( _SwordsMan, ai_city, 7, 8 );
+                        this->SelectSoldier ( this->war->_id - 1 );
                     }
                     if ( this->act_num % 144 >= 41 && this->act_num % 144 <= 65 )
                     {
-                        this->Create_Soldier ( _Dragon, ai_city, 7, 8 );
-                        this->Select_Soldier ( this->war->_id - 1 );
+                        this->CreateSoldier ( _Dragon, ai_city, 7, 8 );
+                        this->SelectSoldier ( this->war->_id - 1 );
                     }
                     break;
                 }
@@ -561,7 +570,7 @@ void Player::Action()
             {
                 case 1:
                 {
-                    this->Select_Soldier ( soldier_num );
+                    this->SelectSoldier ( soldier_num );
                     if ( soldier_num == 1 || soldier_num == 2 || soldier_num == 3 || soldier_num == 0 )
                         this->MoveUp();
                     else
@@ -592,7 +601,7 @@ void Player::Action()
             }
         }
     }
-    if ( this->Get_War_Num() == 4 )
+    if ( this->GetWarNum() == 4 )
     {
         if ( this->act_num % 260 > 0 && this->act_num % 260 <= 130 )
             switch ( manipulator )
@@ -601,23 +610,23 @@ void Player::Action()
                 {
                     if ( this->act_num % 260 == 1 )
                     {
-                        this->Create_Soldier ( _Worker, ai_city, 9, 10 );
-                        this->Select_Soldier ( this->war->_id - 1 );
+                        this->CreateSoldier ( _Worker, ai_city, 9, 10 );
+                        this->SelectSoldier ( this->war->_id - 1 );
                     }
                     if ( this->act_num % 260 >= 11 && this->act_num % 260 <= 71 )
                     {
-                        this->Create_Soldier ( _SiegCar, ai_city, 9, 10 );
-                        this->Select_Soldier ( this->war->_id - 1 );
+                        this->CreateSoldier ( _SiegCar, ai_city, 9, 10 );
+                        this->SelectSoldier ( this->war->_id - 1 );
                     }
                     if ( this->act_num % 260 >= 81 && this->act_num % 260 <=  111 )
                     {
-                        this->Create_Soldier ( _Naga, ai_city, 9, 10 );
-                        this->Select_Soldier ( this->war->_id - 1 );
+                        this->CreateSoldier ( _Naga, ai_city, 9, 10 );
+                        this->SelectSoldier ( this->war->_id - 1 );
                     }
                     if ( this->act_num % 260 == 121 )
                     {
-                        this->Create_Soldier ( _IceGiant, ai_city, 9, 10 );
-                        this->Select_Soldier ( this->war->_id - 1 );
+                        this->CreateSoldier ( _IceGiant, ai_city, 9, 10 );
+                        this->SelectSoldier ( this->war->_id - 1 );
                     }
                     break;
                 }
@@ -658,7 +667,7 @@ void Player::Action()
             {
                 case 1:
                 {
-                    this->Select_Soldier ( soldier_num );
+                    this->SelectSoldier ( soldier_num );
                     if ( soldier_num % 2 == 1 )
                         this->MoveUp();
                     else
@@ -704,7 +713,7 @@ void Player::Action()
             }
         }
     }
-    if ( this->Get_War_Num() == 5 )
+    if ( this->GetWarNum() == 5 )
     {
         int round_num = act_num / 28 + 1;
         int base_num = act_num % 4;
@@ -713,46 +722,46 @@ void Player::Action()
         {
             for ( int i = 0 ; i < 5; i++ )
             {
-                this->Create_Soldier ( _Naga, ai_city, 6, 1 );
-                this->Create_Soldier ( _Naga, ai_city, 6, 5 );
-                this->Create_Soldier ( _Naga, ai_city, 6, 9 );
+                this->CreateSoldier ( _Naga, ai_city, 6, 1 );
+                this->CreateSoldier ( _Naga, ai_city, 6, 5 );
+                this->CreateSoldier ( _Naga, ai_city, 6, 9 );
             }
             cout << "蛤蛤蛤*5，15个蛙人部署完毕。" << endl;
             for ( int i = 15; i <= 17; i++ )
                 for ( int j = 1; j <= 3 ; j++ )
                 {
-                    this->Create_Soldier ( _FlameBirds, ai_city, i, 3 );
-                    this->Create_Soldier ( _FlameBirds, ai_city, i, 7 );
+                    this->CreateSoldier ( _FlameBirds, ai_city, i, 3 );
+                    this->CreateSoldier ( _FlameBirds, ai_city, i, 7 );
                 }
             for ( int i = 4; i <= 6; i++ )
                 for ( int j = 1; j <= 3 ; j++ )
-                    this->Create_Soldier ( _FlameBirds, ai_city, 15, i );
+                    this->CreateSoldier ( _FlameBirds, ai_city, 15, i );
         }
         if ( manipulator >= 1 && manipulator <= 4 )
         {
             if ( round_num == 1 )
-                this->Create_Soldier ( _Dragon, ai_city, 7, manipulator * 2 );
+                this->CreateSoldier ( _Dragon, ai_city, 7, manipulator * 2 );
             if ( round_num == 2 )
-                this->Create_Soldier ( _IceGiant, ai_city, 7, manipulator * 2 );
+                this->CreateSoldier ( _IceGiant, ai_city, 7, manipulator * 2 );
             if ( round_num == 3 )
-                this->Create_Soldier ( _Phoenix, ai_city, 7, manipulator * 2 );
-            this->Select_Soldier ( this->war->_id - 1 );
+                this->CreateSoldier ( _Phoenix, ai_city, 7, manipulator * 2 );
+            this->SelectSoldier ( this->war->_id - 1 );
         }
         if ( manipulator >= 5 )
         {
             switch ( base_num )
             {
                 case 1:
-                    this->Select_Soldier ( this->war->_id - 4 );
+                    this->SelectSoldier ( this->war->_id - 4 );
                     break;
                 case 2:
-                    this->Select_Soldier ( this->war->_id - 3 );
+                    this->SelectSoldier ( this->war->_id - 3 );
                     break;
                 case 3:
-                    this->Select_Soldier ( this->war->_id - 2 );
+                    this->SelectSoldier ( this->war->_id - 2 );
                     break;
                 case 0:
-                    this->Select_Soldier ( this->war->_id - 1 );
+                    this->SelectSoldier ( this->war->_id - 1 );
                     break;
             }
             this->MoveLeft();
@@ -761,7 +770,7 @@ void Player::Action()
     this->act_num++;
 }
 
-int Player::getAct_num()
+int Player::GetActNum()
 {
     return this->act_num;
 }
@@ -779,9 +788,18 @@ void Player::BuildCity()
 }
 void Player::Recover()
 {
-    this->war->_UpdateLife(20);
-    this->war->_UpdateMagic(10);
-    this->war->_UpdateCoin(4);
+    unsigned int rlife = this->war->recover_life * this->war->occupied_city;
+    unsigned int rmagic = this->war->recover_magic * this->war->occupied_city;
+    unsigned int rcoin = this->war->recover_coin * this->war->occupied_city;
+    cout << endl << "[*]";
+    if ( this->GetIdentity() == _player_ )
+        cout << "玩家";
+    else
+        cout << "AI";
+    cout << "恢复 " << rlife << " 点生命源, " << rmagic << " 点魔法源, " << rcoin << " 点金钱" << endl;
+    this->war->_UpdateLife ( rlife );
+    this->war->_UpdateMagic ( rmagic );
+    this->war->_UpdateCoin ( rcoin );
 }
 enum IDENTITY Player::GetIdentity()
 {
@@ -804,25 +822,25 @@ void Player::AttackBase ( unsigned int _x, unsigned int _y )
 {
     cout << endl << "[*]";
     if ( this->GetIdentity() == _player_ )
-        cout << "电脑";
+        cout << "AI";
     else
         cout << "玩家";
     cout << "基地遭受攻击" << endl;
     double _hurt = this->war->soldier_selecter->GetAttack();
     cout << "[*]受到 " << _hurt << " 点伤害" << endl;
-    this->war->_map->Get_Point ( _x, _y )->UpdateLife ( -_hurt );
-    cout << "[*]当前剩余生命值为 " << this->war->_map->Get_Point ( _x, _y )->GetLife() << endl ;
+    this->war->_map->GetPoint ( _x, _y )->UpdateLife ( -_hurt );
+    cout << "[*]当前剩余生命值为 " << this->war->_map->GetPoint ( _x, _y )->GetLife() << endl ;
 }
 
-void Player::AttackSoldier ( unsigned int _x, unsigned int _y )
+void Player::AttackSoldier ( unsigned int _x, unsigned int _y, enum Direct _direct, bool _cattack )
 {
     cout << endl << "[*]";
     if ( this->GetIdentity() == _player_ )
-        cout << "电脑";
+        cout << "AI";
     else
         cout << "玩家";
     cout << "士兵遭遇攻击" << endl;
-    unsigned int _pid = this->war->_map->Get_Point ( _x, _y )->GetCurrentSoldierNum() - 1;
+    unsigned int _pid = this->war->_map->GetPoint ( _x, _y )->GetCurrentSoldierNum() - 1;
     double _hurt = this->war->soldier_selecter->GetAttack() - this->GetSoldierFromPoint ( _x, _y, _pid )->GetDefence();
     if ( _hurt > 0 )
     {
@@ -830,9 +848,38 @@ void Player::AttackSoldier ( unsigned int _x, unsigned int _y )
         cout << "[*]ID为 " << _id << " 的士兵受到 " << _hurt << " 点伤害" << endl;
         this->GetSoldierFromPoint ( _x, _y, _pid )->UpdateLife ( _hurt );
         if ( this->GetSoldierFromPoint ( _x, _y, _pid )->GetLife() <= 0 )
-            this->Delete_Soldier ( _id );
-        else if ( this->IsCounterAttack() )
+            this->DeleteSoldier ( _id );
+        else if ( this->IsCounterAttack() && _cattack )
         {
+            cout << endl << "[*]";
+            if ( this->GetIdentity() == _player_ )
+                cout << "玩家";
+            else
+                cout << "AI";
+            cout << "士兵发起反击" << endl;
+            switch ( _direct )
+            {
+                case _up:
+                {
+                    this->AttackSoldier ( _x, _y + 1, _down, false );
+                    break;
+                }
+                case _down:
+                {
+                    this->AttackSoldier ( _x, _y - 1, _up, false );
+                    break;
+                }
+                case _left:
+                {
+                    this->AttackSoldier ( _x + 1, _y, _right, false );
+                    break;
+                }
+                case _right:
+                {
+                    this->AttackSoldier ( _x + 1, _y, _left, false );
+                    break;
+                }
+            }
         }
     }
     else
@@ -843,37 +890,37 @@ void Player::AttackCity ( unsigned int _x, unsigned int _y )
 {
     cout << endl << "[*]";
     if ( this->GetIdentity() == _player_ )
-        cout << "电脑";
+        cout << "AI";
     else
         cout << "玩家";
     cout << "城市遭遇攻击" << endl;
     double _hurt = this->war->soldier_selecter->GetAttack();
-    if ( this->war->_map->Get_Point ( _x, _y )->GetLife() > 0 )
+    if ( this->war->_map->GetPoint ( _x, _y )->GetLife() > 0 )
     {
         cout << "[*]该城市受到 " << _hurt << " 点伤害" << endl;
-        this->war->_map->Get_Point ( _x, _y )->UpdateLife ( -_hurt );
+        this->war->_map->GetPoint ( _x, _y )->UpdateLife ( -_hurt );
     }
     else
     {
         cout << "[*]该城市已被摧毁，城市中的士兵全部死亡" << endl;
         while ( true )
         {
-            unsigned int _pid = this->war->_map->Get_Point ( _x, _y )->GetCurrentSoldierNum() - 1;
+            unsigned int _pid = this->war->_map->GetPoint ( _x, _y )->GetCurrentSoldierNum() - 1;
             if ( _pid < 0 )
                 break;
             unsigned int _id = this->GetSoldierFromPoint ( _x, _y, _pid )->GetID();
-            this->Delete_Soldier ( _id );
+            this->DeleteSoldier ( _id );
         }
     }
 }
 
 
-bool Player::MoveUp()
+bool Player::MoveUp( )
 {
     bool _result = false;
     unsigned int _y = this->war->soldier_selecter->GetY();
     unsigned int _x = this->war->soldier_selecter->GetX();
-    if ( _y != 0 && ( ( this->GetIdentity() == _player_ &&  this->war->_map->Get_Point ( _x, _y - 1 )->GetPower() != _player ) || ( this->GetIdentity() == _ai_ && this->war->_map->Get_Point ( _x, _y - 1 )->GetPower() != _ai ) || ( this->war->soldier_selecter->GetSoldierName() == _Worker  && this->war->_map->Get_Point ( _x, _y - 1 )->GetPower() == empty_city ) ) )
+    if ( _y != 0 && ( ( this->GetIdentity() == _player_ &&  this->war->_map->GetPoint ( _x, _y - 1 )->GetPower() != _player ) || ( this->GetIdentity() == _ai_ && this->war->_map->GetPoint ( _x, _y - 1 )->GetPower() != _ai ) || ( this->war->soldier_selecter->GetSoldierName() == _Worker  && this->war->_map->GetPoint ( _x, _y - 1 )->GetPower() == empty_city ) ) )
     {
         bool _isattack = false;
         if ( this->GetIdentity() == _player_ )
@@ -883,13 +930,13 @@ bool Player::MoveUp()
                 _isattack = true;
                 if ( this->war->_map->GetChar ( _x, _y - 1, true ) == 'X' )
                 {
-                    if ( this->war->_map->Get_Point ( _x, _y - 1 )->GetPower() == ai_city )
+                    if ( this->war->_map->GetPoint ( _x, _y - 1 )->GetPower() == ai_city )
                         this->AttackCity ( _x, _y - 1 );
                     else
                         this->AttackBase ( _x, _y - 1 );
                 }
                 else
-                    this->AttackSoldier ( _x, _y - 1 );
+                    this->AttackSoldier ( _x, _y - 1, _up );
             }
             else if ( this->war->_map->GetChar ( _x, _y - 1, false ) == '+' &&
                       this->war->_map->GetChar ( _x, _y - 1, true ) == 'X' )
@@ -907,13 +954,13 @@ bool Player::MoveUp()
                 _isattack = true;
                 if ( this->war->_map->GetChar ( _x, _y - 1, true ) == '*' )
                 {
-                    if ( this->war->_map->Get_Point ( _x, _y - 1 )->GetPower() == player_city )
+                    if ( this->war->_map->GetPoint ( _x, _y - 1 )->GetPower() == player_city )
                         this->AttackCity ( _x, _y - 1 );
                     else
                         this->AttackBase ( _x, _y - 1 );
                 }
                 else
-                    this->AttackSoldier ( _x, _y - 1 );
+                    this->AttackSoldier ( _x, _y - 1, _up );
             }
             else if ( this->war->_map->GetChar ( _x, _y - 1, false ) == '+' &&
                       this->war->_map->GetChar ( _x, _y - 1, true ) == '*' )
@@ -937,12 +984,12 @@ bool Player::MoveUp()
     return _result;
 }
 
-bool Player::MoveDown()
+bool Player::MoveDown( )
 {
     bool _result = false;
     unsigned int _y = this->war->soldier_selecter->GetY();
     unsigned int _x = this->war->soldier_selecter->GetX();
-    if ( ( _y != this->war->_map->GetRHeight() - 1 ) && ( ( this->GetIdentity() == _player_ &&  this->war->_map->Get_Point ( _x, _y + 1 )->GetPower() != _player ) || ( this->GetIdentity() == _ai_ && this->war->_map->Get_Point ( _x, _y + 1 )->GetPower() != _ai ) || ( this->war->soldier_selecter->GetSoldierName() == _Worker  && this->war->_map->Get_Point ( _x, _y + 1 )->GetPower() == empty_city ) ) )
+    if ( ( _y != this->war->_map->GetRHeight() - 1 ) && ( ( this->GetIdentity() == _player_ &&  this->war->_map->GetPoint ( _x, _y + 1 )->GetPower() != _player ) || ( this->GetIdentity() == _ai_ && this->war->_map->GetPoint ( _x, _y + 1 )->GetPower() != _ai ) || ( this->war->soldier_selecter->GetSoldierName() == _Worker  && this->war->_map->GetPoint ( _x, _y + 1 )->GetPower() == empty_city ) ) )
     {
         bool _isattack = false;
         if ( this->GetIdentity() == _player_ )
@@ -952,13 +999,13 @@ bool Player::MoveDown()
                 _isattack = true;
                 if ( this->war->_map->GetChar ( _x, _y + 1, true ) == 'X' )
                 {
-                    if ( this->war->_map->Get_Point ( _x, _y + 1 )->GetPower() == ai_city )
+                    if ( this->war->_map->GetPoint ( _x, _y + 1 )->GetPower() == ai_city )
                         this->AttackCity ( _x, _y + 1 );
                     else
                         this->AttackBase ( _x, _y + 1 );
                 }
                 else
-                    this->AttackSoldier ( _x, _y + 1 );
+                    this->AttackSoldier ( _x, _y + 1, _down );
             }
             else if ( this->war->_map->GetChar ( _x, _y + 1, false ) == '+' &&
                       this->war->_map->GetChar ( _x, _y + 1, true ) == 'X' )
@@ -976,13 +1023,13 @@ bool Player::MoveDown()
                 _isattack = true;
                 if ( this->war->_map->GetChar ( _x, _y + 1, true ) == '*' )
                 {
-                    if ( this->war->_map->Get_Point ( _x, _y + 1 )->GetPower() == player_city )
+                    if ( this->war->_map->GetPoint ( _x, _y + 1 )->GetPower() == player_city )
                         this->AttackCity ( _x, _y + 1 );
                     else
                         this->AttackBase ( _x, _y + 1 );
                 }
                 else
-                    this->AttackSoldier ( _x, _y + 1 );
+                    this->AttackSoldier ( _x, _y + 1, _down );
             }
             else if ( this->war->_map->GetChar ( _x, _y + 1, false ) == '+' &&
                       this->war->_map->GetChar ( _x, _y + 1, true ) == '*' )
@@ -1006,12 +1053,12 @@ bool Player::MoveDown()
     return _result;
 }
 
-bool Player::MoveLeft()
+bool Player::MoveLeft( )
 {
     bool _result = false;
     unsigned int _y = this->war->soldier_selecter->GetY();
     unsigned int _x = this->war->soldier_selecter->GetX();
-    if ( _x != 0 && ( ( this->GetIdentity() == _player_ &&  this->war->_map->Get_Point ( _x - 1, _y )->GetPower() != _player ) || ( this->GetIdentity() == _ai_ && this->war->_map->Get_Point ( _x - 1, _y )->GetPower() != _ai ) || ( this->war->soldier_selecter->GetSoldierName() == _Worker  && this->war->_map->Get_Point ( _x - 1, _y )->GetPower() == empty_city ) ) )
+    if ( _x != 0 && ( ( this->GetIdentity() == _player_ &&  this->war->_map->GetPoint ( _x - 1, _y )->GetPower() != _player ) || ( this->GetIdentity() == _ai_ && this->war->_map->GetPoint ( _x - 1, _y )->GetPower() != _ai ) || ( this->war->soldier_selecter->GetSoldierName() == _Worker  && this->war->_map->GetPoint ( _x - 1, _y )->GetPower() == empty_city ) ) )
     {
         bool _isattack = false;
         if ( this->GetIdentity() == _player_ )
@@ -1021,13 +1068,13 @@ bool Player::MoveLeft()
                 _isattack = true;
                 if ( this->war->_map->GetChar ( _x - 1, _y, true ) == 'X' )
                 {
-                    if ( this->war->_map->Get_Point ( _x - 1, _y )->GetPower() == ai_city )
+                    if ( this->war->_map->GetPoint ( _x - 1, _y )->GetPower() == ai_city )
                         this->AttackCity ( _x - 1, _y );
                     else
                         this->AttackBase ( _x - 1, _y );
                 }
                 else
-                    this->AttackSoldier ( _x - 1, _y );
+                    this->AttackSoldier ( _x - 1, _y, _left );
             }
             else if ( this->war->_map->GetChar ( _x - 1, _y, false ) == '+' &&
                       this->war->_map->GetChar ( _x - 1, _y, true ) == 'X' )
@@ -1045,13 +1092,13 @@ bool Player::MoveLeft()
                 _isattack = true;
                 if ( this->war->_map->GetChar ( _x - 1, _y, true ) == '*' )
                 {
-                    if ( this->war->_map->Get_Point ( _x - 1, _y )->GetPower() == player_city )
+                    if ( this->war->_map->GetPoint ( _x - 1, _y )->GetPower() == player_city )
                         this->AttackCity ( _x - 1, _y );
                     else
                         this->AttackBase ( _x - 1, _y );
                 }
                 else
-                    this->AttackSoldier ( _x - 1, _y );
+                    this->AttackSoldier ( _x - 1, _y, _left );
             }
             else if ( this->war->_map->GetChar ( _x - 1, _y, false ) == '+' &&
                       this->war->_map->GetChar ( _x - 1, _y, true ) == '*' )
@@ -1074,12 +1121,12 @@ bool Player::MoveLeft()
     }
     return _result;
 }
-bool Player::MoveRight()
+bool Player::MoveRight( )
 {
     bool _result = false;
     unsigned int _y = this->war->soldier_selecter->GetY();
     unsigned int _x = this->war->soldier_selecter->GetX();
-    if ( ( _x !=  this->war->_map->GetRWidth() - 1 ) && ( ( this->GetIdentity() == _player_ &&  this->war->_map->Get_Point ( _x + 1, _y )->GetPower() != _player ) || ( this->GetIdentity() == _ai_ && this->war->_map->Get_Point ( _x + 1, _y )->GetPower() != _ai ) || ( this->war->soldier_selecter->GetSoldierName() == _Worker  && this->war->_map->Get_Point ( _x + 1, _y )->GetPower() == empty_city ) ) )
+    if ( ( _x !=  this->war->_map->GetRWidth() - 1 ) && ( ( this->GetIdentity() == _player_ &&  this->war->_map->GetPoint ( _x + 1, _y )->GetPower() != _player ) || ( this->GetIdentity() == _ai_ && this->war->_map->GetPoint ( _x + 1, _y )->GetPower() != _ai ) || ( this->war->soldier_selecter->GetSoldierName() == _Worker  && this->war->_map->GetPoint ( _x + 1, _y )->GetPower() == empty_city ) ) )
     {
         bool _isattack = false;
         if ( this->GetIdentity() == _player_ )
@@ -1089,13 +1136,13 @@ bool Player::MoveRight()
                 _isattack = true;
                 if ( this->war->_map->GetChar ( _x + 1, _y, true ) == 'X' )
                 {
-                    if ( this->war->_map->Get_Point ( _x + 1, _y )->GetPower() == ai_city )
+                    if ( this->war->_map->GetPoint ( _x + 1, _y )->GetPower() == ai_city )
                         this->AttackCity ( _x + 1, _y );
                     else
                         this->AttackBase ( _x + 1, _y );
                 }
                 else
-                    this->AttackSoldier ( _x + 1, _y );
+                    this->AttackSoldier ( _x + 1, _y, _right );
             }
             else if ( this->war->_map->GetChar ( _x + 1, _y, false ) == '+' &&
                       this->war->_map->GetChar ( _x + 1, _y, true ) == 'X' )
@@ -1113,13 +1160,13 @@ bool Player::MoveRight()
                 _isattack = true;
                 if ( this->war->_map->GetChar ( _x + 1, _y, true ) == '*' )
                 {
-                    if ( this->war->_map->Get_Point ( _x + 1, _y )->GetPower() == player_city )
+                    if ( this->war->_map->GetPoint ( _x + 1, _y )->GetPower() == player_city )
                         this->AttackCity ( _x + 1, _y );
                     else
                         this->AttackBase ( _x + 1, _y );
                 }
                 else
-                    this->AttackSoldier ( _x + 1, _y );
+                    this->AttackSoldier ( _x + 1, _y, _right );
             }
             else if ( this->war->_map->GetChar ( _x + 1, _y, false ) == '+' &&
                       this->war->_map->GetChar ( _x + 1, _y, true ) == '*' )
@@ -1150,14 +1197,14 @@ enum Is_Win Player::_Result()
     player_y = GetPlayerBaseY();
     ai_x = GetAIBaseX();
     ai_y = GetAIBaseY();
-    if ( this->war->_map->Get_Point ( player_x, player_y )->GetLife() <= 0 )
+    if ( this->war->_map->GetPoint ( player_x, player_y )->GetLife() <= 0 )
         return _lose;
-    else if ( this->war->_map->Get_Point ( ai_x, ai_y )->GetLife() <= 0 )
+    else if ( this->war->_map->GetPoint ( ai_x, ai_y )->GetLife() <= 0 )
         return _win;
     else
         return _draw;
 }
-bool Player::CheckWin( )
+bool Player::CheckWinOfWar( )
 {
     bool _result = false;
     enum Is_Win win_result;
@@ -1180,7 +1227,7 @@ bool Player::CheckWin( )
             this->violence *= 0.2;
             this->second *= 0.2;
         }
-        this->End_War ( this -> war -> _map );
+        this->EndWar ( this -> war -> _map );
         _result = true;
     }
     return _result;

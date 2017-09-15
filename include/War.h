@@ -9,14 +9,14 @@ class War
     private:
         War ( double prestige, double bitcoin, double violence, int second, unsigned short war_num, Map*& _map );
         ~War();
-        void _Show_Status();
-        void _Show_Map ( bool show_detail = false );
-        bool _Select_Point ( unsigned int _x, unsigned int _y );
-        void _Show_Point_Status();
-        bool _Select_Soldier ( unsigned int id );
-        void _Show_Soldier_Status ( unsigned int id );
-        bool _Create_Soldier ( enum AllSoldiers soldier, enum LocalPower power, unsigned int x, unsigned int y, double* _life, double* _magic, unsigned int* _coin );
-        void _Delete_Soldier ( unsigned int _id );
+        void _ShowStatus();
+        void _ShowMap ( bool show_detail = false );
+        bool _SelectPoint ( unsigned int _x, unsigned int _y );
+        void _ShowPointStatus();
+        bool _SelectSoldier ( unsigned int id );
+        void _ShowSoldierStatus ( unsigned int id );
+        bool _CreateSoldier ( enum AllSoldiers soldier, enum LocalPower power, unsigned int x, unsigned int y, double* _life, double* _magic, unsigned int* _coin );
+        void _DeleteSoldier ( unsigned int _id );
         bool _IsSelectSoldier();
         unsigned int _GetPlayerBaseX();
         unsigned int _GetPlayerBaseY();
@@ -27,20 +27,24 @@ class War
         unsigned int _GetCoin();
         double _GetLucky();
         void _AddSoldierToMap ( const char& _c, unsigned int _x, unsigned int _y, Soldier& _soldier );
-        void _Show_Soldier_Status();
+        void _ShowSoldierStatus();
         Soldier* _GetSoldierFromPoint ( unsigned int _x, unsigned int _y, unsigned int _id );
         enum AllSoldiers _GetCurrentSoldierName();
         enum LocalPower _GetCityPower();
         void _BuildCity();
-        void _UpdateLife(int _life);
-        void _UpdateMagic(int _magic);
-        void _UpdateCoin(int _coin);
+        void _UpdateLife ( int _life );
+        void _UpdateMagic ( int _magic );
+        void _UpdateCoin ( int _coin );
 
         double life;
+        double recover_life;
         double magic;
+        double recover_magic;
         unsigned int coin;
+        unsigned int recover_coin;
         double lucky;
         unsigned int _id;
+        unsigned int occupied_city;
 
         vector<Soldier> created_soldier;
 

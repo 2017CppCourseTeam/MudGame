@@ -138,6 +138,7 @@ enum IDENTITY {_player_, _ai_};
 enum Species {humanity, mechanical, beast, wizard, warcraft};
 enum AllSoldiers {_Worker, _Archer, _SwordsMan, _Priest, _SiegCar, _Dragon, _Wolf, _Slime, _Goblin, _IceGiant, _FlameBirds, _Naga, _Phoenix};
 enum LocalPower {_empty, _player, _ai, player_city, ai_city, empty_city};
+enum Direct {_up, _down, _left, _right};
 enum Is_Win {_win, _lose, _draw};
 
 #endif // GLOBAL_H_INCLUDED

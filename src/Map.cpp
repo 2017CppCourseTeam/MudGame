@@ -118,7 +118,7 @@ void Map::_Init_Map_Points()
     }
 }
 
-void Map::Show_Map ( bool show_detail )
+void Map::ShowMap ( bool show_detail )
 
 {
     if ( show_detail )
@@ -192,7 +192,7 @@ void Map::Show_Map ( bool show_detail )
     }
 }
 
-Point* Map::Get_Point ( unsigned int _x, unsigned int _y )
+Point* Map::GetPoint ( unsigned int _x, unsigned int _y )
 {
     return &this->points[_x][_y];
 }
@@ -483,7 +483,7 @@ void Point::AddToCurrentSoldier ( Soldier& soldier )
     this->current_soldiers.push_back ( soldier );
     this->UpdateLife ( soldier.GetLife() );
     this->UpdateAttack ( soldier.GetAttack() );
-    if(this->GetPower() != _empty)
+    if ( this->GetPower() != _empty )
         this->UpdateDefense ( soldier.GetDefence() );
     this->UpdateNumber ( 1 );
 }

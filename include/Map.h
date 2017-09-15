@@ -56,7 +56,7 @@ class Map
 {
     public:
         Map ( unsigned int height, unsigned int width, string name, unsigned short level, unsigned char**& data );
-        Point * Get_Point ( unsigned int _x, unsigned int _y ); // 得到相对坐标x y点的指针
+        Point * GetPoint ( unsigned int _x, unsigned int _y ); // 得到相对坐标x y点的指针
 
         void InitMap(); // 初始化地图
 
@@ -71,7 +71,7 @@ class Map
         void AddSoldierToPoint ( unsigned int _x, unsigned int _y, Soldier& _soldier ); // 在该点上添加一个士兵
         void RemoveSoldierFromPoint ( unsigned int _x, unsigned int _y, unsigned int _id ); // 在该点上删除一个士兵
 
-        void Show_Map ( bool show_detail ); // 打印地图，可选是否打印详细地图
+        void ShowMap ( bool show_detail ); // 打印地图，可选是否打印详细地图
 
         bool IsEmptyCity ( unsigned int _x, unsigned int _y );
         char WhosCity ( unsigned int _x, unsigned int _y );

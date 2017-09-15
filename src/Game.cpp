@@ -277,22 +277,22 @@ void Game::SelectArchive ( )
     // Print archives
     cout << "1) ";
     this->user->SelectPlayer ( 1 );
-    if ( this->user->player->Get_name() == string ( "" ) )
+    if ( this->user->player->GetName() == string ( "" ) )
         cout << "ÎÞ" << endl;
     else
-        cout << this->user->player->Get_name() << endl;
+        cout << this->user->player->GetName() << endl;
     cout << "2) ";
     this->user->SelectPlayer ( 2 );
-    if ( this->user->player->Get_name() == string ( "" ) )
+    if ( this->user->player->GetName() == string ( "" ) )
         cout << "ÎÞ" << endl;
     else
-        cout << this->user->player->Get_name() << endl;
+        cout << this->user->player->GetName() << endl;
     cout << "3) ";
     this->user->SelectPlayer ( 3 );
-    if ( this->user->player->Get_name() == string ( "" ) )
+    if ( this->user->player->GetName() == string ( "" ) )
         cout << "ÎÞ" << endl;
     else
-        cout << this->user->player->Get_name() << endl;
+        cout << this->user->player->GetName() << endl;
     string _choice;
     short _choice_;
     while ( true )
@@ -319,14 +319,14 @@ void Game::SelectArchive ( )
     }
     // Set arhcive name
     this->user->SelectPlayer ( _choice_ );
-    if ( user->player->Get_name() == string ( "" ) )
+    if ( user->player->GetName() == string ( "" ) )
     {
         cout << "ÇëÊäÈë´æµµÃû³Æ: ";
         string _arhcive_name;
         cin >> _arhcive_name;
-        this->user->player->Set_name ( _arhcive_name );
+        this->user->player->SetName ( _arhcive_name );
     }
-    cout << endl << "[*]µ±Ç°´æµµ: " << this->user->player->Get_name() << endl;
+    cout << endl << "[*]µ±Ç°´æµµ: " << this->user->player->GetName() << endl;
     cout << "**************************" << endl;
     getchar();
 }
@@ -343,6 +343,10 @@ bool Game::Run ( )
             getline ( cin, cmd );
             if ( !this->commander->Eval ( cmd ) )
                 cout << endl << "[!]´íÎóµÄÃüÁî: " << cmd << endl;
+            if ( this->user->player->CheckWin() )
+                this->commander->SetStatus ( _win_ );
+            else if ( this->user->player->CheckLose() )
+                this->commander->SetStatus ( _lose_ );
         }
         else
             break;
@@ -353,7 +357,7 @@ bool Game::Run ( )
 bool Game::_Check()
 {
     bool _result = true;
-    if ( this->commander->Get_Status() == _lose_ )
+    if ( this->commander->GetStatus() == _lose_ )
     {
         cout << endl << "[*]ºÜÒÅº¶ÄãÊäÁËÓÎÏ·" << endl;
         this->user->player->ShowStatus();
@@ -361,7 +365,7 @@ bool Game::_Check()
         if ( getch() )
             _result = false;
     }
-    if ( this->commander->Get_Status() == _win_ )
+    if ( this->commander->GetStatus() == _win_ )
     {
         cout << endl << "[*]Äã¹§Ï²ÄãÓ®ÁËÓÎÏ·" << endl;
         this->user->player->ShowStatus();
@@ -369,7 +373,7 @@ bool Game::_Check()
         if ( getch() )
             _result = false;
     }
-    if ( this->commander->Get_Status() == _quit )
+    if ( this->commander->GetStatus() == _quit )
     {
         cout << endl << "[*]Íæ¼ÒÍË³ö" << endl;
         _result = false;

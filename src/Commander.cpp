@@ -6,9 +6,14 @@ Commander::Commander ( User*& user )
     this->user = user;
 }
 
-enum STATUS Commander::Get_Status()
+enum STATUS Commander::GetStatus()
 {
     return this->status;
+}
+
+void Commander::SetStatus ( enum STATUS _status )
+{
+    this->status = _status;
 }
 
 template <class T>
@@ -20,7 +25,7 @@ T Commander::_ConvertStringToNum ( const string& str )
     return num;
 }
 
-void Commander::_To_Lower ( string& s )
+void Commander::_ToLower ( string& s )
 {
     transform ( s.begin(), s.end(), s.begin(), ::tolower );
 }
@@ -73,7 +78,7 @@ void Commander::_ShowSoldierType()
     cout << "+--------------------+------------+--------+--------+--------+----------+----------+----------+" << endl;
 }
 
-void Commander::_Show_Manual()
+void Commander::_ShowManual()
 {
     HANDLE handle;
     handle = GetStdHandle ( STD_OUTPUT_HANDLE );
@@ -95,6 +100,7 @@ void Commander::_Show_Manual()
     cout << "  通过挖矿，获得比特币                        " << endl;
     cout << "  通过政治洗脑，提升威望值                    " << endl;
     cout << "  通过发动战争，攻克各个关卡，获得最终的胜利！" << endl;
+    cout << "  在战争中，生产士兵，占领城市，消灭敌人！    " << endl;
     cout << "                                              " << endl;
     SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_BLUE );
     cout << "按任意键继续" << endl;
@@ -152,7 +158,7 @@ void Commander::_Show_Manual()
     }
 }
 
-void Commander::_Current_Page()
+void Commander::_CurrentPage()
 {
     cout << endl << "[*]当前界面: ";
     switch ( this->status )
@@ -258,7 +264,7 @@ bool Commander::LoadMap ( string name, unsigned short level )
     return true;
 }
 
-void Commander::_Show_History()
+void Commander::_ShowHistory()
 {
     cout << endl << "[*]历史命令: " << endl;
     for ( int i = this->history.size() - 1; i >= 0 ; i-- )
@@ -268,7 +274,7 @@ void Commander::_Show_History()
 bool Commander::Eval ( string& cmd )
 {
     bool _result = false;
-    _To_Lower ( cmd );
+    _ToLower ( cmd );
     this->history.insert ( history.begin(), cmd );
     // Global command
     if ( cmd == string ( "status" ) )
@@ -278,17 +284,17 @@ bool Commander::Eval ( string& cmd )
     }
     else if ( cmd == string ( "current page" ) )
     {
-        this->_Current_Page();
+        this->_CurrentPage();
         return true;
     }
     else if ( cmd == string ( "manual" ) )
     {
-        this->_Show_Manual();
+        this->_ShowManual();
         return true;
     }
     else if ( cmd == string ( "history" ) )
     {
-        this->_Show_History();
+        this->_ShowHistory();
         return true;
     }
     else if ( cmd == string ( "save" ) )
@@ -391,7 +397,7 @@ bool Commander::Eval ( string& cmd )
             if ( _choice == string ( "y" ) || _choice == string ( "Y" ) )
             {
                 cout << endl << "[*]重新开始战争" << endl;
-                this->user->player->Restart_War();
+                this->user->player->RestartWar();
             }
             _result = true;
         }
@@ -399,12 +405,12 @@ bool Commander::Eval ( string& cmd )
         {
             cout << endl << "[*]继续战争" << endl;
             this->status = start_war;
-            this->LoadMap ( string ( "standard" ), this->user->player->Get_War_Num() );
-            this->user->player->Start_War ( this->_map );
-            cout << endl << "[*]当前关卡: " << this->user->player->Get_War_Num() << endl;
+            this->LoadMap ( string ( "standard" ), this->user->player->GetWarNum() );
+            this->user->player->StartWar ( this->_map );
+            cout << endl << "[*]当前关卡: " << this->user->player->GetWarNum() << endl;
             this->user->player->ShowStatus();
-            this->user->player->Show_War_Status();
-            this->user->player->Show_Map ( true );
+            this->user->player->ShowWarStatus();
+            this->user->player->ShowMap ( true );
             cout << "[*]确认开始？(y/n)" << endl << ">>";
             string _choice;
             cin >> _choice;
@@ -412,74 +418,79 @@ bool Commander::Eval ( string& cmd )
             if ( _choice != string ( "y" ) && _choice != string ( "Y" ) )
             {
                 this->status = war;
-                this->user->player->End_War ( this->_map );
+                this->user->player->EndWar ( this->_map );
             }
             else
             {
                 cout << endl << "[*]战争开始";
                 this->user->player->First();
                 this->user->ai = new Player();
-                bool _first = this->user->player->Is_First();
+                bool _first = this->user->player->IsFirst();
                 if ( _first )
                     cout << endl << "[*]第一回合玩家先手" << endl;
                 else
-                    cout << endl << "[*]第一回合电脑先手" << endl;
-                switch ( this->user->player->Get_War_Num() )
+                    cout << endl << "[*]第一回合AI先手" << endl;
+                switch ( this->user->player->GetWarNum() )
                 {
                     case 1:
                     {
-                        this->user->ai->AI_Init ( AI_PRESTIGE_1,
-                                                  AI_BITCOIN_1,
-                                                  AI_VIOLENCE_1,
-                                                  AI_BITCOIN_1,
-                                                  0,
-                                                  !_first );
+                        this->user->ai->AIInit ( AI_PRESTIGE_1,
+                                                 AI_BITCOIN_1,
+                                                 AI_VIOLENCE_1,
+                                                 AI_BITCOIN_1,
+                                                 0,
+                                                 !_first );
                         break;
                     }
                     case 2:
                     {
-                        this->user->ai->AI_Init ( AI_PRESTIGE_2,
-                                                  AI_BITCOIN_2,
-                                                  AI_VIOLENCE_2,
-                                                  AI_BITCOIN_2,
-                                                  1,
-                                                  !_first );
+                        this->user->ai->AIInit ( AI_PRESTIGE_2,
+                                                 AI_BITCOIN_2,
+                                                 AI_VIOLENCE_2,
+                                                 AI_BITCOIN_2,
+                                                 1,
+                                                 !_first );
                         break;
                     }
                     case 3:
                     {
-                        this->user->ai->AI_Init ( AI_PRESTIGE_3,
-                                                  AI_BITCOIN_3,
-                                                  AI_VIOLENCE_3,
-                                                  AI_BITCOIN_3,
-                                                  2,
-                                                  !_first );
+                        this->user->ai->AIInit ( AI_PRESTIGE_3,
+                                                 AI_BITCOIN_3,
+                                                 AI_VIOLENCE_3,
+                                                 AI_BITCOIN_3,
+                                                 2,
+                                                 !_first );
                         break;
                     }
                     case 4:
                     {
-                        this->user->ai->AI_Init ( AI_PRESTIGE_4,
-                                                  AI_BITCOIN_4,
-                                                  AI_VIOLENCE_4,
-                                                  AI_BITCOIN_4,
-                                                  3,
-                                                  !_first );
+                        this->user->ai->AIInit ( AI_PRESTIGE_4,
+                                                 AI_BITCOIN_4,
+                                                 AI_VIOLENCE_4,
+                                                 AI_BITCOIN_4,
+                                                 3,
+                                                 !_first );
                         break;
                     }
                     case 5:
                     {
-                        this->user->ai->AI_Init ( AI_PRESTIGE_5,
-                                                  AI_BITCOIN_5,
-                                                  AI_VIOLENCE_5,
-                                                  AI_BITCOIN_5,
-                                                  4,
-                                                  !_first );
+                        this->user->ai->AIInit ( AI_PRESTIGE_5,
+                                                 AI_BITCOIN_5,
+                                                 AI_VIOLENCE_5,
+                                                 AI_BITCOIN_5,
+                                                 4,
+                                                 !_first );
                         break;
                     }
                 }
-                this->user->ai->Start_War ( this->_map );
-                if ( this->user->ai->Is_First() )
+                this->user->ai->StartWar ( this->_map );
+                if ( this->user->ai->IsFirst() )
+                {
+                    cout << endl << "[*]AI回合开始" << endl;
                     this->user->ai->Action();
+                    this->user->ai->Recover();
+                    cout << endl << "[*]AI回合结束" << endl;
+                }
             }
             _result = true;
         }
@@ -501,36 +512,80 @@ bool Commander::Eval ( string& cmd )
             if ( _choice == string ( "y" ) || _choice == string ( "Y" ) )
             {
                 cout << endl << "[*]退出战争" << endl;
-                this->user->player->End_War ( this->_map );
+                this->user->player->EndWar ( this->_map );
                 this->status = war;
                 _result = true;
             }
         }
-        else if ( cmd == string ( "help" ) )
+        else if ( cmd.substr ( 0, 4 ) == string ( "help" ) )
         {
-            cout << endl << "+----------------------------------------------------------+" << endl;
-            cout << "|[*]战争界面命令:                                          |" << endl;
-            cout << "|show status           显示战争属性                        |" << endl;
-            cout << "|show map              显示当前地图                        |" << endl;
-            cout << "|show all              显示属性与地图                      |" << endl;
-            cout << "|show type             显示士兵详细列表                    |" << endl;
-            cout << "|                                                          |" << endl;
-            cout << "|select building x,y   显示 x,y 坐标的建筑属性             |" << endl;
-            cout << "|select soldier n      选择ID为n的士兵，并显示该士兵的属性 |" << endl;
-            cout << "|                                                          |" << endl;
-            cout << "|move up               当前选择的士兵向上移动              |" << endl;
-            cout << "|move down             当前选择的士兵向下移动              |" << endl;
-            cout << "|move left             当前选择的士兵向左移动              |" << endl;
-            cout << "|move right            当前选择的士兵向右移动              |" << endl;
-            cout << "|                                                          |" << endl;
-            cout << "|produce type          生产type类型的士兵                  |" << endl;
-            cout << "|                      详情请参考 show type 指令           |" << endl;
-            cout << "|                                                          |" << endl;
-            cout << "|build                 当前选择的士兵(工人)占领该城市      |" << endl;
-            cout << "|help                  显示本页面                          |" << endl;
-            cout << "|exit                  退出战争                            |" << endl;
-            cout << "+----------------------------------------------------------+" << endl;
-            _result = true;
+            if ( cmd.substr ( 4, 1 ) == string ( " " ) )
+            {
+                string subcmd = cmd.substr ( 5 );
+                if ( subcmd == string ( "cmd" ) )
+                {
+                    cout << endl << "+----------------------------------------------------------+" << endl;
+                    cout << "|[*]战争界面命令:                                          |" << endl;
+                    cout << "|show status           显示战争属性                        |" << endl;
+                    cout << "|show map              显示当前地图                        |" << endl;
+                    cout << "|show all              显示属性与地图                      |" << endl;
+                    cout << "|show type             显示士兵详细列表                    |" << endl;
+                    cout << "|                                                          |" << endl;
+                    cout << "|select building x,y   显示 x,y 坐标的建筑属性             |" << endl;
+                    cout << "|select soldier n      选择ID为n的士兵，并显示该士兵的属性 |" << endl;
+                    cout << "|                                                          |" << endl;
+                    cout << "|move up               当前选择的士兵向上移动              |" << endl;
+                    cout << "|move down             当前选择的士兵向下移动              |" << endl;
+                    cout << "|move left             当前选择的士兵向左移动              |" << endl;
+                    cout << "|move right            当前选择的士兵向右移动              |" << endl;
+                    cout << "|                                                          |" << endl;
+                    cout << "|produce type          生产type类型的士兵                  |" << endl;
+                    cout << "|                      详情请参考 show type 指令           |" << endl;
+                    cout << "|                                                          |" << endl;
+                    cout << "|build                 当前选择的士兵(工人)占领该城市      |" << endl;
+                    cout << "|help                  显示本页面                          |" << endl;
+                    cout << "|exit                  退出战争                            |" << endl;
+                    cout << "+----------------------------------------------------------+" << endl;
+                    _result = true;
+                }
+                else if ( subcmd == string ( "map" ) )
+                {
+                    cout << endl << "[*]地图说明:" << endl;
+                    cout << "+----+----------------+" << endl;
+                    cout << "| ** | 玩家基地或城市 |" << endl;
+                    cout << "+----+----------------+" << endl;
+                    cout << "| XX | AI基地或城市   |" << endl;
+                    cout << "+----+----------------+" << endl;
+                    cout << "| ++ | 空的城市       |" << endl;
+                    cout << "+----+----------------+" << endl;
+                    cout << "| +* | 玩家占领的城市 |" << endl;
+                    cout << "+----+----------------+" << endl;
+                    cout << "| +* | AI占领的城市   |" << endl;
+                    cout << "+----+----------------+" << endl;
+                    cout << "| *  | 玩家士兵       |" << endl;
+                    cout << "+----+----------------+" << endl;
+                    cout << "| *  | AI士兵         |" << endl;
+                    cout << "+---------------------+" << endl;
+                    _result = true;
+                }
+                else if ( subcmd == string ( "war" ) )
+                {
+                    cout << endl << "[*]战争介绍:" << endl;
+                    cout << "战争采用回合制，玩家对抗AI" << endl;
+                    cout << "最开始玩家有50%的几率先手" << endl;
+                    cout << "玩家可以在基地生产士兵，但是需要使用资源，士兵生产资源详情请参考 Show type" << endl;
+                    cout << "玩家必须使用 Select 指令根据士兵ID选择士兵，然后可以移动该士兵" << endl;
+                    cout << "玩家生产、建造与移动一个士兵均算一个回合" << endl;
+                    cout << "当士兵移动方向上遇见了敌对势力的士兵或城市时，会自动攻击" << endl;
+                    cout << "被攻击方受到的伤害 = 攻击方攻击力 - 被攻击方防御力" << endl;
+                    cout << "被攻击方有一定概率进行反击，该概率等于幸运值" << endl;
+                }
+            }
+            if ( !_result )
+            {
+                cout << endl << "[!]Help 指令缺少参数或参数错误" << endl;
+                cout << endl << "[*]也许你想使用 Help map 或 Help cmd ?" << endl;
+            }
         }
         else if ( cmd.substr ( 0, 4 ) == string ( "show" ) )
         {
@@ -539,18 +594,18 @@ bool Commander::Eval ( string& cmd )
                 string subcmd = cmd.substr ( 5 );
                 if ( subcmd == string ( "status" ) )
                 {
-                    this->user->player->Show_War_Status();
+                    this->user->player->ShowWarStatus();
                     _result = true;
                 }
                 else if ( subcmd == string ( "map" ) )
                 {
-                    this->user->player->Show_Map ( true );
+                    this->user->player->ShowMap ( true );
                     _result = true;
                 }
                 else if ( subcmd == string ( "all" ) )
                 {
-                    this->user->player->Show_War_Status();
-                    this->user->player->Show_Map ( true );
+                    this->user->player->ShowWarStatus();
+                    this->user->player->ShowMap ( true );
                     _result = true;
                 }
                 else if ( subcmd == string ( "type" ) )
@@ -558,6 +613,11 @@ bool Commander::Eval ( string& cmd )
                     this->_ShowSoldierType();
                     _result = true;
                 }
+            }
+            if ( !_result )
+            {
+                cout << endl << "[!]Show 指令缺少参数或参数错误" << endl;
+                cout << endl << "[*]也许你想使用 Show status 或 Show map 或 Show all 或 Show  type ?" << endl;
             }
         }
         else if ( cmd.substr ( 0, 6 ) == string ( "select" ) )
@@ -574,9 +634,9 @@ bool Commander::Eval ( string& cmd )
                         {
                             unsigned int _x = this->_ConvertStringToNum<unsigned int> ( _subcmd.substr ( 0, position ) );
                             unsigned int _y = this->_ConvertStringToNum<unsigned int> ( _subcmd.substr ( position + 1 ) );
-                            if ( this->user->player->Select_Point ( _x, _y ) )
+                            if ( this->user->player->SelectPoint ( _x, _y ) )
                             {
-                                this->user->player->Show_Ponit_Status();
+                                this->user->player->ShowPonitStatus();
                                 _result = true;
                             }
                         }
@@ -588,13 +648,18 @@ bool Commander::Eval ( string& cmd )
                     {
                         string _subcmd = cmd.substr ( 0 + 6 + 1 + 7 + 1 );
                         unsigned int _id = this->_ConvertStringToNum<unsigned int> ( _subcmd );
-                        if ( this->user->player->Select_Soldier ( _id ) )
+                        if ( this->user->player->SelectSoldier ( _id ) )
                         {
-                            this->user->player->Show_Soldier_Status ( _id );
+                            this->user->player->ShowSoldierStatus ( _id );
                             _result = true;
                         }
                     }
                 }
+            }
+            if ( !_result )
+            {
+                cout << endl << "[!]Select 指令缺少参数或参数错误" << endl;
+                cout << endl << "[*]也许你想使用 Select building x,y 或 Select soldier id ?" << endl;
             }
         }
         else if ( cmd.substr ( 0, 4 ) == string ( "move" ) )
@@ -607,8 +672,10 @@ bool Commander::Eval ( string& cmd )
                 {
                     if ( this->user->player->MoveUp() )
                     {
-                        this->user->player->Show_Soldier_Status();
+                        cout << endl << "[*]玩家回合开始" << endl;
+                        this->user->player->ShowSoldierStatus();
                         this->user->player->Recover();
+                        cout << endl << "[*]玩家回合结束" << endl;
                         _result = true;
                     }
                     else
@@ -618,8 +685,10 @@ bool Commander::Eval ( string& cmd )
                 {
                     if ( this->user->player->MoveDown() )
                     {
-                        this->user->player->Show_Soldier_Status();
+                        cout << endl << "[*]玩家回合开始" << endl;
+                        this->user->player->ShowSoldierStatus();
                         this->user->player->Recover();
+                        cout << endl << "[*]玩家回合结束" << endl;
                         _result = true;
                     }
                     else
@@ -629,8 +698,10 @@ bool Commander::Eval ( string& cmd )
                 {
                     if ( this->user->player->MoveLeft() )
                     {
-                        this->user->player->Show_Soldier_Status();
+                        cout << endl << "[*]玩家回合开始" << endl;
+                        this->user->player->ShowSoldierStatus();
                         this->user->player->Recover();
+                        cout << endl << "[*]玩家回合结束" << endl;
                         _result = true;
                     }
                     else
@@ -640,15 +711,27 @@ bool Commander::Eval ( string& cmd )
                 {
                     if ( this->user->player->MoveRight() )
                     {
-                        this->user->player->Show_Soldier_Status();
+                        cout << endl << "[*]玩家回合开始" << endl;
+                        this->user->player->ShowSoldierStatus();
                         this->user->player->Recover();
+                        cout << endl << "[*]玩家回合结束" << endl;
                         _result = true;
                     }
                     else
                         cout << endl << "[!]移动方向有障碍物，无法移动" << endl;
                 }
-                if(_result && !this->user->ai->Is_First() )
+                if ( _result && !this->user->ai->IsFirst() )
+                {
+                    cout << endl << "[*]AI回合开始" << endl;
                     this->user->ai->Action();
+                    this->user->ai->Recover();
+                    cout << endl << "[*]AI回合结束" << endl;
+                }
+            }
+            if ( !_result )
+            {
+                cout << endl << "[!]Move 指令缺少参数或参数错误" << endl;
+                cout << endl << "[*]也许你想使用 Move up 或 Move down 或 Move left 或 Move right ?" << endl;
             }
         }
         else if ( cmd.substr ( 0, 7 ) == string ( "produce" ) )
@@ -664,84 +747,121 @@ bool Commander::Eval ( string& cmd )
                     _y = _y + 1;
                 if ( _subcmd == string ( "worker" ) )
                 {
-                    if ( this->user->player->Create_Soldier ( _Worker, player_city, _x, _y ) )
+                    cout << endl << "[*]玩家回合开始" << endl;
+                    if ( this->user->player->CreateSoldier ( _Worker, player_city, _x, _y ) )
                         this->user->player->Recover();
-                        _result = true;
+                    cout << endl << "[*]玩家回合结束" << endl;
+                    _result = true;
                 }
                 else if ( _subcmd == string ( "archer" ) )
                 {
-                    if ( this->user->player->Create_Soldier ( _Archer, player_city, _x, _y ) )
+                    cout << endl << "[*]玩家回合开始" << endl;
+                    if ( this->user->player->CreateSoldier ( _Archer, player_city, _x, _y ) )
                         this->user->player->Recover();
-                        _result = true;
+                    cout << endl << "[*]玩家回合结束" << endl;
+                    _result = true;
                 }
                 else if ( _subcmd == string ( "swordsman" ) )
                 {
-                    if ( this->user->player->Create_Soldier ( _SwordsMan, player_city, _x, _y ) )
+                    cout << endl << "[*]玩家回合开始" << endl;
+                    if ( this->user->player->CreateSoldier ( _SwordsMan, player_city, _x, _y ) )
                         this->user->player->Recover();
-                        _result = true;
+                    cout << endl << "[*]玩家回合结束" << endl;
+                    _result = true;
                 }
                 else if ( _subcmd == string ( "priest" ) )
                 {
-                    if ( this->user->player->Create_Soldier ( _Priest, player_city, _x, _y ) )
+                    cout << endl << "[*]玩家回合开始" << endl;
+                    if ( this->user->player->CreateSoldier ( _Priest, player_city, _x, _y ) )
                         this->user->player->Recover();
-                        _result = true;
+                    cout << endl << "[*]玩家回合结束" << endl;
+                    _result = true;
                 }
                 else if ( _subcmd == string ( "siegcar" ) )
                 {
-                    if ( this->user->player->Create_Soldier ( _SiegCar, player_city, _x, _y ) )
+                    cout << endl << "[*]玩家回合开始" << endl;
+                    if ( this->user->player->CreateSoldier ( _SiegCar, player_city, _x, _y ) )
                         this->user->player->Recover();
-                        _result = true;
+                    cout << endl << "[*]玩家回合结束" << endl;
+                    _result = true;
                 }
                 else if ( _subcmd == string ( "dragon" ) )
                 {
-                    if ( this->user->player->Create_Soldier ( _Dragon, player_city, _x, _y ) )
+                    cout << endl << "[*]玩家回合开始" << endl;
+                    if ( this->user->player->CreateSoldier ( _Dragon, player_city, _x, _y ) )
                         this->user->player->Recover();
-                        _result = true;
+                    cout << endl << "[*]玩家回合结束" << endl;
+                    _result = true;
                 }
                 else if ( _subcmd == string ( "wolf" ) )
                 {
-                    if ( this->user->player->Create_Soldier ( _Wolf, player_city, _x, _y ) )
+                    cout << endl << "[*]玩家回合开始" << endl;
+                    if ( this->user->player->CreateSoldier ( _Wolf, player_city, _x, _y ) )
                         this->user->player->Recover();
-                        _result = true;
+                    cout << endl << "[*]玩家回合结束" << endl;
+                    _result = true;
                 }
                 else if ( _subcmd == string ( "slime" ) )
                 {
-                    if ( this->user->player->Create_Soldier ( _Slime, player_city, _x, _y ) )
+                    cout << endl << "[*]玩家回合开始" << endl;
+                    if ( this->user->player->CreateSoldier ( _Slime, player_city, _x, _y ) )
                         this->user->player->Recover();
-                        _result = true;
+                    cout << endl << "[*]玩家回合结束" << endl;
+                    _result = true;
                 }
                 else if ( _subcmd == string ( "goblin" ) )
                 {
-                    if ( this->user->player->Create_Soldier ( _Goblin, player_city, _x, _y ) )
+                    cout << endl << "[*]玩家回合开始" << endl;
+                    if ( this->user->player->CreateSoldier ( _Goblin, player_city, _x, _y ) )
                         this->user->player->Recover();
-                        _result = true;
+                    cout << endl << "[*]玩家回合结束" << endl;
+                    _result = true;
                 }
                 else if ( _subcmd == string ( "icegiant" ) )
                 {
-                    if ( this->user->player->Create_Soldier ( _IceGiant, player_city, _x, _y ) )
+                    cout << endl << "[*]玩家回合开始" << endl;
+                    if ( this->user->player->CreateSoldier ( _IceGiant, player_city, _x, _y ) )
                         this->user->player->Recover();
-                        _result = true;
+                    cout << endl << "[*]玩家回合结束" << endl;
+                    _result = true;
                 }
                 else if ( _subcmd == string ( "flamebirds" ) )
                 {
-                    if ( this->user->player->Create_Soldier ( _FlameBirds, player_city, _x, _y ) )
+                    cout << endl << "[*]玩家回合开始" << endl;
+                    if ( this->user->player->CreateSoldier ( _FlameBirds, player_city, _x, _y ) )
                         this->user->player->Recover();
-                        _result = true;
+                    cout << endl << "[*]玩家回合结束" << endl;
+                    _result = true;
                 }
                 else if ( _subcmd == string ( "naga" ) )
                 {
-                    if ( this->user->player->Create_Soldier ( _Naga, player_city, _x, _y ) )
+                    cout << endl << "[*]玩家回合开始" << endl;
+                    if ( this->user->player->CreateSoldier ( _Naga, player_city, _x, _y ) )
                         this->user->player->Recover();
-                        _result = true;
+                    cout << endl << "[*]玩家回合结束" << endl;
+                    _result = true;
                 }
                 else if ( _subcmd == string ( "phoenix" ) )
                 {
-                    if ( this->user->player->Create_Soldier ( _Phoenix, player_city, _x, _y ) )
+                    cout << endl << "[*]玩家回合开始" << endl;
+                    if ( this->user->player->CreateSoldier ( _Phoenix, player_city, _x, _y ) )
                         this->user->player->Recover();
-                        _result = true;
+                    cout << endl << "[*]玩家回合结束" << endl;
+                    _result = true;
                 }
-                if(_result && !this->user->ai->Is_First() )
+                if ( _result && !this->user->ai->IsFirst() )
+                {
+                    cout << endl << "[*]AI回合开始" << endl;
                     this->user->ai->Action();
+                    this->user->ai->Recover();
+                    cout << endl << "[*]AI回合结束" << endl;
+                }
+            }
+            if ( !_result )
+            {
+                cout << endl << "[!]Produce 指令缺少参数或参数错误" << endl;
+                cout << endl << "[*]也许你想使用 Produce type ?" << endl;
+                cout << endl << "[*]Type 详情请参阅 Show type" << endl;
             }
         }
         else if ( cmd.substr ( 0, 5 ) == string ( "build" ) )
@@ -750,9 +870,10 @@ bool Commander::Eval ( string& cmd )
             {
                 if ( this->user->player->GetCityPower() == empty_city )
                 {
+                    cout << endl << "[*]玩家回合开始" << endl;
                     this->user->player->BuildCity();
-                    this->user->player->Recover();
                     cout << endl << "[*]建造成功" << endl;
+                    cout << endl << "[*]玩家回合结束" << endl;
                     _result = true;
                 }
                 else
@@ -760,15 +881,19 @@ bool Commander::Eval ( string& cmd )
             }
             else
                 cout << endl << "[!]只有Worker可以建造城市，当前选择的士兵并不是Worker，请重新选择。";
-                if(_result && !this->user->ai->Is_First() )
+            if ( _result && !this->user->ai->IsFirst() )
+            {
+                cout << endl << "[*]AI回合开始" << endl;
                 this->user->ai->Action();
+                this->user->ai->Recover();
+                cout << endl << "[*]AI回合结束" << endl;
+            }
         }
-        if ( this->user->player->CheckWin() )
+        if ( this->user->player->CheckWinOfWar() )
         {
             cout << endl << "[*]战争结束，返回主页面" << endl;
             this->status = _main;
         }
-        //this->user->player->Recover();
     }
     return _result;
 }
