@@ -335,9 +335,9 @@ bool Commander::Eval ( string& cmd )
             cout << endl << "[*]战争界面" << endl;
             SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY );
             cout << endl << ".     /| ________________" << endl;
-            cout << "O|===|* >________________>" << endl;
+            cout << "O|===|* >________________>♂♂♂♂♂" << endl;
             cout << "'     \\|" << endl<<endl;
-            SetConsoleTextAttribute ( handle, BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY );
+            SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN );
             _result = true;
         }
         else if ( cmd == string ( "exit" ) )
