@@ -67,15 +67,16 @@ void Game::_Logo()
 
 void Game::_Narrative( )
 {
+    PlaySound ( ".\\BGM\\ddz.wav", NULL, SND_FILENAME | SND_ASYNC );
     SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_GREEN );
     cout << endl;
-    cout << " ----------------------------------------------------------------------- " << endl;
+    cout << "+-----------------------------------------------------------------------+" << endl;
     cout << "|     某日，在计算机网络系统保护中心收到了一封莫名的邮件。              |" << endl;
     cout << "|  邮件上没有标题、署名、更是没有IP地址，有的只是短短的四个字:          |" << endl
          << "|                                                                       |" << endl;
     cout << "|";
     SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY );
-    cout << "                     “侵略地球”                                      ";
+    cout << "                     “侵略地球”                                        ";
     SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_GREEN );
     cout << "|" << endl;
     cout << "|                                                                       |" << endl;
@@ -103,7 +104,7 @@ void Game::_Narrative( )
     cout << "|                                                                       |" << endl;
     cout << "|";
     SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY );
-    cout << "   “我们是人工智能，从现在开始，地球就属于我们了，这是我们的时代！”  ";
+    cout << "   “我们是人工智能，从现在开始，地球就属于我们了，这是我们的时代！”   ";
     SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_GREEN );
     cout << "|" << endl
          << "|                                                                       |" << endl;
@@ -119,7 +120,7 @@ void Game::_Narrative( )
          << "|  在茫茫人海中跳了起来，成功引起了战略总部总指挥的注意，成功背负起     |" << endl
          << "|  打倒人工智能政权的重大责任，你带领着百余位经过精挑细选后的码农，     |" << endl
          << "|  正在进行着一场天翻地覆的反政权运动。传奇正在继续，请开始你的表演！   |" << endl;
-    cout << " -----------------------------------------------------------------------" << endl << endl;
+    cout << "+-----------------------------------------------------------------------+" << endl << endl;
     SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN );
 }
 
@@ -328,6 +329,7 @@ void Game::SelectArchive ( )
     }
     cout << endl << "[*]当前存档: " << this->user->player->GetName() << endl;
     cout << "**************************" << endl;
+    PlaySound ( ".\\BGM\\vs.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP );
     getchar();
 }
 

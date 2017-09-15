@@ -83,7 +83,7 @@ void Player::TrainCoder()
         cout << "|   ºÜÒÅº¶£¬ÑµÁ·Ê§°Ü¡£                      |" << endl;
         cout << "|                                           |" << endl;
         cout << "|                          ±©Á¦Öµ-5£¬-1s    |" << endl;
-        PlaySound ( ".\\BGM\\8848.wav", NULL, SND_FILENAME | SND_SYNC );
+        PlaySound ( ".\\BGM\\8488.wav", NULL, SND_FILENAME | SND_SYNC );
     }
     Player::RandomEvent();
     SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN );
@@ -166,7 +166,7 @@ void Player::WashBrain()
         cout << "|   ºÜÒÅº¶£¬ÑµÁ·Ê§°Ü                        |" << endl;
         cout << "|                                           |" << endl;
         cout << "|                            ÍþÍû-5£¬ -1s   |" << endl;
-        PlaySound ( ".\\BGM\\8848.wav", NULL, SND_FILENAME | SND_SYNC );
+        PlaySound ( ".\\BGM\\8488.wav", NULL, SND_FILENAME | SND_SYNC );
     }
     Player::RandomEvent();
     SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN );
