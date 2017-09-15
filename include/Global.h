@@ -130,6 +130,8 @@
 #include <string>
 #include <algorithm>
 #include <vector>
+#include <mmsystem.h>
+#include <stdio.h>
 
 using namespace std;
 

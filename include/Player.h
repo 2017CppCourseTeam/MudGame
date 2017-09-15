@@ -25,6 +25,7 @@ class Player
         double GetViolence(); // 得到暴力值
         int GetSecond(); // 得到时间
         unsigned short GetWarNum(); // 得到战争进度
+        void SetWarNum ( unsigned int num ); // 设置战争进度
         string GetName(); // 得到该玩家姓名
         void SetName ( string name ); // 设置该玩家姓名
         bool CheckWinOfWar(); // 检查玩家是否胜利

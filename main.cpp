@@ -1,12 +1,13 @@
 #include "Game.h"
-#include <windows.h>
-#include <string>
+#include "Global.h"
+#pragma comment(lib,"WINMM.LIB")
 
 int main()
 {
     Game* game = new Game ( );
     while ( true )
     {
+        PlaySound ( ".\\BGM\\HDL.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP );
         system ( "color E0" );
         if ( game->Init ( ) )   // 游戏初始化（登录、注册）
         {

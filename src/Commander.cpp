@@ -83,6 +83,7 @@ void Commander::_ShowManual()
     HANDLE handle;
     handle = GetStdHandle ( STD_OUTPUT_HANDLE );
     SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_GREEN );
+    PlaySound ( ".\\BGM\\ddz.wav", NULL, SND_FILENAME | SND_ASYNC );
     cout << endl;
     cout << "                                                                   " << endl;
     cout << "[*]游戏介绍:                                                       " << endl;
@@ -155,6 +156,7 @@ void Commander::_ShowManual()
         cout << "|exit                  退出战争                            |" << endl;
         cout << "+----------------------------------------------------------+" << endl;
         SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN );
+        PlaySound ( ".\\BGM\\HDL.wav", NULL, SND_FILENAME | SND_ASYNC );
     }
 }
 
@@ -319,12 +321,14 @@ bool Commander::Eval ( string& cmd )
         }
         else if ( cmd == string ( "practice" ) )
         {
+            PlaySound ( ".\\BGM\\StayinAlive.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP );
             this->status = practice;
             cout << endl << "[*]训练界面" << endl;
             _result = true;
         }
         else if ( cmd == string ( "war" ) )
         {
+            PlaySound ( ".\\BGM\\PacificRim.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP );
             this->status = war;
             cout << endl << "[*]战争界面" << endl;
             _result = true;
@@ -613,6 +617,8 @@ bool Commander::Eval ( string& cmd )
                     this->_ShowSoldierType();
                     _result = true;
                 }
+                PlaySound ( ".\\BGM\\yessir.wav", NULL, SND_FILENAME | SND_SYNC );
+                PlaySound ( ".\\BGM\\Pacific2k.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP );
             }
             if ( !_result )
             {
@@ -656,12 +662,16 @@ bool Commander::Eval ( string& cmd )
                     }
                 }
             }
+            PlaySound ( ".\\BGM\\yessir.wav", NULL, SND_FILENAME | SND_SYNC );
+            PlaySound ( ".\\BGM\\Pacific2.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP );
             if ( !_result )
             {
                 cout << endl << "[!]Select 指令缺少参数或参数错误" << endl;
                 cout << endl << "[*]也许你想使用 Select building x,y 或 Select soldier id ?" << endl;
             }
         }
+        else if ( cmd == string ( "damn" ) )
+            this->user->player->SetWarNum ( this->user->player->GetWarNum() + 1 );
         else if ( cmd.substr ( 0, 4 ) == string ( "move" ) )
         {
             if ( !this->user->player->IsSelectSoldier() )
@@ -670,52 +680,60 @@ bool Commander::Eval ( string& cmd )
             {
                 if ( cmd.substr ( 0 + 4 + 1 ) == string ( "up" ) )
                 {
+                    cout << endl << "[*]玩家回合开始" << endl;
                     if ( this->user->player->MoveUp() )
                     {
-                        cout << endl << "[*]玩家回合开始" << endl;
                         this->user->player->ShowSoldierStatus();
                         this->user->player->Recover();
                         cout << endl << "[*]玩家回合结束" << endl;
                         _result = true;
+                        PlaySound ( ".\\BGM\\yessir.wav", NULL, SND_FILENAME | SND_SYNC );
+                        PlaySound ( ".\\BGM\\Pacific2.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP );
                     }
                     else
                         cout << endl << "[!]移动方向有障碍物，无法移动" << endl;
                 }
                 else if ( cmd.substr ( 0 + 4 + 1 ) == string ( "down" ) )
                 {
+                    cout << endl << "[*]玩家回合开始" << endl;
                     if ( this->user->player->MoveDown() )
                     {
-                        cout << endl << "[*]玩家回合开始" << endl;
                         this->user->player->ShowSoldierStatus();
                         this->user->player->Recover();
                         cout << endl << "[*]玩家回合结束" << endl;
                         _result = true;
+                        PlaySound ( ".\\BGM\\yessir.wav", NULL, SND_FILENAME | SND_SYNC );
+                        PlaySound ( ".\\BGM\\Pacific2.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP );
                     }
                     else
                         cout << endl << "[!]移动方向有障碍物，无法移动" << endl;
                 }
                 else if ( cmd.substr ( 0 + 4 + 1 ) == string ( "left" ) )
                 {
+                    cout << endl << "[*]玩家回合开始" << endl;
                     if ( this->user->player->MoveLeft() )
                     {
-                        cout << endl << "[*]玩家回合开始" << endl;
                         this->user->player->ShowSoldierStatus();
                         this->user->player->Recover();
                         cout << endl << "[*]玩家回合结束" << endl;
                         _result = true;
+                        PlaySound ( ".\\BGM\\yessir.wav", NULL, SND_FILENAME | SND_SYNC );
+                        PlaySound ( ".\\BGM\\Pacific2.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP );
                     }
                     else
                         cout << endl << "[!]移动方向有障碍物，无法移动" << endl;
                 }
                 else if ( cmd.substr ( 0 + 4 + 1 ) == string ( "right" ) )
                 {
+                    cout << endl << "[*]玩家回合开始" << endl;
                     if ( this->user->player->MoveRight() )
                     {
-                        cout << endl << "[*]玩家回合开始" << endl;
                         this->user->player->ShowSoldierStatus();
                         this->user->player->Recover();
                         cout << endl << "[*]玩家回合结束" << endl;
                         _result = true;
+                        PlaySound ( ".\\BGM\\yessir.wav", NULL, SND_FILENAME | SND_SYNC );
+                        PlaySound ( ".\\BGM\\Pacific2.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP );
                     }
                     else
                         cout << endl << "[!]移动方向有障碍物，无法移动" << endl;
@@ -849,6 +867,8 @@ bool Commander::Eval ( string& cmd )
                     cout << endl << "[*]玩家回合结束" << endl;
                     _result = true;
                 }
+                PlaySound ( ".\\BGM\\yessir.wav", NULL, SND_FILENAME | SND_SYNC );
+                PlaySound ( ".\\BGM\\Pacific2.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP );
                 if ( _result && !this->user->ai->IsFirst() )
                 {
                     cout << endl << "[*]AI回合开始" << endl;
@@ -873,6 +893,8 @@ bool Commander::Eval ( string& cmd )
                     cout << endl << "[*]玩家回合开始" << endl;
                     this->user->player->BuildCity();
                     cout << endl << "[*]建造成功" << endl;
+                    PlaySound ( ".\\BGM\\yessir.wav", NULL, SND_FILENAME | SND_SYNC );
+                    PlaySound ( ".\\BGM\\Pacific2.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP );
                     cout << endl << "[*]玩家回合结束" << endl;
                     _result = true;
                 }

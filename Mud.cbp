@@ -16,6 +16,9 @@
 					<Add option="-g" />
 					<Add directory="include" />
 				</Compiler>
+				<Linker>
+					<Add library="WINMM" />
+				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/Mud" prefix_auto="1" extension_auto="1" />
@@ -28,6 +31,7 @@
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add library="WINMM" />
 				</Linker>
 			</Target>
 		</Build>

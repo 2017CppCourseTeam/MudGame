@@ -3,12 +3,12 @@
 War::War ( double prestige, double bitcoin, double violence, int second, unsigned short war_num, Map*& _map )
 {
     this->occupied_city = 1;
-    this->lucky = ( sqrt ( ( 10 - war_num ) * 0.03 ) + prestige * 0.05 + violence + 0.05 ) / 100.0;
-    this->life = ( prestige / 2 ) * 300 + this->lucky * 100;
+    this->lucky = ( ( sqrt ( ( 10 - war_num ) * 0.03 ) + prestige * 0.05 + violence + 0.05 + second * 0.08 ) / ( prestige + bitcoin + violence + second ) ) ;
+    this->life = ( prestige / 2 ) * 300 + ( this->lucky / 3 ) * 100;
     this->recover_life = 30;
-    this->magic = ( violence / 2 ) * 150 + this->lucky * 100;
+    this->magic = ( violence / 2 ) * 150 + ( this->lucky / 8 ) * 100;
     this->recover_magic = 10;
-    this->coin = ( bitcoin / 3 ) * 100 + this->lucky * 100;
+    this->coin = ( bitcoin / 3 ) * 100 + ( this->lucky / 13 ) * 100;
     this->recover_coin = 25;
     this->point_selecter = 0;
     this->soldier_selecter = 0;

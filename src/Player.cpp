@@ -74,6 +74,7 @@ void Player::TrainCoder()
         cout << "|   恭喜你，训练成功。                      |" << endl;
         cout << "|                                           |" << endl;
         cout << "|                          暴力值+3，+1s    |" << endl;
+        PlaySound ( ".\\BGM\\+1s.wav", NULL, SND_FILENAME | SND_SYNC );
     }
     else
     {
@@ -82,9 +83,11 @@ void Player::TrainCoder()
         cout << "|   很遗憾，训练失败。                      |" << endl;
         cout << "|                                           |" << endl;
         cout << "|                          暴力值-5，-1s    |" << endl;
+        PlaySound ( ".\\BGM\\8848.wav", NULL, SND_FILENAME | SND_SYNC );
     }
     Player::RandomEvent();
     SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN );
+    PlaySound ( ".\\BGM\\StayinAlive.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP );
     return;
 }
 void Player::DigMine()
@@ -113,6 +116,7 @@ void Player::DigMine()
         cout << "|   好NB，本次挖出2个比特币！               |" << endl;
         cout << "|                                           |" << endl;
         cout << "|                          比特币+2，+1s    |" << endl;
+        PlaySound ( ".\\BGM\\8488.wav", NULL, SND_FILENAME | SND_SYNC );
     }
     else
     {
@@ -121,9 +125,11 @@ void Player::DigMine()
         cout << "|   恭喜你，本次挖出0.5个比特币！           |" << endl;
         cout << "|                                           |" << endl;
         cout << "|                          比特币+0.5，+1s  |" << endl;
+        PlaySound ( ".\\BGM\\bitcoin.wav", NULL, SND_FILENAME | SND_SYNC );
     }
     Player::RandomEvent();
     SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN );
+    PlaySound ( ".\\BGM\\StayinAlive.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP );
     return;
 }
 void Player::WashBrain()
@@ -151,6 +157,7 @@ void Player::WashBrain()
         cout << "|   恭喜您，训练成功                        |" << endl;
         cout << "|                                           |" << endl;
         cout << "|                            威望+3， +1s   |" << endl;
+        PlaySound ( ".\\BGM\\brainwash.wav", NULL, SND_FILENAME | SND_SYNC );
     }
     else
     {
@@ -159,9 +166,11 @@ void Player::WashBrain()
         cout << "|   很遗憾，训练失败                        |" << endl;
         cout << "|                                           |" << endl;
         cout << "|                            威望-5， -1s   |" << endl;
+        PlaySound ( ".\\BGM\\8848.wav", NULL, SND_FILENAME | SND_SYNC );
     }
     Player::RandomEvent();
     SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN );
+    PlaySound ( ".\\BGM\\StayinAlive.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP );
     return;
 }
 
@@ -770,6 +779,12 @@ void Player::Action()
     this->act_num++;
 }
 
+void Player::SetWarNum ( unsigned int num )
+{
+    this->war_num = num;
+}
+
+
 int Player::GetActNum()
 {
     return this->act_num;
@@ -835,17 +850,22 @@ void Player::AttackBase ( unsigned int _x, unsigned int _y )
 void Player::AttackSoldier ( unsigned int _x, unsigned int _y, enum Direct _direct, bool _cattack )
 {
     cout << endl << "[*]";
-    if ( this->GetIdentity() == _player_ )
-        cout << "AI";
-    else
+    if ( ( this->GetIdentity() == _player_ && !_cattack ) || ( this->GetIdentity() == _ai_ && _cattack ) )
         cout << "玩家";
+    else if ( ( this->GetIdentity() == _ai_ && !_cattack ) || ( this->GetIdentity() == _player_ && _cattack ) )
+        cout << "AI";
     cout << "士兵遭遇攻击" << endl;
     unsigned int _pid = this->war->_map->GetPoint ( _x, _y )->GetCurrentSoldierNum() - 1;
     double _hurt = this->war->soldier_selecter->GetAttack() - this->GetSoldierFromPoint ( _x, _y, _pid )->GetDefence();
     if ( _hurt > 0 )
     {
         unsigned int _id = this->GetSoldierFromPoint ( _x, _y, _pid )->GetID();
-        cout << "[*]ID为 " << _id << " 的士兵受到 " << _hurt << " 点伤害" << endl;
+        cout << "[*]ID为 " << _id << " 的";
+        if ( ( this->GetIdentity() == _player_ && !_cattack ) || ( this->GetIdentity() == _ai_ && _cattack ) )
+            cout << "玩家";
+        else if ( ( this->GetIdentity() == _ai_ && !_cattack ) || ( this->GetIdentity() == _player_ && _cattack ) )
+            cout << "AI";
+        cout << "士兵受到 " << _hurt << " 点伤害" << endl;
         this->GetSoldierFromPoint ( _x, _y, _pid )->UpdateLife ( _hurt );
         if ( this->GetSoldierFromPoint ( _x, _y, _pid )->GetLife() <= 0 )
             this->DeleteSoldier ( _id );
@@ -853,9 +873,9 @@ void Player::AttackSoldier ( unsigned int _x, unsigned int _y, enum Direct _dire
         {
             cout << endl << "[*]";
             if ( this->GetIdentity() == _player_ )
-                cout << "玩家";
-            else
                 cout << "AI";
+            else
+                cout << "玩家";
             cout << "士兵发起反击" << endl;
             switch ( _direct )
             {
