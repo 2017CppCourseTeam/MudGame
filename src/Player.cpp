@@ -1233,6 +1233,19 @@ bool Player::CheckWinOfWar( )
     {
         if ( win_result == _win )
         {
+            cout << endl << "|                  .     :     ." << endl;
+            cout << "|             '.    ;    :    ;    .`" << endl;
+            cout << "|         '-.   '.   ;   :   ;   .`   .-`" << endl;
+            cout << "|      \"-.   '-.  '.  ;  :  ;  .`  .-`   .-\"" << endl;
+            cout << "|         \"-.   '-. '. ; : ; .` .-`   .-\"" << endl;
+            cout << "|    '\"--.   '\"-.  '-.'  '  `.-`  .-\"`   .--\"`" << endl;
+            cout << "|         '\"--.  '\"-.   ,.   .-\"`  .--\"`" << endl;
+            cout << "|              '\"--.  .:::::.  .--\"`" << endl;
+            cout << "|---------------------:::::::---------------------------" << endl;
+            cout << "|                      ~~~~~" << endl;
+            cout << "|                       ~~~" << endl;
+            cout << "|                        ~" << endl;
+            cout << "|   \"" << endl;
             cout << endl << "[*]恭喜你赢得了这场战争，所有属性增加" << endl;
             this->prestige *= 1.2;
             this->bitcoin *= 1.2;
