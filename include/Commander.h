@@ -29,5 +29,6 @@ class Commander
         template <class T>
         T _ConvertStringToNum ( const string& str ); // 将str转换为数字类型
         void _CurrentPage(); // 打印当前界面名称
+        HANDLE handle;
 };
 #endif // COMMDER_H

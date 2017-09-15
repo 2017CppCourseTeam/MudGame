@@ -328,12 +328,16 @@ bool Commander::Eval ( string& cmd )
         }
         else if ( cmd == string ( "war" ) )
         {
+            HANDLE handle;
+            handle = GetStdHandle ( STD_OUTPUT_HANDLE );
             PlaySound ( ".\\BGM\\PacificRim.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP );
             this->status = war;
             cout << endl << "[*]战争界面" << endl;
+            SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY );
             cout << endl << ".     /| ________________" << endl;
-            cout << "O|===|* >_____XGAMER_____>" << endl;
+            cout << "O|===|* >________________>" << endl;
             cout << "'     \\|" << endl<<endl;
+            SetConsoleTextAttribute ( handle, BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY );
             _result = true;
         }
         else if ( cmd == string ( "exit" ) )

@@ -164,10 +164,9 @@
 1504539113 source:d:\mudgame\game.cpp
 	"Game.h"
 
-1505194456 source:d:\mudgame\main.cpp
+1505449302 source:d:\mudgame\main.cpp
 	"Game.h"
-	<windows.h>
-	<string>
+	"Global.h"
 
 1504536976 source:d:\mudgame\user.cpp
 	"Game.h"
@@ -175,53 +174,53 @@
 1504539777 source:d:\mudgame\player.cpp
 	"Game.h"
 
-1505200026 d:\mudgame\include\player.h
+1505449302 d:\mudgame\include\player.h
 	"War.h"
 
-1505194456 d:\mudgame\include\war.h
+1505449302 d:\mudgame\include\war.h
 	"Map.h"
 
-1505194456 d:\mudgame\include\map.h
+1505449302 d:\mudgame\include\map.h
 	<string>
 	"Soldier.h"
 
 1504863310 d:\mudgame\include\ai-settings.h
 	"User.h"
 
-1505194457 source:d:\mudgame\src\commander.cpp
+1505457505 source:d:\mudgame\src\commander.cpp
 	"Commander.h"
 
-1505194456 d:\mudgame\include\game.h
+1505449302 d:\mudgame\include\game.h
 	"Global.h"
 	"User.h"
 	"Commander.h"
 	"windows.h"
 
-1505194456 d:\mudgame\include\commander.h
+1505457466 d:\mudgame\include\commander.h
 	"User.h"
 
-1505194456 d:\mudgame\include\user.h
+1505449302 d:\mudgame\include\user.h
 	"Player.h"
 
-1505194457 source:d:\mudgame\src\game.cpp
+1505458917 source:d:\mudgame\src\game.cpp
 	"Game.h"
 
-1505194457 source:d:\mudgame\src\map.cpp
+1505449303 source:d:\mudgame\src\map.cpp
 	"Map.h"
 
-1505194457 source:d:\mudgame\src\player.cpp
+1505456841 source:d:\mudgame\src\player.cpp
 	"Player.h"
 
-1505194457 source:d:\mudgame\src\soldier.cpp
+1505449303 source:d:\mudgame\src\soldier.cpp
 	"Soldier.h"
 
-1505194456 d:\mudgame\include\soldier.h
+1505449302 d:\mudgame\include\soldier.h
 	"Global.h"
 
-1505194457 source:d:\mudgame\src\user.cpp
+1505449303 source:d:\mudgame\src\user.cpp
 	"User.h"
 
-1505194457 source:d:\mudgame\src\war.cpp
+1505449303 source:d:\mudgame\src\war.cpp
 	"War.h"
 
 1505443988 f:\文档\学习资料\mudgame\include\global.h
@@ -251,7 +250,7 @@
 
 1505056843 adf8fde47ffe048f458d2c5a504baec69387f
 
-1505194456 d:\mudgame\include\global.h
+1505449302 d:\mudgame\include\global.h
 	<ctime>
 	<cstdlib>
 	<cmath>
@@ -266,6 +265,8 @@
 	<string>
 	<algorithm>
 	<vector>
+	<mmsystem.h>
+	<stdio.h>
 
 1505263799 source:f:\github\mudgame\main.cpp
 
