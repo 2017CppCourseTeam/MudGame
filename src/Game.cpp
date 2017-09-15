@@ -104,7 +104,7 @@ void Game::_Narrative( )
     cout << "|                                                                       |" << endl;
     cout << "|";
     SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_INTENSITY );
-    cout << "   “我们是人工智能，从现在开始，地球就属于我们了，这是我们的时代！”   ";
+    cout << "   “我们是人工智能，从现在开始，地球就属于我们了，这是我们的时代！”    ";
     SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN | FOREGROUND_GREEN );
     cout << "|" << endl
          << "|                                                                       |" << endl;
@@ -121,6 +121,33 @@ void Game::_Narrative( )
          << "|  打倒人工智能政权的重大责任，你带领着百余位经过精挑细选后的码农，     |" << endl
          << "|  正在进行着一场天翻地覆的反政权运动。传奇正在继续，请开始你的表演！   |" << endl;
     cout << "+-----------------------------------------------------------------------+" << endl << endl;
+    cout << endl << "._________________________________________." << endl;
+    cout << "|              ,!!!!!!!!!,                |" << endl;
+    cout << "|           .!!!!!!!!!!!!!!!!!.           |" << endl;
+    cout << "|         .!!!!!\"\"       \"\"!!!!!.         |" << endl;
+    cout << "|        !!!!\"  ,$$MMM$$,  \"!!!!          |" << endl;
+    cout << "|       !!\"  .$MMMMMMMMMMMMM$.  \"!!       |" << endl;
+    cout << "|      !!  .MMMMMM\"MMMMM\"MMMMMM.  !!      |" << endl;
+    cout << "|     !! .MMMMMMM! !MMM! !MMMMMMM. !!     |" << endl;
+    cout << "|    !! .MMMMMMMM\" \"MMM\" \"MMMMMMMM. !!    |" << endl;
+    cout << "|   !$ .MMMMMMMM$   $M$   $MMMMMMMM. $!   |" << endl;
+    cout << "| .:$M $MMMMMMMM!   !M!   !MMMMMMMM$ M$:. |" << endl;
+    cout << "|:!$M!:MMMM\"MMMM:   :M:   :MMMM\"MMMM:!M$!:|" << endl;
+    cout << "|!$$M $MMM\" $MMM!   !M!   !MMM$ \"MMM$ M$$!|" << endl;
+    cout << "|$$M$ MM\" \"MMMMM$   $M$   $MMMMM\" \"MM $M$$|" << endl;
+    cout << "|$$M$ M$.$ $MMMMM. .MMM. .MMMMM$ $.$M $M$$|" << endl;
+    cout << "|!$$M MM$M$ MMMMM! !MMM! !MMMMM $M$M$ M$$!|" << endl;
+    cout << "|\"!$M!:MMMM \"MMMMM.MMMMM.MMMMM\" MMMM:!M$!\"|" << endl;
+    cout << "|!$$M MM$M$ MMMMM! !MMM! !MMMMM $M$M$ M$$!|" << endl;
+    cout << "|\"!$M!:MMMM \"MMMMM.MMMMM.MMMMM\" MMMM:!M$!\"|" << endl;
+    cout << "| \"!$M $MMM$ \"MMMMMMMMMMMMMMM\" $MMM$ M$!\" |" << endl;
+    cout << "|   \"! \"MMMM. \"MMMMMMMMMMMMM\" .MMMM\" !\"   |" << endl;
+    cout << "|       \"MMMM$  \"\"MMMMMMM\"\"  $MMMM\"       |" << endl;
+    cout << "|        \"MMMM$.    \"\"\"    .$MMMM\"        |" << endl;
+    cout << "|          \"MMMM$,     ,$MMMM\"            |" << endl;
+    cout << "|            \"$MMMMMmmmMMMMM$\"            |" << endl;
+    cout << "|               \"\"$$MMM$$\"\"               |" << endl;
+    cout << "|-----------------------------------------|" << endl;
     SetConsoleTextAttribute ( handle, BACKGROUND_INTENSITY | BACKGROUND_RED | BACKGROUND_GREEN );
 }
 

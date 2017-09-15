@@ -331,6 +331,9 @@ bool Commander::Eval ( string& cmd )
             PlaySound ( ".\\BGM\\PacificRim.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP );
             this->status = war;
             cout << endl << "[*]战争界面" << endl;
+            cout << endl << ".     /| ________________" << endl;
+            cout << "O|===|* >_____XGAMER_____>" << endl;
+            cout << "'     \\|" << endl<<endl;
             _result = true;
         }
         else if ( cmd == string ( "exit" ) )
@@ -618,7 +621,7 @@ bool Commander::Eval ( string& cmd )
                     _result = true;
                 }
                 PlaySound ( ".\\BGM\\yessir.wav", NULL, SND_FILENAME | SND_SYNC );
-                PlaySound ( ".\\BGM\\Pacific2k.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP );
+                PlaySound ( ".\\BGM\\Pacific2.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP );
             }
             if ( !_result )
             {
